@@ -17,7 +17,7 @@ func InitDB() {
 }
 
 func NewDBManager() *dbmanager {
-	db, err := sql.Open("postgres", "user=postgres dbname=fantasy")
+	db, err := sql.Open("postgres", "user=fantasy password=password dbname=fantasy sslmode=disable")
 
 	if err != nil {
 		log.Fatal(err)

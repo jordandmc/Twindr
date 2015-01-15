@@ -15,8 +15,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	if username != "" && password != "" {
 		requestedUser := domain.GetUserByEmail(username)
 		if requestedUser != nil {
-			passwordWithSalt := password + requestedUser.Salt
-			if bcrypt.CompareHashAndPassword([]byte(requestedUser.Password), []byte(passwordWithSalt)) == nil {
+			if bcrypt.CompareHashAndPassword([]byte(requestedUser.Password), []byte(password)) == nil {
 				//TODO: create token in database and send that token instead of the word "token"
 				fmt.Fprintf(w, "token")
 			} else {
@@ -36,6 +35,6 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	util.InitDB()
 	router := mux.NewRouter()
-	router.HandleFunc("/login", LoginHandler).Methods("GET")
+	router.HandleFunc("/login", LoginHandler).Methods("POST")
 	http.ListenAndServe(":9000", router)
 }
