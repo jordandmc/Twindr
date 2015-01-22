@@ -14,7 +14,8 @@ libraryDependencies ++= Seq(
   anorm,
   cache,
   ws,
-  "org.mongodb" %% "casbah" % "2.7.4"
+  "org.mongodb" %% "casbah" % "2.7.4",
+  "org.reactivemongo" %% "reactivemongo" % "0.10.5.0.akka23"
 )
 
 unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )  
