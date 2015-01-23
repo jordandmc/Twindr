@@ -1,16 +1,15 @@
 package persistence
 
-import reactivemongo.api.{DefaultDB, MongoDriver}
+import com.mongodb.casbah.Imports._
 
 object DBManager {
-  type DB = DefaultDB
 
-  private val driver = new MongoDriver
-  private val connectionPool = driver.connection(List("localhost"))
+  type DB = MongoDB
 
-  private def getConnection(name: String = "db") = connectionPool.db(name)
+  private val mongoClient = MongoClient("localhost", 27017)
+  private def getDB = mongoClient("db")
 
   def withDB[A](block: DB => A): A = {
-    block(getConnection())
+    block(getDB)
   }
 }
