@@ -14,8 +14,8 @@ libraryDependencies ++= Seq(
   anorm,
   cache,
   ws,
-  "org.mongodb" %% "casbah" % "2.7.4" withSources(),
-  "com.novus" %% "salat" % "1.9.9" withSources()
+  "org.mongodb" %% "casbah" % "2.7.5",
+  "com.novus" %% "salat" % "1.9.9"
 )
 
 unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )  
