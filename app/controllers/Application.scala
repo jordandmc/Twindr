@@ -11,7 +11,7 @@ object Application extends Controller {
   def index = Action {
     val id = UUID.randomUUID().toString
     val originalUser = User(id, "testToken")
-    originalUser.save
+    originalUser.save()
 
     val newUser = User.getByID(id)
     val newId = newUser.get.id
