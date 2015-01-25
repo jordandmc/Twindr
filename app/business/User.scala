@@ -7,7 +7,7 @@ import com.novus.salat.global._
 
 case class User(id: String, oauthToken: String) {
 
-  def save(): Unit = withDB { db =>
+  private[business] def save(): Unit = withDB { db =>
     val usersCollection = db("users")
     usersCollection.update(getQuery, grater[User].asDBObject(this), upsert = true)
   }
@@ -19,7 +19,7 @@ case class User(id: String, oauthToken: String) {
 
 object User {
 
-  def getByID(id: String): Option[User] = withDB { db =>
+  private[business] def getByID(id: String): Option[User] = withDB { db =>
     val usersCollection = db("users")
     val criteria = MongoDBObject("_id" -> id)
     val cursor = usersCollection.findOne(criteria)
