@@ -1,8 +1,7 @@
 package controllers
 
 import java.util.UUID
-
-import business.User
+import business.domain.User
 import play.api._
 import play.api.mvc._
 
