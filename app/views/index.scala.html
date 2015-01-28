@@ -1,7 +1,19 @@
-@(message: String)
 
-@main("Welcome to Play") {
+@main("Twindr") {
 
-    @play20.welcome(message)
+    <h2>Twindr</h2>
+    <br/>
+    <br/>
+    <p class="splashMain">
+        The matchmaking service that cares about you, not your looks!
+        <br/>
+        <br/>
+        Find interesting people in your area.
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <a href="@routes.Login.login()">Sign in via Twitter</a>
+    </p>
 
 }

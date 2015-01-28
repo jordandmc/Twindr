@@ -1,14 +1,15 @@
 package controllers
 
-import java.util.UUID
-import business.domain.User
-import play.api._
 import play.api.mvc._
 
 object Application extends Controller {
 
   def index = Action {
-    Ok("test")
+    Ok(views.html.index())
+  }
+
+  def matchesFeed = AuthAction {
+    Ok(views.html.matchesFeed())
   }
 
 }
