@@ -16,6 +16,11 @@ h1, h2, h3, h4, h5, h6, p {
     width: 50%;
 }
 
+.error {
+    color: #970000;
+    font-weight: 300;
+}
+
 #main-wrapper {
     border-top-width: 35px;
     border-bottom-width: 10px;
@@ -25,6 +30,31 @@ h1, h2, h3, h4, h5, h6, p {
 .no-padding {
     margin: 0;
     padding: 0;
+}
+
+.reg-filler {
+    padding: 1em 0;
+}
+
+.reg-textarea {
+    max-width: 100%;
+}
+
+.reg-help {
+    font-size: 0.9em;
+    margin: 0;
+}
+
+.reg-input {
+    margin-top: 10px;
+}
+
+.reg-label {
+    font-weight: bold;
+}
+
+.reg-rule {
+    padding: 0.5em 0;
 }
 
 .rounded-box {

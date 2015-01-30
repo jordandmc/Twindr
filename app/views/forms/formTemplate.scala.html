@@ -1,0 +1,10 @@
+@(elements: helper.FieldElements)
+@import views.html.helper._
+
+<div>
+  <p class="reg-label no-padding"><label for="@elements.id">@elements.label(elements.lang)</label></p>
+  <span class="help"><p class="reg-help">@elements.infos(elements.lang).mkString(", ")</p></span>
+  <div class="reg-input">
+    <p>@elements.input</p>
+  </div>
+</div>

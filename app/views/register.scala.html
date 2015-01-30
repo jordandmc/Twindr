@@ -1,14 +1,76 @@
+@(registrationForm: Form[business.domain.Registration])
+
+@import helper._
+@import views.forms.FormHelpers._
 
  @main("Twindr - Account Registration") {
 
-  <h2>Twindr</h2>
-  <br/>
-  <br/>
-  <p>
-    It looks like you're new here!<br/>
-    <br/>
-    Before you get started, we would like to get to know you a bit better.
-    <br/>
-  </p>
+  <div id="reg-main" class="rounded-box">
+
+      <p>
+          It looks like you're new here!<br/>
+          <br/>
+          Before you get started, we would like to get to know you a bit better.<br/>
+      </p>
+
+      @if(registrationForm.hasErrors) {
+          <div class="error">
+              <p class="error">The following errors occurred while processing your registration:</p>
+              <ul>
+              @for(error <- registrationForm.errors) {
+                  <li>@error.message</li>
+              }
+              </ul>
+          </div>
+      }
+
+      <div class="reg-filler"></div>
+
+      @form(routes.Login.checkRegistration) {
+
+          @inputRadioGroup(
+              registrationForm("sex"),
+              options = Seq("M" -> "Male", "F" -> "Female", "X" -> "Non-binary"),
+              '_label -> "Sex",
+              '_help -> ""
+          )
+
+          <div class="reg-rule"></div>
+
+          @inputDate(
+              registrationForm("birthday"),
+              '_label -> "Birthday",
+              '_help -> "",
+              'size -> "40",
+              '_error -> "Please enter your birthday"
+          )
+
+          <div class="reg-rule"></div>
+
+          @inputText(
+              registrationForm("preferredLocation"),
+              '_label -> "Preferred location",
+              '_help -> "In the event we are unable to retrieve your location, we will use the one you provide us.",
+              'size -> "40"
+          )
+
+          <div class="reg-rule"></div>
+
+          @textarea(
+              registrationForm("interests"),
+              '_label -> "Please enter some of your interests. One per line.",
+              'rows -> "8",
+              'cols -> "41",
+              '_help -> "",
+              'class -> "reg-textarea"
+          )
+
+          <div class="reg-rule"></div>
+
+          <input type="submit" value="Register" />
+
+      }
+
+  </div>
 
 }
