@@ -1,5 +1,96 @@
 @charset "utf-8";
 
 html, body {
-    font-family: "Myriad Pro", "Trebuchet MS", Verdana, Arial, sans-serif;
+    font-family: "Trebuchet MS", Verdana, Arial, sans-serif;
+    height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    color: #fffee7;
+}
+
+.container {
+    left: 25%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+#main-wrapper {
+    border-top-width: 35px;
+    border-bottom-width: 10px;
+    padding-top: 4em;
+}
+
+.no-padding {
+    margin: 0;
+    padding: 0;
+}
+
+.rounded-box {
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    background-color: #27ae60;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+/*******************************************************
+                Header and Navigation
+*******************************************************/
+
+#header {
+    background: #27ae60;
+    height: 4em;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+#header .logo {
+    display: inline-block;
+    height: 4em;
+    line-height: 4em;
+    position: absolute;
+    text-align: center;
+    top: 0;
+}
+
+#nav {
+    color: #27ae60;
+    height: 4em;
+    position: absolute;
+    top: 0;
+    vertical-align: text-bottom;
+}
+
+#nav ul {
+    margin: 0;
+}
+
+#nav ul li {
+    display: inline-block;
+    height: 4em;
+    line-height: 4em;
+    margin: 0 0.5em;
+    text-align: center;
+}
+
+#nav ul li a {
+    color: #fffee7;
+    display: block;
+    padding: 0 0.5em;
+    text-decoration: none;
+}
+
+#nav li:hover a,
+#nav li:hover span,
+#nav li.active a,
+#nav li.active span {
+    background-color: #026802;
+}
+
+.nav-right {
+    float: right;
 }
