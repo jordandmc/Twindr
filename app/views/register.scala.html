@@ -32,7 +32,8 @@
               registrationForm("sex"),
               options = Seq("M" -> "Male", "F" -> "Female", "X" -> "Non-binary"),
               '_label -> "Sex",
-              '_help -> ""
+              '_help -> "",
+              '_error -> "Please select your sex"
           )
 
           <div class="reg-rule"></div>
@@ -67,7 +68,7 @@
 
           <div class="reg-rule"></div>
 
-          <input type="submit" value="Register" />
+          <input class="main-button" type="submit" value="Register" />
 
       }
 
