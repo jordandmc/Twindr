@@ -112,6 +112,12 @@ h1, h2, h3, h4, h5, h6, p {
     top: 0;
 }
 
+#header .logo a {
+    color: #fffee7;
+    display: block;
+    text-decoration: none;
+}
+
 #nav {
     color: #27ae60;
     height: 4em;
