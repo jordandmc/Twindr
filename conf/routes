@@ -9,7 +9,7 @@ GET         /                    controllers.Application.index
 GET         /assets/*file        controllers.Assets.at(path="/public", file)
 
 # Login and logout
-GET         /login               controllers.Login.signInWithTwitter
+GET         /login               controllers.Login.login
 POST        /login               controllers.Login.login
 GET         /logout              controllers.Login.logout
 
@@ -20,3 +20,8 @@ POST        /register            controllers.Login.checkRegistration
 # Matchmaking
 GET         /main                controllers.Application.matchesFeed
 
+#Twitter API interaction
+GET         /auth                controllers.TwitterProvider.authenticate
+GET         /lookup              controllers.TwitterProvider.nameLookup
+#extra example
+GET         /timeline            controllers.TwitterProvider.timeline

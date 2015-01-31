@@ -5,10 +5,12 @@ import com.mongodb.casbah.commons.MongoDBObject
 import persistence.DBManager._
 
 import business.domain.{Token, User}
+import play.api.libs.oauth.RequestToken
+import play.api.mvc.RequestHeader
 
 object LoginManager {
 
-  def login(oauthToken: String): Token = {
+  def login(oauthToken: RequestToken): Token = {
     val twitterName = "@callwebservice"
     val user = User.getByTwitterName(twitterName) match {
       case Some(u: User) => u
@@ -21,5 +23,15 @@ object LoginManager {
 
       Token(UUID.randomUUID().toString, user._id).save()
     }
+  }
+
+  def getSessionToken(implicit request:RequestHeader): Option[RequestToken] = {
+      request.session.get("id") match{
+        case Some(id) => User.getByID(id) match {
+          case Some(user) => Option(user.oauthToken)
+          case _ => None
+        }
+        case _ => None
+      }
   }
 }

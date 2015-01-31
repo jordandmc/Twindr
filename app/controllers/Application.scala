@@ -1,6 +1,11 @@
 package controllers
 
+import business.logic.LoginManager
+import play.api.libs.oauth.OAuthCalculator
+import play.api.libs.ws.WS
 import play.api.mvc._
+
+import scala.concurrent.Future
 
 object Application extends Controller {
 
@@ -11,5 +16,4 @@ object Application extends Controller {
   def matchesFeed = AuthAction {
     Ok(views.html.matchesFeed())
   }
-
 }

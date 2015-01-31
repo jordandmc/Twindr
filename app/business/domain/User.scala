@@ -4,8 +4,9 @@ import com.mongodb.casbah.Imports._
 import com.novus.salat._
 import com.novus.salat.global._
 import persistence.DBManager._
+import play.api.libs.oauth.RequestToken
 
-case class User(_id: String, oauthToken: String, twitterName: String) {
+case class User(_id: String, oauthToken: RequestToken, twitterName: String) {
 
   private[business] def save(): User = withDB { db =>
     val usersCollection = db("users")

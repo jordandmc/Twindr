@@ -16,12 +16,8 @@ object Login extends Controller {
     ) (Registration.apply)(Registration.unapply)
   )
 
-  def signInWithTwitter = Action {
-    Ok("Redirect to Twitter")
-  }
-
   def login = Action {
-    Ok("Received Twitter token")
+    Ok("login")
   }
 
   def logout = AuthAction {
@@ -41,7 +37,7 @@ object Login extends Controller {
         // Process registration information
         // Add to database
 
-        Redirect(routes.Application.matchesFeed)
+        Redirect(routes.Application.matchesFeed())
       }
     )
   }
