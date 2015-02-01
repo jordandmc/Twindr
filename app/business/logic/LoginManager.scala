@@ -27,7 +27,7 @@ object LoginManager {
 
   def getSessionToken(implicit request:RequestHeader): Option[RequestToken] = {
       request.session.get("id") match{
-        case Some(id) => User.getByID(id) match {
+        case Some(id) => Token.getUserFromToken(id) match {
           case Some(user) => Option(user.oauthToken)
           case _ => None
         }
