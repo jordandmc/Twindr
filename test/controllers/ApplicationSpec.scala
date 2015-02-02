@@ -20,7 +20,7 @@ class ApplicationSpec extends Specification {
   "Application#index" should {
 
     "render the index page" in new WithApplication {
-      val home = route(FakeRequest(GET, "/")).get
+      val home = route(FakeRequest(GET, controllers.routes.Application.index().url)).get
 
       status(home) must equalTo(OK)
       contentType(home) must beSome.which(_ == "text/html")
@@ -28,11 +28,11 @@ class ApplicationSpec extends Specification {
     }
     
     "not render the index page if signed in" in new WithApplication {
-      val request = FakeRequest(GET, "/").withSession("userid" -> "1234")
+      val request = FakeRequest(GET, controllers.routes.Application.index().url).withSession("userid" -> "1234")
       val home = route(request).get
 
       status(home) must equalTo(SEE_OTHER) // Should redirect automatically
-      redirectLocation(home) must beSome.which(_ == "/main")
+      redirectLocation(home) must beSome.which(_ == controllers.routes.Application.matchesFeed().url)
       contentAsString(home) must not contain ("Welcome to Twindr!")
       assert(AuthAction.isAuthenticated(request))
     }
@@ -42,7 +42,7 @@ class ApplicationSpec extends Specification {
   "Application#main" should {
 
     "render the matching feed page (if signed in)" in new WithApplication {
-      val request = FakeRequest(GET, "/main").withSession("userid" -> "1234")
+      val request = FakeRequest(GET, controllers.routes.Application.matchesFeed().url).withSession("userid" -> "1234")
       val main = route(request).get
 
       status(main) must equalTo(OK)
@@ -52,7 +52,7 @@ class ApplicationSpec extends Specification {
     }
 
     "not render the matching feed page if not signed in" in new WithApplication {
-      val request = FakeRequest(GET, "/main")
+      val request = FakeRequest(GET, controllers.routes.Application.matchesFeed().url)
       val main = route(request).get
 
       status(main) must equalTo(FORBIDDEN)
