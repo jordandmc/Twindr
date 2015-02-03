@@ -14,7 +14,8 @@ object LoginManager {
     val twitterName = "@callwebservice"
     val user = User.getByTwitterName(twitterName) match {
       case Some(u: User) => u
-      case None => User(UUID.randomUUID().toString, oauthToken, twitterName).save()
+
+      //case None => User(UUID.randomUUID().toString, oauthToken, twitterName).save()
     }
 
     withDB { db =>
