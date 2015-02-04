@@ -7,8 +7,12 @@ object RegistrationManager {
     User(user._id, user.oauthToken, user.twitterName, Option(info.sex), Option(info.dateOfBirth), None, createInterestList(info.interests)).save()
   }
 
+  def hasRegistered(user: User): Boolean = {
+    !user.interests.isEmpty
+  }
+
   private def createInterestList(interestText: String): List[String] = {
-    val interestList = List[String]()
+    var interestList = List[String]()
 
     interestText.toLowerCase()
     val interests = interestText.split("""\r\n|\n|\r""")
@@ -16,10 +20,10 @@ object RegistrationManager {
     for(interest <- interests) {
       val temp = interest.trim()
       if(!temp.isEmpty) {
-        interestList :+ temp
+        interestList = interestList :+ temp
       }
     }
 
-    return interestList
+    interestList
   }
 }

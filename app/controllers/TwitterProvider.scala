@@ -25,7 +25,7 @@ object TwitterProvider extends Controller {
       TWITTER.retrieveAccessToken(tokenPair, verifier) match {
         case Right(accessToken) =>
           // We received the authorized tokens in the OAuth object - store it before we proceed
-          Redirect(routes.Application.index()).withSession("X-Auth-Token" -> LoginManager.login(accessToken)._id)
+          Redirect(routes.Login.login()).withSession("X-Auth-Token" -> LoginManager.login(accessToken)._id)
         case Left(e) => throw e
       }
     }.getOrElse(

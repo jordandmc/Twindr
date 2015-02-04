@@ -16,8 +16,13 @@ object Login extends Controller {
     )(Registration.apply)(Registration.unapply)
   )
 
-  def login = Action {
-    Ok("login")
+  def login = AuthAction { request =>
+    if(RegistrationManager.hasRegistered(request.user)) {
+      Redirect(routes.Application.matchesFeed())
+    }
+    else {
+      Redirect(routes.Login.register())
+    }
   }
 
   def logout = AuthAction { request =>
@@ -29,7 +34,12 @@ object Login extends Controller {
   }
 
   def register = AuthAction { request =>
-    Ok(views.html.register(registrationForm))
+    if(!RegistrationManager.hasRegistered(request.user)) {
+      Ok(views.html.register(registrationForm))
+    }
+    else {
+      Forbidden("You're account has already registered")
+    }
   }
 
   def checkRegistration = AuthAction { request =>
