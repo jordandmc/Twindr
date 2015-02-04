@@ -12,7 +12,7 @@ object Login extends Controller {
     mapping (
       "sex" -> text.verifying("Please enter your sex", {!_.isEmpty}),
       "birthday" -> date.verifying("Your birth date must be in the past", {_.before(new java.util.Date())}),
-      "interests" -> list(text)
+      "interests" -> text.verifying("Please enter at least one interest of yours", {!_.isEmpty})
     )(Registration.apply)(Registration.unapply)
   )
 
