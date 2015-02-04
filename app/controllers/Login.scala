@@ -1,42 +1,44 @@
 package controllers
 
-import business.domain.Registration
+import business.domain.{Token, Registration}
+import business.logic.RegistrationManager
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc.{Action, Controller}
 
 object Login extends Controller {
 
-  val registrationForm = Form (
+  val registrationForm = Form(
     mapping (
       "sex" -> text.verifying("Please enter your sex", {!_.isEmpty}),
-      "birthday" -> date.verifying("Your birthday must be in the past", {_.before(new java.util.Date())}),
-      "preferredLocation" -> text.verifying("Please enter your preferred location", {!_.isEmpty}),
-      "interests" -> text.verifying("Please enter at least one interest of yours", {!_.isEmpty})
-    ) (Registration.apply)(Registration.unapply)
+      "birthday" -> date.verifying("Your birth date must be in the past", {_.before(new java.util.Date())}),
+      "interests" -> list(text)
+    )(Registration.apply)(Registration.unapply)
   )
 
   def login = Action {
     Ok("login")
   }
 
-  def logout = AuthAction {
+  def logout = AuthAction { request =>
+    AuthAction.getTokenString(request).map{ tkn =>
+      Token.deleteById(tkn)
+    }
+
     Redirect(routes.Application.index()).withNewSession
   }
 
-  def register = AuthAction {
+  def register = AuthAction { request =>
     Ok(views.html.register(registrationForm))
   }
 
-  def checkRegistration = AuthAction { implicit request =>
-    registrationForm.bindFromRequest.fold(
+  def checkRegistration = AuthAction { request =>
+    registrationForm.bindFromRequest((request.request.body.asFormUrlEncoded).getOrElse(Map())).fold(
       formWithErrors => {
         BadRequest(views.html.register(formWithErrors))
       },
       registration => {
-        // Process registration information
-        // Add to database
-
+        RegistrationManager.register(request.user, registration)
         Redirect(routes.Application.matchesFeed())
       }
     )

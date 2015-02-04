@@ -18,4 +18,4 @@ libraryDependencies ++= Seq(
   "com.novus" %% "salat" % "1.9.9"
 )
 
-unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )  
+unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )

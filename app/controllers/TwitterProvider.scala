@@ -25,7 +25,7 @@ object TwitterProvider extends Controller {
       TWITTER.retrieveAccessToken(tokenPair, verifier) match {
         case Right(accessToken) =>
           // We received the authorized tokens in the OAuth object - store it before we proceed
-          Redirect(routes.Application.index()).withSession("id" -> LoginManager.login(accessToken)._id)
+          Redirect(routes.Application.index()).withSession("X-Auth-Token" -> LoginManager.login(accessToken)._id)
         case Left(e) => throw e
       }
     }.getOrElse(
@@ -46,8 +46,8 @@ object TwitterProvider extends Controller {
     }
   }
 
-  def timeline = Action.async { implicit request =>
-    LoginManager.getSessionToken match {
+  def timeline = AuthAction.async { implicit request =>
+    AuthAction.getUserOAuthToken(request) match {
       case Some(sessionToken) =>
         WS.url("https://api.twitter.com/1.1/statuses/home_timeline.json")
           .sign(OAuthCalculator(TwitterProvider.KEY, sessionToken))
@@ -57,8 +57,8 @@ object TwitterProvider extends Controller {
     }
   }
 
-  def nameLookup = Action.async { implicit request =>
-    LoginManager.getSessionToken match {
+  def nameLookup = AuthAction.async { implicit request =>
+    AuthAction.getUserOAuthToken(request) match {
       case Some(sessionToken) =>
         WS.url("https://api.twitter.com/1.1/account/verify_credentials.json")
           .sign(OAuthCalculator(TwitterProvider.KEY, sessionToken))

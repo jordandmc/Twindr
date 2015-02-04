@@ -4,7 +4,7 @@ import play.api.mvc._
 
 object Application extends Controller {
 
-  def index = Action { implicit request =>
+  def index = Action { request =>
     if(AuthAction.isAuthenticated(request)) {
       Redirect(routes.Application.matchesFeed())
     }
@@ -13,7 +13,7 @@ object Application extends Controller {
     }
   }
 
-  def matchesFeed = AuthAction {
+  def matchesFeed = AuthAction { request =>
     Ok(views.html.matchesFeed())
   }
 }

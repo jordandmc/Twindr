@@ -1,6 +1,7 @@
 package business.domain
 
 import com.mongodb.casbah.Imports._
+import com.mongodb.casbah.commons.MongoDBObject
 import com.novus.salat._
 import com.novus.salat.global._
 import persistence.DBManager._
@@ -47,9 +48,18 @@ object Token {
     }
   }
 
-  private[business] def withUser[T](_id: String)(block: User => T): Option[T] = {
+  def withUser[T](_id: String)(block: User => T): Option[T] = {
     getUserFromToken(_id).map { usr =>
       block(usr)
     }
+  }
+
+  def isTokenValid(_id: String): Boolean = {
+    getUserFromToken(_id).isDefined
+  }
+
+  def deleteById(_id: String): Unit = withDB{ db =>
+    val tokensCollection = db("tokens")
+    tokensCollection.findAndRemove(MongoDBObject("_id" -> _id))
   }
 }

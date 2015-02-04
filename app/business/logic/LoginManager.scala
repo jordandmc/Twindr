@@ -2,16 +2,19 @@ package business.logic
 
 import java.util.UUID
 import com.mongodb.casbah.commons.MongoDBObject
+import controllers.TwitterProvider
 import persistence.DBManager._
+import play.api.libs.oauth._
 
 import business.domain.{Token, User}
 import play.api.libs.oauth.RequestToken
+import play.api.libs.ws.WS
 import play.api.mvc.RequestHeader
 
 object LoginManager {
 
   def login(oauthToken: RequestToken): Token = {
-    val twitterName = "@callwebservice"
+    val twitterName = "@TwitterName"
     val user = User.getByTwitterName(twitterName) match {
       case Some(u: User) => u
 
@@ -24,15 +27,5 @@ object LoginManager {
 
       Token(UUID.randomUUID().toString, user._id).save()
     }
-  }
-
-  def getSessionToken(implicit request:RequestHeader): Option[RequestToken] = {
-      request.session.get("id") match{
-        case Some(id) => User.getByID(id) match {
-          case Some(user) => Option(user.oauthToken)
-          case _ => None
-        }
-        case _ => None
-      }
   }
 }
