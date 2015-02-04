@@ -57,14 +57,14 @@ object TwitterProvider extends Controller {
     }
   }
 
-  def nameLookup(implicit requestHeader: RequestHeader): Future[Option[String]] = {
+  def nameLookup = Action.async { implicit request =>
     LoginManager.getSessionToken match {
       case Some(sessionToken) =>
         WS.url("https://api.twitter.com/1.1/account/verify_credentials.json")
           .sign(OAuthCalculator(TwitterProvider.KEY, sessionToken))
           .get()
-          .map(result => result.json.\("screen_name").asOpt[String] )
-      case _ => Future.successful(None)
+          .map(result => Ok(result.json))
+      case _ => Future.successful(Redirect(routes.Application.index()))
     }
   }
 }

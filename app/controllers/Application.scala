@@ -1,19 +1,19 @@
 package controllers
 
-import business.logic.LoginManager
-import play.api.libs.oauth.OAuthCalculator
-import play.api.libs.ws.WS
 import play.api.mvc._
-
-import scala.concurrent.Future
 
 object Application extends Controller {
 
-  def index = Action {
-    Ok(views.html.index())
+  def index = Action { request =>
+    if(AuthAction.isAuthenticated(request)) {
+      Redirect(routes.Application.matchesFeed())
+    }
+    else {
+      Ok(views.html.index())
+    }
   }
 
-  def matchesFeed = AuthAction {
+  def matchesFeed = AuthAction { request =>
     Ok(views.html.matchesFeed())
   }
 }

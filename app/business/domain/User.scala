@@ -2,12 +2,12 @@ package business.domain
 
 import com.mongodb.casbah.Imports._
 import com.novus.salat._
-import com.novus.salat.global._
 import persistence.DBManager._
 import play.api.libs.oauth.RequestToken
+import java.util.Date
 
-case class User(_id: String, oauthToken: RequestToken, twitterName: String) {
-
+case class User(_id: String, oauthToken: RequestToken, twitterName: String,
+                sex:Option[String], dateOfBirth: Option[Date], location: Option[String], interests: List[String]) {
   private[business] def save(): User = withDB { db =>
     val usersCollection = db("users")
     usersCollection.update(getQuery, grater[User].asDBObject(this), upsert = true)
@@ -18,6 +18,7 @@ case class User(_id: String, oauthToken: RequestToken, twitterName: String) {
     MongoDBObject("_id" -> _id)
   }
 }
+
 
 object User {
 
