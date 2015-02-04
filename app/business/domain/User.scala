@@ -6,8 +6,8 @@ import persistence.DBManager._
 import play.api.libs.oauth.RequestToken
 import java.util.Date
 
-case class User(_id: String, oauthToken: RequestToken, twitterName: String, sex:String, dateOfBirth: Date, location: String, interests: String) {
-
+case class User(_id: String, oauthToken: RequestToken, twitterName: String,
+                sex:Option[String], dateOfBirth: Option[Date], location: Option[String], interests: List[String]) {
   private[business] def save(): User = withDB { db =>
     val usersCollection = db("users")
     usersCollection.update(getQuery, grater[User].asDBObject(this), upsert = true)
