@@ -38,7 +38,7 @@ object Login extends Controller {
       Ok(views.html.register(registrationForm))
     }
     else {
-      Forbidden("You're account has already registered")
+      Forbidden("Your account has already registered")
     }
   }
 
