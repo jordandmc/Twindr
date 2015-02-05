@@ -12,7 +12,7 @@ object Login extends Controller {
   val registrationForm = Form(
     mapping (
       "sex" -> text.verifying("Please enter your sex", {!_.isEmpty}),
-      "birthday" -> date("MM/dd/yyyy").verifying("Your birth date must be in the past", {_.before(new java.util.Date())}),
+      "birthday" -> date("yyyy-mm-dd").verifying("Your birth date must be in the past", {_.before(new java.util.Date())}),
       "interests" -> text
     )(Registration.apply)(Registration.unapply)
   )
