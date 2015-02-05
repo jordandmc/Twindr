@@ -17,7 +17,7 @@ object Login extends Controller {
     )(Registration.apply)(Registration.unapply)
   )
 
-  def login = AuthAction { request =>
+  def login = AuthAction { implicit request =>
     if(RegistrationManager.hasRegistered(request.user)) {
       Redirect(routes.Application.matchesFeed())
     }
@@ -26,7 +26,7 @@ object Login extends Controller {
     }
   }
 
-  def logout = AuthAction { request =>
+  def logout = AuthAction { implicit request =>
     AuthAction.getTokenString(request).map{ tkn =>
       Token.deleteById(tkn)
     }
@@ -34,7 +34,7 @@ object Login extends Controller {
     Redirect(routes.Application.index()).withNewSession
   }
 
-  def register = AuthAction { request =>
+  def register = AuthAction { implicit request =>
     if(!RegistrationManager.hasRegistered(request.user)) {
       Ok(views.html.register(registrationForm))
     }
@@ -43,7 +43,7 @@ object Login extends Controller {
     }
   }
 
-  def checkRegistration = AuthAction { request =>
+  def checkRegistration = AuthAction { implicit request =>
     registrationForm.bindFromRequest((request.request.body.asFormUrlEncoded).getOrElse(Map())).fold(
       formWithErrors => {
         BadRequest(views.html.register(formWithErrors))

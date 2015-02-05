@@ -1,4 +1,4 @@
-@()
+@(implicit request: play.api.mvc.RequestHeader)
 
 <header id="header">
   <div class="container">
@@ -8,8 +8,10 @@
       </div>
 
       <ul class="nav-right">
-        <li><a href="#">Settings</a></li>
-        <li><a href="@routes.Login.logout()">Logout</a></li>
+        @if(AuthAction.isAuthenticated(request)) {
+          <li><a href="#">Settings</a></li>
+          <li><a href="@routes.Login.logout()">Logout</a></li>
+        }
       </ul>
     </nav>
   </div>

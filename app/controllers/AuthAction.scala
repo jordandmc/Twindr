@@ -37,7 +37,7 @@ object AuthAction extends ActionBuilder[AuthenticatedRequest] {
     }
   }
 
-  def isAuthenticated[A](request: Request[A]): Boolean = {
+  def isAuthenticated[A](request: RequestHeader): Boolean = {
     val tokenId = request.headers.get("X-Auth-Token")
 
     val token = tokenId match {
