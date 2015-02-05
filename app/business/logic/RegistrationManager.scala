@@ -12,7 +12,7 @@ object RegistrationManager {
   }
 
   private def createInterestList(interestText: String): List[String] = {
-    interestText.toLowerCase.split("""\r\n|\n|\r|,( +)|,| +""").foldLeft(List[String]()) { (acc: List[String], current: String) =>
+    interestText.toLowerCase.split("""\r\n|\n|\r|,( *)""").foldLeft(List[String]()) { (acc: List[String], current: String) =>
         if(! current.isEmpty) {
           current :: acc
         } else {
