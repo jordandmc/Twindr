@@ -33,6 +33,7 @@ object AuthAction extends ActionBuilder[AuthenticatedRequest] {
     result match {
       case None => Future.successful(Redirect(routes.Application.index()))
       case Some(res: Future[Result]) => res
+      case _ => Future.successful(Redirect(routes.Application.index()))
     }
   }
 
