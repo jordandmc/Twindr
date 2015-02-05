@@ -21,6 +21,3 @@ GET         /main                controllers.Application.matchesFeed
 
 #Twitter API interaction
 GET         /auth                controllers.TwitterProvider.authenticate
-GET         /lookup              controllers.TwitterProvider.nameLookup
-#extra example
-GET         /timeline            controllers.TwitterProvider.timeline

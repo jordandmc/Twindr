@@ -41,7 +41,7 @@ object Token {
     }.getOrElse(None)
   }
 
-  private[business] def getUserFromToken(_id: String): Option[User] = withDB { db =>
+  def getUserFromToken(_id: String): Option[User] = withDB { db =>
     val userToken = getByID(_id)
     userToken.flatMap { tkn =>
       User.getByID(tkn.userId)

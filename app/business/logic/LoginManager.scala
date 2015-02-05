@@ -14,7 +14,8 @@ import play.api.mvc.RequestHeader
 object LoginManager {
 
   def login(oauthToken: RequestToken): Token = {
-    val twitterName = "@TwitterName"
+    //TODO find a better way to handle the case when getTwitterName returns None
+    val twitterName = TwitterProvider.getTwitterName(oauthToken).getOrElse("@" + UUID.randomUUID().toString)
     val user = User.getByTwitterName(twitterName) match {
       case Some(u: User) => u
 

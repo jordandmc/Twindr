@@ -8,22 +8,16 @@ object RegistrationManager {
   }
 
   def hasRegistered(user: User): Boolean = {
-    !user.sex.isEmpty
+    user.sex.isDefined && user.dateOfBirth.isDefined
   }
 
   private def createInterestList(interestText: String): List[String] = {
-    var interestList = List[String]()
-
-    interestText.toLowerCase()
-    val interests = interestText.split("""\r\n|\n|\r""")
-
-    for(interest <- interests) {
-      val temp = interest.trim()
-      if(!temp.isEmpty) {
-        interestList = interestList :+ temp
-      }
+    interestText.toLowerCase.split("""\r\n|\n|\r|,( +)|,| +""").foldLeft(List[String]()) { (acc: List[String], current: String) =>
+        if(! current.isEmpty) {
+          current :: acc
+        } else {
+          acc
+        }
     }
-
-    interestList
   }
 }

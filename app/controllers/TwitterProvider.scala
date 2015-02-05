@@ -1,5 +1,6 @@
 package controllers
 
+import business.domain.User
 import business.logic.LoginManager
 import play.api.libs.oauth._
 import play.api.libs.ws.WS
@@ -7,6 +8,8 @@ import play.api.mvc.{RequestHeader, Action, Controller}
 import play.api.Play.current
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
+import scala.concurrent.Await
+import scala.concurrent.duration._
 
 object TwitterProvider extends Controller {
 
@@ -46,25 +49,29 @@ object TwitterProvider extends Controller {
     }
   }
 
-  def timeline = AuthAction.async { implicit request =>
-    AuthAction.getUserOAuthToken(request) match {
-      case Some(sessionToken) =>
-        WS.url("https://api.twitter.com/1.1/statuses/home_timeline.json")
-          .sign(OAuthCalculator(TwitterProvider.KEY, sessionToken))
-          .get()
-          .map(result => Ok(result.json))
-      case _ => Future.successful(Redirect(routes.Application.index()))
-    }
-  }
+//  def timeline = AuthAction.async { implicit request =>
+//    AuthAction.getUserOAuthToken(request) match {
+//      case Some(sessionToken) =>
+//        WS.url("https://api.twitter.com/1.1/statuses/home_timeline.json")
+//          .sign(OAuthCalculator(TwitterProvider.KEY, sessionToken))
+//          .get()
+//          .map(result => Ok(result.json))
+//      case _ => Future.successful(Redirect(routes.Application.index()))
+//    }
+//  }
 
-  def nameLookup = AuthAction.async { implicit request =>
-    AuthAction.getUserOAuthToken(request) match {
-      case Some(sessionToken) =>
-        WS.url("https://api.twitter.com/1.1/account/verify_credentials.json")
-          .sign(OAuthCalculator(TwitterProvider.KEY, sessionToken))
-          .get()
-          .map(result => Ok(result.json))
-      case _ => Future.successful(Redirect(routes.Application.index()))
+  def getTwitterName(oauthToken: RequestToken): Option[String] = {
+
+    val result = WS.url("https://api.twitter.com/1.1/account/verify_credentials.json")
+      .sign(OAuthCalculator(TwitterProvider.KEY, oauthToken))
+      .get()
+
+    val resultFuture = result.map{ response =>
+      Option((response.json \ "screen_name").as[String])
+    } recover {
+      case timeout: java.util.concurrent.TimeoutException => None
     }
+
+    Await.result(resultFuture, 5000 millis)
   }
 }
