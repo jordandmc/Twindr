@@ -2,7 +2,6 @@ package controllers
 
 import business.domain.{User, Token}
 import business.logic.RegistrationManager
-import controllers.Login._
 import play.api.mvc._
 
 object Application extends Controller {
