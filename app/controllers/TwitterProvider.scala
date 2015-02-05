@@ -32,7 +32,8 @@ object TwitterProvider extends Controller {
         case Left(e) => throw e
       }
     }.getOrElse(
-        TWITTER.retrieveRequestToken("http://localhost:9000/auth") match {
+        //string here is an override, fill with http://localhost:9000/auth for testing
+        TWITTER.retrieveRequestToken("") match {
           case Right(t) =>
             // We received the unauthorized tokens in the OAuth object - store it before we proceed
             Redirect(TWITTER.redirectUrl(t.token)).withSession("token" -> t.token, "secret" -> t.secret)
