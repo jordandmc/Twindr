@@ -8,7 +8,7 @@ object RegistrationManager {
   }
 
   def hasRegistered(user: User): Boolean = {
-    !user.interests.isEmpty
+    !user.sex.isEmpty
   }
 
   private def createInterestList(interestText: String): List[String] = {
