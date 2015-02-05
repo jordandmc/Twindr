@@ -18,7 +18,7 @@ object TwitterProvider extends Controller {
   val TWITTER = OAuth(ServiceInfo(
     "https://api.twitter.com/oauth/request_token",
     "https://api.twitter.com/oauth/access_token",
-    "https://api.twitter.com/oauth/authorize", KEY),
+    "https://api.twitter.com/oauth/authenticate", KEY),
     use10a = true)
 
   def authenticate = Action { request =>
