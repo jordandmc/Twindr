@@ -2,6 +2,7 @@ package controllers
 
 import business.domain.{Token, Registration}
 import business.logic.RegistrationManager
+import controllers.Application._
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc.{Action, Controller}
@@ -11,13 +12,18 @@ object Login extends Controller {
   val registrationForm = Form(
     mapping (
       "sex" -> text.verifying("Please enter your sex", {!_.isEmpty}),
-      "birthday" -> date.verifying("Your birth date must be in the past", {_.before(new java.util.Date())}),
-      "interests" -> text.verifying("Please enter at least one interest of yours", {!_.isEmpty})
+      "birthday" -> date("MM/dd/yyyy").verifying("Your birth date must be in the past", {_.before(new java.util.Date())}),
+      "interests" -> text
     )(Registration.apply)(Registration.unapply)
   )
 
-  def login = Action {
-    Ok("login")
+  def login = AuthAction { request =>
+    if(RegistrationManager.hasRegistered(request.user)) {
+      Redirect(routes.Application.matchesFeed())
+    }
+    else {
+      Redirect(routes.Login.register())
+    }
   }
 
   def logout = AuthAction { request =>
@@ -29,7 +35,12 @@ object Login extends Controller {
   }
 
   def register = AuthAction { request =>
-    Ok(views.html.register(registrationForm))
+    if(!RegistrationManager.hasRegistered(request.user)) {
+      Ok(views.html.register(registrationForm))
+    }
+    else {
+      Redirect(routes.Application.matchesFeed())
+    }
   }
 
   def checkRegistration = AuthAction { request =>

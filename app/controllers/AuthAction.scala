@@ -27,11 +27,11 @@ object AuthAction extends ActionBuilder[AuthenticatedRequest] {
       case Some(tkn: String) => Token.withUser(tkn) { usr =>
         block(new AuthenticatedRequest[A](usr, request))
       }
-      case _ => Future.successful(Forbidden("You must be signed in to view this page."))
+      case _ => Future.successful(Redirect(routes.Application.index()))
     }
 
     result match {
-      case None => Future.successful(Forbidden("You must be signed in to view this page."))
+      case None => Future.successful(Redirect(routes.Application.index()))
       case Some(res: Future[Result]) => res
     }
   }
@@ -51,6 +51,24 @@ object AuthAction extends ActionBuilder[AuthenticatedRequest] {
     token match {
       case Some(tkn: String) => Token.isTokenValid(tkn)
       case _ => false
+    }
+  }
+
+  def getUserFromRequest[A](request: Request[A]): Option[User] = {
+    val tokenId = request.headers.get("X-Auth-Token")
+
+    val token = tokenId match {
+      case tkn: Some[String] => tkn
+      case _ =>
+        request.session.get("X-Auth-Token") match {
+          case tkn: Some[String] => tkn
+          case _ => None
+        }
+    }
+
+    token match {
+      case Some(tkn: String) => Token.getUserFromToken(tkn)
+      case _ => None
     }
   }
 
