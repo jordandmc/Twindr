@@ -4,7 +4,7 @@ import business.domain.{Registration, User}
 
 object RegistrationManager {
   def register(user: User, info: Registration): Unit = {
-    User(user._id, user.oauthToken, user.twitterName, Option(info.sex), Option(info.dateOfBirth), None, createInterestList(info.interests)).save()
+    user.copy(sex = Option(info.sex), dateOfBirth = Option(info.dateOfBirth), interests = createInterestList(info.interests)).save()
   }
 
   def hasRegistered(user: User): Boolean = {

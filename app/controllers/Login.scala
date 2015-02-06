@@ -1,6 +1,6 @@
 package controllers
 
-import business.domain.{Token, Registration}
+import business.domain.{Sex, Token, Registration}
 import business.logic.RegistrationManager
 import controllers.Application._
 import play.api.data.Form
