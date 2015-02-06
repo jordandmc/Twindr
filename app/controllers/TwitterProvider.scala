@@ -2,6 +2,7 @@ package controllers
 
 import business.domain.User
 import business.logic.LoginManager
+import play.api.Play
 import play.api.libs.oauth._
 import play.api.libs.ws.WS
 import play.api.mvc.{RequestHeader, Action, Controller}
@@ -32,8 +33,7 @@ object TwitterProvider extends Controller {
         case Left(e) => throw e
       }
     }.getOrElse(
-        //string here is an override, fill with http://localhost:9000/auth for testing
-        TWITTER.retrieveRequestToken("") match {
+        TWITTER.retrieveRequestToken(Play.current.configuration.getString("oauthCallback", Option(Set("", "http://localhost:9000/auth"))).getOrElse("")) match {
           case Right(t) =>
             // We received the unauthorized tokens in the OAuth object - store it before we proceed
             Redirect(TWITTER.redirectUrl(t.token)).withSession("token" -> t.token, "secret" -> t.secret)
