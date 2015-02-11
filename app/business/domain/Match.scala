@@ -32,7 +32,7 @@ case class Match(_id: String, user1: String, user2: String, unmatched: Boolean =
  * Companion object for Match
  */
 object Match extends Collected {
-  def collection = "matches"
+  override def collection = "matches"
 
   private[business] def getMatchesForUser(user: User): List[Match] = Match.withCollection { collection =>
     val criteria = $and(

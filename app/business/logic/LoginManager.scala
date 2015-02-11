@@ -13,6 +13,11 @@ import play.api.mvc.RequestHeader
 
 object LoginManager {
 
+  /**
+   * Execute login logic after twitter authentication
+   * @param oauthToken the twitter oauth token returned after authentication
+   * @return a new authentication token for authenticated web-services and pages
+   */
   def login(oauthToken: RequestToken): Token = {
     //TODO find a better way to handle the case when getTwitterName returns None
     val twitterName = TwitterProvider.getTwitterName(oauthToken).getOrElse("@" + UUID.randomUUID().toString)

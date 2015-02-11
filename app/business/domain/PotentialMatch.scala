@@ -49,7 +49,7 @@ object PotentialMatch extends Collected {
   final val ACCEPTED = "ACCEPTED"
   final val REJECTED = "REJECTED"
 
-  def collection = "potentialmatches"
+  override def collection = "potentialmatches"
 
   private[business] def getByID(_id: String): Option[PotentialMatch] = withCollection { collection =>
     val criteria = MongoDBObject("_id" -> _id)

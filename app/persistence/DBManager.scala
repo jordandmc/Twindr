@@ -7,6 +7,7 @@ object DBManager {
   type DB = MongoDB
 
   //TODO: pull this information from application.conf
+  //TODO: Add authentication to database
   private val mongoClient = MongoClient("localhost", 27017)
   private def getDB = mongoClient("db")
 

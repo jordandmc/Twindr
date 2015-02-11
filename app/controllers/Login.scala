@@ -1,6 +1,6 @@
 package controllers
 
-import business.domain.{Sex, Token, Registration}
+import business.domain.{Token, Registration}
 import business.logic.RegistrationManager
 import controllers.Application._
 import play.api.data.Form
@@ -44,7 +44,7 @@ object Login extends Controller {
   }
 
   def checkRegistration = AuthAction { implicit request =>
-    registrationForm.bindFromRequest((request.request.body.asFormUrlEncoded).getOrElse(Map())).fold(
+    registrationForm.bindFromRequest(request.request.body.asFormUrlEncoded.getOrElse(Map())).fold(
       formWithErrors => {
         BadRequest(views.html.register(formWithErrors))
       },
