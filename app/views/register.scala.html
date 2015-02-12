@@ -3,7 +3,23 @@
 @import helper._
 @import views.forms.FormHelpers._
 
- @main("Twindr - Account Registration") {
+@moreScripts = {
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+    <script type="text/javascript">
+        $(function() {
+            $("#datepicker" ).datepicker({
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-120:+0",
+                maxDate: "0"
+            });
+        });
+    </script>
+}
+
+@main("Twindr - Account Registration", moreScripts) {
 
   <div id="reg-main" class="rounded-box">
 
@@ -38,10 +54,11 @@
 
           <div class="reg-rule"></div>
 
-          @inputDate(
+          @inputText(
               registrationForm("birthday"),
-              '_label -> "Birthday (yyyy-mm-dd)",
-              '_help -> "",
+              'id -> "datepicker",
+              '_label -> "Birthday",
+              '_help -> "(yyyy-mm-dd)",
               'size -> "40",
               '_error -> "Please enter your birthday"
           )
