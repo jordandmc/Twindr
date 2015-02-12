@@ -1,6 +1,6 @@
 package controllers
 
-import business.domain.{TwitterTweet}
+import business.domain.TwitterTweet
 import business.logic.LoginManager
 import play.api.Play
 import play.api.libs.functional.syntax._

@@ -1,6 +1,6 @@
 package controllers
 
-import business.domain.{TwitterTweet, User, Token}
+import business.domain.User
 import business.logic.RegistrationManager
 import play.api.mvc._
 
