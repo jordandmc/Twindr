@@ -1,6 +1,6 @@
 package controllers
 
-import business.domain.{User, Token}
+import business.domain.{TwitterTweet, User, Token}
 import business.logic.RegistrationManager
 import play.api.mvc._
 
@@ -21,6 +21,6 @@ object Application extends Controller {
   }
 
   def matchesFeed = AuthAction { implicit request =>
-    Ok(views.html.matchesFeed(request))
+    Ok(views.html.matchesFeed(TwitterProvider.timeline(request))(request))
   }
 }

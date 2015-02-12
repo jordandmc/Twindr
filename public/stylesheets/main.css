@@ -21,6 +21,14 @@ h1, h2, h3, h4, h5, h6, p {
     font-weight: 300;
 }
 
+.float-right {
+    float: right;
+}
+
+.match-box {
+    margin: 20px 0;
+}
+
 .main-button {
     -moz-border-radius: 3px;
     -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
