@@ -16,9 +16,13 @@ h1, h2, h3, h4, h5, h6, p {
     width: 50%;
 }
 
-.error {
-    color: #ff7744;
-    font-weight: 300;
+.error-box {
+    background-color: #ac3b3b;
+    padding: 5px 10px;
+}
+
+.error-text {
+    color: #fffee7;
 }
 
 .float-right {

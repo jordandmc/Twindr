@@ -30,11 +30,11 @@
       </p>
 
       @if(registrationForm.hasErrors) {
-          <div class="error">
-              <p class="error">The following errors occurred while processing your registration:</p>
+          <div class="error-box">
+              <p class="error-text">The following errors occurred while processing your registration:</p>
               <ul>
               @for(error <- registrationForm.errors) {
-                  <li>@error.message</li>
+                  <li class="error-text"><p>@error.message</p></li>
               }
               </ul>
           </div>
