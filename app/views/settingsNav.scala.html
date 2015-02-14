@@ -2,13 +2,13 @@
 
 <div class="profile-nav">
     <ul>
-        @if(request.uri == "/profile/settings") {
+        @if(request.uri == routes.Profile.settings().url) {
             <li class="profile-nav-selected">Profile</li>
         } else {
             <li><a href="@routes.Profile.settings()">Profile</a></li>
         }
 
-        @if(request.uri == "/profile/filters") {
+        @if(request.uri == routes.Profile.filters().url) {
             <li class="profile-nav-selected">Filters</li>
         } else {
             <li><a href="@routes.Profile.filters()">Filters</a></li>
