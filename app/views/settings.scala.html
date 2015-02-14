@@ -1,8 +1,39 @@
-@(implicit request: play.api.mvc.RequestHeader)
+@(registrationForm: Form[business.domain.Registration])(implicit request: play.api.mvc.RequestHeader)
 
-@main("Twindr - Settings") {
-    <div id="main" class="rounded-box">
-        <p>Settings:</p>
-        <br/>
+@import helper._
+@import views.utility.DateHelper
+
+@main("Twindr - Settings", DateHelper.includeJQueryDateTime) {
+
+    <div id="main" class="rounded-box profile-container">
+        @settingsNav(request)
+        <div class="profile-content">
+            <p>
+                Update your profile<br/>
+            </p>
+
+            @if(registrationForm.hasErrors) {
+                <div class="error-box">
+                    <p class="error-text">The following errors occurred while updating your profile:</p>
+                    <ul>
+                    @for(error <- registrationForm.errors) {
+                        <li class="error-text"><p>@error.message</p></li>
+                    }
+                    </ul>
+                </div>
+            }
+
+            <div class="reg-filler"></div>
+
+            @form(routes.Profile.settings()) {
+
+                @forms.registrationForm(registrationForm)
+
+                <input class="main-button" type="submit" value="Update" />
+
+            }
+
+        </div>
     </div>
+
 }

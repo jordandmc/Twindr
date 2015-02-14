@@ -65,6 +65,54 @@ h1, h2, h3, h4, h5, h6, p {
     padding: 0;
 }
 
+.profile-container {
+    width: 100%;
+}
+
+.profile-content {
+    margin-left: 15%;
+    overflow: hidden;
+}
+
+.profile-nav {
+    float: left;
+    width: 15%;
+    overflow: hidden;
+    padding-right: 15px;
+}
+
+.profile-nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+.profile-nav ul li {
+    display: inline-block;
+    height: 2em;
+    line-height: 2em;
+    margin: 0 0.5em;
+    text-align: left;
+}
+
+.profile-nav ul li a {
+    color: #fffee7;
+    display: block;
+    padding: 0 0.5em;
+    text-decoration: none;
+}
+
+.profile-nav li:hover a,
+.profile-nav li.active a {
+    background-color: #026802;
+}
+
+.profile-nav-selected {
+    color: #fffee7;
+    padding: 0 0.5em;
+    background-color: #026802;
+    width: 50%;
+}
+
 .reg-filler {
     padding: 1em 0;
 }

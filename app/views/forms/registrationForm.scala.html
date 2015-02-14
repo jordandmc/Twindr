@@ -1,0 +1,36 @@
+@(registrationForm: Form[business.domain.Registration])
+
+@import helper._
+@import views.forms.FormHelpers._
+
+@inputRadioGroup(
+  registrationForm("sex"),
+  options = Seq("M" -> "Male", "F" -> "Female", "X" -> "Prefer not to say"),
+  '_label -> "Sex",
+  '_help -> "",
+  '_error -> "Please select your sex"
+)
+
+<div class="reg-rule"></div>
+
+@inputText(
+  registrationForm("birthday"),
+  'id -> "datepicker",
+  '_label -> "Birthday",
+  '_help -> "(yyyy-mm-dd)",
+  'size -> "40",
+  '_error -> "Please enter your birthday"
+)
+
+<div class="reg-rule"></div>
+
+@textarea(
+  registrationForm("interests"),
+  '_label -> "Please enter some of your interests. One per line or separated by commas.",
+  'rows -> "8",
+  'cols -> "41",
+  '_help -> "(Optional)",
+  'class -> "reg-textarea"
+)
+
+<div class="reg-rule"></div>
