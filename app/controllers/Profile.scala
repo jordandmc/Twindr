@@ -1,6 +1,7 @@
 package controllers
 
 import business.domain.Registration
+import business.logic.RegistrationManager
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc.Controller
@@ -19,7 +20,20 @@ object Profile extends Controller {
   )
 
   def settings = AuthAction { implicit request =>
-    Ok(views.html.settings(registrationForm)(request))
+    val userData = Registration(request.user.sex.toString, request.user.dateOfBirth.get, request.user.interests.mkString("\n"))
+    Ok(views.html.settings(registrationForm.fill(userData))(request))
+  }
+
+  def updateSettings = AuthAction { implicit request =>
+    registrationForm.bindFromRequest(request.request.body.asFormUrlEncoded.getOrElse(Map())).fold(
+      formWithErrors => {
+        BadRequest(views.html.settings(formWithErrors))
+      },
+      registration => {
+        RegistrationManager.register(request.user, registration)
+        Redirect(routes.Profile.settings()).flashing("success" -> "Your account has been updated successfully.")
+      }
+    )
   }
 
   def filters = AuthAction { implicit request =>

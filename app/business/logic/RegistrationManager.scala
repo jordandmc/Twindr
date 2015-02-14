@@ -22,6 +22,11 @@ object RegistrationManager {
     user.sex.isDefined && user.dateOfBirth.isDefined
   }
 
+  /**
+   * Parses the interest text into a list. Assumes one interest per line
+   * @param interestText The raw interest text
+   * @return List of interests
+   */
   private def createInterestList(interestText: String): List[String] = {
     interestText.toLowerCase.split("""\r\n|\n|\r|,( *)""").foldLeft(List[String]()) { (acc: List[String], current: String) =>
         if(! current.isEmpty) {

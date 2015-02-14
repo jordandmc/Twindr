@@ -4,7 +4,7 @@
 @import views.forms.FormHelpers._
 
 @inputRadioGroup(
-  registrationForm("sex"),
+  registrationForm("sex").copy( value=registrationForm("sex").value.orElse(Some("X")) ),
   options = Seq("M" -> "Male", "F" -> "Female", "X" -> "Prefer not to say"),
   '_label -> "Sex",
   '_help -> "",

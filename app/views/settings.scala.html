@@ -8,6 +8,13 @@
     <div id="main" class="rounded-box profile-container">
         @settingsNav(request)
         <div class="profile-content">
+
+            @if(request.flash.get("success").isDefined) {
+                <div class="success-box">
+                    <p>@request.flash.get("success").get</p>
+                </div>
+            }
+
             <p>
                 Update your profile<br/>
             </p>
@@ -25,7 +32,7 @@
 
             <div class="reg-filler"></div>
 
-            @form(routes.Profile.settings()) {
+            @form(routes.Profile.updateSettings()) {
 
                 @forms.registrationForm(registrationForm)
 

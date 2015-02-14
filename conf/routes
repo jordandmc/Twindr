@@ -18,6 +18,7 @@ POST        /register                controllers.Login.checkRegistration
 
 # Profile settings
 GET         /profile/settings        controllers.Profile.settings
+POST        /profile/settings        controllers.Profile.updateSettings
 GET         /profile/filters         controllers.Profile.filters
 
 # Matchmaking
