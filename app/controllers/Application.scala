@@ -1,6 +1,6 @@
 package controllers
 
-import business.domain.{User, Token}
+import business.domain.User
 import business.logic.RegistrationManager
 import play.api.mvc._
 

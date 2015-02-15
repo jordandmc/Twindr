@@ -1,10 +1,12 @@
 package business.domain
 
-import com.mongodb.casbah.Imports._
+import business.logic.GeoJSONFormatter
+import com.mongodb.casbah.query.Imports._
 import com.novus.salat._
-import persistence.DBManager._
 import play.api.libs.oauth.RequestToken
 import java.util.Date
+
+import scala.util.Random
 
 /**
  * User database object - should never be sent to client
@@ -16,9 +18,13 @@ import java.util.Date
  * @param dateOfBirth User's date of birth
  * @param location    User's location in geoJSON format
  * @param interests   List of user's interests
+ * @param recentTweets  The most recent tweets pulled from a user (replace when updating)
+ * @param random      random value used for taking random samples
  */
 case class User(_id: String, oauthToken: RequestToken, twitterName: String,
-                sex: Option[String], dateOfBirth: Option[Date], location: Option[String], interests: List[String]) {
+                sex: Option[String], dateOfBirth: Option[Date], location: Option[DBObject], interests: List[String],
+                recentTweets: List[String], random: Double) {
+
   private[business] def save(): User = User.withCollection { collection =>
     collection.update(getQuery, grater[User].asDBObject(this), upsert = true)
     this
@@ -52,6 +58,27 @@ object User extends Collected {
     cursor.map { x =>
       Option(grater[User].asObject(x))
     }.getOrElse(None)
+  }
+
+  private[business] def getNear(user: User, maxDistance: Double, maxUsers: Int): List[User] = withCollection { collection =>
+    val start = Random.nextDouble()
+    val (longitude, latitude) = user.location match {
+      case Some(s: DBObject) => GeoJSONFormatter.getCoords(s)
+      case _ => (0.0, 0.0)
+    }
+
+    val geo = MongoDBObject("$geometry" -> MongoDBObject)
+
+    val criteria = $and(
+      "location" $nearSphere(GeoCoords(latitude, longitude)),// $maxDistance maxDistance,
+      "random" $gt start
+    )
+
+    val cursor = collection.find(criteria).sort(MongoDBObject("random" -> 1)).limit(maxUsers)
+
+    cursor.toList.map { x =>
+      grater[User].asObject(x)
+    }
   }
 }
 

@@ -13,8 +13,13 @@ object MatchingManager {
    * @return a list of potential matches
    */
   def getPotentialMatches(user: User): List[PreparedPotentialMatch] = {
-    preparePotentialMatches(PotentialMatch.getPendingForUser(user._id), user)
-    //TODO: Generate new potential matches if there aren't enough existing if possible
+    val existing = PotentialMatch.getPendingForUser(user)
+    val newlyGenerated = PotentialMatchGenerator.POTENTIAL_MAX - existing.size match {
+      case n: Int if n <= 0 => List[PotentialMatch]()
+      case n: Int => PotentialMatchGenerator.generateForUser(user, n)
+    }
+
+    preparePotentialMatches(existing ::: newlyGenerated, user)
   }
 
   /**
@@ -62,8 +67,9 @@ object MatchingManager {
     dbObjects.foldRight(List[PreparedPotentialMatch]()) { (current: PotentialMatch, acc: List[PreparedPotentialMatch]) =>
 
       User.getByID(getOtherUserId(user, current)) match {
-        //TODO: pull actual tweets from database
-        case Some(other: User) => PreparedPotentialMatch(other.twitterName, List("Test1", "Test2", "Test3"), other.sex.getOrElse("X"), other.dateOfBirth.getOrElse(new Date())) :: acc
+        case Some(other: User) =>
+          PreparedPotentialMatch(other.twitterName, other.recentTweets, other.sex.getOrElse("X"),
+            other.dateOfBirth.getOrElse(new Date())) :: acc
         case _ => acc
       }
     }
@@ -72,7 +78,8 @@ object MatchingManager {
     dbObjects.foldRight(List[PreparedMatch]()) { (current: Match, acc: List[PreparedMatch]) =>
 
       User.getByID(getOtherUserId(user, current)) match {
-        case Some(other: User) => PreparedMatch(other.twitterName, other.sex.getOrElse("X"), other.dateOfBirth.getOrElse(new Date())) :: acc
+        case Some(other: User) =>
+          PreparedMatch(other.twitterName, other.sex.getOrElse("X"), other.dateOfBirth.getOrElse(new Date())) :: acc
         case _ => acc
       }
     }

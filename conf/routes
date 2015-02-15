@@ -21,3 +21,8 @@ GET         /main                controllers.Application.matchesFeed
 
 #Twitter API interaction
 GET         /auth                controllers.TwitterProvider.authenticate
+
+
+#Mobile Access
+
+GET         /m/potentialMatches     controllers.MobileController.getPotentialMatches

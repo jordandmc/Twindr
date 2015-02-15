@@ -11,6 +11,8 @@ import play.api.libs.oauth.RequestToken
 import play.api.libs.ws.WS
 import play.api.mvc.RequestHeader
 
+import scala.util.Random
+
 object LoginManager {
 
   /**
@@ -23,8 +25,8 @@ object LoginManager {
     val twitterName = TwitterProvider.getTwitterName(oauthToken).getOrElse("@" + UUID.randomUUID().toString)
     val user = User.getByTwitterName(twitterName) match {
       case Some(u: User) => u
-
-      case None => User(UUID.randomUUID().toString, oauthToken, twitterName,None,None,None,List()).save()
+      case None =>
+        User(UUID.randomUUID().toString, oauthToken, twitterName, None, None, Option(GeoJSONFormatter.generateFromCoords(0.0, 0.0)), List(), List(), Random.nextDouble()).save()
     }
 
     withDB { db =>

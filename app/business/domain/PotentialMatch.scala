@@ -2,6 +2,7 @@ package business.domain
 
 import java.util.Date
 
+import business.logic.PotentialMatchGenerator
 import com.mongodb.casbah.Imports._
 import com.novus.salat._
 
@@ -60,14 +61,14 @@ object PotentialMatch extends Collected {
     }.getOrElse(None)
   }
 
-  private[business] def getPendingForUser(userId: String): List[PotentialMatch] = withCollection { collection =>
+  private[business] def getPendingForUser(user: User): List[PotentialMatch] = withCollection { collection =>
 
     val criteria = $or(
-      $and( "user1" $eq userId, $nor("user1State" $eq REJECTED, "user1State" $eq ACCEPTED, "user2State" $eq REJECTED)),
-      $and( "user2" $eq userId, $nor("user2State" $eq REJECTED, "user2State" $eq ACCEPTED, "user1State" $eq REJECTED))
+      $and( "user1" $eq user._id, $nor("user1State" $eq REJECTED, "user1State" $eq ACCEPTED, "user2State" $eq REJECTED)),
+      $and( "user2" $eq user._id, $nor("user2State" $eq REJECTED, "user2State" $eq ACCEPTED, "user1State" $eq REJECTED))
     )
 
-    collection.find(criteria).limit(32).toList.map { dbObj =>
+    collection.find(criteria).limit(PotentialMatchGenerator.POTENTIAL_MAX).toList.map { dbObj =>
       grater[PotentialMatch].asObject(dbObj)
     }
   }
@@ -75,15 +76,18 @@ object PotentialMatch extends Collected {
   private[business] def getForUserAndMatchResponse(user: User, response: PotentialMatchResponse): Option[PotentialMatch] = withCollection { collection =>
     val otherUser = User.getByTwitterName(response.username)
     otherUser.flatMap { other =>
+      getForUsers(user, other)
+    }
+  }
 
-      val criteria = $or(
-        $and("user1" $eq user._id, "user2" $eq other._id),
-        $and("user1" $eq other._id, "user2" $eq user._id)
-      )
+  private[business] def getForUsers(user1: User, user2: User): Option[PotentialMatch] = withCollection { collection =>
+    val criteria = $or(
+      $and("user1" $eq user1._id, "user2" $eq user2._id),
+      $and("user1" $eq user2._id, "user2" $eq user1._id)
+    )
 
-      collection.findOne(criteria).map { x =>
-        grater[PotentialMatch].asObject(x)
-      }
+    collection.findOne(criteria).map { x =>
+      grater[PotentialMatch].asObject(x)
     }
   }
 }
