@@ -1,9 +1,9 @@
 @(registrationForm: Form[business.domain.Registration])(implicit request: play.api.mvc.RequestHeader)
 
 @import helper._
-@import views.forms.FormHelpers._
+@import views.utility.DateHelper
 
- @main("Twindr - Account Registration") {
+@main("Twindr - Account Registration", DateHelper.includeJQueryDateTime) {
 
   <div id="reg-main" class="rounded-box">
 
@@ -14,11 +14,11 @@
       </p>
 
       @if(registrationForm.hasErrors) {
-          <div class="error">
-              <p class="error">The following errors occurred while processing your registration:</p>
+          <div class="error-box">
+              <p class="error-text">The following errors occurred while processing your registration:</p>
               <ul>
               @for(error <- registrationForm.errors) {
-                  <li>@error.message</li>
+                  <li class="error-text"><p>@error.message</p></li>
               }
               </ul>
           </div>
@@ -28,36 +28,7 @@
 
       @form(routes.Login.checkRegistration) {
 
-          @inputRadioGroup(
-              registrationForm("sex"),
-              options = Seq("M" -> "Male", "F" -> "Female", "X" -> "Prefer not to say"),
-              '_label -> "Sex",
-              '_help -> "",
-              '_error -> "Please select your sex"
-          )
-
-          <div class="reg-rule"></div>
-
-          @inputDate(
-              registrationForm("birthday"),
-              '_label -> "Birthday (yyyy-mm-dd)",
-              '_help -> "",
-              'size -> "40",
-              '_error -> "Please enter your birthday"
-          )
-
-          <div class="reg-rule"></div>
-
-          @textarea(
-              registrationForm("interests"),
-              '_label -> "Please enter some of your interests. One per line or separated by commas.",
-              'rows -> "8",
-              'cols -> "41",
-              '_help -> "(Optional)",
-              'class -> "reg-textarea"
-          )
-
-          <div class="reg-rule"></div>
+          @forms.registrationForm(registrationForm)
 
           <input class="main-button" type="submit" value="Register" />
 

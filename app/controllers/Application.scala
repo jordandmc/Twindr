@@ -21,6 +21,6 @@ object Application extends Controller {
   }
 
   def matchesFeed = AuthAction { implicit request =>
-    Ok(views.html.matchesFeed(request))
+    Ok(views.html.matchesFeed(TwitterProvider.timeline(request)))
   }
 }

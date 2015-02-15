@@ -1,14 +1,15 @@
 package controllers
 
-import business.domain.User
+import business.domain.TwitterTweet
 import business.logic.LoginManager
 import play.api.Play
+import play.api.libs.functional.syntax._
+import play.api.libs.json.{JsPath, Reads}
 import play.api.libs.oauth._
 import play.api.libs.ws.WS
 import play.api.mvc.{RequestHeader, Action, Controller}
 import play.api.Play.current
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
 import scala.concurrent.Await
 import scala.concurrent.duration._
 
@@ -21,6 +22,11 @@ object TwitterProvider extends Controller {
     "https://api.twitter.com/oauth/access_token",
     "https://api.twitter.com/oauth/authenticate", KEY),
     use10a = true)
+
+  implicit val tweetReads: Reads[TwitterTweet] = (
+    (JsPath \ "user" \ "name").read[String] and
+    (JsPath \ "text").read[String]
+  )(TwitterTweet.apply _)
 
   def authenticate = Action { request =>
     request.queryString.get("oauth_verifier").flatMap(_.headOption).map { verifier =>
@@ -50,16 +56,23 @@ object TwitterProvider extends Controller {
     }
   }
 
-//  def timeline = AuthAction.async { implicit request =>
-//    AuthAction.getUserOAuthToken(request) match {
-//      case Some(sessionToken) =>
-//        WS.url("https://api.twitter.com/1.1/statuses/home_timeline.json")
-//          .sign(OAuthCalculator(TwitterProvider.KEY, sessionToken))
-//          .get()
-//          .map(result => Ok(result.json))
-//      case _ => Future.successful(Redirect(routes.Application.index()))
-//    }
-//  }
+  def timeline[A](request: AuthenticatedRequest[A]): List[TwitterTweet] = {
+    AuthAction.getUserOAuthToken(request) match {
+      case Some(sessionToken) =>
+        val result =  WS.url("https://api.twitter.com/1.1/statuses/home_timeline.json")
+            .sign(OAuthCalculator(TwitterProvider.KEY, sessionToken))
+            .get()
+
+        val resultFuture = result.map { response =>
+          response.json.as[List[TwitterTweet]]
+        } recover {
+          case timeout: java.util.concurrent.TimeoutException => List[TwitterTweet]()
+        }
+
+        Await.result(resultFuture, 5000 millis)
+      case _ => List[TwitterTweet]()
+    }
+  }
 
   def getTwitterName(oauthToken: RequestToken): Option[String] = {
 

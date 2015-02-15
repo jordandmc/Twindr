@@ -4,12 +4,8 @@ import java.util.UUID
 import com.mongodb.casbah.commons.MongoDBObject
 import controllers.TwitterProvider
 import persistence.DBManager._
-import play.api.libs.oauth._
-
 import business.domain.{Token, User}
 import play.api.libs.oauth.RequestToken
-import play.api.libs.ws.WS
-import play.api.mvc.RequestHeader
 
 import scala.util.Random
 

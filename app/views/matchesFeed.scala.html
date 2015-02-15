@@ -1,9 +1,26 @@
-@(implicit request: play.api.mvc.RequestHeader)
+@(tweets: List[business.domain.TwitterTweet])(implicit request: play.api.mvc.RequestHeader)
+
 @main("Twindr - Matchmaking") {
 
   <div id="main" class="rounded-box">
     <p>View your matches here:</p>
     <br/>
   </div>
+
+  @for(tweet <- tweets) {
+    <div id="match" class="rounded-box match-box">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td><p>@tweet.author</p></td>
+        </tr>
+        <tr>
+          <td align="center"><p>@tweet.message</p></td>
+        </tr>
+        <tr align="right">
+          <td><span id="not-matched" class="float-right"><p>Match | Discard</p></span></td>
+        </tr>
+      </table>
+    </div>
+  }
 
 }
