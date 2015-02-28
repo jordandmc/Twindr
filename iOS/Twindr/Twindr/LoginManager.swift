@@ -9,18 +9,31 @@
 import Foundation
 import Accounts
 
-class LoginManager {
-    init(){
+class TwitterManager {
+    init() {
         SignIntoTwitter()
     }
     
-    func SignIntoTwitter(){
-        var accountStore = ACAccountStore()
-        var accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
+    func SignIntoTwitter() {
+        var account:ACAccountStore = ACAccountStore()
+        var accountType:ACAccountType = account.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
         
-        accountStore.requestAccessToAccountsWithType(accountType, options: nil) {
+        account.requestAccessToAccountsWithType(accountType, options: nil) {
             (granted, error) in
-            println("got back: \(granted)")
+            if(granted) {
+                var arrayOfAccounts = account.accountsWithAccountType(accountType)
+                let requestAPI:NSURL = NSURL(string: "http://api.twitter.com/1.1/statuses/user_timeline.json")!
+                
+                println("Twitter accounts on device:")
+                for item in arrayOfAccounts{
+                    println("username: \(item.username)")
+                    println("description: \(item.description)")
+                    println()
+                }
+            }
+            else {
+                println("ERROR: \(error)")
+            }
         }
     }
 }
