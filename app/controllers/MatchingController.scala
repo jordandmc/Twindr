@@ -1,11 +1,15 @@
 package controllers
 
-import play.api.mvc.{Action, Controller}
+import business.domain.User
+import business.logic.GeoJSONFormatter
+import play.api.mvc.Controller
 
 object MatchingController extends Controller {
 
   def updateGeolocation(latitude: Double, longitude: Double) = AuthAction { implicit request =>
-    Ok("Success: Lat=" + latitude + " Long: " + longitude)
+    val location = GeoJSONFormatter.generateFromCoords(longitude, latitude)
+    User.updateUserLocation(request.user, Option(location))
+    Ok("Geolocation updated")
   }
 
   def acceptMatch(twitterName: String) = AuthAction { implicit request =>
