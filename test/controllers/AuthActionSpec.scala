@@ -1,5 +1,6 @@
 package controllers
 
+import business.logic.WithApplicationAndDatabase
 import org.junit.runner._
 import org.specs2.mutable._
 import org.specs2.runner._
@@ -11,8 +12,8 @@ class AuthActonSpec extends Specification {
 
   "User" should {
 
-    "be authenticated" in new WithApplication {
-      val request = FakeRequest(GET, controllers.routes.Application.index().url).withSession("userid" -> "1234")
+    "be authenticated" in new WithApplicationAndDatabase {
+      val request = FakeRequest(GET, controllers.routes.Application.index().url).withSession(user1Data).withHeaders(user1Data)
       AuthAction.isAuthenticated(request) must beEqualTo(true)
     }
 
