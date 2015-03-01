@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		173A6B831AA03A4C003198FF /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173A6B821AA03A4C003198FF /* LoginManager.swift */; };
 		173A6B8A1AA197AD003198FF /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 173A6B871AA197AD003198FF /* TwitterKit.framework */; };
 		173A6B8B1AA197AD003198FF /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 173A6B881AA197AD003198FF /* TwitterKitResources.bundle */; };
 		173A6B8C1AA197AD003198FF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 173A6B891AA197AD003198FF /* Fabric.framework */; };
@@ -34,7 +33,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		173A6B821AA03A4C003198FF /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		173A6B871AA197AD003198FF /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
 		173A6B881AA197AD003198FF /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		173A6B891AA197AD003198FF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
@@ -107,7 +105,6 @@
 				20B96B9F1A73549500F32F98 /* Main.storyboard */,
 				20B96BA41A73549600F32F98 /* LaunchScreen.xib */,
 				20B96B991A73549500F32F98 /* Supporting Files */,
-				173A6B821AA03A4C003198FF /* LoginManager.swift */,
 				173A6B8D1AA19D4A003198FF /* LoginViewController.swift */,
 			);
 			path = Twindr;
@@ -262,7 +259,6 @@
 				E621AC1A1A8D32AC00C3BAAB /* HomeViewController.swift in Sources */,
 				20B96B9E1A73549500F32F98 /* ViewController.swift in Sources */,
 				20B96B9C1A73549500F32F98 /* AppDelegate.swift in Sources */,
-				173A6B831AA03A4C003198FF /* LoginManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
