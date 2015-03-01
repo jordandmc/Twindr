@@ -27,6 +27,7 @@ trait WithApplicationAndDatabase extends WithApplication {
   )
 
   val user1Data = ("X-Auth-Token" -> "123")
+  val user2Data = ("X-Auth-Token" -> "124")
 
   override def around[T: AsResult](t: => T): Result = super.around {
     setup
@@ -41,8 +42,10 @@ trait WithApplicationAndDatabase extends WithApplication {
    * Populate the test database with test data
    */
   def setup: Unit = {
-    User("123456", RequestToken("X-Auth-Token", "123"), "testuser", None, None, Option(GeoJSONFormatter.generateFromCoords(0.0, 0.0)), List(), List(), Random.nextDouble()).save()
+    User("123456", RequestToken("X-Auth-Token", "123"), "testuser", Option("M"), Option(new java.util.Date()), Option(GeoJSONFormatter.generateFromCoords(0.0, 0.0)), List(), List(), Random.nextDouble()).save()
+    User("123457", RequestToken("X-Auth-Token", "124"), "testuser2", None, None, Option(GeoJSONFormatter.generateFromCoords(0.0, 0.0)), List(), List(), Random.nextDouble()).save()
     Token("123", "123456").save()
+    Token("124", "123457").save()
   }
 
   /**
