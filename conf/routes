@@ -3,31 +3,32 @@
 # ~~~~
 
 # Home page
-GET         /                        controllers.Application.index
+GET         /                          controllers.Application.index
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file            controllers.Assets.at(path="/public", file)
+GET         /assets/*file              controllers.Assets.at(path="/public", file)
 
 # Login and logout
-GET         /login                   controllers.Login.login
-GET         /logout                  controllers.Login.logout
+GET         /login                     controllers.Login.login
+GET         /logout                    controllers.Login.logout
 
 # One time account registration
-GET         /register                controllers.Login.register
-POST        /register                controllers.Login.checkRegistration
+GET         /register                  controllers.Login.register
+POST        /register                  controllers.Login.checkRegistration
 
 # Profile settings
-GET         /profile/settings        controllers.Profile.settings
-POST        /profile/settings        controllers.Profile.updateSettings
-GET         /profile/filters         controllers.Profile.filters
+GET         /profile/settings          controllers.Profile.settings
+POST        /profile/settings          controllers.Profile.updateSettings
+GET         /profile/filters           controllers.Profile.filters
 
 # Matchmaking
-GET         /main                    controllers.Application.matchesFeed
+GET         /main                      controllers.Application.matchesFeed
 
 #Twitter API interaction
 
-GET         /auth                controllers.TwitterProvider.authenticate
+GET         /auth                      controllers.TwitterProvider.authenticate
 
 #Mobile Access
 
-GET         /m/potentialMatches     controllers.MobileController.getPotentialMatches
+GET         /m/potentialMatches        controllers.MobileController.getPotentialMatches
+GET         /m/matches                 controllers.MobileController.getMatches
