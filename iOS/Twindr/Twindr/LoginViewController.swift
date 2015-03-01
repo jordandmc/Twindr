@@ -12,14 +12,23 @@ import TwitterKit
 class LoginViewController: ViewController {
     
     override func viewDidLoad() {
-        println("this has been loaded")
         super.viewDidLoad()
         let logInButton = TWTRLogInButton(logInCompletion:
             { (session, error) in
                 if (session != nil) {
-                    println("signed in as \(session.userName)");
+                    println("signed in as \(session.userName)")
+                    println("Oauth token: \(session.authToken)")
+                    println("Oauth token secret: \(session.authTokenSecret)")
                     
-                } else {
+                    if(self.postOauthCredentials(session)){
+                        let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("StartNav") as UINavigationController
+                        self.presentViewController(navigationController, animated: true, completion: nil)
+                    }
+                    else {
+                        println("There was a problem communicating with the server.")
+                    }
+                }
+                else {
                     println("error: \(error.localizedDescription)");
                 }
         })
@@ -30,5 +39,13 @@ class LoginViewController: ViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func postOauthCredentials(session:TWTRSession) -> Bool {
+        var result = true
+        
+        
+        
+        return result
     }
 }
