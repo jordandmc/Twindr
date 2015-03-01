@@ -2,6 +2,7 @@ package controllers
 
 import business.domain.User
 import business.logic.{MatchingManager, RegistrationManager}
+import play.api.Routes
 import play.api.mvc._
 
 object Application extends Controller {
@@ -25,5 +26,15 @@ object Application extends Controller {
     val potentialMatches = MatchingManager.getPotentialMatches(user)
 
     Ok(views.html.matchesFeed(potentialMatches))
+  }
+
+  def javascriptRoutes = Action { implicit request =>
+    Ok(
+      Routes.javascriptRouter("jsRoutes")(
+        routes.javascript.MatchingController.acceptMatch,
+        routes.javascript.MatchingController.rejectMatch,
+        routes.javascript.MatchingController.updateGeolocation
+      )
+    ).as("text/javascript")
   }
 }
