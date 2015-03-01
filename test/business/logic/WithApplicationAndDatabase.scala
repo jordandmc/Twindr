@@ -26,6 +26,17 @@ trait WithApplicationAndDatabase extends WithApplication {
     })
   )
 
+  /**
+   * Generic user test data. These users will be populated in the database once created
+   * for use with tests. Ideally use these to speed up the process with unrelated tests.
+   * ie. Make new ones if you're testing user creation
+   */
+  val user1 = User("123456", RequestToken("X-Auth-Token", "123"), "testuser", Option("M"), Option(new java.util.Date()), Option(GeoJSONFormatter.generateFromCoords(0.0, 0.0)), List(), List(), Random.nextDouble())
+  val user2 = User("123457", RequestToken("X-Auth-Token", "124"), "testuser2", None, None, Option(GeoJSONFormatter.generateFromCoords(0.0, 0.0)), List(), List(), Random.nextDouble())
+
+  val token1 = Token("123", "123456")
+  val token2 = Token("124", "123457")
+
   val user1Data = ("X-Auth-Token" -> "123")
   val user2Data = ("X-Auth-Token" -> "124")
 
@@ -42,10 +53,10 @@ trait WithApplicationAndDatabase extends WithApplication {
    * Populate the test database with test data
    */
   def setup: Unit = {
-    User("123456", RequestToken("X-Auth-Token", "123"), "testuser", Option("M"), Option(new java.util.Date()), Option(GeoJSONFormatter.generateFromCoords(0.0, 0.0)), List(), List(), Random.nextDouble()).save()
-    User("123457", RequestToken("X-Auth-Token", "124"), "testuser2", None, None, Option(GeoJSONFormatter.generateFromCoords(0.0, 0.0)), List(), List(), Random.nextDouble()).save()
-    Token("123", "123456").save()
-    Token("124", "123457").save()
+    user1.save()
+    user2.save()
+    token1.save()
+    token2.save()
   }
 
   /**
