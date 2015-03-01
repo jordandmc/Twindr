@@ -1,10 +1,7 @@
 package controllers
 
-import business.domain.TwitterTweet
 import business.logic.LoginManager
 import play.api.Play
-import play.api.libs.functional.syntax._
-import play.api.libs.json.{JsPath, Reads}
 import play.api.libs.oauth._
 import play.api.libs.ws.WS
 import play.api.mvc.{RequestHeader, Action, Controller}
@@ -22,11 +19,6 @@ object TwitterProvider extends Controller {
     "https://api.twitter.com/oauth/access_token",
     "https://api.twitter.com/oauth/authenticate", KEY),
     use10a = true)
-
-  implicit val tweetReads: Reads[TwitterTweet] = (
-    (JsPath \ "user" \ "name").read[String] and
-    (JsPath \ "text").read[String]
-  )(TwitterTweet.apply _)
 
   def authenticate = Action { request =>
     request.queryString.get("oauth_verifier").flatMap(_.headOption).map { verifier =>
@@ -56,21 +48,21 @@ object TwitterProvider extends Controller {
     }
   }
 
-  def timeline[A](request: AuthenticatedRequest[A]): List[TwitterTweet] = {
+  def timeline[A](request: AuthenticatedRequest[A]): List[String] = {
     AuthAction.getUserOAuthToken(request) match {
       case Some(sessionToken) =>
-        val result =  WS.url("https://api.twitter.com/1.1/statuses/home_timeline.json")
+        val result =  WS.url("https://api.twitter.com/1.1/statuses/user_timeline.json?count=20")
             .sign(OAuthCalculator(TwitterProvider.KEY, sessionToken))
             .get()
 
         val resultFuture = result.map { response =>
-          response.json.as[List[TwitterTweet]]
+          (response.json \\ "text").map(_.as[String]).toList
         } recover {
-          case timeout: java.util.concurrent.TimeoutException => List[TwitterTweet]()
+          case timeout: java.util.concurrent.TimeoutException => List[String]()
         }
 
         Await.result(resultFuture, 5000 millis)
-      case _ => List[TwitterTweet]()
+      case _ => List[String]()
     }
   }
 

@@ -1,7 +1,7 @@
 package controllers
 
 import business.domain.User
-import business.logic.RegistrationManager
+import business.logic.{MatchingManager, RegistrationManager}
 import play.api.mvc._
 
 object Application extends Controller {
@@ -21,6 +21,9 @@ object Application extends Controller {
   }
 
   def matchesFeed = AuthAction { implicit request =>
-    Ok(views.html.matchesFeed(TwitterProvider.timeline(request)))
+    val user = User.updateUserTweets(request.user, TwitterProvider.timeline(request))
+    val potentialMatches = MatchingManager.getPotentialMatches(user)
+
+    Ok(views.html.matchesFeed(potentialMatches))
   }
 }

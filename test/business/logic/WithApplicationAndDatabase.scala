@@ -1,10 +1,11 @@
 package business.logic
 
 import business.domain.{Token, User}
+import com.mongodb.casbah.commons.MongoDBObject
 import com.typesafe.config.ConfigFactory
 import org.specs2.execute.{AsResult, Result}
 import persistence.DBManager._
-import play.api.{Configuration, GlobalSettings}
+import play.api.{Application, Configuration, GlobalSettings}
 import play.api.libs.oauth.RequestToken
 import play.api.test.{FakeApplication, WithApplication}
 import scala.util.Random
@@ -15,13 +16,19 @@ import scala.util.Random
 trait WithApplicationAndDatabase extends WithApplication {
 
   /**
-   * Changes the application to use the test configuration file
-   * @return A FakeApplication running the test settings
+   * Changes the application to use the test configuration file.
    */
   override implicit val app: FakeApplication = new FakeApplication(
     withGlobal = Some(new GlobalSettings() {
       override def configuration: Configuration = {
         Configuration(ConfigFactory.load("test.conf"))
+      }
+
+      override def onStart(app: Application): Unit = withDB { db =>
+        val usersCollection = db.getCollection("users")
+
+        usersCollection.createIndex(MongoDBObject("random" -> 1))
+        usersCollection.createIndex(MongoDBObject("location" -> "2dsphere"))
       }
     })
   )

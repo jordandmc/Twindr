@@ -81,4 +81,34 @@ class UserSpec extends Specification {
 
   }
 
+  "update recent tweets" should {
+
+    "update the tweets field" in new WithApplicationAndDatabase {
+      val user = User.updateUserTweets(user1, List[String]("Tweet 1", "Another tweet"))
+
+      user != None
+      user.recentTweets.isEmpty == false
+      user.recentTweets.contains("Tweet 1") == true
+      user.recentTweets.contains("Another tweet") == true
+    }
+
+    "update the tweets field twice" in new WithApplicationAndDatabase {
+      var user = User.updateUserTweets(user1, List[String]("Tweet 1", "Another tweet"))
+      user = User.updateUserTweets(user1, List[String]("Only one tweet"))
+
+      user != None
+      user.recentTweets.isEmpty == false
+      user.recentTweets.size == 1
+      user.recentTweets.contains("Only one tweet") == true
+    }
+
+    "contain no tweets" in new WithApplicationAndDatabase {
+      val user = User.updateUserTweets(user1, List[String]())
+
+      user != None
+      user.recentTweets.isEmpty == true
+    }
+
+  }
+
 }
