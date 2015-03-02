@@ -70,7 +70,7 @@ object User extends Collected {
     val geo = MongoDBObject("$geometry" -> MongoDBObject)
 
     val criteria = $and(
-      "location" $nearSphere(GeoCoords(latitude, longitude)),// $maxDistance maxDistance,
+      "location" $nearSphere GeoCoords(longitude, latitude),
       "random" $gt start
     )
 
