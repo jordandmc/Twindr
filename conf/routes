@@ -23,6 +23,7 @@ GET         /profile/filters               controllers.Profile.filters
 
 # Matchmaking
 GET         /main                          controllers.Application.matchesFeed
+GET         /matches                       controllers.MatchingController.matchedUserFeed
 
 #Twitter API interaction
 
@@ -34,3 +35,10 @@ GET         /m/potentialMatches            controllers.MobileController.getPoten
 GET         /m/matches                     controllers.MobileController.getMatches
 GET         /m/processMatchResponse        controllers.MobileController.processMatchResponse
 GET         /m/unmatch                     controllers.MobileController.unmatch
+
+# AJAX/ Javascript routes
+GET         /js/routes                     controllers.Application.javascriptRoutes
+GET         /ajax/updateGeolocation        controllers.MatchingController.updateGeolocation(latitude: Double, longitude: Double)
+GET         /ajax/firstMatch               controllers.MatchingController.getFirstMatch
+GET         /ajax/acceptMatch              controllers.MatchingController.acceptMatch(twitterName: String)
+GET         /ajax/rejectMatch              controllers.MatchingController.rejectMatch(twitterName: String)
