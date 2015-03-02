@@ -12,11 +12,11 @@ $(document).ready(getGeolocation())
 function getGeolocation() {
     //Get the geolocation if the client has one
     if(Modernizr.geolocation) {
-        navigator.geolocation.getCurrentPosition(getLocation, handleError);
+        navigator.geolocation.getCurrentPosition(geoPosition, geoError, {maximumAge: 600000});
     }
 }
 
-function getLocation(position) {
+function geoPosition(position) {
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
 
@@ -24,5 +24,5 @@ function getLocation(position) {
     jsRoutes.controllers.MatchingController.updateGeolocation(latitude, longitude).ajax()
 }
 
-function handleError(error) {
+function geoError(error) {
 }
