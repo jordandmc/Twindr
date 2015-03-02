@@ -47,7 +47,7 @@ object User extends Collected {
   }
 
   def updateUserLocation(user: User, newLocation: Option[DBObject]): User = {
-    user.copy(location = newLocation).save()
+    user.copy(location = newLocation).save
   }
 
   private[business] def getByID(_id: String): Option[User] = User.withCollection { collection =>

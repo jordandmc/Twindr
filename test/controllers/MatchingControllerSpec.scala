@@ -1,6 +1,6 @@
 package controllers
 
-import business.logic.{MatchingManager, WithApplicationAndDatabase}
+import business.logic.WithApplicationAndDatabase
 import org.junit.runner._
 import org.specs2.mutable._
 import org.specs2.runner._
