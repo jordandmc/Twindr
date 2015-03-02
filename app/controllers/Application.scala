@@ -22,16 +22,16 @@ object Application extends Controller {
   }
 
   def matchesFeed = AuthAction { implicit request =>
-    val user = User.updateUserTweets(request.user, TwitterProvider.timeline(request))
-    val potentialMatches = MatchingManager.getPotentialMatches(user)
-
-    Ok(views.html.matchesFeed(potentialMatches))
+    //Update the user's tweets when they refresh the matches page
+    User.updateUserTweets(request.user, TwitterProvider.timeline(request))
+    Ok(views.html.matchesFeed())
   }
 
   def javascriptRoutes = Action { implicit request =>
     Ok(
       Routes.javascriptRouter("jsRoutes")(
         routes.javascript.MatchingController.acceptMatch,
+        routes.javascript.MatchingController.getFirstMatch,
         routes.javascript.MatchingController.rejectMatch,
         routes.javascript.MatchingController.updateGeolocation
       )

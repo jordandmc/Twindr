@@ -36,5 +36,6 @@ GET         /m/matches                     controllers.MobileController.getMatch
 # AJAX/ Javascript routes
 GET         /js/routes                     controllers.Application.javascriptRoutes
 GET         /ajax/updateGeolocation        controllers.MatchingController.updateGeolocation(latitude: Double, longitude: Double)
+GET         /ajax/firstMatch               controllers.MatchingController.getFirstMatch
 GET         /ajax/acceptMatch              controllers.MatchingController.acceptMatch(twitterName: String)
 GET         /ajax/rejectMatch              controllers.MatchingController.rejectMatch(twitterName: String)
