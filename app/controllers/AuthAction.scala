@@ -1,12 +1,14 @@
 package controllers
 
 import business.domain.{Token, User}
+import business.logic.RegistrationManager
+import play.api.Logger
 import play.api.libs.oauth.RequestToken
 import play.api.mvc.Results._
 import play.api.mvc._
 import scala.concurrent.Future
 
-class AuthenticatedRequest[A](val user: User, val request: Request[A]) extends WrappedRequest[A](request)
+class AuthenticatedRequest[A](val user: User, val request: Request[A], val token: Token) extends WrappedRequest[A](request)
 
 object AuthAction extends ActionBuilder[AuthenticatedRequest] {
 
@@ -14,18 +16,28 @@ object AuthAction extends ActionBuilder[AuthenticatedRequest] {
 
     val tokenId = request.headers.get("X-Auth-Token")
 
-    val token = tokenId match {
-      case tkn: Some[String] => tkn
+    val (token, web) = tokenId match {
+      case tkn: Some[String] => (tkn, false)
       case _ =>
         request.session.get("X-Auth-Token") match {
-          case tkn: Some[String] => tkn
-          case _ => None
+          case tkn: Some[String] => (tkn, true)
+          case _ => (None, false)
         }
     }
 
     val result = token match {
       case Some(tkn: String) => Token.withUser(tkn) { usr =>
-        block(new AuthenticatedRequest[A](usr, request))
+        val webNotRegistered = web match {
+          case true => ! RegistrationManager.hasRegistered(usr)
+          case _ => false
+        }
+
+        webNotRegistered match {
+          case true if ! request.path.contains("register") && ! request.path.contains("logout") =>
+            Future.successful(Redirect(routes.Login.register()))
+          case _ => block(new AuthenticatedRequest[A](usr, request, Token(tkn, usr._id)))
+        }
+
       }
       case _ => Future.successful(Redirect(routes.Application.index()))
     }

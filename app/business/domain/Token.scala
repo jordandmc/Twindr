@@ -18,6 +18,10 @@ case class Token(_id: String, userId: String) {
     this
   }
 
+  private[business] def delete(): Unit = Token.withCollection { collection =>
+    collection.findAndRemove(getQuery)
+  }
+
   private def getQuery: DBObject = {
     MongoDBObject("_id" -> _id)
   }

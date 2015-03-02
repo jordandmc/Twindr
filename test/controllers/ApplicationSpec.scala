@@ -48,7 +48,7 @@ class ApplicationSpec extends Specification {
 
       status(main) must equalTo(OK)
       contentType(main) must beSome.which(_ == "text/html")
-      contentAsString(main) must contain ("View your matches here")
+      contentAsString(main) must contain ("View your potential matches here")
       assert(AuthAction.isAuthenticated(request))
     }
 
@@ -57,7 +57,7 @@ class ApplicationSpec extends Specification {
       val main = route(request).get
 
       status(main) must equalTo(SEE_OTHER)
-      contentAsString(main) must not contain ("View your matches here")
+      contentAsString(main) must not contain ("View your potential matches here")
       assert(!AuthAction.isAuthenticated(request))
     }
 

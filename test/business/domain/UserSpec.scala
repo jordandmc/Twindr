@@ -111,4 +111,21 @@ class UserSpec extends Specification {
 
   }
 
+  "update location" should {
+
+    "update the location field" in new WithApplicationAndDatabase {
+      val location = Option(GeoJSONFormatter.generateFromCoords(10.0, 20.0))
+      val user = User.updateUserLocation(user1, location)
+
+      user != None
+      user.location == location
+    }
+
+    "no longer have a location" in new WithApplicationAndDatabase {
+      val user = User.updateUserLocation(user1, None)
+
+      user == None
+    }
+  }
+
 }

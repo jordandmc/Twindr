@@ -46,6 +46,10 @@ object User extends Collected {
     user.copy(recentTweets = newTweets).save
   }
 
+  def updateUserLocation(user: User, newLocation: Option[DBObject]): User = {
+    user.copy(location = newLocation).save
+  }
+
   private[business] def getByID(_id: String): Option[User] = User.withCollection { collection =>
     val criteria = MongoDBObject("_id" -> _id)
     val cursor = collection.findOne(criteria)
@@ -74,7 +78,7 @@ object User extends Collected {
     val geo = MongoDBObject("$geometry" -> MongoDBObject)
 
     val criteria = $and(
-      "location" $nearSphere(GeoCoords(latitude, longitude)),// $maxDistance maxDistance,
+      "location" $nearSphere GeoCoords(longitude, latitude),
       "random" $gt start
     )
 
