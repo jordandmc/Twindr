@@ -10,4 +10,10 @@ object MobileController extends Controller {
     val potentialMatches = MatchingManager.getPotentialMatches(request.user)
     Ok(Json.toJson(potentialMatches))
   }
+
+  def getMatches = AuthAction { request =>
+    val matches = MatchingManager.getMatches(request.user)
+    Ok(Json.toJson(matches))
+  }
+
 }

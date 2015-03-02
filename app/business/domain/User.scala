@@ -42,6 +42,10 @@ object User extends Collected {
 
   override def collection = "users"
 
+  def updateUserTweets(user: User, newTweets: List[String]): User = {
+    user.copy(recentTweets = newTweets).save
+  }
+
   private[business] def getByID(_id: String): Option[User] = User.withCollection { collection =>
     val criteria = MongoDBObject("_id" -> _id)
     val cursor = collection.findOne(criteria)
