@@ -25,11 +25,10 @@ object LoginManager {
         User(UUID.randomUUID().toString, oauthToken, twitterName, None, None, Option(GeoJSONFormatter.generateFromCoords(0.0, 0.0)), List(), List(), Random.nextDouble()).save()
     }
 
-    withDB { db =>
-      val tokensCollection = db("tokens")
-      tokensCollection.findAndRemove(MongoDBObject("userId" -> user._id))
+    Token(UUID.randomUUID().toString, user._id).save()
+  }
 
-      Token(UUID.randomUUID().toString, user._id).save()
-    }
+  def logout(token: Token): Unit = {
+    token.delete()
   }
 }

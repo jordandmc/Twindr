@@ -1,7 +1,7 @@
 package controllers
 
 import business.domain.{Token, Registration}
-import business.logic.RegistrationManager
+import business.logic.{LoginManager, RegistrationManager}
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc.Controller
@@ -26,9 +26,7 @@ object Login extends Controller {
   }
 
   def logout = AuthAction { implicit request =>
-    AuthAction.getTokenString(request).map{ tkn =>
-      Token.deleteById(tkn)
-    }
+    LoginManager.logout(request.token)
 
     Redirect(routes.Application.index()).withNewSession
   }

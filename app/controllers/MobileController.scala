@@ -1,7 +1,7 @@
 package controllers
 
 import business.domain.PotentialMatchResponse
-import business.logic.MatchingManager
+import business.logic.{LoginManager, MatchingManager}
 import play.api.libs.json.{JsValue, JsSuccess, Json}
 import play.api.mvc.Controller
 
@@ -34,6 +34,11 @@ object MobileController extends Controller {
 
   def unmatch = AuthAction { request =>
     MatchingManager.unmatch(request.user,request.body.asText.getOrElse(""))
+    Ok
+  }
+
+  def logout = AuthAction { request =>
+    LoginManager.logout(request.token)
     Ok
   }
 }
