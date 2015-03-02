@@ -38,8 +38,8 @@ function updateMatchBox(potentialMatch) {
 
     $('#potential-match-username').text(potentialMatch.username);
     $('#potential-match-tweets').html(tweets);
-    $('#accept-match').html("<a class='main-button' href='#' onclick='acceptMatch(\"" + potentialMatch.username + "\")'>Match</a>");
-    $('#reject-match').html("<a class='main-button' href='#' onclick='rejectMatch(\"" + potentialMatch.username + "\")'>Decline</a>");
+    $('#accept-match').html("<a class='main-button text-like-link' href='#' onclick='acceptMatch(\"" + potentialMatch.username + "\")'>Match</a>");
+    $('#reject-match').html("<a class='main-button text-like-link' href='#' onclick='rejectMatch(\"" + potentialMatch.username + "\")'>Decline</a>");
     document.getElementById('has-potential-match').style.visibility = "visible";
     document.getElementById('not-matched').style.visibility = "visible";
 }
