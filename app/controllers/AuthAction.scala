@@ -6,7 +6,7 @@ import play.api.mvc.Results._
 import play.api.mvc._
 import scala.concurrent.Future
 
-class AuthenticatedRequest[A](val user: User, val request: Request[A]) extends WrappedRequest[A](request)
+class AuthenticatedRequest[A](val user: User, val request: Request[A], val token: Token) extends WrappedRequest[A](request)
 
 object AuthAction extends ActionBuilder[AuthenticatedRequest] {
 
@@ -25,7 +25,7 @@ object AuthAction extends ActionBuilder[AuthenticatedRequest] {
 
     val result = token match {
       case Some(tkn: String) => Token.withUser(tkn) { usr =>
-        block(new AuthenticatedRequest[A](usr, request))
+        block(new AuthenticatedRequest[A](usr, request, Token(tkn, usr._id)))
       }
       case _ => Future.successful(Redirect(routes.Application.index()))
     }

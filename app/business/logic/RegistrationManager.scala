@@ -3,14 +3,30 @@ package business.logic
 import business.domain.{Registration, User}
 
 object RegistrationManager {
+
+  /**
+   * Fill in profile details of a user after the first time they log in
+   * @param user the user to update
+   * @param info data transfer object containing profile information
+   */
   def register(user: User, info: Registration): Unit = {
-    User(user._id, user.oauthToken, user.twitterName, Option(info.sex), Option(info.dateOfBirth), None, createInterestList(info.interests)).save()
+    user.copy(sex = Option(info.sex), dateOfBirth = Option(info.dateOfBirth), interests = createInterestList(info.interests)).save()
   }
 
+  /**
+   * Check to see if a user has already completed the registration step
+   * @param user the user in question
+   * @return true if the user has completed the registration step, false otherwise
+   */
   def hasRegistered(user: User): Boolean = {
     user.sex.isDefined && user.dateOfBirth.isDefined
   }
 
+  /**
+   * Parses the interest text into a list. Assumes one interest per line
+   * @param interestText The raw interest text
+   * @return List of interests
+   */
   private def createInterestList(interestText: String): List[String] = {
     interestText.toLowerCase.split("""\r\n|\n|\r|,( *)""").foldLeft(List[String]()) { (acc: List[String], current: String) =>
         if(! current.isEmpty) {

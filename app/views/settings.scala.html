@@ -1,0 +1,53 @@
+@(registrationForm: Form[business.domain.UpdateRegistration])(implicit request: play.api.mvc.RequestHeader)
+
+@import helper._
+@import views.forms.FormHelpers._
+
+@main("Twindr - Settings") {
+
+    <div id="main" class="rounded-box profile-container">
+        @settingsNav(request)
+        <div class="profile-content">
+
+            @if(request.flash.get("success").isDefined) {
+                <div class="success-box">
+                    <p>@request.flash.get("success").get</p>
+                </div>
+            }
+
+            <p>
+                Update your profile<br/>
+            </p>
+
+            @if(registrationForm.hasErrors) {
+                <div class="error-box">
+                    <p class="error-text">The following errors occurred while updating your profile:</p>
+                    <ul>
+                    @for(error <- registrationForm.errors) {
+                        <li class="error-text"><p>@error.message</p></li>
+                    }
+                    </ul>
+                </div>
+            }
+
+            <div class="reg-filler"></div>
+
+            @form(routes.Profile.updateSettings()) {
+
+                @textarea(
+                    registrationForm("interests"),
+                    '_label -> "Please enter some of your interests. One per line or separated by commas.",
+                    'rows -> "8",
+                    'cols -> "41",
+                    '_help -> "(Optional)",
+                    'class -> "reg-textarea"
+                )
+
+                <input class="main-button" type="submit" value="Update" />
+
+            }
+
+        </div>
+    </div>
+
+}

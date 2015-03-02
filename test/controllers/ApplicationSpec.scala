@@ -1,5 +1,6 @@
 package controllers
 
+import business.logic.WithApplicationAndDatabase
 import org.junit.runner._
 import org.specs2.mutable._
 import org.specs2.runner._
@@ -27,8 +28,8 @@ class ApplicationSpec extends Specification {
       contentAsString(home) must contain ("Welcome to Twindr!")
     }
     
-    "not render the index page if signed in" in new WithApplication {
-      val request = FakeRequest(GET, controllers.routes.Application.index().url).withSession("userid" -> "1234")
+    "not render the index page if signed in" in new WithApplicationAndDatabase {
+      val request = FakeRequest(GET, controllers.routes.Application.index().url).withSession(user1Data).withHeaders(user1Data)
       val home = route(request).get
 
       status(home) must equalTo(SEE_OTHER) // Should redirect automatically
@@ -41,13 +42,13 @@ class ApplicationSpec extends Specification {
 
   "Application#main" should {
 
-    "render the matching feed page (if signed in)" in new WithApplication {
-      val request = FakeRequest(GET, controllers.routes.Application.matchesFeed().url).withSession("userid" -> "1234")
+    "render the matching feed page (if signed in)" in new WithApplicationAndDatabase {
+      val request = FakeRequest(GET, controllers.routes.Application.matchesFeed().url).withSession(user1Data).withHeaders(user1Data)
       val main = route(request).get
 
       status(main) must equalTo(OK)
       contentType(main) must beSome.which(_ == "text/html")
-      contentAsString(main) must contain ("View your matches here")
+      contentAsString(main) must contain ("View your potential matches here")
       assert(AuthAction.isAuthenticated(request))
     }
 
@@ -55,9 +56,8 @@ class ApplicationSpec extends Specification {
       val request = FakeRequest(GET, controllers.routes.Application.matchesFeed().url)
       val main = route(request).get
 
-      status(main) must equalTo(FORBIDDEN)
-      contentType(main) must beSome.which(_ == "text/plain")
-      contentAsString(main) must contain ("You must be signed in to view this page.")
+      status(main) must equalTo(SEE_OTHER)
+      contentAsString(main) must not contain ("View your potential matches here")
       assert(!AuthAction.isAuthenticated(request))
     }
 

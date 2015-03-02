@@ -1,7 +1,8 @@
 package controllers
 
-import business.domain.{User, Token}
-import business.logic.RegistrationManager
+import business.domain.User
+import business.logic.{MatchingManager, RegistrationManager}
+import play.api.Routes
 import play.api.mvc._
 
 object Application extends Controller {
@@ -21,6 +22,19 @@ object Application extends Controller {
   }
 
   def matchesFeed = AuthAction { implicit request =>
-    Ok(views.html.matchesFeed(request))
+    //Update the user's tweets when they refresh the matches page
+    User.updateUserTweets(request.user, TwitterProvider.timeline(request))
+    Ok(views.html.matchesFeed())
+  }
+
+  def javascriptRoutes = Action { implicit request =>
+    Ok(
+      Routes.javascriptRouter("jsRoutes")(
+        routes.javascript.MatchingController.acceptMatch,
+        routes.javascript.MatchingController.getFirstMatch,
+        routes.javascript.MatchingController.rejectMatch,
+        routes.javascript.MatchingController.updateGeolocation
+      )
+    ).as("text/javascript")
   }
 }

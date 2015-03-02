@@ -1,11 +1,10 @@
 package controllers
 
 import business.domain.{Token, Registration}
-import business.logic.RegistrationManager
-import controllers.Application._
+import business.logic.{LoginManager, RegistrationManager}
 import play.api.data.Form
 import play.api.data.Forms._
-import play.api.mvc.{Action, Controller}
+import play.api.mvc.Controller
 
 object Login extends Controller {
 
@@ -27,9 +26,7 @@ object Login extends Controller {
   }
 
   def logout = AuthAction { implicit request =>
-    AuthAction.getTokenString(request).map{ tkn =>
-      Token.deleteById(tkn)
-    }
+    LoginManager.logout(request.token)
 
     Redirect(routes.Application.index()).withNewSession
   }
@@ -44,7 +41,7 @@ object Login extends Controller {
   }
 
   def checkRegistration = AuthAction { implicit request =>
-    registrationForm.bindFromRequest((request.request.body.asFormUrlEncoded).getOrElse(Map())).fold(
+    registrationForm.bindFromRequest(request.request.body.asFormUrlEncoded.getOrElse(Map())).fold(
       formWithErrors => {
         BadRequest(views.html.register(formWithErrors))
       },

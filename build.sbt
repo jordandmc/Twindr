@@ -16,7 +16,7 @@ libraryDependencies ++= Seq(
   ws,
   "org.mongodb" %% "casbah" % "2.7.5",
   "com.novus" %% "salat" % "1.9.9",
-  "org.scalatest" % "scalatest_2.11" % "2.2.1" % "test"
+  "org.scalatest" %% "scalatest" % "2.2.1" % "test"
 )
 
 unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )
