@@ -40,22 +40,21 @@ class MatchesViewController: ViewController {
         
     }
     
-    @IBAction func dismissMatch(sender: UIBarButtonItem) {
+    @IBAction func noButton(sender: UIBarButtonItem) {
         dismissMatch()
+    }
+
+    @IBAction func yesButton(sender: UIBarButtonItem) {
+        acceptMatch()
     }
     
     // Swipe to the right (start left, move right)
-    @IBAction func dismissMatch(sender: UISwipeGestureRecognizer) {
+    @IBAction func noSwipe(sender: UISwipeGestureRecognizer) {
         dismissMatch()
     }
     
-    @IBAction func acceptMatch(sender: UIBarButtonItem) {
-        acceptMatch()
-    }
-    
     // Swipe to the left (start right, move left)
-    @IBAction func acceptMatch(sender: UISwipeGestureRecognizer) {
+    @IBAction func yesSwipe(sender: UISwipeGestureRecognizer) {
         acceptMatch()
     }
-    
 }
