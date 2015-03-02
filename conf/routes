@@ -23,6 +23,7 @@ GET         /profile/filters               controllers.Profile.filters
 
 # Matchmaking
 GET         /main                          controllers.Application.matchesFeed
+GET         /matches                       controllers.MatchingController.matchedUserFeed
 
 #Twitter API interaction
 

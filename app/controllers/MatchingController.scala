@@ -58,6 +58,10 @@ object MatchingController extends Controller {
       BadRequest("No matches")
   }
 
+  def matchedUserFeed = AuthAction { implicit request =>
+    Ok(views.html.matchedUserFeed(MatchingManager.getMatches(request.user)))
+  }
+
   private def getNextMatch(user: User): Option[JsObject] = {
     val potentialMatches = MatchingManager.getPotentialMatches(user)
     if(potentialMatches.size > 1)

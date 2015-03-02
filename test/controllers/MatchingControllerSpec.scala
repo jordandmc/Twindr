@@ -4,7 +4,7 @@ import business.logic.WithApplicationAndDatabase
 import org.junit.runner._
 import org.specs2.mutable._
 import org.specs2.runner._
-import play.api.test.FakeRequest
+import play.api.test.{WithApplication, FakeRequest}
 import play.api.test.Helpers._
 
 @RunWith(classOf[JUnitRunner])
@@ -45,6 +45,26 @@ class MatchingControllerSpec extends Specification {
       val req = route(request).get
 
       status(req) must equalTo(OK)
+    }
+
+  }
+
+  "matchedUserFeed" should {
+
+    "not render the matched user page (if not signed in)" in new WithApplication {
+      val req = route(FakeRequest(GET, controllers.routes.MatchingController.matchedUserFeed().url)).get
+
+      status(req) must equalTo(SEE_OTHER)
+      redirectLocation(req) must beSome.which(_ == controllers.routes.Application.index().url)
+    }
+
+    "render the matched user page" in new WithApplicationAndDatabase {
+      val request = FakeRequest(GET, controllers.routes.MatchingController.matchedUserFeed().url).withSession(user1Data).withHeaders(user1Data)
+      val req = route(request).get
+
+      status(req) must equalTo(OK)
+      contentAsString(req) must contain ("Your matches:")
+      assert(AuthAction.isAuthenticated(request))
     }
 
   }
