@@ -425,7 +425,23 @@
                     <view key="view" contentMode="scaleToFill" id="jn4-TL-78a">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Twindr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TF1-6V-ypz">
+                                <rect key="frame" x="206" y="150" width="189" height="59"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="189" id="7UY-aa-QHB"/>
+                                    <constraint firstAttribute="height" constant="59" id="ful-Jb-g3A"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.1529411765" green="0.68235294120000001" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="TF1-6V-ypz" secondAttribute="centerY" constant="120.5" id="A3o-09-v4H"/>
+                            <constraint firstAttribute="centerX" secondItem="TF1-6V-ypz" secondAttribute="centerX" constant="-0.5" id="Jw5-6X-2dP"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="a4g-M4-GMG"/>
                     <connections>
