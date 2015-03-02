@@ -9,6 +9,8 @@
 
       <ul class="nav-right">
         @if(AuthAction.isAuthenticated(request)) {
+          <li><a href="@routes.Application.matchesFeed()">Potential Matches</a></li>
+          <li><a href="@routes.MatchingController.matchedUserFeed()">Matches</a></li>
           <li><a href="@routes.Profile.settings()">Settings</a></li>
           <li><a href="@routes.Login.logout()">Logout</a></li>
         }
