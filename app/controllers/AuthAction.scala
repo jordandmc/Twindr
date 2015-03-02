@@ -33,7 +33,7 @@ object AuthAction extends ActionBuilder[AuthenticatedRequest] {
         }
 
         webNotRegistered match {
-          case true if ! request.path.contains("register") =>
+          case true if ! request.path.contains("register") && ! request.path.contains("logout") =>
             Future.successful(Redirect(routes.Login.register()))
           case _ => block(new AuthenticatedRequest[A](usr, request, Token(tkn, usr._id)))
         }
