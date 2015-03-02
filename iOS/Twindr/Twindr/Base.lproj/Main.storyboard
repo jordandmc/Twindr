@@ -65,14 +65,18 @@
                                     <segue destination="hd4-FP-RXb" kind="show" id="ekW-wK-rg8"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ObU-D9-QkW">
-                                <rect key="frame" x="248" y="354" width="104" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Fake Logout">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ObU-D9-QkW">
+                                <rect key="frame" x="243" y="250" width="115" height="32"/>
+                                <color key="backgroundColor" red="0.1529411765" green="0.68235294120000001" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="115" id="VLt-o1-ia9"/>
+                                    <constraint firstAttribute="height" constant="32" id="pCq-nf-CZ6"/>
+                                </constraints>
+                                <state key="normal" title="Logout">
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="HbQ-JZ-pf3" kind="show" id="dFd-Uk-DUy"/>
+                                    <segue destination="HbQ-JZ-pf3" kind="showDetail" id="MEJ-z2-8Uw"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -81,8 +85,9 @@
                         <constraints>
                             <constraint firstItem="TLM-bN-E4S" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="136" id="9GH-Ux-PJr"/>
                             <constraint firstAttribute="centerX" secondItem="w6b-6w-u8W" secondAttribute="centerX" constant="-0.5" id="BtQ-tI-Ebm"/>
-                            <constraint firstAttribute="centerX" secondItem="ObU-D9-QkW" secondAttribute="centerX" id="Bxl-sq-UoM"/>
+                            <constraint firstAttribute="centerX" secondItem="ObU-D9-QkW" secondAttribute="centerX" constant="-0.5" id="GzR-aR-zpe"/>
                             <constraint firstItem="N88-rd-gGT" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="86" id="I7s-Pv-NFF"/>
+                            <constraint firstItem="ObU-D9-QkW" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="186" id="OIh-SV-0KC"/>
                             <constraint firstAttribute="centerX" secondItem="N88-rd-gGT" secondAttribute="centerX" constant="-0.5" id="QYv-L4-lwt"/>
                             <constraint firstItem="w6b-6w-u8W" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="36" id="Udl-EF-i3h"/>
                             <constraint firstAttribute="centerX" secondItem="TLM-bN-E4S" secondAttribute="centerX" constant="-0.5" id="aAW-gk-zQW"/>

@@ -26,15 +26,14 @@ GET         /main                          controllers.Application.matchesFeed
 GET         /matches                       controllers.MatchingController.matchedUserFeed
 
 #Twitter API interaction
-
 GET         /auth                          controllers.TwitterProvider.authenticate
 
 #Mobile Access
-
 GET         /m/potentialMatches            controllers.MobileController.getPotentialMatches
 GET         /m/matches                     controllers.MobileController.getMatches
 GET         /m/processMatchResponse        controllers.MobileController.processMatchResponse
 GET         /m/unmatch                     controllers.MobileController.unmatch
+GET         /m/logout                      controllers.MobileController.logout
 
 # AJAX/ Javascript routes
 GET         /js/routes                     controllers.Application.javascriptRoutes

@@ -1,6 +1,6 @@
 package controllers
 
-import business.domain.Registration
+import business.domain.{UpdateRegistration, Registration}
 import business.logic.RegistrationManager
 import play.api.data.Form
 import play.api.data.Forms._
@@ -13,14 +13,12 @@ object Profile extends Controller {
 
   val registrationForm = Form(
     mapping (
-      "sex" -> text.verifying("Please enter your sex", {!_.isEmpty}),
-      "birthday" -> date("yyyy-mm-dd").verifying("Your birth date must be in the past", {_.before(new java.util.Date())}),
       "interests" -> text
-    )(Registration.apply)(Registration.unapply)
+    )(UpdateRegistration.apply)(UpdateRegistration.unapply)
   )
 
   def settings = AuthAction { implicit request =>
-    val userData = Registration(request.user.sex.toString, request.user.dateOfBirth.get, request.user.interests.mkString("\n"))
+    val userData = UpdateRegistration(request.user.interests.mkString("\n"))
     Ok(views.html.settings(registrationForm.fill(userData))(request))
   }
 
@@ -30,7 +28,7 @@ object Profile extends Controller {
         BadRequest(views.html.settings(formWithErrors))
       },
       registration => {
-        RegistrationManager.register(request.user, registration)
+        RegistrationManager.register(request.user, Registration(request.user.sex.get, request.user.dateOfBirth.get, registration.interests))
         Redirect(routes.Profile.settings()).flashing("success" -> "Your account has been updated successfully.")
       }
     )

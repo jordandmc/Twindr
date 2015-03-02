@@ -34,24 +34,14 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .main-button {
-    -moz-border-radius: 3px;
-    -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-    -webkit-border-radius: 3px;
-    -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-    background: #e9902a;
-    border-radius: 3px;
-    border: 1px solid #a1621b;
-    box-shadow: 0 0 4px rgba(0,0,0, .75);
-    color: #fffee7;
+    color: #026802;
+    background: #fffee7;
     font-size:1.1em;
     padding: 5px 25px;
 }
 
 .main-button:hover, .main-button:focus{
-    -moz-box-shadow: 0 0 1px rgba(0,0,0, .75);
-    -webkit-box-shadow: 0 0 1px rgba(0,0,0, .75);
-    box-shadow: 0 0 1px rgba(0,0,0, .75);
-    background-color : #683f11;
+    background-color : #ffffff;
 }
 
 #main-wrapper {
