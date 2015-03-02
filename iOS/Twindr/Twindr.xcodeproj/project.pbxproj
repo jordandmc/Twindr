@@ -101,11 +101,11 @@
 				E621AC191A8D32AC00C3BAAB /* HomeViewController.swift */,
 				E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */,
 				E621AC1D1A8D34DE00C3BAAB /* MatchesViewController.swift */,
+				173A6B8D1AA19D4A003198FF /* LoginViewController.swift */,
 				20B96BA21A73549500F32F98 /* Images.xcassets */,
 				20B96B9F1A73549500F32F98 /* Main.storyboard */,
 				20B96BA41A73549600F32F98 /* LaunchScreen.xib */,
 				20B96B991A73549500F32F98 /* Supporting Files */,
-				173A6B8D1AA19D4A003198FF /* LoginViewController.swift */,
 			);
 			path = Twindr;
 			sourceTree = "<group>";
