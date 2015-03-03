@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import TwitterKit
 
 class HomeViewController: ViewController {
+    
+    @IBAction func Logout(sender: UIButton) {
+        Twitter.sharedInstance().logOut()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
