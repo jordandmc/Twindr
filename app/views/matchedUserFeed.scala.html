@@ -3,15 +3,21 @@
 @main("Twindr - Matchmaking") {
 
     <div id="main" class="rounded-box">
-        <p>Your matches:</p>
+        <p>
+            Your matches will appear in the list below once a user you elected you match with has matched with you as well.
+        </p>
     </div>
 
     <div id="match" class="rounded-box match-box">
-        <ul class="no-bullets">
+        @if(matches.nonEmpty) {
+            <ul class="no-bullets">
             @for(mat <- matches) {
                 <li><p>@mat.username</p></li>
             }
-        </ul>
+            </ul>
+        } else {
+            <p>We have no matches for you at this time.</p>
+        }
     </div>
 
 }

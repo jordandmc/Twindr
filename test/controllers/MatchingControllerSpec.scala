@@ -63,7 +63,7 @@ class MatchingControllerSpec extends Specification {
       val req = route(request).get
 
       status(req) must equalTo(OK)
-      contentAsString(req) must contain ("Your matches:")
+      contentAsString(req) must contain ("Your matches")
       assert(AuthAction.isAuthenticated(request))
     }
 
