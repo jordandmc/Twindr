@@ -31,7 +31,7 @@ object Application extends Controller {
     Ok(
       Routes.javascriptRouter("jsRoutes")(
         routes.javascript.MatchingController.acceptMatch,
-        routes.javascript.MatchingController.getFirstMatch,
+        routes.javascript.MatchingController.getPotentialMatches,
         routes.javascript.MatchingController.rejectMatch,
         routes.javascript.MatchingController.updateGeolocation
       )

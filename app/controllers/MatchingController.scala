@@ -1,13 +1,22 @@
 package controllers
 
-import business.domain.{PotentialMatch, PotentialMatchResponse, User}
+import business.domain.{PreparedPotentialMatch, PotentialMatch, PotentialMatchResponse, User}
 import business.logic.{MatchingManager, GeoJSONFormatter}
-import play.api.libs.json.{JsObject, Json}
+import play.api.libs.json.{JsValue, Writes, Json}
 import play.api.mvc.Controller
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
 object MatchingController extends Controller {
+
+  implicit val potentialMatchWrites = new Writes[PreparedPotentialMatch] {
+    def writes(p: PreparedPotentialMatch): JsValue = {
+      Json.obj(
+        "username" -> p.username,
+        "tweets" -> p.tweets.take(3)
+      )
+    }
+  }
 
   def updateGeolocation(latitude: Double, longitude: Double) = AuthAction { implicit request =>
     val location = GeoJSONFormatter.generateFromCoords(longitude, latitude)
@@ -21,13 +30,7 @@ object MatchingController extends Controller {
       MatchingManager.processMatchResponse(request.user, PotentialMatchResponse(twitterName, PotentialMatch.ACCEPTED))
     }
 
-    //Assume that the first match in the list is the match that we are in the process of
-    //marking as accepted
-    val nextMatch = getNextMatch(request.user)
-    if(nextMatch.nonEmpty)
-      Ok(nextMatch.get)
-    else
-      BadRequest("No matches")
+    Ok("Accepted")
   }
 
   def rejectMatch(twitterName: String) = AuthAction { implicit request =>
@@ -36,22 +39,15 @@ object MatchingController extends Controller {
       MatchingManager.processMatchResponse(request.user, PotentialMatchResponse(twitterName, PotentialMatch.REJECTED))
     }
 
-    //Assume that the first match in the list is the match that we are in the process of
-    //marking as accepted
-    val nextMatch = getNextMatch(request.user)
-    if(nextMatch.nonEmpty)
-      Ok(nextMatch.get)
-    else
-      BadRequest("No matches")
+    Ok("Rejected")
   }
 
-  def getFirstMatch = AuthAction { implicit request =>
+  def getPotentialMatches = AuthAction { implicit request =>
     val potentialMatches = MatchingManager.getPotentialMatches(request.user)
     if(potentialMatches.nonEmpty)
     {
       Ok(Json.obj(
-        "username" -> potentialMatches(0).username,
-        "tweets" -> potentialMatches(0).tweets.take(3)
+        "matches" -> potentialMatches
       ))
     }
     else
@@ -61,18 +57,4 @@ object MatchingController extends Controller {
   def matchedUserFeed = AuthAction { implicit request =>
     Ok(views.html.matchedUserFeed(MatchingManager.getMatches(request.user)))
   }
-
-  private def getNextMatch(user: User): Option[JsObject] = {
-    val potentialMatches = MatchingManager.getPotentialMatches(user)
-    if(potentialMatches.size > 1)
-    {
-      Option(Json.obj(
-        "username" -> potentialMatches(1).username,
-        "tweets" -> potentialMatches(1).tweets.take(3)
-      ))
-    }
-    else
-      None
-  }
-
 }
