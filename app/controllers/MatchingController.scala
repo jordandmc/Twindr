@@ -42,6 +42,14 @@ object MatchingController extends Controller {
     Ok("Rejected")
   }
 
+  def unmatch(twitterName: String) = AuthAction { implicit request =>
+    Future {
+      MatchingManager.unmatch(request.user, twitterName)
+    }
+
+    Ok("Unmatched")
+  }
+
   def getPotentialMatches = AuthAction { implicit request =>
     val potentialMatches = MatchingManager.getPotentialMatches(request.user)
     if(potentialMatches.nonEmpty)

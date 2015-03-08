@@ -41,3 +41,4 @@ GET         /ajax/updateGeolocation        controllers.MatchingController.update
 GET         /ajax/requestMatches           controllers.MatchingController.getPotentialMatches
 GET         /ajax/acceptMatch              controllers.MatchingController.acceptMatch(twitterName: String)
 GET         /ajax/rejectMatch              controllers.MatchingController.rejectMatch(twitterName: String)
+GET         /ajax/unmatch                  controllers.MatchingController.unmatch(twitterName: String)

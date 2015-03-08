@@ -1,7 +1,7 @@
 package controllers
 
 import business.domain.User
-import business.logic.{MatchingManager, RegistrationManager}
+import business.logic.RegistrationManager
 import play.api.Routes
 import play.api.mvc._
 
@@ -33,6 +33,7 @@ object Application extends Controller {
         routes.javascript.MatchingController.acceptMatch,
         routes.javascript.MatchingController.getPotentialMatches,
         routes.javascript.MatchingController.rejectMatch,
+        routes.javascript.MatchingController.unmatch,
         routes.javascript.MatchingController.updateGeolocation
       )
     ).as("text/javascript")

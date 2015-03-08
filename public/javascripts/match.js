@@ -35,6 +35,39 @@ function rejectMatch(twitterName) {
 }
 
 /**
+ * Unmatches with a previously matched user
+ * @param twitterName The name of the twitter user we want to forget
+ */
+function unmatch(twitterName) {
+    jsRoutes.controllers.MatchingController.unmatch(twitterName).ajax({
+        success: function() { removeUserFromPage(twitterName); },
+        error: unmatchError
+    });
+}
+
+/**
+ * Removes the given twitter username from the page
+ * @param twitterName The twitter name of the user to remove
+ */
+function removeUserFromPage(twitterName) {
+    var element = document.getElementById("match-user-" + twitterName);
+    element.parentNode.removeChild(element);
+
+    var list = document.getElementById('match-list');
+    if(list.children.length <= 0) {
+        $('#match').html("<p>We have no matches for you at this time.</p>");
+    }
+}
+
+/**
+ * An error has occurred removing a user
+ * @param msg The error message
+ */
+function unmatchError(msg) {
+
+}
+
+/**
  * Updates the relevant fields in matchesFeed.scala.html
  */
 function updateMatchBox() {

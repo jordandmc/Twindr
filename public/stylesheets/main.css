@@ -40,6 +40,13 @@ h1, h2, h3, h4, h5, h6, p {
     padding: 5px 25px;
 }
 
+.main-button-small {
+    color: #026802;
+    background: #fffee7;
+    font-size: 1em;
+    padding: 5px 10px;
+}
+
 .main-button:hover, .main-button:focus{
     background-color : #ffffff;
 }
@@ -57,6 +64,10 @@ h1, h2, h3, h4, h5, h6, p {
 
 .no-bullets {
     list-style-type: none;
+}
+
+.no-bullets li {
+    padding: 10px 0;
 }
 
 .profile-container {
