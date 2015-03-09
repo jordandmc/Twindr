@@ -13,11 +13,15 @@ class SettingsViewController: ViewController {
     @IBOutlet weak var genderField: UITextField!
     @IBOutlet weak var dobField: UITextField!
     @IBOutlet weak var interestsField: UITextField!
-    @IBOutlet weak var saveButton: UIButton!
-    
+    var datePickerView: UIDatePicker = UIDatePicker()
+    var genderPicker: UIPickerView = UIPickerView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set the input for the Date of Birth field
+        self.datePickerView.datePickerMode = UIDatePickerMode.Date
+        dobField.inputView = self.datePickerView
     }
     
     override func didReceiveMemoryWarning() {
@@ -25,19 +29,25 @@ class SettingsViewController: ViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func editDOBField(sender: UITextField) {
-        /*var datePickerView: UIDatePicker = UIDatePicker()
-        datePickerView.datePickerMode = UIDatePickerMode.Date
-        sender.inputView = datePickerView
-        datePickerView.addTarget(self, action: Selector("handleDatePicker:"), forControlEvents : UIControlEvents.ValueChanged)
-        sender.resignFirstResponder()*/
+    @IBAction func saveButton(sender: UIButton) {
+        // save the changes
+    }
+    
+    @IBAction func editDobField(sender: UITextField) {
+        self.datePickerView.addTarget(self, action: Selector("handleDatePicker:"), forControlEvents : UIControlEvents.ValueChanged)
     }
     
     func handleDatePicker(sender: UIDatePicker) {
-        /*var dateFormatter = NSDateFormatter()
+        var dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = .ShortStyle
-        dateFormatter.dateFormat = "YYYY/MM/DD"
-        dobField.text = dateFormatter.stringFromDate(sender.date)*/
+        dateFormatter.dateFormat = "yyyy/MM/dd"
+        dobField.text = dateFormatter.stringFromDate(sender.date)
     }
+    
+    @IBAction func editGenderField(sender: UITextField) {
+        // This may not be the way to go about for UIPickerView
+        // You may have to override it's method to give it data
+    }
+    
     
 }
