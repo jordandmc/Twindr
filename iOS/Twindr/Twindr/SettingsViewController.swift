@@ -24,10 +24,27 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
         self.genderPicker.dataSource = self
         self.genderPicker.delegate = self
         
-        // Set the input for the fields
+        // Create toolbar
+        var toolbar = UIToolbar()
+        toolbar.barStyle = UIBarStyle.Default
+        toolbar.translucent = true
+        toolbar.sizeToFit()
+        
+        // Create items to put onto the toolbar
+        var spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        var doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Bordered, target: self, action: "donePressed")
+        
+        // Add items to the toolbar
+        toolbar.setItems([spaceButton, doneButton], animated: false)
+        
+        // Set the inputs for the datePicker
         self.datePickerView.datePickerMode = UIDatePickerMode.Date
         self.dobField.inputView = self.datePickerView
+        self.dobField.inputAccessoryView = toolbar
+        
+        // Set the inputs for the genderPicker
         self.genderField.inputView = self.genderPicker
+        self.genderField.inputAccessoryView = toolbar
         
         // Should grab info from server
     }
@@ -41,6 +58,25 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
         // save the changes
     }
     
+    // Removes the pickers from view if they're active
+    func donePressed() {
+        if(genderField.isFirstResponder()) {
+            if(genderField.text == "") {
+                genderField.text = genders[0]
+            }
+            genderField.resignFirstResponder()
+            
+        } else if(dobField.isFirstResponder()) {
+            if(dobField.text == "") {
+                handleDatePicker(self.datePickerView)
+            }
+            dobField.resignFirstResponder()
+        }
+    }
+    
+    /*
+     * DatePicker functions
+     */
     @IBAction func editDobField(sender: UITextField) {
         self.datePickerView.addTarget(self, action: Selector("handleDatePicker:"), forControlEvents : UIControlEvents.ValueChanged)
     }
@@ -52,6 +88,10 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
         dobField.text = dateFormatter.stringFromDate(sender.date)
     }
     
+    
+    /*
+     * PickerView functions
+     */
     // UIPickerViewDataSource
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1;
@@ -66,7 +106,7 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String {
         return self.genders[row]
     }
-    
+
     // UIPickerViewDelegate
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
