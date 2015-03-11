@@ -8,20 +8,28 @@
 
 import UIKit
 
-class SettingsViewController: ViewController {
+class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var genderField: UITextField!
     @IBOutlet weak var dobField: UITextField!
     @IBOutlet weak var interestsField: UITextField!
+    
     var datePickerView: UIDatePicker = UIDatePicker()
     var genderPicker: UIPickerView = UIPickerView()
+    var genders = ["Male", "Female", "Prefer not to say..."]
+    var genderBackend = ["M", "F", "X"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.genderPicker.dataSource = self
+        self.genderPicker.delegate = self
         
-        // Set the input for the Date of Birth field
+        // Set the input for the fields
         self.datePickerView.datePickerMode = UIDatePickerMode.Date
-        dobField.inputView = self.datePickerView
+        self.dobField.inputView = self.datePickerView
+        self.genderField.inputView = self.genderPicker
+        
+        // Should grab info from server
     }
     
     override func didReceiveMemoryWarning() {
@@ -44,10 +52,24 @@ class SettingsViewController: ViewController {
         dobField.text = dateFormatter.stringFromDate(sender.date)
     }
     
-    @IBAction func editGenderField(sender: UITextField) {
-        // This may not be the way to go about for UIPickerView
-        // You may have to override it's method to give it data
+    // UIPickerViewDataSource
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1;
     }
     
+    // UIPickerViewDataSource
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.genders.count;
+    }
     
+    // UIPickerViewDelegate
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String {
+        return self.genders[row]
+    }
+    
+    // UIPickerViewDelegate
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    {
+        genderField.text = self.genders[row]
+    }
 }

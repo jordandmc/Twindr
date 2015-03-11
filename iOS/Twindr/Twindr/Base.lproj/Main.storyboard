@@ -329,9 +329,6 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <action selector="editGenderField:" destination="Z07-Fp-cyt" eventType="editingDidBegin" id="BaV-s7-B0E"/>
-                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ABi-SW-tx5">
                                         <rect key="frame" x="123" y="97" width="184" height="30"/>
