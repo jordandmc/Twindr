@@ -5,6 +5,7 @@ if errorlevel 1 (
   echo.
   echo.
   echo No browser open
+  echo Run StartJSTestDriver.bat
   echo.
   echo Open a browser of your choice
   echo Navigate to http://localhost:9876
