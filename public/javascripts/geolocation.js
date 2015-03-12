@@ -7,11 +7,16 @@
  * Geolocation functionality.
  * Requires the above modernizr script in order to function.
  */
-$(document).ready(getGeolocation())
+$(document).ready(getGeolocation());
 
 function getGeolocation() {
     //Get the geolocation if the client has one
-    if(Modernizr.geolocation) {
+    var status = "allowed";
+    if($.cookie("geolocation-status") != null) {
+        status = $.cookie("geolocation-status");
+    }
+
+    if(Modernizr.geolocation && status == "allowed") {
         navigator.geolocation.getCurrentPosition(geoPosition, geoError, {maximumAge: 600000});
     }
 }
@@ -21,8 +26,13 @@ function geoPosition(position) {
     var longitude = position.coords.longitude;
 
     //Update the geolocation on the server. The user does not need to see this information.
-    jsRoutes.controllers.MatchingController.updateGeolocation(latitude, longitude).ajax()
+    jsRoutes.controllers.MatchingController.updateGeolocation(latitude, longitude).ajax();
 }
 
 function geoError(error) {
+    if(error.code == error.PERMISSION_DENIED) {
+        //Store this data in a cookie. Should only apply to users who fail to click any option
+        //or click 'Not now'/ 'This time only'.
+        $.cookie("geolocation-status", "denied", { expires: 2, path: '/'});
+    }
 }
