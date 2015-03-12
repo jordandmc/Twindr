@@ -16,9 +16,9 @@ var currentIndex = 0;
  * Accepts the current match and loads the next one.
  * @param twitterName The name of the twitter user we want to match with
  */
-function acceptMatch(twitterName) {
+function acceptMatch(twitterName, callback) {
     jsRoutes.controllers.MatchingController.acceptMatch(twitterName).ajax({
-        success: updateMatchBox,
+        success: callback || updateMatchBox,
         error: matchingError
     });
 }
@@ -27,9 +27,9 @@ function acceptMatch(twitterName) {
  * Rejects the current match and loads the next one/
  * @param twitterName The name of the twitter user we don't want to match with
  */
-function rejectMatch(twitterName) {
+function rejectMatch(twitterName, callback) {
     jsRoutes.controllers.MatchingController.rejectMatch(twitterName).ajax({
-        success: updateMatchBox,
+        success: callback || updateMatchBox,
         error: matchingError
     });
 }
@@ -38,9 +38,9 @@ function rejectMatch(twitterName) {
  * Unmatches with a previously matched user
  * @param twitterName The name of the twitter user we want to forget
  */
-function unmatch(twitterName) {
+function unmatch(twitterName, callback) {
     jsRoutes.controllers.MatchingController.unmatch(twitterName).ajax({
-        success: function() { removeUserFromPage(twitterName); },
+        success: callback || function() { removeUserFromPage(twitterName); },
         error: unmatchError
     });
 }
