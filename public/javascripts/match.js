@@ -15,33 +15,39 @@ var currentIndex = 0;
 /**
  * Accepts the current match and loads the next one.
  * @param twitterName The name of the twitter user we want to match with
+ * @param callback Override for AJAX success callback
+ * @param errorCallback Override for AJAX error callback
  */
-function acceptMatch(twitterName, callback) {
+function acceptMatch(twitterName, callback, errorCallback) {
     jsRoutes.controllers.MatchingController.acceptMatch(twitterName).ajax({
         success: callback || updateMatchBox,
-        error: matchingError
+        error: errorCallback || matchingError
     });
 }
 
 /**
  * Rejects the current match and loads the next one/
  * @param twitterName The name of the twitter user we don't want to match with
+ * @param callback Override for AJAX success callback
+ * @param errorCallback Override for AJAX error callback
  */
-function rejectMatch(twitterName, callback) {
+function rejectMatch(twitterName, callback, errorCallback) {
     jsRoutes.controllers.MatchingController.rejectMatch(twitterName).ajax({
         success: callback || updateMatchBox,
-        error: matchingError
+        error: errorCallback || matchingError
     });
 }
 
 /**
  * Unmatches with a previously matched user
  * @param twitterName The name of the twitter user we want to forget
+ * @param callback Override for AJAX success callback
+ * @param errorCallback Override for AJAX error callback
  */
-function unmatch(twitterName, callback) {
+function unmatch(twitterName, callback, errorCallback) {
     jsRoutes.controllers.MatchingController.unmatch(twitterName).ajax({
         success: callback || function() { removeUserFromPage(twitterName); },
-        error: unmatchError
+        error: errorCallback || unmatchError
     });
 }
 
@@ -51,7 +57,8 @@ function unmatch(twitterName, callback) {
  */
 function removeUserFromPage(twitterName) {
     var element = document.getElementById("match-user-" + twitterName);
-    element.parentNode.removeChild(element);
+    if(element)
+        element.parentNode.removeChild(element);
 
     var list = document.getElementById('match-list');
     if(list.children.length <= 0) {
@@ -71,7 +78,7 @@ function unmatchError(msg) {
  * Updates the relevant fields in matchesFeed.scala.html
  */
 function updateMatchBox() {
-    if(currentIndex < potentialMatchList.matches.length) {
+    if(potentialMatchList != null && currentIndex < potentialMatchList.matches.length) {
         var potentialMatch = potentialMatchList.matches[currentIndex];
         var tweets = "";
         for (var i = 0; i < potentialMatch.tweets.length; i++) {
@@ -99,7 +106,7 @@ function updateMatchBox() {
  */
 function matchingError(msg) {
     var message = "";
-    if(msg.responseText == "No matches") {
+    if(msg != null && msg.responseText == "No matches") {
         message = "We have no potential matches to suggest at this time.";
     }
     else {
@@ -109,8 +116,12 @@ function matchingError(msg) {
     $('#potential-match-username').text("");
     $('#potential-match-tweets').html(message);
     $('#has-potential-match').html("");
-    document.getElementById('has-potential-match').style.visibility = "hidden";
-    document.getElementById('not-matched').style.visibility = "hidden";
+
+    var hpe = document.getElementById('has-potential-match');
+    if(hpe) hpe.style.visibility = "hidden";
+
+    var nm = document.getElementById('not-matched');
+    if(nm) nm.style.visibility = "hidden";
 }
 
 /**
@@ -126,11 +137,11 @@ function updateWithNewMatches(matchList) {
     potentialMatchList = matchList;
     currentIndex = 0;
 
-    if(potentialMatchList.matches.length > 0) {
+    if(matchList != null && potentialMatchList.matches.length > 0) {
         updateMatchBox();
     }
     else {
-        matchingError("No matches");
+        matchingError(JSON.parse('{ "responseText": "No matches" }'));
     }
 }
 
@@ -138,10 +149,12 @@ function updateWithNewMatches(matchList) {
  * Called when the page is loaded and on subsequent calls to get more matches to populate
  * the potential match list. If there are no potential matches, we will automatically
  * call the error callback.
+ * @param callback Override for AJAX success callback
+ * @param errorCallback Override for AJAX error callback
  */
-function loadPotentialMatches() {
+function loadPotentialMatches(callback, errorCallback) {
     jsRoutes.controllers.MatchingController.getPotentialMatches().ajax({
-        success: updateWithNewMatches,
-        error: matchingError
+        success: callback || updateWithNewMatches,
+        error: errorCallback || matchingError
     });
 }
