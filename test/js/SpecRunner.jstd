@@ -2,6 +2,7 @@ load:
   - jasmine-lib/jasmine.js
   - jasmine-lib/JasmineAdapter.js
   - ../../public/javascripts/jquery-1.9.0.min.js
+  - lib/jquery.cookie.min.js
   - ../../public/javascripts/*.js
   - RouteDependencies.js
 
