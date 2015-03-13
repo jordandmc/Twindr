@@ -10,7 +10,7 @@ object MessagingController extends Controller {
   /**
    * Enumerator for pushing JSON data through the sent event
    */
-  val (out, wsOutChannel) = Concurrent.broadcast[JsValue]
+  val (msg, msgOutChannel) = Concurrent.broadcast[JsValue]
 
   /**
    * Show the messaging page
@@ -25,7 +25,7 @@ object MessagingController extends Controller {
    * @return Success
    */
   def sendMessage = AuthAction(parse.json) { implicit request =>
-    wsOutChannel.push(request.body)
+    msgOutChannel.push(request.body)
     Ok
   }
 
@@ -34,7 +34,7 @@ object MessagingController extends Controller {
    * @return EventSource object containing the message
    */
   def receiveMessage = AuthAction { implicit request =>
-    Ok.feed(out &> EventSource()).as("text/event-stream")
+    Ok.feed(msg &> EventSource()).as("text/event-stream")
   }
 
 }
