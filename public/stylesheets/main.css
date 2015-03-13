@@ -25,8 +25,21 @@ h1, h2, h3, h4, h5, h6, p {
     color: #fffee7;
 }
 
+.float-left {
+    float: left;
+}
+
 .float-right {
     float: right;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.full-width-small-padding {
+    padding: 5px 5px;
+    width: 100%;
 }
 
 .match-box {
@@ -43,8 +56,8 @@ h1, h2, h3, h4, h5, h6, p {
 .main-button-small {
     color: #026802;
     background: #fffee7;
-    font-size: 1em;
-    padding: 5px 10px;
+    font-size: 1.1em;
+    padding: 2px 10px;
 }
 
 .main-button:hover, .main-button:focus{
@@ -55,6 +68,12 @@ h1, h2, h3, h4, h5, h6, p {
     border-top-width: 35px;
     border-bottom-width: 10px;
     padding-top: 4em;
+}
+
+.messaging-textarea {
+    max-width: 95%;
+    resize: none;
+    width: 95%;
 }
 
 .no-padding {
@@ -157,6 +176,12 @@ h1, h2, h3, h4, h5, h6, p {
     background-color: #27ae60;
     border-radius: 3px;
     padding: 20px;
+}
+
+.span-message {
+    display: inline-block;
+    white-space: nowrap;
+    width: 100%;
 }
 
 .text-like-link {

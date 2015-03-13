@@ -26,6 +26,7 @@ GET         /matches                       controllers.MatchingController.matche
 
 # Messaging
 GET         /messaging                     controllers.MessagingController.messages
+POST        /messaging                     controllers.MessagingController.sendMessage
 
 #Twitter API interaction
 GET         /auth                          controllers.TwitterProvider.authenticate

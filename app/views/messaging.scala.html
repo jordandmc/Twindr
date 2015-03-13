@@ -1,11 +1,25 @@
 @(implicit request: play.api.mvc.RequestHeader)
 
+@import helper._
+
 @main("Twindr - Messaging") {
 
+    <script type="text/javascript" src='@routes.Assets.at("javascripts/eventsource.min.js")'></script>
+
     <div id="main" class="rounded-box">
-        <p>
-            Messaging
-        </p>
+        <div id="messageFeed">
+
+        </div>
+        <div id="sendMessage" class="full-width-small-padding">
+            @form(routes.MessagingController.sendMessage) {
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td><textarea id="messageBox" rows="4" class="messaging-textarea" placeholder="Type a message here"></textarea></td>
+                        <td width="5%"><input class="main-button-small float-left" type="button" value="Send" /></td>
+                    </tr>
+                </table>
+            }
+        </div>
     </div>
 
 }
