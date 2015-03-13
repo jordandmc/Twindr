@@ -11,6 +11,7 @@
 		173A6B8B1AA197AD003198FF /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 173A6B881AA197AD003198FF /* TwitterKitResources.bundle */; };
 		173A6B8C1AA197AD003198FF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 173A6B891AA197AD003198FF /* Fabric.framework */; };
 		173A6B8E1AA19D4A003198FF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173A6B8D1AA19D4A003198FF /* LoginViewController.swift */; };
+		175F11B21AB273E20070CCE2 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 175F11B11AB273E20070CCE2 /* README.txt */; };
 		20B96B9C1A73549500F32F98 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96B9B1A73549500F32F98 /* AppDelegate.swift */; };
 		20B96B9E1A73549500F32F98 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96B9D1A73549500F32F98 /* ViewController.swift */; };
 		20B96BA11A73549500F32F98 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20B96B9F1A73549500F32F98 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 		173A6B881AA197AD003198FF /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		173A6B891AA197AD003198FF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		173A6B8D1AA19D4A003198FF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		175F11B11AB273E20070CCE2 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.txt; path = Twindr/README.txt; sourceTree = "<group>"; };
 		20B96B961A73549500F32F98 /* Twindr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twindr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20B96B9A1A73549500F32F98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20B96B9B1A73549500F32F98 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 		20B96B8D1A73549500F32F98 = {
 			isa = PBXGroup;
 			children = (
+				175F11B11AB273E20070CCE2 /* README.txt */,
 				173A6B871AA197AD003198FF /* TwitterKit.framework */,
 				173A6B881AA197AD003198FF /* TwitterKitResources.bundle */,
 				173A6B891AA197AD003198FF /* Fabric.framework */,
@@ -220,6 +223,7 @@
 				20B96BA11A73549500F32F98 /* Main.storyboard in Resources */,
 				20B96BA61A73549600F32F98 /* LaunchScreen.xib in Resources */,
 				20B96BA31A73549600F32F98 /* Images.xcassets in Resources */,
+				175F11B21AB273E20070CCE2 /* README.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
