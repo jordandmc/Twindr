@@ -19,7 +19,7 @@
             } else {
                 <li class="profile-nav-nonlink">Matches</li>
             }
-            @if(request.uri != routes.Profile.settings().url && request.uri != routes.Profile.filters().url) {
+            @if(request.uri != routes.Profile.settings().url) {
                 <li><a href="@routes.Profile.settings()">Settings</a></li>
             } else {
                 <li class="profile-nav-nonlink">Settings</li>
