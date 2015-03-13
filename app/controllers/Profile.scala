@@ -34,8 +34,4 @@ object Profile extends Controller {
     )
   }
 
-  def filters = AuthAction { implicit request =>
-    Ok(views.html.filters(request))
-  }
-
 }

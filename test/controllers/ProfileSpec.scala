@@ -45,20 +45,4 @@ class ProfileSpec extends Specification {
     }
 
   }
-
-  "Profile#filters" should {
-
-    "access page if signed in" in new WithApplicationAndDatabase {
-      val request = FakeRequest(GET, controllers.routes.Profile.filters().url).withHeaders(user1Data).withSession(user1Data)
-      AuthAction.isAuthenticated(request) must beEqualTo(true)
-      status(route(request).get) must equalTo(OK)
-    }
-
-    "not access page if not signed in" in new WithApplicationAndDatabase {
-      val request = FakeRequest(GET, controllers.routes.Profile.filters().url)
-      AuthAction.isAuthenticated(request) must beEqualTo(false)
-      redirectLocation(route(request).get) must beSome.which(_ == controllers.routes.Application.index().url)
-    }
-
-  }
 }
