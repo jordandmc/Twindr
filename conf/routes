@@ -24,6 +24,9 @@ POST        /profile/settings              controllers.Profile.updateSettings
 GET         /main                          controllers.Application.matchesFeed
 GET         /matches                       controllers.MatchingController.matchedUserFeed
 
+# Messaging
+GET         /messaging                     controllers.MessagingController.messages
+
 #Twitter API interaction
 GET         /auth                          controllers.TwitterProvider.authenticate
 
