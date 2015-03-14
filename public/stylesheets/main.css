@@ -70,12 +70,6 @@ h1, h2, h3, h4, h5, h6, p {
     padding-top: 4em;
 }
 
-.messaging-textarea {
-    max-width: 95%;
-    resize: none;
-    width: 95%;
-}
-
 .no-padding {
     margin: 0;
     padding: 0;
@@ -88,6 +82,63 @@ h1, h2, h3, h4, h5, h6, p {
 .no-bullets li {
     padding: 10px 0;
 }
+
+.rounded-box {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background-color: #27ae60;
+    border-radius: 3px;
+    padding: 20px;
+}
+
+.text-like-link {
+    text-decoration: none;
+}
+
+/*******************************************************
+                Messaging
+*******************************************************/
+
+.message-box-current-user {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background-color: #66ae44;
+    border-radius: 3px;
+    float: right;
+    margin-bottom: 20px;
+    max-width: 80%;
+    padding: 5px 10px;
+}
+
+.message-box-other-user {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background-color: #06842f;
+    border-radius: 3px;
+    float: left;
+    margin-bottom: 20px;
+    max-width: 80%;
+    padding: 5px 10px;
+}
+
+.messaging-textarea {
+    max-width: 95%;
+    resize: none;
+    width: 95%;
+}
+
+.outerMessageBox {
+    overflow: auto;
+    width: 100%;
+}
+
+.sendMessageSeparator {
+    margin: 0 10px;
+}
+
+/*******************************************************
+                Profile/ Settings
+*******************************************************/
 
 .profile-container {
     width: 100%;
@@ -145,6 +196,10 @@ h1, h2, h3, h4, h5, h6, p {
     width: 50%;
 }
 
+/*******************************************************
+                Registration
+*******************************************************/
+
 .reg-filler {
     padding: 1em 0;
 }
@@ -168,24 +223,6 @@ h1, h2, h3, h4, h5, h6, p {
 
 .reg-rule {
     padding: 0.5em 0;
-}
-
-.rounded-box {
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    background-color: #27ae60;
-    border-radius: 3px;
-    padding: 20px;
-}
-
-.span-message {
-    display: inline-block;
-    white-space: nowrap;
-    width: 100%;
-}
-
-.text-like-link {
-    text-decoration: none;
 }
 
 /*******************************************************

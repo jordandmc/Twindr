@@ -1,24 +1,46 @@
-@(implicit request: play.api.mvc.RequestHeader)
-
-@import helper._
+@(senderTwitterName: String)(implicit request: play.api.mvc.RequestHeader)
 
 @main("Twindr - Messaging") {
 
     <script type="text/javascript" src='@routes.Assets.at("javascripts/eventsource.min.js")'></script>
+    <script type="text/javascript" src='@routes.Assets.at("javascripts/messaging.js")'></script>
+    <script type="text/javascript">
+        var messageFeed = new EventSource('@routes.MessagingController.receiveMessage.url');
+        var messageHandler = function(event) {
+            var message = JSON.parse(event.data);
+
+            var newMessage = document.createElement("div");
+            newMessage.className = "full-width outerMessageBox";
+
+            if(message.sender == '@senderTwitterName') {
+                newMessage.innerHTML = "<span class='message-box-current-user'><p>" + message.message + "</p></span>";
+            } else {
+                newMessage.innerHTML = "<span class='message-box-other-user'><p>" + message.message + "</p></span>";
+            }
+
+            document.getElementById("messageFeed").appendChild(newMessage);
+        };
+
+        messageFeed.addEventListener('message', messageHandler);
+    </script>
 
     <div id="main" class="rounded-box">
         <div id="messageFeed">
 
+            <div class="full-width outerMessageBox"><span class="message-box-other-user"><p>When I was a young boy, My father took me into the city, To see a marching band</p></span></div>
+            <div class="full-width outerMessageBox"><span class="message-box-current-user"><p>He said, "Son when you grow up, would you be the saviour of the broken, the beaten and the damned?" He said "Will you defeat them, your demons, and all the non-believers, the plans that they have made?"</p></span></div>
+
         </div>
+
+        <div class="sendMessageSeparator"></div>
+
         <div id="sendMessage" class="full-width-small-padding">
-            @form(routes.MessagingController.sendMessage) {
-                <table border="0" cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td><textarea id="messageBox" rows="4" class="messaging-textarea" placeholder="Type a message here"></textarea></td>
-                        <td width="5%"><input class="main-button-small float-left" type="button" value="Send" /></td>
-                    </tr>
-                </table>
-            }
+            <table border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td><textarea id="messageBox" rows="4" class="messaging-textarea" placeholder="Type a message here"></textarea></td>
+                    <td width="5%"><a class="main-button-small float-left text-like-link" onclick="sendMessage('@senderTwitterName', 'recip')" href="#">Send</a></td>
+                </tr>
+            </table>
         </div>
     </div>
 

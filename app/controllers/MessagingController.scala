@@ -17,7 +17,7 @@ object MessagingController extends Controller {
    * @return The messaging page response
    */
   def messages = AuthAction { implicit request =>
-    Ok(views.html.messaging(request))
+    Ok(views.html.messaging(request.user.twitterName)(request))
   }
 
   /**
@@ -34,7 +34,7 @@ object MessagingController extends Controller {
    * @return EventSource object containing the message
    */
   def receiveMessage = AuthAction { implicit request =>
-    Ok.feed(msg &> EventSource()).as("text/event-stream")
+    Ok.feed(msg &> Concurrent.buffer(50) &> EventSource()).as("text/event-stream")
   }
 
 }
