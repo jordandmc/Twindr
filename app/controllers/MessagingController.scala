@@ -14,10 +14,11 @@ object MessagingController extends Controller {
 
   /**
    * Show the messaging page
+   * @param recipientTwitterName Twitter name of the user we want to send a message to
    * @return The messaging page response
    */
-  def messages = AuthAction { implicit request =>
-    Ok(views.html.messaging(request.user.twitterName)(request))
+  def messages(recipientTwitterName: String) = AuthAction { implicit request =>
+    Ok(views.html.messaging(request.user.twitterName, recipientTwitterName)(request))
   }
 
   /**

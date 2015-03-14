@@ -25,7 +25,7 @@ GET         /main                          controllers.Application.matchesFeed
 GET         /matches                       controllers.MatchingController.matchedUserFeed
 
 # Messaging
-GET         /messaging                     controllers.MessagingController.messages
+GET         /messaging                     controllers.MessagingController.messages(twitterName: String)
 POST        /messaging                     controllers.MessagingController.sendMessage
 
 #Twitter API interaction

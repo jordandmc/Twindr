@@ -13,14 +13,14 @@ class MessagingControllerSpec extends Specification {
   "messages" should {
 
     "not render the messages page if not signed in" in new WithApplication {
-      val page = route(FakeRequest(GET, controllers.routes.MessagingController.messages().url)).get
+      val page = route(FakeRequest(GET, controllers.routes.MessagingController.messages("twitterUser").url)).get
 
       status(page) must equalTo(SEE_OTHER)
       contentAsString(page) must not contain ("Messaging")
     }
 
     "render the messages page if signed in" in new WithApplicationAndDatabase {
-      val request = FakeRequest(GET, controllers.routes.MessagingController.messages().url).withSession(user1Data).withHeaders(user1Data)
+      val request = FakeRequest(GET, controllers.routes.MessagingController.messages("twitterUser").url).withSession(user1Data).withHeaders(user1Data)
       val page = route(request).get
 
       status(page) must equalTo(OK)
