@@ -24,12 +24,9 @@ class LoginViewController: ViewController {
                         let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("StartNav") as UINavigationController
                         self.presentViewController(navigationController, animated: true, completion: nil)
                     }
-                    else {
-                        println("There was a problem communicating with the server.")
-                    }
                 }
                 else {
-                    println("error: \(error.localizedDescription)");
+                    println("error: \(error.localizedDescription)")
                 }
         })
         logInButton.center = self.view.center
@@ -46,6 +43,9 @@ class LoginViewController: ViewController {
         
         
         
+        if(!result){
+            println("There was a problem communicating with the server.")
+        }
         return result
     }
 }
