@@ -12,7 +12,7 @@ import TwitterKit
 class HomeViewController: ViewController {
     
     @IBAction func Logout(sender: UIButton) {
-        Twitter.sharedInstance().logOut()
+        Logout()
     }
     
     override func viewDidLoad() {
@@ -25,7 +25,7 @@ class HomeViewController: ViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    func Logout(){
+        Twitter.sharedInstance().logOut()
+    }
 }
-
-
