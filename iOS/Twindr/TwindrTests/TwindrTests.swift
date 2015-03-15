@@ -8,6 +8,7 @@
 
 import UIKit
 import XCTest
+import TwitterKit
 
 class TwindrTests: XCTestCase {
     
@@ -19,6 +20,12 @@ class TwindrTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+    }
+    
+    func testLogout(){
+        let homeController = HomeViewController()
+        homeController.Logout();
+        XCTAssertNil(Twitter.sharedInstance().session(), "Error: logging out")
     }
     
     func testExample() {
