@@ -29,4 +29,35 @@ class MessagingControllerSpec extends Specification {
 
   }
 
+  "sendMessage" should {
+
+    "not process an unauthenticated request" in new WithApplication {
+      val request = FakeRequest(GET, controllers.routes.MessagingController.sendMessage().url)
+      val page = route(request).get
+
+      status(page) must equalTo(BAD_REQUEST)
+      assert(!AuthAction.isAuthenticated(request))
+    }
+
+  }
+
+  "receiveMessage" should {
+
+    "not process an unauthenticated request" in new WithApplication {
+      val request = FakeRequest(GET, controllers.routes.MessagingController.receiveMessage("1").url)
+      val page = route(request).get
+
+      status(page) must equalTo(SEE_OTHER)
+      assert(!AuthAction.isAuthenticated(request))
+    }
+
+    "send an event stream" in new WithApplicationAndDatabase {
+      val request = FakeRequest(GET, controllers.routes.MessagingController.receiveMessage("1").url).withSession(user1Data).withHeaders(user1Data)
+      val page = route(request).get
+
+      contentType(page) must beSome.which(_ == "text/event-stream")
+    }
+
+  }
+
 }

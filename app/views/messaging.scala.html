@@ -1,11 +1,11 @@
-@(senderTwitterName: String, recipientTwitterName: String)(implicit request: play.api.mvc.RequestHeader)
+@(senderTwitterName: String, recipientTwitterName: String, matchID: String)(implicit request: play.api.mvc.RequestHeader)
 
 @main("Twindr - Messaging") {
 
     <script type="text/javascript" src='@routes.Assets.at("javascripts/eventsource.min.js")'></script>
     <script type="text/javascript" src='@routes.Assets.at("javascripts/messaging.js")'></script>
     <script type="text/javascript">
-        var messageFeed = new EventSource('@routes.MessagingController.receiveMessage.url');
+        var messageFeed = new EventSource('@routes.MessagingController.receiveMessage(matchID).url');
         var messageHandler = function(event) {
             var message = JSON.parse(event.data);
 
@@ -47,7 +47,7 @@
             <table border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td><textarea id="messageBox" rows="4" class="messaging-textarea" placeholder="Type a message here"></textarea></td>
-                    <td width="5%"><a class="main-button-small float-left text-like-link" onclick="sendMessage('@senderTwitterName', '@recipientTwitterName')" href="#">Send</a></td>
+                    <td width="5%"><a class="main-button-small float-left text-like-link" onclick="sendMessage('@senderTwitterName', '@recipientTwitterName', '@matchID')" href="#">Send</a></td>
                 </tr>
             </table>
         </div>

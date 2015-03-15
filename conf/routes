@@ -45,4 +45,4 @@ GET         /ajax/requestMatches           controllers.MatchingController.getPot
 GET         /ajax/acceptMatch              controllers.MatchingController.acceptMatch(twitterName: String)
 GET         /ajax/rejectMatch              controllers.MatchingController.rejectMatch(twitterName: String)
 GET         /ajax/unmatch                  controllers.MatchingController.unmatch(twitterName: String)
-GET         /js/receiveMessage             controllers.MessagingController.receiveMessage
+GET         /js/receiveMessage/:matchID    controllers.MessagingController.receiveMessage(matchID: String)
