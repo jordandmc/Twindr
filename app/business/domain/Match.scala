@@ -62,10 +62,11 @@ object Match extends Collected {
 
 /**
  * Data transfer object to send existing matches to the client
+ * @param matchID The match identifier key
  * @param username the other user's twitter username
  * @param sex the other user's sex
  * @param dateOfBirth the other user's date of birth
  */
-case class PreparedMatch(username: String, sex: String, dateOfBirth: Date) {
+case class PreparedMatch(matchID: String, username: String, sex: String, dateOfBirth: Date) {
 
 }

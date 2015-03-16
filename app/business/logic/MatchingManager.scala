@@ -79,7 +79,7 @@ object MatchingManager {
 
       User.getByID(getOtherUserId(user, current)) match {
         case Some(other: User) =>
-          PreparedMatch(other.twitterName, other.sex.getOrElse("X"), other.dateOfBirth.getOrElse(new Date())) :: acc
+          PreparedMatch(current._id, other.twitterName, other.sex.getOrElse("X"), other.dateOfBirth.getOrElse(new Date())) :: acc
         case _ => acc
       }
     }

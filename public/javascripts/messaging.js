@@ -8,7 +8,7 @@ function sendMessage(matchID, sender) {
     var message = document.getElementById("messageBox").value;
 
     if(message != null && message != "") {
-        var msg = { matchID: matchID, sender: sender, message: message, time: (new Date()).toString() };
+        var msg = { _id: "", matchID: matchID, sender: sender, message: message, dateTime: (new Date()).getTime() };
 
         jsRoutes.controllers.MessagingController.sendMessage().ajax({
             data: JSON.stringify(msg),

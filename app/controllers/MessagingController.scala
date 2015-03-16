@@ -1,11 +1,17 @@
 package controllers
 
+import business.domain.MatchMessage
 import play.api.libs.EventSource
 import play.api.libs.iteratee.{Enumeratee, Concurrent}
-import play.api.libs.json.{Json, JsValue}
+import play.api.libs.json._
 import play.api.mvc._
 
+import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
+
 object MessagingController extends Controller {
+
+  implicit val matchMessageReads = Json.reads[MatchMessage]
 
   /**
    * Enumerator for pushing JSON data through the sent event
@@ -14,18 +20,24 @@ object MessagingController extends Controller {
 
   /**
    * Show the messaging page
-   * @param recipientTwitterName Twitter name of the user we want to send a message to
+   * @param matchID Unique identifier used to identify both the match object and the communication channel
    * @return The messaging page response
    */
-  def messages(recipientTwitterName: String) = AuthAction { implicit request =>
-    Ok(views.html.messaging(request.user.twitterName, "1")(request))
+  def messages(matchID: String) = AuthAction { implicit request =>
+    Ok(views.html.messaging(request.user.twitterName, matchID)(request))
   }
 
   /**
-   * Sends the given message from the client to the server
+   * Sends the given message from the client to the server and saves the message
    * @return Success
    */
   def sendMessage = AuthAction(parse.json) { implicit request =>
+    Future {
+      //Make a record of the message in the database
+      val message = request.body.as[MatchMessage]
+      MatchMessage.processNewMessage(message)
+    }
+
     msgOutChannel.push(request.body)
     Ok
   }
