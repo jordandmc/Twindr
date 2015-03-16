@@ -63,6 +63,9 @@ function addMoreMessages(messageList, senderTwitterName) {
         for (var i = 0; i < messageList.prevMessages.length; i++) {
             addMessageDiv(messageList.prevMessages[i], senderTwitterName);
         }
+
+        var messageDiv = document.getElementById('messageFeed');
+        messageDiv.scrollTop = messageDiv.scrollHeight;
     }
 }
 
