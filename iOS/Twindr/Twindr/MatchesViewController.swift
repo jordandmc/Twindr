@@ -25,6 +25,10 @@ class MatchesViewController: ViewController {
         self.navigationController?.toolbar.tintColor = UIColor.whiteColor()
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController?.setToolbarHidden(true, animated: false)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -38,7 +42,7 @@ class MatchesViewController: ViewController {
     // Accept the match via button or swipe
     func acceptMatch() {
         // follow that user
-        // send data that you chose to match with them
+        // send that you matched with them
         // load next potential match
     }
     
