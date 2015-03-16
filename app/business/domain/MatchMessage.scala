@@ -46,11 +46,16 @@ object MatchMessage extends Collected {
    */
   def retrievePreviousMessage(matchID: String, mostRecentMessage: Date): List[MatchMessage] = withCollection { collection =>
     val criteria = $and("matchID" $eq matchID, "dateTime" $lte mostRecentMessage)
-    val cursor = collection.find(criteria).sort(MongoDBObject("dateTime" -> 1)).limit(20)
 
-    cursor.toList.map { x =>
+    //Grab the last 20
+    val cursor = collection.find(criteria).sort(MongoDBObject("dateTime" -> -1)).limit(20)
+
+    val list = cursor.toList.map { x =>
       grater[MatchMessage].asObject(x)
     }
+
+    //Sort the last 20 into the correct order
+    list.reverse
   }
 
 }
