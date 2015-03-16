@@ -12,6 +12,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 object MessagingController extends Controller {
 
   implicit val matchMessageReads = Json.reads[MatchMessage]
+  implicit val matchMessageWrite = Json.writes[MatchMessage]
 
   /**
    * Enumerator for pushing JSON data through the sent event
@@ -49,6 +50,19 @@ object MessagingController extends Controller {
    */
   def receiveMessage(matchID: String) = AuthAction { implicit request =>
     Ok.feed(msg &> filter(matchID) &>  Concurrent.buffer(50) &> EventSource()).as("text/event-stream")
+  }
+
+  /**
+   * Loads previous messages from the data
+   * @param matchID The match to load messages for
+   * @return The messages
+   */
+  def getMoreMessages(matchID: String) = AuthAction { implicit request =>
+    val previousMessages = MatchMessage.retrievePreviousMessage(matchID, new java.util.Date())
+    for(message <- previousMessages) {
+      msgOutChannel.push(Json.toJson(message))
+    }
+    Ok
   }
 
   /**

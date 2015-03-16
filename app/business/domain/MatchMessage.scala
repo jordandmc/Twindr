@@ -29,9 +29,28 @@ object MatchMessage extends Collected {
 
   override def collection = "messages"
 
+  /**
+   * Adds a new message
+   * @param message A message between matches
+   */
   def processNewMessage(message: MatchMessage): Unit = {
     val msg = message.copy(_id = UUID.randomUUID().toString)
     msg.save()
+  }
+
+  /**
+   * Retrieves the last X number of messages between a match based on the given date
+   * @param matchID The id of the match
+   * @param mostRecentMessage The timestamp of the most recent match
+   * @return A list of recent messages
+   */
+  def retrievePreviousMessage(matchID: String, mostRecentMessage: Date): List[MatchMessage] = withCollection { collection =>
+    val criteria = $and("matchID" $eq matchID, "dateTime" $lte mostRecentMessage)
+    val cursor = collection.find(criteria).sort(MongoDBObject("dateTime" -> 1)).limit(20)
+
+    cursor.toList.map { x =>
+      grater[MatchMessage].asObject(x)
+    }
   }
 
 }

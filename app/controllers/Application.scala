@@ -31,6 +31,7 @@ object Application extends Controller {
     Ok(
       Routes.javascriptRouter("jsRoutes")(
         routes.javascript.MatchingController.acceptMatch,
+        routes.javascript.MessagingController.getMoreMessages,
         routes.javascript.MatchingController.getPotentialMatches,
         routes.javascript.MessagingController.receiveMessage,
         routes.javascript.MatchingController.rejectMatch,

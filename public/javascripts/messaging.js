@@ -20,3 +20,15 @@ function sendMessage(matchID, sender) {
         document.getElementById("messageBox").value = "";
     }
 }
+
+/**
+ * Loads previous messages based on the match identifier
+ * @param matchID The match to load messages for
+ */
+function loadMoreMessages(matchID) {
+    if(matchID != null && matchID != "") {
+        jsRoutes.controllers.MessagingController.getMoreMessages(matchID).ajax({
+            type: 'post'
+        });
+    }
+}
