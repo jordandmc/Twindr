@@ -1,4 +1,4 @@
-@(senderTwitterName: String, matchID: String)(implicit request: play.api.mvc.RequestHeader)
+@(senderTwitterName: String, recipient: String, matchID: String)(implicit request: play.api.mvc.RequestHeader)
 
 @main("Twindr - Messaging") {
 
@@ -36,6 +36,9 @@
     </script>
 
     <div id="main" class="rounded-box">
+        <div id="chatName">
+            <p>You're chatting with @recipient:</p>
+        </div>
         <div id="messageFeed" class="messaging-scrolling">
 
         </div>

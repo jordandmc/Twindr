@@ -21,10 +21,11 @@ object MessagingController extends Controller {
   /**
    * Show the messaging page
    * @param matchID Unique identifier used to identify both the match object and the communication channel
+   * @param recipient The name of the user we are communicating with
    * @return The messaging page response
    */
-  def messages(matchID: String) = AuthAction { implicit request =>
-    Ok(views.html.messaging(request.user.twitterName, matchID)(request))
+  def messages(matchID: String, recipient: String) = AuthAction { implicit request =>
+    Ok(views.html.messaging(request.user.twitterName, recipient, matchID)(request))
   }
 
   /**
