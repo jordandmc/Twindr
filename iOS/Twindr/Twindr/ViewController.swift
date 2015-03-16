@@ -12,6 +12,9 @@ import CoreLocation
 // globally defined variables
 var user:NSString!
 var location:CLLocation!
+var gender:NSString!
+var dob:NSString!
+var interests:NSString!
 
 class ViewController: UIViewController {
     
