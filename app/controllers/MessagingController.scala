@@ -18,7 +18,7 @@ object MessagingController extends Controller {
    * @return The messaging page response
    */
   def messages(recipientTwitterName: String) = AuthAction { implicit request =>
-    Ok(views.html.messaging(request.user.twitterName, recipientTwitterName, "1")(request))
+    Ok(views.html.messaging(request.user.twitterName, "1")(request))
   }
 
   /**
