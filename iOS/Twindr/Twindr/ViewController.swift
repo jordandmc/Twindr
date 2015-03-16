@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import CoreLocation
+
+// globally defined variables
+var user:NSString!
+var location:CLLocation!
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
