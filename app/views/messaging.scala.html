@@ -7,29 +7,10 @@
     <script type="text/javascript">
         var messageFeed = new EventSource('@routes.MessagingController.receiveMessage(matchID).url');
         var messageHandler = function(event) {
-            var message = JSON.parse(event.data);
-
-            var newMessage = document.createElement("div");
-            newMessage.className = "full-width outerMessageBox";
-
-            if(message.sender == '@senderTwitterName') {
-                newMessage.innerHTML = "<span class='message-box-current-user'><p>" + message.message + "</p></span>";
-            } else {
-                newMessage.innerHTML = "<span class='message-box-other-user'><p>" + message.message + "</p></span>";
-            }
-
-            document.getElementById("messageFeed").appendChild(newMessage);
+            addMessageDiv(JSON.parse(event.data), '@senderTwitterName');
         };
 
         messageFeed.addEventListener('message', messageHandler);
-
-        function doResize() {
-            var height = $(window).height() - $('#header').height() - $('#sendMessage').height() - 150;
-            if(height < $(window).height() * 0.2)
-            height = $(window).height() * 0.2;
-
-            $('#messageFeed').height(height);
-        }
 
         window.addEventListener('resize', function() { doResize(); });
         $(window).ready(function() { doResize(); });

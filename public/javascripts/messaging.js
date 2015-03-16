@@ -22,6 +22,26 @@ function sendMessage(matchID, sender) {
 }
 
 /**
+ * Adds a message to the message feed
+ * @param message The message to add
+ * @param senderTwitterName The name of the message sender
+ */
+function addMessageDiv(message, senderTwitterName) {
+    if(message != null) {
+        var newMessage = document.createElement("div");
+        newMessage.className = "full-width outerMessageBox";
+
+        if (message.sender == senderTwitterName) {
+            newMessage.innerHTML = "<span class='message-box-current-user'><p>" + message.message + "</p></span>";
+        } else {
+            newMessage.innerHTML = "<span class='message-box-other-user'><p>" + message.message + "</p></span>";
+        }
+
+        document.getElementById("messageFeed").appendChild(newMessage);
+    }
+}
+
+/**
  * Loads previous messages based on the match identifier
  * @param matchID The match to load messages for
  */
@@ -41,17 +61,7 @@ function loadMoreMessages(matchID, senderTwitterName) {
 function addMoreMessages(messageList, senderTwitterName) {
     if(messageList != null && messageList.prevMessages != null) {
         for (var i = 0; i < messageList.prevMessages.length; i++) {
-            var message = messageList.prevMessages[i];
-            var newMessage = document.createElement("div");
-            newMessage.className = "full-width outerMessageBox";
-
-            if(message.sender == senderTwitterName) {
-                newMessage.innerHTML = "<span class='message-box-current-user'><p>" + message.message + "</p></span>";
-            } else {
-                newMessage.innerHTML = "<span class='message-box-other-user'><p>" + message.message + "</p></span>";
-            }
-
-            document.getElementById("messageFeed").appendChild(newMessage);
+            addMessageDiv(messageList.prevMessages[i], senderTwitterName);
         }
     }
 }
@@ -62,4 +72,15 @@ function addMoreMessages(messageList, senderTwitterName) {
  */
 function failedToLoadMoreMessages(error) {
     //Nothing to do
+}
+
+/**
+ * Resizes the messaging box to fill the majority of the page
+ */
+function doResize() {
+    var height = $(window).height() - $('#header').height() - $('#sendMessage').height() - 150;
+    if(height < $(window).height() * 0.2)
+        height = $(window).height() * 0.2;
+
+    $('#messageFeed').height(height);
 }
