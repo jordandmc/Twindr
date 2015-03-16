@@ -69,7 +69,6 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
     
     @IBAction func saveButton(sender: UIButton) {
         // save the changes
-        
         if(genderField.text != "" && dobField.text != "") {
             gender = genderField.text
             dob = dobField.text
