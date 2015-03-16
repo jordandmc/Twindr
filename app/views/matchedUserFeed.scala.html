@@ -12,8 +12,9 @@
         @if(matches.nonEmpty) {
             <ul id="match-list" class="no-bullets">
             @for(mat <- matches) {
-                <li id="match-user-@mat.username"><p>@mat.username<span class="float-right"><a class='main-button-small text-like-link'
-                    href='#' onclick="unmatch('@mat.username')">Unmatch</a></span></p></li>
+                <li id="match-user-@mat.username"><p>@mat.username<span class="float-right">
+                    <a class='main-button-small text-like-link' href="@{routes.MessagingController.messages(mat.matchID, mat.username)}">Send message</a>
+                    <a class='main-button-small text-like-link' href='#' onclick="unmatch('@mat.username')">Unmatch</a></span></p></li>
             }
             </ul>
         } else {

@@ -3,41 +3,47 @@
 # ~~~~
 
 # Home page
-GET         /                              controllers.Application.index
+GET         /                                  controllers.Application.index
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file                  controllers.Assets.at(path="/public", file)
+GET         /assets/*file                      controllers.Assets.at(path="/public", file)
 
 # Login and logout
-GET         /login                         controllers.Login.login
-GET         /logout                        controllers.Login.logout
+GET         /login                             controllers.Login.login
+GET         /logout                            controllers.Login.logout
 
 # One time account registration
-GET         /register                      controllers.Login.register
-POST        /register                      controllers.Login.checkRegistration
+GET         /register                          controllers.Login.register
+POST        /register                          controllers.Login.checkRegistration
 
 # Profile settings
-GET         /profile/settings              controllers.Profile.settings
-POST        /profile/settings              controllers.Profile.updateSettings
+GET         /profile/settings                  controllers.Profile.settings
+POST        /profile/settings                  controllers.Profile.updateSettings
 
 # Matchmaking
-GET         /main                          controllers.Application.matchesFeed
-GET         /matches                       controllers.MatchingController.matchedUserFeed
+GET         /main                              controllers.Application.matchesFeed
+GET         /matches                           controllers.MatchingController.matchedUserFeed
+
+# Messaging
+GET         /messaging                         controllers.MessagingController.messages(channel: String, recipient: String)
+POST        /messaging                         controllers.MessagingController.sendMessage
 
 #Twitter API interaction
-GET         /auth                          controllers.TwitterProvider.authenticate
+GET         /auth                              controllers.TwitterProvider.authenticate
 
 #Mobile Access
-GET         /m/potentialMatches            controllers.MobileController.getPotentialMatches
-GET         /m/matches                     controllers.MobileController.getMatches
-GET         /m/processMatchResponse        controllers.MobileController.processMatchResponse
-GET         /m/unmatch                     controllers.MobileController.unmatch
-GET         /m/logout                      controllers.MobileController.logout
+GET         /m/potentialMatches                controllers.MobileController.getPotentialMatches
+GET         /m/matches                         controllers.MobileController.getMatches
+GET         /m/processMatchResponse            controllers.MobileController.processMatchResponse
+GET         /m/unmatch                         controllers.MobileController.unmatch
+GET         /m/logout                          controllers.MobileController.logout
 
 # AJAX/ Javascript routes
-GET         /js/routes                     controllers.Application.javascriptRoutes
-GET         /ajax/updateGeolocation        controllers.MatchingController.updateGeolocation(latitude: Double, longitude: Double)
-GET         /ajax/requestMatches           controllers.MatchingController.getPotentialMatches
-GET         /ajax/acceptMatch              controllers.MatchingController.acceptMatch(twitterName: String)
-GET         /ajax/rejectMatch              controllers.MatchingController.rejectMatch(twitterName: String)
-GET         /ajax/unmatch                  controllers.MatchingController.unmatch(twitterName: String)
+GET         /js/routes                         controllers.Application.javascriptRoutes
+GET         /ajax/updateGeolocation            controllers.MatchingController.updateGeolocation(latitude: Double, longitude: Double)
+GET         /ajax/requestMatches               controllers.MatchingController.getPotentialMatches
+GET         /ajax/acceptMatch                  controllers.MatchingController.acceptMatch(twitterName: String)
+GET         /ajax/rejectMatch                  controllers.MatchingController.rejectMatch(twitterName: String)
+GET         /ajax/unmatch                      controllers.MatchingController.unmatch(twitterName: String)
+GET         /ajax/getMoreMessages              controllers.MessagingController.getMoreMessages(matchID: String)
+GET         /js/receiveMessage/:matchID        controllers.MessagingController.receiveMessage(matchID: String)
