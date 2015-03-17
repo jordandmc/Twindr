@@ -7,7 +7,7 @@
 function sendMessage(matchID, sender) {
     var message = document.getElementById("messageBox").value;
 
-    if(message != null && message != "") {
+    if(message != null && message != "" && matchID != null && matchID != "" && sender != null && sender != "") {
         var msg = { _id: "", matchID: matchID, sender: sender, message: message, dateTime: (new Date()).getTime() };
 
         jsRoutes.controllers.MessagingController.sendMessage().ajax({
@@ -44,12 +44,14 @@ function addMessageDiv(message, senderTwitterName) {
 /**
  * Loads previous messages based on the match identifier
  * @param matchID The match to load messages for
+ * @param successCallback Overrides the success callback (should only be used for testing)
+ * @param errorCallback Overrides the error callback (should only be used for testing)
  */
-function loadMoreMessages(matchID, senderTwitterName) {
+function loadMoreMessages(matchID, senderTwitterName, successCallback, errorCallback) {
     if(matchID != null && matchID != "") {
         jsRoutes.controllers.MessagingController.getMoreMessages(matchID).ajax({
-            success: function(result) { addMoreMessages(result, senderTwitterName) },
-            error: failedToLoadMoreMessages
+            success: successCallback || function(result) { addMoreMessages(result, senderTwitterName) },
+            error: errorCallback || failedToLoadMoreMessages
         });
     }
 }

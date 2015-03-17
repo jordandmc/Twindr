@@ -81,8 +81,12 @@ function updateMatchBox() {
     if(potentialMatchList != null && currentIndex < potentialMatchList.matches.length) {
         var potentialMatch = potentialMatchList.matches[currentIndex];
         var tweets = "";
-        for (var i = 0; i < potentialMatch.tweets.length; i++) {
-            tweets += potentialMatch.tweets[i] + "<br/>";
+        if(potentialMatch.tweets.length > 0) {
+            for (var i = 0; i < potentialMatch.tweets.length; i++) {
+                tweets += potentialMatch.tweets[i] + "<br/>";
+            }
+        } else {
+            tweets = potentialMatch.username + " has not tweeted anything";
         }
 
         $('#potential-match-username').text(potentialMatch.username);

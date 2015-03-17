@@ -60,4 +60,24 @@ class MessagingControllerSpec extends Specification {
 
   }
 
+  "getMoreMessages" should {
+
+    "not process an unauthenticated request" in new WithApplication {
+      val request = FakeRequest(GET, controllers.routes.MessagingController.getMoreMessages("1").url)
+      val page = route(request).get
+
+      status(page) must equalTo(SEE_OTHER)
+      assert(!AuthAction.isAuthenticated(request))
+    }
+
+    "return a JSON object" in new WithApplicationAndDatabase {
+      val request = FakeRequest(GET, controllers.routes.MessagingController.getMoreMessages("1").url).withSession(user1Data).withHeaders(user1Data)
+      val page = route(request).get
+
+      contentType(page) must beSome.which(_ == "application/json")
+      status(page) must equalTo(OK)
+    }
+
+  }
+
 }

@@ -15,7 +15,7 @@ class HomeViewController: ViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     
     @IBAction func Logout(sender: UIButton) {
-        Twitter.sharedInstance().logOut()
+        Logout()
         user = ""
     }
     
@@ -57,6 +57,10 @@ class HomeViewController: ViewController, CLLocationManagerDelegate {
         }
     }
     
+    func Logout(){
+        Twitter.sharedInstance().logOut()
+    }
+    
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         println(error)
     }
@@ -75,5 +79,3 @@ class HomeViewController: ViewController, CLLocationManagerDelegate {
     
     
 }
-
-
