@@ -9,6 +9,8 @@
 import Foundation
 import CoreLocation
 
+var location: CLLocation!
+
 class Geolocation: NSObject, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
 
