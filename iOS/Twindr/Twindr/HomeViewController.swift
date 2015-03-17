@@ -11,7 +11,7 @@ import TwitterKit
 
 class HomeViewController: ViewController {
     
-    var geolocationHelper = GeolocationHelper()
+    var geolocationHelper = Geolocation()
     
     @IBAction func Logout(sender: UIButton) {
         Logout()

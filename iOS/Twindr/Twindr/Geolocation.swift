@@ -9,7 +9,7 @@
 import Foundation
 import CoreLocation
 
-class GeolocationHelper: NSObject, CLLocationManagerDelegate {
+class Geolocation: NSObject, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
 
     // Initialize locationManager to poll geolocation
