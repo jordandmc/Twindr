@@ -11,7 +11,7 @@ object GeoJSONFormatter {
   }
 
   def getCoords(coords: DBObject): (Double, Double) = {
-    val geoObj = coords.as[BasicDBList]("coordinates").toList.collect {
+    val geoObj = coords.as[MongoDBList]("coordinates").toList.collect {
       case c: Double => c
     }
 

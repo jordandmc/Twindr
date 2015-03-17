@@ -1,6 +1,6 @@
 package controllers
 
-import business.logic.WithApplicationAndDatabase
+import business.scaffolding.WithUsers
 import org.junit.runner._
 import org.specs2.mutable._
 import org.specs2.runner._
@@ -28,13 +28,13 @@ class ApplicationSpec extends Specification {
       contentAsString(home) must contain ("Welcome to Twindr!")
     }
     
-    "not render the index page if signed in" in new WithApplicationAndDatabase {
+    "not render the index page if signed in" in new WithUsers {
       val request = FakeRequest(GET, controllers.routes.Application.index().url).withSession(user1Data).withHeaders(user1Data)
       val home = route(request).get
 
       status(home) must equalTo(SEE_OTHER) // Should redirect automatically
       redirectLocation(home) must beSome.which(_ == controllers.routes.Application.matchesFeed().url)
-      contentAsString(home) must not contain ("Welcome to Twindr!")
+      contentAsString(home) must not contain "Welcome to Twindr!"
       assert(AuthAction.isAuthenticated(request))
     }
     
@@ -42,7 +42,7 @@ class ApplicationSpec extends Specification {
 
   "Application#main" should {
 
-    "render the matching feed page (if signed in)" in new WithApplicationAndDatabase {
+    "render the matching feed page (if signed in)" in new WithUsers {
       val request = FakeRequest(GET, controllers.routes.Application.matchesFeed().url).withSession(user1Data).withHeaders(user1Data)
       val main = route(request).get
 
@@ -57,7 +57,7 @@ class ApplicationSpec extends Specification {
       val main = route(request).get
 
       status(main) must equalTo(SEE_OTHER)
-      contentAsString(main) must not contain ("View your potential matches here")
+      contentAsString(main) must not contain "View your potential matches here"
       assert(!AuthAction.isAuthenticated(request))
     }
 
