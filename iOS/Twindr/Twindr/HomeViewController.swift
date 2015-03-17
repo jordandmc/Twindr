@@ -11,10 +11,10 @@ import TwitterKit
 
 class HomeViewController: ViewController {
     
-    var geolocation = Geolocation()
+    var geolocationHelper = GeolocationHelper()
     
     @IBAction func Logout(sender: UIButton) {
-        Twitter.sharedInstance().logOut()
+        Logout()
         user = ""
     }
     
@@ -24,13 +24,15 @@ class HomeViewController: ViewController {
         self.title = user
         
         // Gets the coordinates of the user
-        geolocation.getLocation()
+        geolocationHelper.getLocation()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func Logout(){
+        Twitter.sharedInstance().logOut()
+    }
 }
-
-

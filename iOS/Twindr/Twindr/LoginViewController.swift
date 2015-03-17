@@ -25,12 +25,9 @@ class LoginViewController: ViewController {
                         let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("StartNav") as UINavigationController
                         self.presentViewController(navigationController, animated: true, completion: nil)
                     }
-                    else {
-                        println("There was a problem communicating with the server.")
-                    }
                 }
                 else {
-                    println("error: \(error.localizedDescription)");
+                    println("error: \(error.localizedDescription)")
                 }
         })
         logInButton.center = self.view.center
@@ -42,11 +39,11 @@ class LoginViewController: ViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    private func postOauthCredentials(session:TWTRSession) -> Bool {
-        var result = true
+    func postOauthCredentials(session:TWTRSession) -> Bool {
+        let helper = NetworkHelper()
+        var host:String = helper.getPlistKey("TwindrURL")
         
-        
-        
-        return result
+        return helper.post(["authToken":session.authToken, "authTokenSecret":session.authTokenSecret], url:  host + "m/login")
     }
+    
 }
