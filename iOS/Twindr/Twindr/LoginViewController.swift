@@ -16,7 +16,8 @@ class LoginViewController: ViewController {
         let logInButton = TWTRLogInButton(logInCompletion:
             { (session, error) in
                 if (session != nil) {
-                    println("signed in as \(session.userName)")
+                    user = session.userName
+                    println("Logged in as: \(session.userName)")
                     println("Oauth token: \(session.authToken)")
                     println("Oauth token secret: \(session.authTokenSecret)")
                     

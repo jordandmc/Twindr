@@ -19,6 +19,8 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
     var genders = ["Male", "Female", "Prefer not to say..."]
     var genderBackend = ["M", "F", "X"]
     
+    var isRegistration = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.genderPicker.dataSource = self
@@ -46,7 +48,18 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
         self.genderField.inputView = self.genderPicker
         self.genderField.inputAccessoryView = toolbar
         
-        // Should grab info from server
+        // Should grab info from server and set values
+        
+        // Retrieve previously entered info
+        if(gender != nil){
+            genderField.text = gender
+        }
+        if(dob != nil){
+            dobField.text = dob
+        }
+        if(interests != nil){
+            interestsField.text = interests
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -56,6 +69,15 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
     
     @IBAction func saveButton(sender: UIButton) {
         // save the changes
+        if(genderField.text != "" && dobField.text != "") {
+            gender = genderField.text
+            dob = dobField.text
+            interests = interestsField.text
+            
+            // Send to server
+        }
+        
+        // If registration, send to home page
     }
     
     // Removes the pickers from view if they're active
@@ -74,9 +96,7 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
         }
     }
     
-    /*
-     * DatePicker functions
-     */
+    // DatePicker functions
     @IBAction func editDobField(sender: UITextField) {
         self.datePickerView.addTarget(self, action: Selector("handleDatePicker:"), forControlEvents : UIControlEvents.ValueChanged)
     }

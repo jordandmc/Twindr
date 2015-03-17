@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="HbQ-JZ-pf3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="HbQ-JZ-pf3">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <scenes>
         <!--Home-->
@@ -226,6 +226,14 @@
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Potential Matches" id="FUL-wD-XuG"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <connections>
+                        <outlet property="tweet1Label" destination="si2-gS-N74" id="lDO-zi-hiq"/>
+                        <outlet property="tweet2Label" destination="U95-oV-qra" id="7vZ-yr-fcB"/>
+                        <outlet property="tweet3Label" destination="rzc-uf-O0S" id="OZk-KG-oAU"/>
+                        <outlet property="tweet4Label" destination="Vz5-AZ-hht" id="2RL-rU-71k"/>
+                        <outlet property="tweet5Label" destination="yqy-v2-uVJ" id="BV9-qG-p73"/>
+                        <outlet property="userLabel" destination="Jrf-fN-HV5" id="uX7-Yo-rWg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="riR-Pl-Hmh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="right" id="4fT-Tn-Mwa" userLabel="YesSwipe">
