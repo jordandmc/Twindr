@@ -16,6 +16,7 @@ class HomeViewController: ViewController, CLLocationManagerDelegate {
     
     @IBAction func Logout(sender: UIButton) {
         Logout()
+        user = ""
     }
     
     override func viewDidLoad() {
@@ -44,7 +45,37 @@ class HomeViewController: ViewController, CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [AnyObject]) {
+        if(locations.count > 0 && location == nil) {
+            location = (locations.last as CLLocation)
+            println(location.coordinate.latitude)
+            println(location.coordinate.longitude)
+            
+            // Send location to server
+            
+            locationManager.stopUpdatingLocation()
+        }
+    }
+    
     func Logout(){
         Twitter.sharedInstance().logOut()
     }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        println(error)
+    }
+    
+    // If false, we'll send them to the North Pole!
+    func isLocatingAllowed() -> Bool {
+        var allowed = true
+        if CLLocationManager.locationServicesEnabled() == false {
+            allowed = false
+        }
+        if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.Denied {
+            allowed = false
+        }
+        return allowed
+    }
+    
+    
 }
