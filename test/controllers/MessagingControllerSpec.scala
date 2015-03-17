@@ -1,6 +1,6 @@
 package controllers
 
-import business.scaffolding.WithUsers
+import business.scaffolding.{WithApplicationAndDatabase, WithUsers}
 import org.junit.runner._
 import org.specs2.mutable._
 import org.specs2.runner._
@@ -70,7 +70,7 @@ class MessagingControllerSpec extends Specification {
       assert(!AuthAction.isAuthenticated(request))
     }
 
-    "return a JSON object" in new WithApplicationAndDatabase {
+    "return a JSON object" in new WithUsers {
       val request = FakeRequest(GET, controllers.routes.MessagingController.getMoreMessages("1").url).withSession(user1Data).withHeaders(user1Data)
       val page = route(request).get
 

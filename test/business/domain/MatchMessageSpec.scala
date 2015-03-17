@@ -1,13 +1,13 @@
 package business.domain
 
-import business.logic.WithApplicationAndDatabase
+import business.scaffolding.WithApplicationAndDatabase
 import org.junit.runner.RunWith
 import org.specs2.mutable.Specification
 import org.specs2.runner.JUnitRunner
 import org.specs2.specification.BeforeAfter
 import persistence.DBManager._
 
-import java.util.Date;
+import java.util.Date
 
 @RunWith(classOf[JUnitRunner])
 class MatchMessageSpec extends Specification with BeforeAfter {
