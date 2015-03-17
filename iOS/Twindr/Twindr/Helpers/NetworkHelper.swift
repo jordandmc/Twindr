@@ -11,8 +11,8 @@ import Foundation
 class NetworkHelper {
     
     func post(params : Dictionary<String, String>, url : String) -> Bool {
-        var result = false
-        var request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        var result = true
+        /*var request = NSMutableURLRequest(URL: NSURL(string: url)!)
         var session = NSURLSession.sharedSession()
         var err: NSError?
         
@@ -50,7 +50,7 @@ class NetworkHelper {
                 }
             }
         })
-        task.resume()
+        task.resume()*/
         return result
     }
     
