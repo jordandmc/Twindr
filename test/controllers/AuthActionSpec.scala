@@ -1,6 +1,6 @@
 package controllers
 
-import business.logic.WithApplicationAndDatabase
+import business.scaffolding.WithUsers
 import org.junit.runner._
 import org.specs2.mutable._
 import org.specs2.runner._
@@ -8,11 +8,11 @@ import play.api.test.Helpers._
 import play.api.test._
 
 @RunWith(classOf[JUnitRunner])
-class AuthActonSpec extends Specification {
+class AuthActionSpec extends Specification {
 
   "User" should {
 
-    "be authenticated" in new WithApplicationAndDatabase {
+    "be authenticated" in new WithUsers {
       val request = FakeRequest(GET, controllers.routes.Application.index().url).withSession(user1Data).withHeaders(user1Data)
       AuthAction.isAuthenticated(request) must beEqualTo(true)
     }

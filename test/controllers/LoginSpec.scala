@@ -1,6 +1,6 @@
 package controllers
 
-import business.logic.WithApplicationAndDatabase
+import business.scaffolding.WithUsers
 import org.junit.runner._
 import org.specs2.mutable._
 import org.specs2.runner._
@@ -23,7 +23,7 @@ class LoginSpec extends Specification {
 
   "Login#logout" should {
 
-    "logout of the application (logged in)" in new WithApplicationAndDatabase {
+    "logout of the application (logged in)" in new WithUsers {
       val logout = route(FakeRequest(GET, controllers.routes.Login.logout().url).withSession(user1Data).withHeaders(user1Data)).get
 
       status(logout) must equalTo(SEE_OTHER)
@@ -43,7 +43,7 @@ class LoginSpec extends Specification {
 
   "Login#register" should {
 
-    "view the registration page (logged in)" in new WithApplicationAndDatabase {
+    "view the registration page (logged in)" in new WithUsers {
       val request = FakeRequest(GET, controllers.routes.Login.register().url).withSession(user2Data).withHeaders(user2Data)
       val register = route(request).get
 
@@ -59,7 +59,7 @@ class LoginSpec extends Specification {
       redirectLocation(register) must beSome.which(_ == controllers.routes.Application.index().url)
     }
 
-    "submit registration data (empty)" in new WithApplicationAndDatabase {
+    "submit registration data (empty)" in new WithUsers {
       val register = route(FakeRequest(POST, controllers.routes.Login.register().url).withSession(user2Data).withHeaders(user2Data)).get
 
       status(register) must equalTo(BAD_REQUEST)
