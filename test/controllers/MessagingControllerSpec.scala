@@ -1,6 +1,6 @@
 package controllers
 
-import business.logic.WithApplicationAndDatabase
+import business.scaffolding.{WithApplicationAndDatabase, WithUsers}
 import org.junit.runner._
 import org.specs2.mutable._
 import org.specs2.runner._
@@ -16,10 +16,10 @@ class MessagingControllerSpec extends Specification {
       val page = route(FakeRequest(GET, controllers.routes.MessagingController.messages("1", "twitterUser").url)).get
 
       status(page) must equalTo(SEE_OTHER)
-      contentAsString(page) must not contain ("Messaging")
+      contentAsString(page) must not contain "Messaging"
     }
 
-    "render the messages page if signed in" in new WithApplicationAndDatabase {
+    "render the messages page if signed in" in new WithUsers {
       val request = FakeRequest(GET, controllers.routes.MessagingController.messages("1", "twitterUser").url).withSession(user1Data).withHeaders(user1Data)
       val page = route(request).get
 
@@ -51,7 +51,7 @@ class MessagingControllerSpec extends Specification {
       assert(!AuthAction.isAuthenticated(request))
     }
 
-    "send an event stream" in new WithApplicationAndDatabase {
+    "send an event stream" in new WithUsers {
       val request = FakeRequest(GET, controllers.routes.MessagingController.receiveMessage("1").url).withSession(user1Data).withHeaders(user1Data)
       val page = route(request).get
 
@@ -70,7 +70,7 @@ class MessagingControllerSpec extends Specification {
       assert(!AuthAction.isAuthenticated(request))
     }
 
-    "return a JSON object" in new WithApplicationAndDatabase {
+    "return a JSON object" in new WithUsers {
       val request = FakeRequest(GET, controllers.routes.MessagingController.getMoreMessages("1").url).withSession(user1Data).withHeaders(user1Data)
       val page = route(request).get
 
