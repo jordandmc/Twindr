@@ -34,7 +34,7 @@ GET         /auth                              controllers.TwitterProvider.authe
 #Mobile Access
 GET         /m/potentialMatches                controllers.MobileController.getPotentialMatches
 GET         /m/matches                         controllers.MobileController.getMatches
-GET         /m/processMatchResponse            controllers.MobileController.processMatchResponse
+POST        /m/processMatchResponse            controllers.MobileController.processMatchResponse
 GET         /m/unmatch                         controllers.MobileController.unmatch
 POST        /m/logout                          controllers.MobileController.logout
 POST        /m/auth                            controllers.TwitterProvider.authMobile
