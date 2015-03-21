@@ -1,5 +1,6 @@
 package controllers
 
+import business.domain.Token
 import business.logic.LoginManager
 import play.api.Play
 import play.api.libs.oauth._
@@ -22,7 +23,7 @@ object TwitterProvider extends Controller {
 
   def authenticate = Action { request =>
     request.queryString.get("oauth_verifier").flatMap(_.headOption).map { verifier =>
-      val tokenPair = sessionTokenPair(request).get
+      val tokenPair:RequestToken = sessionTokenPair(request).get
       // We got the verifier; now get the access token, store it and back to index
       TWITTER.retrieveAccessToken(tokenPair, verifier) match {
         case Right(accessToken) =>
@@ -37,6 +38,25 @@ object TwitterProvider extends Controller {
             Redirect(TWITTER.redirectUrl(t.token)).withSession("token" -> t.token, "secret" -> t.secret)
           case Left(e) => throw e
         })
+  }
+
+  def authMobile = Action { request =>
+    request.body.asJson match {
+      case Some(jsonObject) =>
+        val token: String = jsonObject.\("token").toString()
+        val secret: String = jsonObject.\("secret").toString()
+        val accessToken: RequestToken = RequestToken(token, secret)
+        val xAuthToken: String = LoginManager.login(accessToken)._id
+
+        Token.getUserFromToken(xAuthToken) match {
+          case Some(user) =>
+            Ok("id:" + user._id)
+          case _ =>
+            Ok("user does not exist")
+        }
+      case _ =>
+        BadRequest
+    }
   }
 
   private def sessionTokenPair(implicit request: RequestHeader): Option[RequestToken] = {
