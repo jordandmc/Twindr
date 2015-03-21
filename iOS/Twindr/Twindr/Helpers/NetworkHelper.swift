@@ -54,6 +54,14 @@ class NetworkHelper {
         return result
     }
     
+    func sendLogout(token: String){
+        var req = NSMutableURLRequest()
+        req.HTTPMethod = "POST"
+        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        req.setValue(token, forHTTPHeaderField: "X-Auth-Token")
+        request(req)
+    }
+    
     func getPlistKey(key: String) -> String {
         var dict: NSDictionary?
         if let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist") {

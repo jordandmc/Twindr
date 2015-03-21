@@ -14,8 +14,7 @@ class HomeViewController: ViewController {
     var geolocation = Geolocation()
     
     @IBAction func Logout(sender: UIButton) {
-        Logout()
-        user = ""
+        Logout("")
     }
     
     override func viewDidLoad() {
@@ -32,7 +31,10 @@ class HomeViewController: ViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func Logout(){
+    func Logout(id:String){
+        let helper = NetworkHelper()
+        helper.sendLogout(user)
+        user = ""
         Twitter.sharedInstance().logOut()
     }
 }
