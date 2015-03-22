@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TwitterKit
 
 class NetworkHelper {
     
@@ -60,6 +61,24 @@ class NetworkHelper {
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
         req.setValue(token, forHTTPHeaderField: "X-Auth-Token")
         request(req)
+    }
+    
+    func oauthEcho() -> Bool {
+        var result = false
+        let oauthSigning = TWTROAuthSigning(
+            authConfig: Twitter.sharedInstance().authConfig,
+            authSession: Twitter.sharedInstance().session())
+        let authHeaders = oauthSigning.OAuthEchoHeadersToVerifyCredentials()
+        let req = NSMutableURLRequest(URL: NSURL(string: "http://192.168.0.107:9000/m/verify_credentials")!)
+        req.allHTTPHeaderFields = authHeaders
+        let response = request(req).response
+        if(response != nil){
+            if(response!.statusCode == 200){
+                result = true
+            }
+        }
+        
+        return result
     }
     
     func getPlistKey(key: String) -> String {
