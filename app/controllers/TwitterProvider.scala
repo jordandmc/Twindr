@@ -1,11 +1,13 @@
 package controllers
 
-import business.logic.LoginManager
+import business.domain.{Token, MobileLoginResponse}
+import business.logic.{RegistrationManager, LoginManager}
 import play.api.Play
 import play.api.libs.oauth._
 import play.api.libs.ws.WS
 import play.api.mvc._
 import play.api.Play.current
+import play.api.libs.json.Json
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Await
 import scala.concurrent.duration._
@@ -54,7 +56,14 @@ object TwitterProvider extends Controller {
 
             Await.result(resultFuture, 5000 millis) match {
               case Some(username) =>
-                Ok(username)
+                val token = LoginManager.mobileLogin(username)
+                var hasRegistered = false
+                Token.getUserFromToken(token._id) match {
+                  case Some(user) =>
+                     hasRegistered = RegistrationManager.hasRegistered(user)
+                }
+                val loginResponse = MobileLoginResponse(token._id, hasRegistered)
+                Ok(Json.toJson(loginResponse))
               case _ =>
                 Status(408)
             }
