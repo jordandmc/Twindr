@@ -1,5 +1,5 @@
 package business.domain
 
-case class MobileLoginResponse(twitterPermission: Boolean, xAuthToken: String, hasRegistered: Boolean){
+case class MobileLoginResponse(xAuthToken: String, hasRegistered: Boolean){
 
 }
