@@ -10,26 +10,12 @@ import UIKit
 import TwitterKit
 
 class LoginViewController: ViewController {
+    let helper = NetworkHelper()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let logInButton = TWTRLogInButton(logInCompletion:
-            { (session, error) in
-                if (session != nil) {
-                    user = session.userName
-                    println("Logged in as: \(session.userName)")
-                    println("Oauth token: \(session.authToken)")
-                    println("Oauth token secret: \(session.authTokenSecret)")
-                    
-                    if(self.postOauthCredentials(session)){
-                        let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("StartNav") as UINavigationController
-                        self.presentViewController(navigationController, animated: true, completion: nil)
-                    }
-                }
-                else {
-                    println("error: \(error.localizedDescription)")
-                }
-        })
+        
+        let logInButton = TWTRLogInButton(logInCompletion: loginDelegate)
         logInButton.center = self.view.center
         self.view.addSubview(logInButton)
     }
@@ -40,10 +26,47 @@ class LoginViewController: ViewController {
     }
     
     func postOauthCredentials(session:TWTRSession) -> Bool {
-        let helper = NetworkHelper()
         var host:String = helper.getPlistKey("TwindrURL")
         
         return helper.post(["authToken":session.authToken, "authTokenSecret":session.authTokenSecret], url:  host + "m/login")
+    }
+    
+    func loginDelegate(session: TWTRSession!, error: NSError!){
+        if (session != nil) {
+            user = session.userName
+            oauthEcho()
+        }
+        else {
+            println("error: \(error.localizedDescription)")
+        }
+    }
+    
+    func oauthEcho(){
+        let oauthSigning = TWTROAuthSigning(
+            authConfig: Twitter.sharedInstance().authConfig,
+            authSession: Twitter.sharedInstance().session())
+        let authHeaders = oauthSigning.OAuthEchoHeadersToVerifyCredentials()
+        let req = NSMutableURLRequest(URL: NSURL(string: "http://192.168.0.107:9000/m/verify_credentials")!)
+        req.allHTTPHeaderFields = authHeaders
+        request(req).response(responseHandler)
+    }
+    
+    private func responseHandler(request: NSURLRequest, response: NSHTTPURLResponse?, responseObj: AnyObject?, error: NSError?){
+        if(response != nil){
+            if(response!.statusCode == 200){
+                let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("StartNav") as UINavigationController
+                self.presentViewController(navigationController, animated: true, completion: nil)
+            }
+            else{
+                if(error != nil){
+                    println("Error: \(error?.localizedDescription)")
+                }
+                println("html error: \(response!.statusCode)")
+                let alertController = UIAlertController(title: "Error", message: "Unable to connect to service.\nPlease try again later.", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+            }
+        }
     }
     
 }
