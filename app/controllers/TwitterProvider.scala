@@ -1,11 +1,10 @@
 package controllers
 
-import business.domain.Token
 import business.logic.LoginManager
 import play.api.Play
 import play.api.libs.oauth._
 import play.api.libs.ws.WS
-import play.api.mvc.{RequestHeader, Action, Controller}
+import play.api.mvc._
 import play.api.Play.current
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Await
@@ -40,22 +39,30 @@ object TwitterProvider extends Controller {
         })
   }
 
-  def authMobile = Action { request =>
-    request.body.asJson match {
-      case Some(jsonObject) =>
-        val token: String = jsonObject.\("token").toString()
-        val secret: String = jsonObject.\("secret").toString()
-        val accessToken: RequestToken = RequestToken(token, secret)
-        val xAuthToken: String = LoginManager.login(accessToken)._id
+  def verify_mobile = Action { request =>
+    request.headers.get("X-Auth-Service-Provider") match {
+      case Some(serviceProviderUrl) =>
+        request.headers.get("X-Verify-Credentials-Authorization") match {
+          case Some(userCredentials) =>
+            val result = WS.url(serviceProviderUrl).withHeaders("Authorization" -> userCredentials).get()
 
-        Token.getUserFromToken(xAuthToken) match {
-          case Some(user) =>
-            Ok("id:" + user._id)
+            val resultFuture = result.map{ response =>
+              Option((response.json \ "screen_name").as[String])
+            } recover {
+              case timeout: java.util.concurrent.TimeoutException => None
+            }
+
+            Await.result(resultFuture, 5000 millis) match {
+              case Some(username) =>
+                Ok(username)
+              case _ =>
+                Status(408)
+            }
           case _ =>
-            Ok("user does not exist")
+            BadRequest("expects 'X-Verify-Credentials-Authorization' in the header")
         }
       case _ =>
-        BadRequest
+        BadRequest("expects 'X-Auth-Service-Provider' in the header")
     }
   }
 
