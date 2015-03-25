@@ -47,3 +47,4 @@ GET         /ajax/rejectMatch                  controllers.MatchingController.re
 GET         /ajax/unmatch                      controllers.MatchingController.unmatch(twitterName: String)
 GET         /ajax/getMoreMessages              controllers.MessagingController.getMoreMessages(matchID: String)
 GET         /js/receiveMessage/:matchID        controllers.MessagingController.receiveMessage(matchID: String)
+GET         /js/testResetDatabase              controllers.TestController.resetDatabase

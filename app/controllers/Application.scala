@@ -35,6 +35,7 @@ object Application extends Controller {
         routes.javascript.MatchingController.getPotentialMatches,
         routes.javascript.MessagingController.receiveMessage,
         routes.javascript.MatchingController.rejectMatch,
+        routes.javascript.TestController.resetDatabase,
         routes.javascript.MessagingController.sendMessage,
         routes.javascript.MatchingController.unmatch,
         routes.javascript.MatchingController.updateGeolocation
