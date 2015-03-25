@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:9000/" />
-<title>Login and Register</title>
+<title>LoginAndRegisterElaborate</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Login and Register</td></tr>
+<tr><td rowspan="1" colspan="3">LoginAndRegisterElaborate</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -68,31 +68,66 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=sex_M</td>
+	<td>css=input.main-button</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=sex_M</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=datepicker</td>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=9</td>
+	<td>assertElementPresent</td>
+	<td>css=p.error-text</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=interests</td>
-	<td>Dragons<br /></td>
+	<td>id=datepicker</td>
+	<td>00000000</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>click</td>
+	<td>css=input.main-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=p.error-text</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker</td>
+	<td>2025-03-24</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input.main-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=p.error-text</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker</td>
+	<td>2010-03-24</td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>css=input.main-button</td>
 	<td></td>
 </tr>
