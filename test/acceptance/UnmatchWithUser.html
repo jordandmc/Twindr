@@ -33,6 +33,26 @@
 </tr>
 <tr>
 	<td>waitForTitle</td>
+	<td>Twitter / Authorize an application</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username_or_email</td>
+	<td>TwindrTest</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password</td>
+	<td>WelcomeToTwitter</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=allow</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTitle</td>
 	<td>Twindr - Matchmaking</td>
 	<td></td>
 </tr>
@@ -85,6 +105,21 @@
 	<td>assertText</td>
 	<td>css=#match &gt; p</td>
 	<td>We have no matches for you at this time.</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>http://twitter.com</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-dropdown-toggle</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#signout-button &gt; button.dropdown-link</td>
+	<td></td>
 </tr>
 
 </tbody></table>
