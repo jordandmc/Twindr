@@ -64,6 +64,6 @@ object MobileController extends Controller {
   }
 
   def getProfileInformation = AuthAction { request =>
-    Ok(Json.obj( "interests" -> request.user.interests ))
+    Ok(Json.toJson(UpdateRegistration(request.user.interests.mkString("\n"))))
   }
 }
