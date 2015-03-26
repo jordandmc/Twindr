@@ -10,21 +10,21 @@ import Foundation
 
 final class LoginResponse: JSONDeserializable {
     let xAuthToken: String
-    let hasRegistered: String
+    let hasRegistered: Bool
     
     init?(json: JSON) {
-        switch(json["xAuthToken"].string, json["hasRegistered"].string) {
+        switch(json["xAuthToken"].string, json["hasRegistered"].bool) {
         case let (.Some(xAuthToken), .Some(hasRegistered)):
             self.xAuthToken = xAuthToken
             self.hasRegistered = hasRegistered
         default:
             self.xAuthToken = ""
-            self.hasRegistered = ""
+            self.hasRegistered = false
         }
     }
     
     init(){
         self.xAuthToken = ""
-        self.hasRegistered = ""
+        self.hasRegistered = false
     }
 }
