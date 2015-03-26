@@ -36,7 +36,8 @@ GET         /m/potentialMatches                controllers.MobileController.getP
 GET         /m/matches                         controllers.MobileController.getMatches
 POST        /m/processMatchResponse            controllers.MobileController.processMatchResponse
 GET         /m/unmatch                         controllers.MobileController.unmatch
-GET         /m/logout                          controllers.MobileController.logout
+POST        /m/logout                          controllers.MobileController.logout
+GET         /m/verify_credentials              controllers.TwitterProvider.verify_mobile
 
 # AJAX/ Javascript routes
 GET         /js/routes                         controllers.Application.javascriptRoutes
