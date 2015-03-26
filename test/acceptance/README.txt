@@ -1,4 +1,5 @@
 To run the acceptance tests:
+    Launch Play using the test.conf file (-Dconfig.file=conf/test.conf or -Dconfig.resource=test.conf [whichever you have setup]). This will allow you access to the TestController functions.
     Open the Selenium IDE
     Load the AcceptanceTestSuite.html file
     Run the tests at no more than 50% speed

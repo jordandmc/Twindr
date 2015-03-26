@@ -2,6 +2,7 @@ package controllers
 
 import business.logic.TestManager
 import controllers.Application._
+import play.Play
 import play.api.mvc.Action
 
 object TestController {
@@ -11,8 +12,12 @@ object TestController {
    * @return OK
    */
   def resetDatabase = Action { implicit request =>
-    TestManager.resetDatabase
-    Ok("")
+    if(Play.application.configuration.getString("allowDBReset") == "true") {
+      TestManager.resetDatabase
+      Ok("Database reset!")
+    } else {
+      Ok("Failed to reset database.")
+    }
   }
 
 }
