@@ -24,7 +24,7 @@ class TwindrTests: XCTestCase {
     
     func testLogout(){
         let homeController = HomeViewController()
-        homeController.Logout("");
+        homeController.Logout("")
         XCTAssertNil(Twitter.sharedInstance().session(), "Error: logging out")
     }
     
