@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		171DAF771AC3EA9000B053A9 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171DAF761AC3EA9000B053A9 /* LoginResponse.swift */; };
+		171DAF781AC4B41F00B053A9 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171DAF761AC3EA9000B053A9 /* LoginResponse.swift */; };
 		173A6B8A1AA197AD003198FF /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 173A6B871AA197AD003198FF /* TwitterKit.framework */; };
 		173A6B8B1AA197AD003198FF /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 173A6B881AA197AD003198FF /* TwitterKitResources.bundle */; };
 		173A6B8C1AA197AD003198FF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 173A6B891AA197AD003198FF /* Fabric.framework */; };
@@ -395,6 +396,7 @@
 				2040C51C1AB8FB400028A4D1 /* JSONSerializable.swift in Sources */,
 				175F12011AB63E2F0070CCE2 /* ViewController.swift in Sources */,
 				2040C5191AB8EC4D0028A4D1 /* ServerRequests.swift in Sources */,
+				171DAF781AC4B41F00B053A9 /* LoginResponse.swift in Sources */,
 				2040C5151AB8EB5E0028A4D1 /* SwiftyJSON.swift in Sources */,
 				20B96BB21A73549600F32F98 /* TwindrTests.swift in Sources */,
 				E6A7DF4A1AB7E23F00E03D51 /* GeolocationTests.swift in Sources */,
