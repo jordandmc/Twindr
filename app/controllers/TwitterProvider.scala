@@ -1,13 +1,16 @@
 package controllers
 
-import business.logic.LoginManager
+import business.domain.{MobileLoginResponse, Token}
+import business.logic.{RegistrationManager, LoginManager}
 import play.api.Play
-import play.api.libs.oauth._
-import play.api.libs.ws.WS
-import play.api.mvc.{RequestHeader, Action, Controller}
 import play.api.Play.current
-import scala.concurrent.ExecutionContext.Implicits.global
+import play.api.libs.oauth._
+import play.api.libs.json.Json
+import play.api.libs.ws.WS
+import play.api.mvc.{Action, Controller, RequestHeader}
+
 import scala.concurrent.Await
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
 
 object TwitterProvider extends Controller {
@@ -37,6 +40,27 @@ object TwitterProvider extends Controller {
             Redirect(TWITTER.redirectUrl(t.token)).withSession("token" -> t.token, "secret" -> t.secret)
           case Left(e) => throw e
         })
+  }
+
+  def mobileLogin = Action { request =>
+    request.body.asJson match {
+      case Some(jsonRequest) =>
+        jsonRequest.asOpt[RequestToken] match {
+          case Some(accessToken) =>
+            val token = LoginManager.login(accessToken)
+            var hasRegistered = false
+            Token.getUserFromToken(token._id) match {
+              case Some(user) =>
+                hasRegistered = RegistrationManager.hasRegistered(user)
+            }
+            val loginResponse = MobileLoginResponse(token._id, hasRegistered)
+            Ok(Json.toJson(loginResponse))
+          case None =>
+            BadRequest("Expects a MobileLoginRequest.")
+        }
+      case _ =>
+        BadRequest("No body sent.")
+    }
   }
 
   private def sessionTokenPair(implicit request: RequestHeader): Option[RequestToken] = {

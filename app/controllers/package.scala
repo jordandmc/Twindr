@@ -1,7 +1,5 @@
-import play.api.libs.json._
-import play.api.libs.functional.syntax._
-
 import business.domain._
+import play.api.libs.json._
 import play.api.libs.oauth.RequestToken
 
 package object controllers {
@@ -11,4 +9,6 @@ package object controllers {
   implicit val preparedPotentialMatchJsonFormatter = Json.format[PreparedPotentialMatch]
   implicit val potentialMatchResponseJsonFormatter = Json.format[PotentialMatchResponse]
   implicit val preparedMatchJsonFormatter = Json.format[PreparedMatch]
+  //implicit val mobileLoginRequestJsonFormatter = Json.format[MobileLoginRequest]
+  implicit val mobileLoginResponseJsonFormatter = Json.format[MobileLoginResponse]
 }
