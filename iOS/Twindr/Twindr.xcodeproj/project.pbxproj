@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		171DAF771AC3EA9000B053A9 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171DAF761AC3EA9000B053A9 /* LoginResponse.swift */; };
 		173A6B8A1AA197AD003198FF /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 173A6B871AA197AD003198FF /* TwitterKit.framework */; };
 		173A6B8B1AA197AD003198FF /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 173A6B881AA197AD003198FF /* TwitterKitResources.bundle */; };
 		173A6B8C1AA197AD003198FF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 173A6B891AA197AD003198FF /* Fabric.framework */; };
 		173A6B8E1AA19D4A003198FF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173A6B8D1AA19D4A003198FF /* LoginViewController.swift */; };
+		1744CA381AC0DE0100C95E42 /* RequestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1744CA371AC0DE0100C95E42 /* RequestToken.swift */; };
+		1744CA391AC0EAAF00C95E42 /* RequestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1744CA371AC0DE0100C95E42 /* RequestToken.swift */; };
 		175F11B21AB273E20070CCE2 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 175F11B11AB273E20070CCE2 /* README.txt */; };
 		175F12001AB63DE00070CCE2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC191A8D32AC00C3BAAB /* HomeViewController.swift */; };
 		175F12011AB63E2F0070CCE2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96B9D1A73549500F32F98 /* ViewController.swift */; };
@@ -64,10 +67,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		171DAF761AC3EA9000B053A9 /* LoginResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		173A6B871AA197AD003198FF /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
 		173A6B881AA197AD003198FF /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		173A6B891AA197AD003198FF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		173A6B8D1AA19D4A003198FF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		1744CA371AC0DE0100C95E42 /* RequestToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestToken.swift; sourceTree = "<group>"; };
 		175F11B11AB273E20070CCE2 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.txt; path = Twindr/README.txt; sourceTree = "<group>"; };
 		175F12071AB792CB0070CCE2 /* NetworkHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkHelper.swift; path = Helpers/NetworkHelper.swift; sourceTree = "<group>"; };
 		175F120B1AB797150070CCE2 /* NetworkHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHelperTests.swift; sourceTree = "<group>"; };
@@ -144,6 +149,8 @@
 				2040C51D1AB903CF0028A4D1 /* PreparedPotentialMatch.swift */,
 				2040C5201AB9052F0028A4D1 /* DeserializationUtil.swift */,
 				2040C5231AB90C7A0028A4D1 /* PotentialMatchResponse.swift */,
+				1744CA371AC0DE0100C95E42 /* RequestToken.swift */,
+				171DAF761AC3EA9000B053A9 /* LoginResponse.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -359,6 +366,7 @@
 			files = (
 				E6A7DF471AB7E08F00E03D51 /* Geolocation.swift in Sources */,
 				2040C51E1AB903CF0028A4D1 /* PreparedPotentialMatch.swift in Sources */,
+				171DAF771AC3EA9000B053A9 /* LoginResponse.swift in Sources */,
 				175F12081AB792CB0070CCE2 /* NetworkHelper.swift in Sources */,
 				2040C5241AB90C7A0028A4D1 /* PotentialMatchResponse.swift in Sources */,
 				2040C5181AB8EC4D0028A4D1 /* ServerRequests.swift in Sources */,
@@ -369,6 +377,7 @@
 				E621AC1C1A8D34B000C3BAAB /* SettingsViewController.swift in Sources */,
 				2040C51B1AB8FB400028A4D1 /* JSONSerializable.swift in Sources */,
 				E621AC1A1A8D32AC00C3BAAB /* HomeViewController.swift in Sources */,
+				1744CA381AC0DE0100C95E42 /* RequestToken.swift in Sources */,
 				2040C5101AB8E6510028A4D1 /* PreparedMatch.swift in Sources */,
 				2040C50B1AB8E6250028A4D1 /* Alamofire.swift in Sources */,
 				20B96B9E1A73549500F32F98 /* ViewController.swift in Sources */,
@@ -393,6 +402,7 @@
 				2040C5221AB9052F0028A4D1 /* DeserializationUtil.swift in Sources */,
 				2040C51F1AB903CF0028A4D1 /* PreparedPotentialMatch.swift in Sources */,
 				2040C50C1AB8E6250028A4D1 /* Alamofire.swift in Sources */,
+				1744CA391AC0EAAF00C95E42 /* RequestToken.swift in Sources */,
 				175F120C1AB797150070CCE2 /* NetworkHelperTests.swift in Sources */,
 				175F120A1AB795560070CCE2 /* NetworkHelper.swift in Sources */,
 				2040C5111AB8E6510028A4D1 /* PreparedMatch.swift in Sources */,
