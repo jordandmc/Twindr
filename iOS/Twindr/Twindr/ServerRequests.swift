@@ -50,3 +50,12 @@ func respondToMatch(response: String)(token: String, username: String) {
 
 let reject = respondToMatch(REJECTED)
 let accept = respondToMatch(ACCEPTED)
+
+func sendBusinessObject<T: JSONSerializable>(obj: T, uri: String)(token: String) {
+    var req = NSMutableURLRequest(URL: NSURL(string: serverURI + uri)!)
+    req.HTTPMethod = "POST"
+    req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    req.setValue(token, forHTTPHeaderField: "X-Auth-Token")
+    req.HTTPBody = (obj.toJson()).dataUsingEncoding(NSUTF8StringEncoding)
+    request(req).response
+}
