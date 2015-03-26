@@ -9,9 +9,10 @@
 import UIKit
 import TwitterKit
 
+var xAuthToken: String?
+let helper = NetworkHelper()
+
 class LoginViewController: ViewController {
-    let helper = NetworkHelper()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,27 +48,43 @@ class LoginViewController: ViewController {
         req.HTTPMethod = "POST"
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
         req.HTTPBody = accessToken.toJson().dataUsingEncoding(NSUTF8StringEncoding)
-        request(req).response(responseHandler)
+        request(req).responseJSON(responseHandler)
     }
     
-    private func responseHandler(request: NSURLRequest, response: NSHTTPURLResponse?, responseObj: AnyObject?, error: NSError?){
-        if(response != nil){
-            if(response!.statusCode == 200 && responseObj != nil){
+    private func responseHandler(request: NSURLRequest, response: NSHTTPURLResponse?, data: AnyObject?, error: NSError?){
+        if(error == nil && response != nil && data != nil){
+            if(response!.statusCode == 200){
+                let json = JSON(data!)
+                let loginResponse = json.object as LoginResponse
                 
-                //JSON.rawData(responseObj?)
-                let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("StartNav") as UINavigationController
-                self.presentViewController(navigationController, animated: true, completion: nil)
-            }
-            else{
-                if(error != nil){
-                    println("Error: \(error?.localizedDescription)")
+                if(!loginResponse.xAuthToken.isEmpty){
+                    if(loginResponse.hasRegistered){
+                        let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("StartNav") as UINavigationController
+                        self.presentViewController(navigationController, animated: true, completion: nil)
+                    }
+                    else{
+                        let registrationController = self.storyboard?.instantiateViewControllerWithIdentifier("Settings") as ViewController
+                        self.presentViewController(registrationController, animated: true, completion: nil)
+                    }
                 }
-                println("html error: \(response!.statusCode)")
-                let alertController = UIAlertController(title: "Error", message: "Unable to connect to service.\nPlease try again later.", preferredStyle: UIAlertControllerStyle.Alert)
-                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-                self.presentViewController(alertController, animated: true, completion: nil)
+                else{
+                    displayLoginFailure()
+                }
             }
         }
+        else{
+            if(error != nil){
+                println("Error: \(error!.localizedDescription)")
+            }
+            println("html error: \(response!.statusCode)")
+            displayLoginFailure()
+        }
+    }
+    
+    private func displayLoginFailure(){
+        let alertController = UIAlertController(title: "Error", message: "Unable to connect to service.\nPlease try again later.", preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
 }
