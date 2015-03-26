@@ -49,6 +49,10 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
         self.genderField.inputAccessoryView = toolbar
         
         // Should grab info from server and set values
+        if(!isRegistration) {
+            var profileInfo: UpdateRegistration! = getProfileInformation(token: "cbb5e4f8-66ca-49a2-8cdc-89789d5e66f1")
+            interests = profileInfo.interests
+        }
         
         // Retrieve previously entered info
         if(gender != nil){
@@ -75,7 +79,11 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
             interests = interestsField.text
             
             // Send to server
-            sendBusinessObject(Registration(sex: gender, dateOfBirth: dob, interests: interests), "/m/registerUser")(token: "cbb5e4f8-66ca-49a2-8cdc-89789d5e66f1")
+            if(isRegistration) {
+                sendBusinessObject(Registration(sex: gender, dateOfBirth: dob, interests: interests), "/m/registerUser")(token: "cbb5e4f8-66ca-49a2-8cdc-89789d5e66f1")
+            } else {
+                sendBusinessObject(UpdateRegistration(interests: interests), "/m/registerUser")(token: "cbb5e4f8-66ca-49a2-8cdc-89789d5e66f1")
+            }
         }
         
         // If registration, send to home page

@@ -51,6 +51,22 @@ func respondToMatch(response: String)(token: String, username: String) {
 let reject = respondToMatch(REJECTED)
 let accept = respondToMatch(ACCEPTED)
 
+func getBusinessObject<T: JSONDeserializable>(dummy: T, method: Method, uri: String)(token: String) -> T? {
+    var res: T? = nil
+    
+    request(method, serverURI + uri, parameters: ["X-Auth-Token": token])
+        .responseJSON { (request, response, data, error) in
+            if error == nil && data != nil {
+                let json = JSON(data!)
+                res = T(json: json)
+            }
+    }
+    
+    return res
+}
+
+let getProfileInformation = getBusinessObject(UpdateRegistration(), Method.GET, "/m/getProfileInformation")
+
 func sendBusinessObject<T: JSONSerializable>(obj: T, uri: String)(token: String) {
     var req = NSMutableURLRequest(URL: NSURL(string: serverURI + uri)!)
     req.HTTPMethod = "POST"
