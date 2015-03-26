@@ -73,5 +73,5 @@ func sendBusinessObject<T: JSONSerializable>(obj: T, uri: String)(token: String)
     req.setValue("application/json", forHTTPHeaderField: "Content-Type")
     req.setValue(token, forHTTPHeaderField: "X-Auth-Token")
     req.HTTPBody = (obj.toJson()).dataUsingEncoding(NSUTF8StringEncoding)
-    request(req).response
+    request(req)
 }

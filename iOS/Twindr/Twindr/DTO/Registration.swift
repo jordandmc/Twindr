@@ -11,17 +11,19 @@ import Foundation
 final class Registration: JSONSerializable {
     
     let sex: String
-    let dateOfBirth: String
+    let dateOfBirth: NSDate!
     let interests: String
     
     init(sex: String, dateOfBirth: String, interests: String) {
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd"
         self.sex = sex
-        self.dateOfBirth = dateOfBirth
+        self.dateOfBirth = dateFormatter.dateFromString(dateOfBirth)
         self.interests = interests
     }
     
     func toJson() -> String {
-        let json: JSON = ["sex": sex, "dateOfBirth": dateOfBirth, "interests": interests]
+        let json: JSON = ["sex": sex, "dateOfBirth": dateOfBirth.description, "interests": interests]
         return json.description
     }
 }
