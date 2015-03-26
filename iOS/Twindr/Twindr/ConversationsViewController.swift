@@ -12,9 +12,6 @@ import UIKit
 class ConversationViewController: ViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var conversationTable: UITableView!
-    let matchedUsers = ["Jordan", "Tim", "Evan","Morgan", "Caesar", "Brett","Jord", "Timothy", "Nave","Morg",
-        "Junhyeok", "Bert","Nadroj", "Mit", "Vane","Nagrom", "Raseac", "Tterb", "Cole", "Sand", "Spearman",
-        "Epp", "Kim", "Small", "Braico"]
     let textCellIdentifier = "TextCell"
     
     override func viewDidLoad() {
@@ -31,11 +28,11 @@ class ConversationViewController: ViewController, UITableViewDelegate, UITableVi
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.matchedUsers.count;
+        return matchedUsers.count;
     }
     
-    func tableView(conversationTable: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = conversationTable.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as UITableViewCell
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as UITableViewCell
         cell.textLabel?.text = matchedUsers[indexPath.row]
         
         return cell
@@ -46,7 +43,20 @@ class ConversationViewController: ViewController, UITableViewDelegate, UITableVi
         println(matchedUsers[indexPath.row])
     }
     
-    func numberOfSectionsInTableView(conversationTable: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
+    }
+    
+    func tableView(tableView: UITableView!, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            // CALL UNMATCHING LOGIC TO SERVER HERE
+            
+            matchedUsers.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        }
     }
 }

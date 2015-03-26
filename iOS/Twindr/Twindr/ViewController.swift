@@ -10,10 +10,12 @@ import UIKit
 import CoreLocation
 
 // globally defined variables
-var user:NSString!
-var gender:NSString!
-var dob:NSString!
-var interests:NSString!
+var user:String!
+var gender:String!
+var dob:String!
+var interests:String!
+//var matchedUsers:Array<String>!
+var matchedUsers = ["Jordan", "Tim", "Evan", "Morgan", "Caesar", "Brett", "Jord", "Timothy", "Nave","Morg", "Junhyeok", "Bert", "Nadroj", "Mit", "Vane", "Nagrom", "Raseac", "Tterb", "Cole", "Sand", "Spearman", "Epp", "Kim", "Small", "Braico"]
 
 class ViewController: UIViewController {
     
