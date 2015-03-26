@@ -44,6 +44,9 @@
 		20B96BA31A73549600F32F98 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20B96BA21A73549500F32F98 /* Images.xcassets */; };
 		20B96BA61A73549600F32F98 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20B96BA41A73549600F32F98 /* LaunchScreen.xib */; };
 		20B96BB21A73549600F32F98 /* TwindrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96BB11A73549600F32F98 /* TwindrTests.swift */; };
+		22C33E881AC46665008F72BC /* UpdateRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C33E871AC46665008F72BC /* UpdateRegistration.swift */; };
+		22C33E891AC471FB008F72BC /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD06961AC3CC6000AD840C /* Registration.swift */; };
+		22C33E8A1AC471FB008F72BC /* UpdateRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C33E871AC46665008F72BC /* UpdateRegistration.swift */; };
 		22CD06971AC3CC6000AD840C /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD06961AC3CC6000AD840C /* Registration.swift */; };
 		E621AC1A1A8D32AC00C3BAAB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC191A8D32AC00C3BAAB /* HomeViewController.swift */; };
 		E621AC1C1A8D34B000C3BAAB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */; };
@@ -90,6 +93,7 @@
 		20B96BAB1A73549600F32F98 /* TwindrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TwindrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		20B96BB01A73549600F32F98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20B96BB11A73549600F32F98 /* TwindrTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwindrTests.swift; sourceTree = "<group>"; };
+		22C33E871AC46665008F72BC /* UpdateRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateRegistration.swift; sourceTree = "<group>"; };
 		22CD06961AC3CC6000AD840C /* Registration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
 		E621AC191A8D32AC00C3BAAB /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +151,7 @@
 				2040C5201AB9052F0028A4D1 /* DeserializationUtil.swift */,
 				2040C5231AB90C7A0028A4D1 /* PotentialMatchResponse.swift */,
 				22CD06961AC3CC6000AD840C /* Registration.swift */,
+				22C33E871AC46665008F72BC /* UpdateRegistration.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -365,6 +370,7 @@
 				175F12081AB792CB0070CCE2 /* NetworkHelper.swift in Sources */,
 				2040C5241AB90C7A0028A4D1 /* PotentialMatchResponse.swift in Sources */,
 				2040C5181AB8EC4D0028A4D1 /* ServerRequests.swift in Sources */,
+				22C33E881AC46665008F72BC /* UpdateRegistration.swift in Sources */,
 				173A6B8E1AA19D4A003198FF /* LoginViewController.swift in Sources */,
 				2040C5211AB9052F0028A4D1 /* DeserializationUtil.swift in Sources */,
 				2040C5141AB8EB5E0028A4D1 /* SwiftyJSON.swift in Sources */,
@@ -384,6 +390,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22C33E891AC471FB008F72BC /* Registration.swift in Sources */,
+				22C33E8A1AC471FB008F72BC /* UpdateRegistration.swift in Sources */,
 				E6A7DF481AB7E08F00E03D51 /* Geolocation.swift in Sources */,
 				2040C5251AB90C7A0028A4D1 /* PotentialMatchResponse.swift in Sources */,
 				175F12021AB63E920070CCE2 /* AppDelegate.swift in Sources */,
