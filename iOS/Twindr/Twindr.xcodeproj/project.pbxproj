@@ -44,6 +44,7 @@
 		20B96BA31A73549600F32F98 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20B96BA21A73549500F32F98 /* Images.xcassets */; };
 		20B96BA61A73549600F32F98 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20B96BA41A73549600F32F98 /* LaunchScreen.xib */; };
 		20B96BB21A73549600F32F98 /* TwindrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96BB11A73549600F32F98 /* TwindrTests.swift */; };
+		22CD06971AC3CC6000AD840C /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD06961AC3CC6000AD840C /* Registration.swift */; };
 		E621AC1A1A8D32AC00C3BAAB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC191A8D32AC00C3BAAB /* HomeViewController.swift */; };
 		E621AC1C1A8D34B000C3BAAB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */; };
 		E621AC1E1A8D34DE00C3BAAB /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC1D1A8D34DE00C3BAAB /* MatchesViewController.swift */; };
@@ -89,6 +90,7 @@
 		20B96BAB1A73549600F32F98 /* TwindrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TwindrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		20B96BB01A73549600F32F98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20B96BB11A73549600F32F98 /* TwindrTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwindrTests.swift; sourceTree = "<group>"; };
+		22CD06961AC3CC6000AD840C /* Registration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
 		E621AC191A8D32AC00C3BAAB /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E621AC1D1A8D34DE00C3BAAB /* MatchesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				2040C51D1AB903CF0028A4D1 /* PreparedPotentialMatch.swift */,
 				2040C5201AB9052F0028A4D1 /* DeserializationUtil.swift */,
 				2040C5231AB90C7A0028A4D1 /* PotentialMatchResponse.swift */,
+				22CD06961AC3CC6000AD840C /* Registration.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				E621AC1E1A8D34DE00C3BAAB /* MatchesViewController.swift in Sources */,
 				E621AC1C1A8D34B000C3BAAB /* SettingsViewController.swift in Sources */,
 				2040C51B1AB8FB400028A4D1 /* JSONSerializable.swift in Sources */,
+				22CD06971AC3CC6000AD840C /* Registration.swift in Sources */,
 				E621AC1A1A8D32AC00C3BAAB /* HomeViewController.swift in Sources */,
 				2040C5101AB8E6510028A4D1 /* PreparedMatch.swift in Sources */,
 				2040C50B1AB8E6250028A4D1 /* Alamofire.swift in Sources */,
