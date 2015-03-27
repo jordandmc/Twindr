@@ -49,6 +49,7 @@
 		22C33E8A1AC471FB008F72BC /* UpdateRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C33E871AC46665008F72BC /* UpdateRegistration.swift */; };
 		22CD06971AC3CC6000AD840C /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD06961AC3CC6000AD840C /* Registration.swift */; };
 		7DFC6025F108FFFBFE39347B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA7F0BE6E3B0E041BC35D2C /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		80B5CB5B80915E120D475346 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA7F0BE6E3B0E041BC35D2C /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E621AC1A1A8D32AC00C3BAAB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC191A8D32AC00C3BAAB /* HomeViewController.swift */; };
 		E621AC1C1A8D34B000C3BAAB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */; };
 		E621AC1E1A8D34DE00C3BAAB /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC1D1A8D34DE00C3BAAB /* MatchesViewController.swift */; };
@@ -85,6 +86,7 @@
 		2040C51D1AB903CF0028A4D1 /* PreparedPotentialMatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreparedPotentialMatch.swift; sourceTree = "<group>"; };
 		2040C5201AB9052F0028A4D1 /* DeserializationUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeserializationUtil.swift; sourceTree = "<group>"; };
 		2040C5231AB90C7A0028A4D1 /* PotentialMatchResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PotentialMatchResponse.swift; sourceTree = "<group>"; };
+		205D16DD1AC4DE8B00BF973D /* ObjCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCBridge.h; sourceTree = "<group>"; };
 		20B96B961A73549500F32F98 /* Twindr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twindr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20B96B9A1A73549500F32F98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20B96B9B1A73549500F32F98 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			files = (
 				175F12031AB63F000070CCE2 /* Fabric.framework in Frameworks */,
 				175F12041AB63F650070CCE2 /* TwitterKit.framework in Frameworks */,
+				80B5CB5B80915E120D475346 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +209,7 @@
 		20B96B981A73549500F32F98 /* Twindr */ = {
 			isa = PBXGroup;
 			children = (
+				205D16DD1AC4DE8B00BF973D /* ObjCBridge.h */,
 				2040C5161AB8EC240028A4D1 /* Network */,
 				2040C5121AB8EB5E0028A4D1 /* SwiftyJSON */,
 				2040C5061AB8E6250028A4D1 /* Alamofire */,
@@ -299,9 +303,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 20B96BB81A73549600F32F98 /* Build configuration list for PBXNativeTarget "TwindrTests" */;
 			buildPhases = (
+				BA502E31719BFBE5017504F5 /* Check Pods Manifest.lock */,
 				20B96BA71A73549600F32F98 /* Sources */,
 				20B96BA81A73549600F32F98 /* Frameworks */,
 				20B96BA91A73549600F32F98 /* Resources */,
+				689E46A95A13910A81323EF5 /* Embed Pods Frameworks */,
+				55D44CDFA67D27C365C405F3 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -417,6 +424,51 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		55D44CDFA67D27C365C405F3 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		689E46A95A13910A81323EF5 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BA502E31719BFBE5017504F5 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		BFE7BD0DE8B7F181AF2E4079 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -447,7 +499,6 @@
 				22C33E881AC46665008F72BC /* UpdateRegistration.swift in Sources */,
 				173A6B8E1AA19D4A003198FF /* LoginViewController.swift in Sources */,
 				2040C5211AB9052F0028A4D1 /* DeserializationUtil.swift in Sources */,
-				E6E54EA81AC4878E00D8C5DA /* ConversationsViewController.swift in Sources */,
 				2040C5141AB8EB5E0028A4D1 /* SwiftyJSON.swift in Sources */,
 				E621AC1E1A8D34DE00C3BAAB /* MatchesViewController.swift in Sources */,
 				E621AC1C1A8D34B000C3BAAB /* SettingsViewController.swift in Sources */,
@@ -555,6 +606,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = Twindr/ObjCBridge.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -591,6 +643,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = Twindr/ObjCBridge.h;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -610,6 +663,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MACH_O_TYPE = mh_execute;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = Twindr/ObjCBridge.h;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -628,12 +682,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MACH_O_TYPE = mh_execute;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = Twindr/ObjCBridge.h;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
 		20B96BB91A73549600F32F98 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8FD94B70908CF94A359374FF /* Pods.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -648,12 +704,14 @@
 				INFOPLIST_FILE = TwindrTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = Twindr/ObjCBridge.h;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Twindr.app/Twindr";
 			};
 			name = Debug;
 		};
 		20B96BBA1A73549600F32F98 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0291D40D848E7241D29C5F5E /* Pods.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -664,6 +722,7 @@
 				INFOPLIST_FILE = TwindrTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = Twindr/ObjCBridge.h;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Twindr.app/Twindr";
 			};
 			name = Release;

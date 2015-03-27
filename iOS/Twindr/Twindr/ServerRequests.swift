@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import EventSource
 
 let serverURI = "ec2-54-149-24-39.us-west-2.compute.amazonaws.com"
 
@@ -88,3 +89,9 @@ func unmatch(token: String, match: String) {
 func logout(token: String) {
     request(.GET, serverURI + "/m/logout", parameters: ["X-Auth-Token": token])
 }
+
+func startMessageService() -> EventSource? {
+    return nil
+}
+
+
