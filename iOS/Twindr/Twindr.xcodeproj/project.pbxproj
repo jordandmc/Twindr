@@ -59,6 +59,7 @@
 		E621AC1C1A8D34B000C3BAAB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */; };
 		E621AC1E1A8D34DE00C3BAAB /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC1D1A8D34DE00C3BAAB /* MatchesViewController.swift */; };
 		E67CA31B1AC4EB7100EE1A7B /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E54EA71AC4878E00D8C5DA /* ConversationsViewController.swift */; };
+		E67CA31F1AC4FD5C00EE1A7B /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67CA31E1AC4FD5C00EE1A7B /* MessageViewController.swift */; };
 		E6A7DF471AB7E08F00E03D51 /* Geolocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A7DF461AB7E08F00E03D51 /* Geolocation.swift */; };
 		E6A7DF481AB7E08F00E03D51 /* Geolocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A7DF461AB7E08F00E03D51 /* Geolocation.swift */; };
 		E6A7DF4A1AB7E23F00E03D51 /* GeolocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A7DF491AB7E23F00E03D51 /* GeolocationTests.swift */; };
@@ -115,6 +116,7 @@
 		E621AC191A8D32AC00C3BAAB /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E621AC1D1A8D34DE00C3BAAB /* MatchesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesViewController.swift; sourceTree = "<group>"; };
+		E67CA31E1AC4FD5C00EE1A7B /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		E6A7DF461AB7E08F00E03D51 /* Geolocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geolocation.swift; sourceTree = "<group>"; };
 		E6A7DF491AB7E23F00E03D51 /* GeolocationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeolocationTests.swift; sourceTree = "<group>"; };
 		E6CCFA531AB5198A000D1EE9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -236,6 +238,7 @@
 				E621AC191A8D32AC00C3BAAB /* HomeViewController.swift */,
 				173A6B8D1AA19D4A003198FF /* LoginViewController.swift */,
 				E621AC1D1A8D34DE00C3BAAB /* MatchesViewController.swift */,
+				E67CA31E1AC4FD5C00EE1A7B /* MessageViewController.swift */,
 				E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */,
 				20B96BA21A73549500F32F98 /* Images.xcassets */,
 				20B96B9F1A73549500F32F98 /* Main.storyboard */,
@@ -536,6 +539,7 @@
 				22CD06971AC3CC6000AD840C /* Registration.swift in Sources */,
 				E621AC1A1A8D32AC00C3BAAB /* HomeViewController.swift in Sources */,
 				2040C5101AB8E6510028A4D1 /* PreparedMatch.swift in Sources */,
+				E67CA31F1AC4FD5C00EE1A7B /* MessageViewController.swift in Sources */,
 				2040C50B1AB8E6250028A4D1 /* Alamofire.swift in Sources */,
 				20B96B9E1A73549500F32F98 /* ViewController.swift in Sources */,
 				20B96B9C1A73549500F32F98 /* AppDelegate.swift in Sources */,
