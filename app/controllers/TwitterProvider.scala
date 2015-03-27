@@ -1,15 +1,16 @@
 package controllers
 
-import business.domain.{Token, MobileLoginResponse}
+import business.domain.{MobileLoginResponse, Token}
 import business.logic.{RegistrationManager, LoginManager}
 import play.api.Play
-import play.api.libs.oauth._
-import play.api.libs.ws.WS
-import play.api.mvc._
 import play.api.Play.current
+import play.api.libs.oauth._
 import play.api.libs.json.Json
-import scala.concurrent.ExecutionContext.Implicits.global
+import play.api.libs.ws.WS
+import play.api.mvc.{Action, Controller, RequestHeader}
+
 import scala.concurrent.Await
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
 
 object TwitterProvider extends Controller {
@@ -24,7 +25,7 @@ object TwitterProvider extends Controller {
 
   def authenticate = Action { request =>
     request.queryString.get("oauth_verifier").flatMap(_.headOption).map { verifier =>
-      val tokenPair:RequestToken = sessionTokenPair(request).get
+      val tokenPair = sessionTokenPair(request).get
       // We got the verifier; now get the access token, store it and back to index
       TWITTER.retrieveAccessToken(tokenPair, verifier) match {
         case Right(accessToken) =>
@@ -41,37 +42,24 @@ object TwitterProvider extends Controller {
         })
   }
 
-  def verify_mobile = Action { request =>
-    request.headers.get("X-Auth-Service-Provider") match {
-      case Some(serviceProviderUrl) =>
-        request.headers.get("X-Verify-Credentials-Authorization") match {
-          case Some(userCredentials) =>
-            val result = WS.url(serviceProviderUrl).withHeaders("Authorization" -> userCredentials).get()
-
-            val resultFuture = result.map{ response =>
-              Option((response.json \ "screen_name").as[String])
-            } recover {
-              case timeout: java.util.concurrent.TimeoutException => None
+  def mobileLogin = Action { request =>
+    request.body.asJson match {
+      case Some(jsonRequest) =>
+        jsonRequest.asOpt[RequestToken] match {
+          case Some(accessToken) =>
+            val token = LoginManager.login(accessToken)
+            var hasRegistered = false
+            Token.getUserFromToken(token._id) match {
+              case Some(user) =>
+                hasRegistered = RegistrationManager.hasRegistered(user)
             }
-
-            Await.result(resultFuture, 5000 millis) match {
-              case Some(username) =>
-                val token = LoginManager.mobileLogin(username)
-                var hasRegistered = false
-                Token.getUserFromToken(token._id) match {
-                  case Some(user) =>
-                     hasRegistered = RegistrationManager.hasRegistered(user)
-                }
-                val loginResponse = MobileLoginResponse(token._id, hasRegistered)
-                Ok(Json.toJson(loginResponse))
-              case _ =>
-                Status(408)
-            }
-          case _ =>
-            BadRequest("expects 'X-Verify-Credentials-Authorization' in the header")
+            val loginResponse = MobileLoginResponse(token._id, hasRegistered)
+            Ok(Json.toJson(loginResponse))
+          case None =>
+            BadRequest("Expects a MobileLoginRequest.")
         }
       case _ =>
-        BadRequest("expects 'X-Auth-Service-Provider' in the header")
+        BadRequest("No body sent.")
     }
   }
 
