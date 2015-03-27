@@ -25,7 +25,6 @@
 		175F12061AB66D940070CCE2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173A6B8D1AA19D4A003198FF /* LoginViewController.swift */; };
 		175F12081AB792CB0070CCE2 /* ConfigHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175F12071AB792CB0070CCE2 /* ConfigHelper.swift */; };
 		175F120A1AB795560070CCE2 /* ConfigHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175F12071AB792CB0070CCE2 /* ConfigHelper.swift */; };
-		175F120C1AB797150070CCE2 /* NetworkHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175F120B1AB797150070CCE2 /* NetworkHelperTests.swift */; };
 		2011396E1AC5497100ED8A00 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */; };
 		2040C50B1AB8E6250028A4D1 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2040C5081AB8E6250028A4D1 /* Alamofire.swift */; };
 		2040C50C1AB8E6250028A4D1 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2040C5081AB8E6250028A4D1 /* Alamofire.swift */; };
@@ -553,7 +552,6 @@
 				1744CA391AC0EAAF00C95E42 /* RequestToken.swift in Sources */,
 				20FBF5261AC52B68006DEEA8 /* Registration.swift in Sources */,
 				20FBF5281AC52B68006DEEA8 /* UpdateRegistration.swift in Sources */,
-				175F120C1AB797150070CCE2 /* NetworkHelperTests.swift in Sources */,
 				175F120A1AB795560070CCE2 /* ConfigHelper.swift in Sources */,
 				2040C5111AB8E6510028A4D1 /* PreparedMatch.swift in Sources */,
 				175F12001AB63DE00070CCE2 /* HomeViewController.swift in Sources */,
