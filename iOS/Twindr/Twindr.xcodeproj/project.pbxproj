@@ -46,6 +46,9 @@
 		20B96BB21A73549600F32F98 /* TwindrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96BB11A73549600F32F98 /* TwindrTests.swift */; };
 		20D7B65B1AC4E5FD006B02CB /* MessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D7B65A1AC4E5FD006B02CB /* MessageHandler.swift */; };
 		20D7B65D1AC4E8DE006B02CB /* MatchMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D7B65C1AC4E8DE006B02CB /* MatchMessage.swift */; };
+		20D7B6621AC4FA10006B02CB /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7B65F1AC4FA10006B02CB /* icon.png */; };
+		20D7B6631AC4FA10006B02CB /* Launch-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7B6601AC4FA10006B02CB /* Launch-Landscape.png */; };
+		20D7B6661AC4FA3F006B02CB /* Launch-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7B6651AC4FA3F006B02CB /* Launch-Portrait.png */; };
 		22C33E881AC46665008F72BC /* UpdateRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C33E871AC46665008F72BC /* UpdateRegistration.swift */; };
 		22C33E891AC471FB008F72BC /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD06961AC3CC6000AD840C /* Registration.swift */; };
 		22C33E8A1AC471FB008F72BC /* UpdateRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C33E871AC46665008F72BC /* UpdateRegistration.swift */; };
@@ -102,6 +105,9 @@
 		20B96BB11A73549600F32F98 /* TwindrTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwindrTests.swift; sourceTree = "<group>"; };
 		20D7B65A1AC4E5FD006B02CB /* MessageHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageHandler.swift; sourceTree = "<group>"; };
 		20D7B65C1AC4E8DE006B02CB /* MatchMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchMessage.swift; sourceTree = "<group>"; };
+		20D7B65F1AC4FA10006B02CB /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		20D7B6601AC4FA10006B02CB /* Launch-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Launch-Landscape.png"; sourceTree = "<group>"; };
+		20D7B6651AC4FA3F006B02CB /* Launch-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Launch-Portrait.png"; sourceTree = "<group>"; };
 		22C33E871AC46665008F72BC /* UpdateRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateRegistration.swift; sourceTree = "<group>"; };
 		22CD06961AC3CC6000AD840C /* Registration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
 		8FD94B70908CF94A359374FF /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -216,6 +222,7 @@
 		20B96B981A73549500F32F98 /* Twindr */ = {
 			isa = PBXGroup;
 			children = (
+				20D7B65E1AC4FA10006B02CB /* Assets */,
 				205D16DD1AC4DE8B00BF973D /* ObjCBridge.h */,
 				2040C5161AB8EC240028A4D1 /* Network */,
 				2040C5121AB8EB5E0028A4D1 /* SwiftyJSON */,
@@ -263,6 +270,16 @@
 				20B96BB01A73549600F32F98 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		20D7B65E1AC4FA10006B02CB /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				20D7B6651AC4FA3F006B02CB /* Launch-Portrait.png */,
+				20D7B65F1AC4FA10006B02CB /* icon.png */,
+				20D7B6601AC4FA10006B02CB /* Launch-Landscape.png */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		9FC48E8E0F710395C70464A6 /* Frameworks */ = {
@@ -369,8 +386,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20D7B6631AC4FA10006B02CB /* Launch-Landscape.png in Resources */,
 				173A6B8B1AA197AD003198FF /* TwitterKitResources.bundle in Resources */,
 				20B96BA11A73549500F32F98 /* Main.storyboard in Resources */,
+				20D7B6661AC4FA3F006B02CB /* Launch-Portrait.png in Resources */,
+				20D7B6621AC4FA10006B02CB /* icon.png in Resources */,
 				20B96BA61A73549600F32F98 /* LaunchScreen.xib in Resources */,
 				20B96BA31A73549600F32F98 /* Images.xcassets in Resources */,
 				175F11B21AB273E20070CCE2 /* README.txt in Resources */,
@@ -664,6 +684,7 @@
 			baseConfigurationReference = 8FD94B70908CF94A359374FF /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -683,6 +704,7 @@
 			baseConfigurationReference = 0291D40D848E7241D29C5F5E /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
