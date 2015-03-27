@@ -68,7 +68,7 @@ func getBusinessObject<T: JSONDeserializable>(dummy: T, method: Method, uri: Str
 
 let getProfileInformation = getBusinessObject(UpdateRegistration(), Method.GET, "/m/getProfileInformation")
 
-func sendBusinessObject<T: JSONSerializable>(obj: T, uri: String)(token: String) {
+func sendBusinessObject<T: JSONSerializable>(dummy: T, uri: String)(obj: T, token: String) {
     var req = NSMutableURLRequest(URL: NSURL(string: serverURI + uri)!)
     req.HTTPMethod = "POST"
     req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -76,6 +76,10 @@ func sendBusinessObject<T: JSONSerializable>(obj: T, uri: String)(token: String)
     req.HTTPBody = (obj.toJson()).dataUsingEncoding(NSUTF8StringEncoding)
     request(req)
 }
+
+let register = sendBusinessObject(Registration(), "/m/registerUser")
+let updateRegistration = sendBusinessObject(UpdateRegistration(), "/m/registerUser")
+
 
 func unmatch(token: String, match: String) {
     var req = NSMutableURLRequest(URL: NSURL(string: serverURI + "/m/unmatch")!)
@@ -90,8 +94,6 @@ func logout(token: String) {
     request(.GET, serverURI + "/m/logout", parameters: ["X-Auth-Token": token])
 }
 
-func startMessageService() -> EventSource? {
-    return nil
-}
+
 
 

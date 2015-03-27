@@ -44,6 +44,8 @@
 		20B96BA31A73549600F32F98 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20B96BA21A73549500F32F98 /* Images.xcassets */; };
 		20B96BA61A73549600F32F98 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20B96BA41A73549600F32F98 /* LaunchScreen.xib */; };
 		20B96BB21A73549600F32F98 /* TwindrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96BB11A73549600F32F98 /* TwindrTests.swift */; };
+		20D7B65B1AC4E5FD006B02CB /* MessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D7B65A1AC4E5FD006B02CB /* MessageHandler.swift */; };
+		20D7B65D1AC4E8DE006B02CB /* MatchMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D7B65C1AC4E8DE006B02CB /* MatchMessage.swift */; };
 		22C33E881AC46665008F72BC /* UpdateRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C33E871AC46665008F72BC /* UpdateRegistration.swift */; };
 		22C33E891AC471FB008F72BC /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD06961AC3CC6000AD840C /* Registration.swift */; };
 		22C33E8A1AC471FB008F72BC /* UpdateRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C33E871AC46665008F72BC /* UpdateRegistration.swift */; };
@@ -97,6 +99,8 @@
 		20B96BAB1A73549600F32F98 /* TwindrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TwindrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		20B96BB01A73549600F32F98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20B96BB11A73549600F32F98 /* TwindrTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwindrTests.swift; sourceTree = "<group>"; };
+		20D7B65A1AC4E5FD006B02CB /* MessageHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageHandler.swift; sourceTree = "<group>"; };
+		20D7B65C1AC4E8DE006B02CB /* MatchMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchMessage.swift; sourceTree = "<group>"; };
 		22C33E871AC46665008F72BC /* UpdateRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateRegistration.swift; sourceTree = "<group>"; };
 		22CD06961AC3CC6000AD840C /* Registration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
 		8FD94B70908CF94A359374FF /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -161,6 +165,7 @@
 				2040C5231AB90C7A0028A4D1 /* PotentialMatchResponse.swift */,
 				22CD06961AC3CC6000AD840C /* Registration.swift */,
 				22C33E871AC46665008F72BC /* UpdateRegistration.swift */,
+				20D7B65C1AC4E8DE006B02CB /* MatchMessage.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				2040C5171AB8EC4D0028A4D1 /* ServerRequests.swift */,
+				20D7B65A1AC4E5FD006B02CB /* MessageHandler.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -498,9 +504,11 @@
 				2040C5181AB8EC4D0028A4D1 /* ServerRequests.swift in Sources */,
 				22C33E881AC46665008F72BC /* UpdateRegistration.swift in Sources */,
 				173A6B8E1AA19D4A003198FF /* LoginViewController.swift in Sources */,
+				20D7B65B1AC4E5FD006B02CB /* MessageHandler.swift in Sources */,
 				2040C5211AB9052F0028A4D1 /* DeserializationUtil.swift in Sources */,
 				2040C5141AB8EB5E0028A4D1 /* SwiftyJSON.swift in Sources */,
 				E621AC1E1A8D34DE00C3BAAB /* MatchesViewController.swift in Sources */,
+				20D7B65D1AC4E8DE006B02CB /* MatchMessage.swift in Sources */,
 				E621AC1C1A8D34B000C3BAAB /* SettingsViewController.swift in Sources */,
 				2040C51B1AB8FB400028A4D1 /* JSONSerializable.swift in Sources */,
 				22CD06971AC3CC6000AD840C /* Registration.swift in Sources */,

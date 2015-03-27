@@ -22,6 +22,12 @@ final class Registration: JSONSerializable {
         self.interests = interests
     }
     
+    init() {
+        self.sex = ""
+        self.dateOfBirth = NSDate()
+        self.interests = ""
+    }
+    
     func toJson() -> String {
         let json: JSON = ["sex": sex, "dateOfBirth": dateOfBirth.description, "interests": interests]
         return json.description
