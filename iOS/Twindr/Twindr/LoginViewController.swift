@@ -39,7 +39,7 @@ class LoginViewController: ViewController {
     }
     
     func sendLogin(session: TWTRSession){
-        var host:String = "http://192.168.0.107:9000/"
+        var host:String = "http://192.168.0.107/"
         //var host:String = helper.getPlistKey("TwindrURL")
         
         let accessToken:RequestToken = RequestToken(token: session.authToken, secret: session.authTokenSecret)
