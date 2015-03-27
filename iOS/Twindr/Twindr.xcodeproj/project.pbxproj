@@ -53,6 +53,7 @@
 		E621AC1A1A8D32AC00C3BAAB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC191A8D32AC00C3BAAB /* HomeViewController.swift */; };
 		E621AC1C1A8D34B000C3BAAB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */; };
 		E621AC1E1A8D34DE00C3BAAB /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC1D1A8D34DE00C3BAAB /* MatchesViewController.swift */; };
+		E67CA31B1AC4EB7100EE1A7B /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E54EA71AC4878E00D8C5DA /* ConversationsViewController.swift */; };
 		E6A7DF471AB7E08F00E03D51 /* Geolocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A7DF461AB7E08F00E03D51 /* Geolocation.swift */; };
 		E6A7DF481AB7E08F00E03D51 /* Geolocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A7DF461AB7E08F00E03D51 /* Geolocation.swift */; };
 		E6A7DF4A1AB7E23F00E03D51 /* GeolocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A7DF491AB7E23F00E03D51 /* GeolocationTests.swift */; };
@@ -491,6 +492,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E67CA31B1AC4EB7100EE1A7B /* ConversationsViewController.swift in Sources */,
 				E6A7DF471AB7E08F00E03D51 /* Geolocation.swift in Sources */,
 				2040C51E1AB903CF0028A4D1 /* PreparedPotentialMatch.swift in Sources */,
 				175F12081AB792CB0070CCE2 /* NetworkHelper.swift in Sources */,
