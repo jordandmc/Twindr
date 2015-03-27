@@ -8,7 +8,7 @@
 
 import Foundation
 
-let serverURI = "http://localhost:9000" //"ec2-54-149-24-39.us-west-2.compute.amazonaws.com"
+let serverURI = "http://192.168.0.107:9000" //helper.getPlistKey("TwindrURL")
 
 let ACCEPTED = "ACCEPTED"
 let REJECTED = "REJECTED"
