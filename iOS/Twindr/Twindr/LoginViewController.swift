@@ -54,11 +54,10 @@ class LoginViewController: ViewController {
     private func responseHandler(request: NSURLRequest, response: NSHTTPURLResponse?, data: AnyObject?, error: NSError?){
         if(error == nil && response != nil && data != nil){
             if(response!.statusCode == 200){
-                let json = JSON(data!)
-                let loginResponse = json.object as LoginResponse
+                let loginResponse = LoginResponse(json: JSON(data!))
                 
-                if(!loginResponse.xAuthToken.isEmpty){
-                    if(loginResponse.hasRegistered){
+                if(loginResponse != nil){
+                    if(loginResponse!.hasRegistered){
                         let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("StartNav") as UINavigationController
                         self.presentViewController(navigationController, animated: true, completion: nil)
                     }
@@ -76,7 +75,6 @@ class LoginViewController: ViewController {
             if(error != nil){
                 println("Error: \(error!.localizedDescription)")
             }
-            println("html error: \(response!.statusCode)")
             displayLoginFailure()
         }
     }
