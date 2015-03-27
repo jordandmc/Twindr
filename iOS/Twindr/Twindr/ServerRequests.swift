@@ -75,3 +75,16 @@ func sendBusinessObject<T: JSONSerializable>(obj: T, uri: String)(token: String)
     req.HTTPBody = (obj.toJson()).dataUsingEncoding(NSUTF8StringEncoding)
     request(req)
 }
+
+func unmatch(token: String, match: String) {
+    var req = NSMutableURLRequest(URL: NSURL(string: serverURI + "/m/unmatch")!)
+    req.HTTPMethod = "POST"
+    req.setValue("text/plain", forHTTPHeaderField: "Content-Type")
+    req.setValue(token, forHTTPHeaderField: "X-Auth-Token")
+    req.HTTPBody = match.dataUsingEncoding(NSUTF8StringEncoding)
+    request(req)
+}
+
+func logout(token: String) {
+    request(.GET, serverURI + "/m/logout", parameters: ["X-Auth-Token": token])
+}
