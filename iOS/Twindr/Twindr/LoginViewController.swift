@@ -10,7 +10,6 @@ import UIKit
 import TwitterKit
 
 var xAuthToken: String?
-let helper = NetworkHelper()
 
 class LoginViewController: ViewController {
     override func viewDidLoad() {
