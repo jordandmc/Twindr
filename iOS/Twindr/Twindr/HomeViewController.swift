@@ -33,9 +33,13 @@ class HomeViewController: ViewController {
     
     func Logout(id:String?){
         if(id != nil){
-            helper.sendLogout(id!)
+            sendLogout(id!)
         }
         user = ""
         Twitter.sharedInstance().logOut()
+    }
+    
+    func sendLogout(token: String){
+        
     }
 }
