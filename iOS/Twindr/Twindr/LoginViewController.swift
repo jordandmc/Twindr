@@ -27,23 +27,22 @@ class LoginViewController: ViewController {
     }
     
     func loginDelegate(session: TWTRSession!, error: NSError!){
-        if (session != nil) {
+        if session != nil {
             user = session.userName
             println("authtoken: \(session.authToken)")
             println("authTokenSecret: \(session.authTokenSecret)")
             sendLogin(session)
-        }
-        else {
+        } else {
             println("error: \(error.localizedDescription)")
         }
     }
     
     func sendLogin(session: TWTRSession){
-        var host:String = "http://192.168.0.107/"
+        //var host:String = "localhost:9000/"//"http://192.168.0.107/"
         //var host:String = helper.getPlistKey("TwindrURL")
         
         let accessToken:RequestToken = RequestToken(token: session.authToken, secret: session.authTokenSecret)
-        let req = NSMutableURLRequest(URL: NSURL(string: host + "m/login")!)
+        let req = NSMutableURLRequest(URL: NSURL(string: serverURI + "/m/login")!)
         
         req.HTTPMethod = "POST"
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -52,27 +51,28 @@ class LoginViewController: ViewController {
     }
     
     private func responseHandler(request: NSURLRequest, response: NSHTTPURLResponse?, data: AnyObject?, error: NSError?){
+        println(request.URLString)
         if(error == nil && response != nil && data != nil){
-            if(response!.statusCode == 200){
+            if response!.statusCode == 200 {
                 let loginResponse = LoginResponse(json: JSON(data!))
                 
-                if(loginResponse != nil){
-                    if(loginResponse!.hasRegistered){
+                if loginResponse != nil {
+                    xAuthToken = loginResponse?.xAuthToken
+                    if loginResponse!.hasRegistered {
                         let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("StartNav") as UINavigationController
                         self.presentViewController(navigationController, animated: true, completion: nil)
-                    }
-                    else{
-                        let registrationController = self.storyboard?.instantiateViewControllerWithIdentifier("Settings") as ViewController
+                    } else {
+                        let registrationController = self.storyboard?.instantiateViewControllerWithIdentifier("Settings") as SettingsViewController
+                        registrationController.isRegistration = true
                         self.presentViewController(registrationController, animated: true, completion: nil)
                     }
-                }
-                else{
+                    
+                } else {
                     displayLoginFailure()
                 }
             }
-        }
-        else{
-            if(error != nil){
+        } else {
+            if error != nil {
                 println("Error: \(error!.localizedDescription)")
             }
             displayLoginFailure()
@@ -80,9 +80,17 @@ class LoginViewController: ViewController {
     }
     
     private func displayLoginFailure(){
-        let alertController = UIAlertController(title: "Error", message: "Unable to connect to service.\nPlease try again later.", preferredStyle: UIAlertControllerStyle.Alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-        self.presentViewController(alertController, animated: true, completion: nil)
+        if objc_getClass("UIAlertController") != nil {
+            let alertController = UIAlertController(title: "Error", message: "Unable to connect to service.\nPlease try again later.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertView()
+            alert.title = "Error"
+            alert.message = "Unable to connect to service.\nPlease try again later."
+            alert.addButtonWithTitle("OK")
+            alert.show()
+        }
     }
     
 }

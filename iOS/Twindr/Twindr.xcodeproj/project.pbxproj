@@ -26,6 +26,7 @@
 		175F12081AB792CB0070CCE2 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175F12071AB792CB0070CCE2 /* NetworkHelper.swift */; };
 		175F120A1AB795560070CCE2 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175F12071AB792CB0070CCE2 /* NetworkHelper.swift */; };
 		175F120C1AB797150070CCE2 /* NetworkHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175F120B1AB797150070CCE2 /* NetworkHelperTests.swift */; };
+		2011396E1AC5497100ED8A00 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */; };
 		2040C50B1AB8E6250028A4D1 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2040C5081AB8E6250028A4D1 /* Alamofire.swift */; };
 		2040C50C1AB8E6250028A4D1 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2040C5081AB8E6250028A4D1 /* Alamofire.swift */; };
 		2040C5101AB8E6510028A4D1 /* PreparedMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2040C50F1AB8E6510028A4D1 /* PreparedMatch.swift */; };
@@ -239,9 +240,9 @@
 				2040C50A1AB8E6250028A4D1 /* DTO */,
 				175F12091AB792E30070CCE2 /* Helpers */,
 				20B96B9B1A73549500F32F98 /* AppDelegate.swift */,
+				E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */,
 				20B96B9D1A73549500F32F98 /* ViewController.swift */,
 				E621AC191A8D32AC00C3BAAB /* HomeViewController.swift */,
-				E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */,
 				E621AC1D1A8D34DE00C3BAAB /* MatchesViewController.swift */,
 				173A6B8D1AA19D4A003198FF /* LoginViewController.swift */,
 				E6A7DF461AB7E08F00E03D51 /* Geolocation.swift */,
@@ -548,6 +549,7 @@
 				2040C5221AB9052F0028A4D1 /* DeserializationUtil.swift in Sources */,
 				2040C51F1AB903CF0028A4D1 /* PreparedPotentialMatch.swift in Sources */,
 				2040C50C1AB8E6250028A4D1 /* Alamofire.swift in Sources */,
+				2011396E1AC5497100ED8A00 /* SettingsViewController.swift in Sources */,
 				1744CA391AC0EAAF00C95E42 /* RequestToken.swift in Sources */,
 				20FBF5261AC52B68006DEEA8 /* Registration.swift in Sources */,
 				20FBF5281AC52B68006DEEA8 /* UpdateRegistration.swift in Sources */,

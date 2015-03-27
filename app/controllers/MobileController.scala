@@ -52,7 +52,10 @@ object MobileController extends Controller {
           case _ =>
             Json.fromJson[UpdateRegistration](js) match {
               case response: JsSuccess[UpdateRegistration] =>
-                RegistrationManager.register(request.user, Registration(request.user.sex.get, request.user.dateOfBirth.get, response.get.interests))
+                response.foreach { rsp =>
+                  RegistrationManager.updateProfile(request.user, rsp.interests)
+                }
+
                 Ok
               case _ =>
                 BadRequest ("Invalid JSON")

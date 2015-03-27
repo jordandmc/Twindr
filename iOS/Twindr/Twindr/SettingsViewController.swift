@@ -49,9 +49,13 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
         self.genderField.inputAccessoryView = toolbar
         
         // Should grab info from server and set values
-        if(!isRegistration) {
-            //var profileInfo: UpdateRegistration! = getProfileInformation(token: "cbb5e4f8-66ca-49a2-8cdc-89789d5e66f1")
-            //interests = profileInfo.interests
+        if let tkn = xAuthToken {
+            if !isRegistration {
+                var profileInfo: UpdateRegistration? = Curried().getProfileInformation(token: tkn)
+                if let info = profileInfo {
+                    interests = info.interests
+                }
+            }
         }
         
         // Retrieve previously entered info
@@ -80,13 +84,14 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
             
             // Send to server
             if(isRegistration) {
-                register(obj: Registration(sex: genderBackend[gender]!, dateOfBirth: dob, interests: interests), token: "cbb5e4f8-66ca-49a2-8cdc-89789d5e66f1")
+                Curried().register(obj: Registration(sex: genderBackend[gender]!, dateOfBirth: dob, interests: interests), token: xAuthToken!)
+                let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("StartNav") as UINavigationController
+                self.presentViewController(navigationController, animated: true, completion: nil)
             } else {
-                updateRegistration(obj: UpdateRegistration(interests: interests), token: "cbb5e4f8-66ca-49a2-8cdc-89789d5e66f1")
+                Curried().updateRegistration(obj: UpdateRegistration(interests: interests), token: xAuthToken!)
             }
         }
         
-        // If registration, send to home page
     }
     
     // Removes the pickers from view if they're active

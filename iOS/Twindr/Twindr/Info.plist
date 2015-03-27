@@ -46,7 +46,7 @@
 	<key>TestCaseKey</key>
 	<string>TestCaseValue</string>
 	<key>TwindrURL</key>
-	<string>http://ec2-54-149-24-39.us-west-2.compute.amazonaws.com/</string>
+	<string>http://ec2-54-149-24-39.us-west-2.compute.amazonaws.com</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

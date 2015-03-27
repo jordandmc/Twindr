@@ -48,10 +48,11 @@ object TwitterProvider extends Controller {
         jsonRequest.asOpt[RequestToken] match {
           case Some(accessToken) =>
             val token = LoginManager.login(accessToken)
-            var hasRegistered = false
-            Token.getUserFromToken(token._id) match {
+            val  hasRegistered = Token.getUserFromToken(token._id) match {
               case Some(user) =>
-                hasRegistered = RegistrationManager.hasRegistered(user)
+                RegistrationManager.hasRegistered(user)
+              case _ =>
+                false
             }
             val loginResponse = MobileLoginResponse(token._id, hasRegistered)
             Ok(Json.toJson(loginResponse))
