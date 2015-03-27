@@ -37,10 +37,7 @@ class LoginViewController: ViewController {
         }
     }
     
-    func sendLogin(session: TWTRSession){
-        //var host:String = "localhost:9000/"//"http://192.168.0.107/"
-        //var host:String = helper.getPlistKey("TwindrURL")
-        
+    func sendLogin(session: TWTRSession){       
         let accessToken:RequestToken = RequestToken(token: session.authToken, secret: session.authTokenSecret)
         let req = NSMutableURLRequest(URL: NSURL(string: serverURI + "/m/login")!)
         
@@ -57,7 +54,7 @@ class LoginViewController: ViewController {
                 let loginResponse = LoginResponse(json: JSON(data!))
                 
                 if loginResponse != nil {
-                    xAuthToken = loginResponse?.xAuthToken
+                    xAuthToken = loginResponse!.xAuthToken
                     if loginResponse!.hasRegistered {
                         let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("StartNav") as UINavigationController
                         self.presentViewController(navigationController, animated: true, completion: nil)
