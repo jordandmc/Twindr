@@ -8,7 +8,7 @@
 
 import Foundation
 
-let serverURI = "http://192.168.0.107:9000" //helper.getPlistKey("TwindrURL")
+let serverURI = "http://192.168.0.107:9000" //configHelper.getPlistKey("TwindrURL")
 
 let ACCEPTED = "ACCEPTED"
 let REJECTED = "REJECTED"
