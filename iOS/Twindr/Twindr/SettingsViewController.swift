@@ -16,7 +16,7 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
     
     var datePickerView: UIDatePicker = UIDatePicker()
     var genderPicker: UIPickerView = UIPickerView()
-    var genders = ["Male", "Female", "Prefer not to say..."]
+    var genders = ["Male", "Female", "Prefer not to say"]
     var genderBackend = ["Male":"M", "Female":"F", "Prefer not to say":"X"]
     
     var isRegistration = false
