@@ -17,7 +17,7 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
     var datePickerView: UIDatePicker = UIDatePicker()
     var genderPicker: UIPickerView = UIPickerView()
     var genders = ["Male", "Female", "Prefer not to say..."]
-    var genderBackend = ["M", "F", "X"]
+    var genderBackend = ["Male":"M", "Female":"F", "Prefer not to say":"X"]
     
     var isRegistration = false
     
@@ -49,6 +49,10 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
         self.genderField.inputAccessoryView = toolbar
         
         // Should grab info from server and set values
+        if(!isRegistration) {
+            /*var profileInfo: UpdateRegistration! = getProfileInformation(token: "cbb5e4f8-66ca-49a2-8cdc-89789d5e66f1")
+            interests = profileInfo.interests*/
+        }
         
         // Retrieve previously entered info
         if(gender != nil){
@@ -75,6 +79,11 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
             interests = interestsField.text
             
             // Send to server
+            if(isRegistration) {
+                register(obj: Registration(sex: genderBackend[gender]!, dateOfBirth: dob, interests: interests), token: "cbb5e4f8-66ca-49a2-8cdc-89789d5e66f1")
+            } else {
+                updateRegistration(obj: UpdateRegistration(interests: interests), token: "cbb5e4f8-66ca-49a2-8cdc-89789d5e66f1")
+            }
         }
         
         // If registration, send to home page

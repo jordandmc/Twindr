@@ -16,7 +16,10 @@ class Geolocation: NSObject, CLLocationManagerDelegate {
 
     // Initialize locationManager to poll geolocation
     func getLocation() {
-        locationManager.requestWhenInUseAuthorization()
+        
+        if (locationManager.respondsToSelector(Selector("requestWhenInUseAuthorization"))) {
+            locationManager.requestWhenInUseAuthorization()
+        }
         
         if(isLocatingAllowed()) {
             locationManager.delegate = self
@@ -39,14 +42,13 @@ class Geolocation: NSObject, CLLocationManagerDelegate {
 
     // If false, we'll send them to the North Pole!
     func isLocatingAllowed() -> Bool {
-        var allowed = true
-        if(CLLocationManager.locationServicesEnabled() == false) {
-            allowed = false
+        if(!CLLocationManager.locationServicesEnabled()) {
+            return false
+        } else if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.Denied) {
+            return false
         }
-        if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.Denied) {
-            allowed = false
-        }
-        return allowed
+        
+        return true
     }
     
     // Delegate function
