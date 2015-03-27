@@ -324,7 +324,7 @@
         <!--Settings-->
         <scene sceneID="tFk-Be-xYD">
             <objects>
-                <viewController id="Z07-Fp-cyt" customClass="SettingsViewController" customModule="Twindr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Settings" id="Z07-Fp-cyt" customClass="SettingsViewController" customModule="Twindr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WvZ-N2-jAE"/>
                         <viewControllerLayoutGuide type="bottom" id="7MM-Dn-uqg"/>

@@ -14,6 +14,15 @@ object RegistrationManager {
   }
 
   /**
+   * Update a users interests...not that we use them for anything
+   * @param user the user to update
+   * @param newInterests the new list of interests
+   */
+  def updateProfile(user: User, newInterests: String): Unit = {
+    user.copy(interests = createInterestList(newInterests)).save()
+  }
+
+  /**
    * Check to see if a user has already completed the registration step
    * @param user the user in question
    * @return true if the user has completed the registration step, false otherwise
