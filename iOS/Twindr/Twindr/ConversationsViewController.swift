@@ -9,16 +9,16 @@
 import Foundation
 import UIKit
 
-class ConversationViewController: ViewController, UITableViewDelegate, UITableViewDataSource {
+class ConversationsViewController: ViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var conversationTable: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     let textCellIdentifier = "TextCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        conversationTable.delegate = self
-        conversationTable.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -38,8 +38,8 @@ class ConversationViewController: ViewController, UITableViewDelegate, UITableVi
         return cell
     }
     
-    func tableView(conversationTable: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        conversationTable.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         println(matchedUsers[indexPath.row])
     }
     

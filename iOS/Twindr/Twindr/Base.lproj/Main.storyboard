@@ -253,7 +253,7 @@
         <!--Matches-->
         <scene sceneID="7cd-WR-J7f">
             <objects>
-                <viewController id="7tK-es-CUo" customClass="ConversationViewController" customModule="Twindr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7tK-es-CUo" customClass="ConversationsViewController" customModule="Twindr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wQE-60-NYE"/>
                         <viewControllerLayoutGuide type="bottom" id="RMk-Vm-kve"/>
@@ -293,7 +293,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Matches" id="BGy-7S-3wd"/>
                     <connections>
-                        <outlet property="conversationTable" destination="lHe-X7-Zxh" id="Y6D-40-39n"/>
+                        <outlet property="tableView" destination="lHe-X7-Zxh" id="W52-AS-wYX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2VC-tQ-x5l" userLabel="First Responder" sceneMemberID="firstResponder"/>
