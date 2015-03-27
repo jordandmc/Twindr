@@ -7,9 +7,8 @@
 //
 
 import Foundation
-import EventSource
 
-let serverURI = "ec2-54-149-24-39.us-west-2.compute.amazonaws.com"
+let serverURI = "ec2-54-149-24-39.us-west-2.compute.amazonaws.com:9000"
 
 let ACCEPTED = "ACCEPTED"
 let REJECTED = "REJECTED"

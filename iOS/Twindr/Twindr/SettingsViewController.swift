@@ -50,8 +50,8 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
         
         // Should grab info from server and set values
         if(!isRegistration) {
-            /*var profileInfo: UpdateRegistration! = getProfileInformation(token: "cbb5e4f8-66ca-49a2-8cdc-89789d5e66f1")
-            interests = profileInfo.interests*/
+            //var profileInfo: UpdateRegistration! = getProfileInformation(token: "cbb5e4f8-66ca-49a2-8cdc-89789d5e66f1")
+            //interests = profileInfo.interests
         }
         
         // Retrieve previously entered info
