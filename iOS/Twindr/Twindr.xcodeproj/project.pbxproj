@@ -23,8 +23,8 @@
 		175F12041AB63F650070CCE2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 173A6B871AA197AD003198FF /* TwitterKit.framework */; };
 		175F12051AB63F780070CCE2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 173A6B881AA197AD003198FF /* TwitterKitResources.bundle */; };
 		175F12061AB66D940070CCE2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173A6B8D1AA19D4A003198FF /* LoginViewController.swift */; };
-		175F12081AB792CB0070CCE2 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175F12071AB792CB0070CCE2 /* NetworkHelper.swift */; };
-		175F120A1AB795560070CCE2 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175F12071AB792CB0070CCE2 /* NetworkHelper.swift */; };
+		175F12081AB792CB0070CCE2 /* ConfigHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175F12071AB792CB0070CCE2 /* ConfigHelper.swift */; };
+		175F120A1AB795560070CCE2 /* ConfigHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175F12071AB792CB0070CCE2 /* ConfigHelper.swift */; };
 		175F120C1AB797150070CCE2 /* NetworkHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175F120B1AB797150070CCE2 /* NetworkHelperTests.swift */; };
 		2011396E1AC5497100ED8A00 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */; };
 		2040C50B1AB8E6250028A4D1 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2040C5081AB8E6250028A4D1 /* Alamofire.swift */; };
@@ -85,7 +85,7 @@
 		173A6B8D1AA19D4A003198FF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1744CA371AC0DE0100C95E42 /* RequestToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestToken.swift; sourceTree = "<group>"; };
 		175F11B11AB273E20070CCE2 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.txt; path = Twindr/README.txt; sourceTree = "<group>"; };
-		175F12071AB792CB0070CCE2 /* NetworkHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkHelper.swift; path = Helpers/NetworkHelper.swift; sourceTree = "<group>"; };
+		175F12071AB792CB0070CCE2 /* ConfigHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfigHelper.swift; path = Helpers/ConfigHelper.swift; sourceTree = "<group>"; };
 		175F120B1AB797150070CCE2 /* NetworkHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHelperTests.swift; sourceTree = "<group>"; };
 		2040C5081AB8E6250028A4D1 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
 		2040C50F1AB8E6510028A4D1 /* PreparedMatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreparedMatch.swift; sourceTree = "<group>"; };
@@ -158,7 +158,7 @@
 		175F12091AB792E30070CCE2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				175F12071AB792CB0070CCE2 /* NetworkHelper.swift */,
+				175F12071AB792CB0070CCE2 /* ConfigHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -508,7 +508,7 @@
 				E6A7DF471AB7E08F00E03D51 /* Geolocation.swift in Sources */,
 				2040C51E1AB903CF0028A4D1 /* PreparedPotentialMatch.swift in Sources */,
 				171DAF771AC3EA9000B053A9 /* LoginResponse.swift in Sources */,
-				175F12081AB792CB0070CCE2 /* NetworkHelper.swift in Sources */,
+				175F12081AB792CB0070CCE2 /* ConfigHelper.swift in Sources */,
 				2040C5241AB90C7A0028A4D1 /* PotentialMatchResponse.swift in Sources */,
 				2040C5181AB8EC4D0028A4D1 /* ServerRequests.swift in Sources */,
 				173A6B8E1AA19D4A003198FF /* LoginViewController.swift in Sources */,
@@ -554,7 +554,7 @@
 				20FBF5261AC52B68006DEEA8 /* Registration.swift in Sources */,
 				20FBF5281AC52B68006DEEA8 /* UpdateRegistration.swift in Sources */,
 				175F120C1AB797150070CCE2 /* NetworkHelperTests.swift in Sources */,
-				175F120A1AB795560070CCE2 /* NetworkHelper.swift in Sources */,
+				175F120A1AB795560070CCE2 /* ConfigHelper.swift in Sources */,
 				2040C5111AB8E6510028A4D1 /* PreparedMatch.swift in Sources */,
 				175F12001AB63DE00070CCE2 /* HomeViewController.swift in Sources */,
 			);
