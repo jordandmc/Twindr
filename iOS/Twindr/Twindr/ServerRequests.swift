@@ -8,7 +8,7 @@
 
 import Foundation
 
-let serverURI = "ec2-54-149-24-39.us-west-2.compute.amazonaws.com:9000"
+let serverURI = "ec2-54-149-24-39.us-west-2.compute.amazonaws.com"
 
 let ACCEPTED = "ACCEPTED"
 let REJECTED = "REJECTED"
