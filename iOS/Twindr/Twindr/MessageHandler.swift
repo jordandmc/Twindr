@@ -30,6 +30,4 @@ class MessageHandler {
             handler(msg)
         }
     }
-    
-    let sendMessage = sendBusinessObject(MatchMessage(), "/messaging")
 }

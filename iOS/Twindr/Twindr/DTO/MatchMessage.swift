@@ -46,6 +46,6 @@ final class MatchMessage: JSONSerializable, JSONDeserializable {
     
     func toJson() -> String {
         let json: JSON = ["matchID": matchID, "sender": sender, "message": message, "dateTime": dateTime]
-        return json.string!
+        return json.description
     }
 }
