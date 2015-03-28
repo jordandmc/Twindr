@@ -7,6 +7,7 @@ import play.api.libs.oauth.RequestToken
 import play.api.mvc.Results._
 import play.api.mvc._
 import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
 
 class AuthenticatedRequest[A](val user: User, val request: Request[A], val token: Token) extends WrappedRequest[A](request)
 
@@ -25,28 +26,41 @@ object AuthAction extends ActionBuilder[AuthenticatedRequest] {
         }
     }
 
-    val result = token match {
-      case Some(tkn: String) => Token.withUser(tkn) { usr =>
-        val webNotRegistered = web match {
-          case true => ! RegistrationManager.hasRegistered(usr)
-          case _ => false
+    web match {
+      case true =>
+        val result = token match {
+          case Some(tkn: String) => Token.withUser(tkn) { usr =>
+            val webNotRegistered = web match {
+              case true => ! RegistrationManager.hasRegistered(usr)
+              case _ => false
+            }
+
+            webNotRegistered match {
+              case true if ! request.path.contains("register") && ! request.path.contains("logout") =>
+                Future.successful(Redirect(routes.Login.register()))
+              case _ => block(new AuthenticatedRequest[A](usr, request, Token(tkn, usr._id)))
+            }
+
+          }
+          case _ => Future.successful(Redirect(routes.Application.index()))
         }
 
-        webNotRegistered match {
-          case true if ! request.path.contains("register") && ! request.path.contains("logout") =>
-            Future.successful(Redirect(routes.Login.register()))
-          case _ => block(new AuthenticatedRequest[A](usr, request, Token(tkn, usr._id)))
+        result match {
+          case None => Future.successful(Redirect(routes.Application.index()))
+          case Some(res: Future[Result]) => res
+          case _ => Future.successful(Redirect(routes.Application.index()))
         }
-
-      }
-      case _ => Future.successful(Redirect(routes.Application.index()))
+      case false =>
+        token match {
+          case Some(tkn: String) => Token.withUser(tkn) { usr =>
+            block(new AuthenticatedRequest[A](usr, request, Token(tkn, usr._id)))
+          }.getOrElse(Future(BadRequest("Something Went Wrong")))
+          case _ =>
+            Future(BadRequest("Invalid Token"))
+        }
     }
 
-    result match {
-      case None => Future.successful(Redirect(routes.Application.index()))
-      case Some(res: Future[Result]) => res
-      case _ => Future.successful(Redirect(routes.Application.index()))
-    }
+
   }
 
   def isAuthenticated[A](request: RequestHeader): Boolean = {

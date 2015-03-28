@@ -51,10 +51,7 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
         // Should grab info from server and set values
         if let tkn = xAuthToken {
             if !isRegistration {
-                var profileInfo: UpdateRegistration? = Curried().getProfileInformation(token: tkn)
-                if let info = profileInfo {
-                    interests = info.interests
-                }
+                Curried().getProfileInformation(token: tkn, callback: populateInterestsCallback)
             }
         }
         
@@ -66,7 +63,13 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
             dobField.text = dob
         }
         if(interests != nil){
-            interestsField.text = interests
+            
+        }
+    }
+    
+    func populateInterestsCallback(res: UpdateRegistration?) {
+        if let info = res {
+            interestsField.text = info.interests
         }
     }
     
@@ -83,12 +86,15 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
             interests = interestsField.text
             
             // Send to server
-            if(isRegistration) {
-                Curried().register(obj: Registration(sex: genderBackend[gender]!, dateOfBirth: dob, interests: interests), token: xAuthToken!)
+            if let tkn = xAuthToken {
+                if(isRegistration) {
+                    Curried().register(obj: Registration(sex: genderBackend[gender]!, dateOfBirth: dob, interests: interests), token: tkn)
+                } else {
+                    Curried().updateRegistration(obj: UpdateRegistration(interests: interests), token: tkn)
+                }
+            
                 let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("StartNav") as UINavigationController
                 self.presentViewController(navigationController, animated: true, completion: nil)
-            } else {
-                Curried().updateRegistration(obj: UpdateRegistration(interests: interests), token: xAuthToken!)
             }
         }
         

@@ -32,7 +32,7 @@ class LoginViewController: ViewController {
             println("authTokenSecret: \(session.authTokenSecret)")
             sendLogin(session)
         } else {
-            println("error: \(error.localizedDescription)")
+            //println("error: \(error.localizedDescription)")
         }
     }
     
@@ -54,6 +54,7 @@ class LoginViewController: ViewController {
                 
                 if loginResponse != nil {
                     xAuthToken = loginResponse!.xAuthToken
+                    println(xAuthToken)
                     if loginResponse!.hasRegistered {
                         let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("StartNav") as UINavigationController
                         self.presentViewController(navigationController, animated: true, completion: nil)
@@ -69,7 +70,7 @@ class LoginViewController: ViewController {
             }
         } else {
             if error != nil {
-                println("Error: \(error!.localizedDescription)")
+                //println("Error: \(error!.localizedDescription)")
             }
             displayLoginFailure()
         }

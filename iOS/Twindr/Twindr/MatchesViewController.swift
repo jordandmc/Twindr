@@ -61,27 +61,36 @@ class MatchesViewController: ViewController {
     
     private func loadPotentialMatch() {
         if potentialList.count == 0 {
-            potentialList = Curried().getPotentialMatches(token: xAuthToken!)!
+            if let tkn = xAuthToken {
+                Curried().getPotentialMatches(token: tkn, callback: potentialMatchesLoadedCallback)
+            }
         }
-        
-        if(potentialList.count > 0) {
-            let potentialMatch = potentialList[0]
-            userLabel.text = potentialMatch.username
+    }
+    
+    private func potentialMatchesLoadedCallback(res: [PreparedPotentialMatch]?) {
+        if let tempList = res {
+            potentialList = tempList
             
-            if potentialMatch.tweets.count >= 1 { tweet1Label.text = potentialMatch.tweets[0] } else { tweet1Label.text = "" }
-            if potentialMatch.tweets.count >= 2 { tweet2Label.text = potentialMatch.tweets[1] } else { tweet2Label.text = "" }
-            if potentialMatch.tweets.count >= 3 { tweet3Label.text = potentialMatch.tweets[2] } else { tweet3Label.text = "" }
-            if potentialMatch.tweets.count >= 4 { tweet4Label.text = potentialMatch.tweets[3] } else { tweet4Label.text = "" }
-            if potentialMatch.tweets.count >= 5 { tweet5Label.text = potentialMatch.tweets[4] } else { tweet5Label.text = "" }
-            
-        } else {
-            userLabel.text   = ""
-            tweet1Label.text = ""
-            tweet2Label.text = "We have no more potential matches at this time."
-            tweet3Label.text = ""
-            tweet4Label.text = ""
-            tweet5Label.text = ""
-            
+            if(potentialList.count > 0) {
+                let potentialMatch = potentialList[0]
+                userLabel.text = potentialMatch.username
+                
+                if potentialMatch.tweets.count >= 1 { tweet1Label.text = potentialMatch.tweets[0] } else { tweet1Label.text = "" }
+                if potentialMatch.tweets.count >= 2 { tweet2Label.text = potentialMatch.tweets[1] } else { tweet2Label.text = "" }
+                if potentialMatch.tweets.count >= 3 { tweet3Label.text = potentialMatch.tweets[2] } else { tweet3Label.text = "" }
+                if potentialMatch.tweets.count >= 4 { tweet4Label.text = potentialMatch.tweets[3] } else { tweet4Label.text = "" }
+                if potentialMatch.tweets.count >= 5 { tweet5Label.text = potentialMatch.tweets[4] } else { tweet5Label.text = "" }
+                
+            } else {
+                userLabel.text   = ""
+                tweet1Label.text = ""
+                tweet2Label.text = "We have no more potential matches at this time."
+                tweet3Label.text = ""
+                tweet4Label.text = ""
+                tweet5Label.text = ""
+                
+            }
+
         }
     }
     
