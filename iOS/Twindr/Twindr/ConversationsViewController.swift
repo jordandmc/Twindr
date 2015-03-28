@@ -14,6 +14,8 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     let textCellIdentifier = "TextCell"
     
+    var converseWith: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,7 +27,6 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return matchedUsers.count;
@@ -39,10 +40,11 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        converseWith = matchedUsers[indexPath.row]
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        println(matchedUsers[indexPath.row])
-        //let messageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MessageView") as MessageViewController
-        //self.presentViewController(messageViewController, animated: true, completion: nil)
+        //var messageVC = self.storyboard?.instantiateViewControllerWithIdentifier("MessageViewController") as MessageViewController
+        //messageVC.conversationWith = converseWith
+        //self.showViewController(messageVC, sender: self)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

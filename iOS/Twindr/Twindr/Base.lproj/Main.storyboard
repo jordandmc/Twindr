@@ -278,9 +278,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="4fd-EY-VqY" kind="show" id="p26-pL-C28"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
@@ -306,7 +303,7 @@
         <!--Message View Controller-->
         <scene sceneID="fbz-vn-cGD">
             <objects>
-                <viewController storyboardIdentifier="MessageView" id="4fd-EY-VqY" customClass="MessageViewController" customModule="Twindr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MessageViewController" id="4fd-EY-VqY" customClass="MessageViewController" customModule="Twindr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cTI-UM-qJc"/>
                         <viewControllerLayoutGuide type="bottom" id="JLT-na-XlY"/>
