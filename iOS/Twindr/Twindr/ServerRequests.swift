@@ -16,7 +16,8 @@ let REJECTED = "REJECTED"
 func getList<T: JSONDeserializable>(dummy: T, method: Method, uri: String)(token: String, callback: ([T]?)->Void) {
     var req = NSMutableURLRequest(URL: NSURL(string: serverURI + uri)!)
     req.HTTPMethod = method.rawValue
-    req.setValue(token, forHTTPHeaderField: "X-Auth-Token")
+    req.setValue(NSString(CString: token, encoding: NSUTF8StringEncoding), forHTTPHeaderField: "X-Auth-Token")
+
     request(req)
         .response { (request, response, data, error) in
             if error == nil && data != nil && response?.statusCode == 200 {
@@ -45,7 +46,7 @@ func respondToMatch(response: String)(token: String, username: String) {
     let resp = PotentialMatchResponse(username: username, status: response)
     req.HTTPMethod = "POST"
     req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    req.setValue(token, forHTTPHeaderField: "X-Auth-Token")
+    req.setValue(NSString(CString: token, encoding: NSUTF8StringEncoding), forHTTPHeaderField: "X-Auth-Token")
     req.HTTPBody = (resp.toJson() as NSString).dataUsingEncoding(NSUTF8StringEncoding)
     request(req)
 }
@@ -53,7 +54,7 @@ func respondToMatch(response: String)(token: String, username: String) {
 func getBusinessObject<T: JSONDeserializable>(dummy: T, method: Method, uri: String)(token: String, callback: (T?)->Void) {
     var req = NSMutableURLRequest(URL: NSURL(string: serverURI + uri)!)
     req.HTTPMethod = "GET"
-    req.setValue(token, forHTTPHeaderField: "X-Auth-Token")
+    req.setValue(NSString(CString: token, encoding: NSUTF8StringEncoding), forHTTPHeaderField: "X-Auth-Token")
     println(req)
     request(req)
         .response{ (request, response, data, error) in
@@ -75,7 +76,7 @@ func sendBusinessObject<T: JSONSerializable>(dummy: T, uri: String)(obj: T, toke
     var req = NSMutableURLRequest(URL: NSURL(string: serverURI + uri)!)
     req.HTTPMethod = "POST"
     req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    req.setValue(token, forHTTPHeaderField: "X-Auth-Token")
+    req.setValue(NSString(CString: token, encoding: NSUTF8StringEncoding), forHTTPHeaderField: "X-Auth-Token")
     req.HTTPBody = (obj.toJson()).dataUsingEncoding(NSUTF8StringEncoding)
     request(req)
 }
@@ -84,14 +85,14 @@ func unmatch(token: String, match: String) {
     var req = NSMutableURLRequest(URL: NSURL(string: serverURI + "/m/unmatch")!)
     req.HTTPMethod = "POST"
     req.setValue("text/plain", forHTTPHeaderField: "Content-Type")
-    req.setValue(token, forHTTPHeaderField: "X-Auth-Token")
+    req.setValue(NSString(CString: token, encoding: NSUTF8StringEncoding), forHTTPHeaderField: "X-Auth-Token")
     req.HTTPBody = match.dataUsingEncoding(NSUTF8StringEncoding)
     request(req)
 }
 
 func logout(token: String) {
     var req = NSMutableURLRequest(URL: NSURL(string: serverURI + "/m/logout")!)
-    req.setValue(token, forHTTPHeaderField: "X-Auth-Token")
+    req.setValue(NSString(CString: token, encoding: NSUTF8StringEncoding), forHTTPHeaderField: "X-Auth-Token")
     req.HTTPMethod = "GET"
     request(req)
 }
