@@ -61,6 +61,8 @@
 		E621AC1E1A8D34DE00C3BAAB /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC1D1A8D34DE00C3BAAB /* MatchesViewController.swift */; };
 		E67CA31F1AC4FD5C00EE1A7B /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67CA31E1AC4FD5C00EE1A7B /* MessageViewController.swift */; };
 		E69597541AC635C9009836D2 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69597531AC635C9009836D2 /* ConversationsViewController.swift */; };
+		E69597561AC63EA3009836D2 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69597551AC63EA3009836D2 /* Message.swift */; };
+		E69597571AC63EA6009836D2 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69597551AC63EA3009836D2 /* Message.swift */; };
 		E6A7DF471AB7E08F00E03D51 /* Geolocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A7DF461AB7E08F00E03D51 /* Geolocation.swift */; };
 		E6A7DF481AB7E08F00E03D51 /* Geolocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A7DF461AB7E08F00E03D51 /* Geolocation.swift */; };
 		E6A7DF4A1AB7E23F00E03D51 /* GeolocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A7DF491AB7E23F00E03D51 /* GeolocationTests.swift */; };
@@ -119,6 +121,7 @@
 		E621AC1D1A8D34DE00C3BAAB /* MatchesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesViewController.swift; sourceTree = "<group>"; };
 		E67CA31E1AC4FD5C00EE1A7B /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		E69597531AC635C9009836D2 /* ConversationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
+		E69597551AC63EA3009836D2 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		E6A7DF461AB7E08F00E03D51 /* Geolocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geolocation.swift; sourceTree = "<group>"; };
 		E6A7DF491AB7E23F00E03D51 /* GeolocationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeolocationTests.swift; sourceTree = "<group>"; };
 		E6CCFA531AB5198A000D1EE9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -248,6 +251,7 @@
 				E621AC1D1A8D34DE00C3BAAB /* MatchesViewController.swift */,
 				E69597531AC635C9009836D2 /* ConversationsViewController.swift */,
 				E67CA31E1AC4FD5C00EE1A7B /* MessageViewController.swift */,
+				E69597551AC63EA3009836D2 /* Message.swift */,
 				E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */,
 				173A6B8D1AA19D4A003198FF /* LoginViewController.swift */,
 				E6A7DF461AB7E08F00E03D51 /* Geolocation.swift */,
@@ -518,6 +522,7 @@
 				175F12081AB792CB0070CCE2 /* ConfigHelper.swift in Sources */,
 				2040C5241AB90C7A0028A4D1 /* PotentialMatchResponse.swift in Sources */,
 				2040C5181AB8EC4D0028A4D1 /* ServerRequests.swift in Sources */,
+				E69597561AC63EA3009836D2 /* Message.swift in Sources */,
 				173A6B8E1AA19D4A003198FF /* LoginViewController.swift in Sources */,
 				20FBF51E1AC52738006DEEA8 /* MessageHandler.swift in Sources */,
 				2040C5211AB9052F0028A4D1 /* DeserializationUtil.swift in Sources */,
@@ -559,6 +564,7 @@
 				2040C50C1AB8E6250028A4D1 /* Alamofire.swift in Sources */,
 				2011396E1AC5497100ED8A00 /* SettingsViewController.swift in Sources */,
 				1744CA391AC0EAAF00C95E42 /* RequestToken.swift in Sources */,
+				E69597571AC63EA6009836D2 /* Message.swift in Sources */,
 				20FBF5261AC52B68006DEEA8 /* Registration.swift in Sources */,
 				20FBF5281AC52B68006DEEA8 /* UpdateRegistration.swift in Sources */,
 				175F120A1AB795560070CCE2 /* ConfigHelper.swift in Sources */,
