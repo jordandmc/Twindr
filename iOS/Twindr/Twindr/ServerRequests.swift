@@ -8,35 +8,40 @@
 
 import Foundation
 
-let serverURI = configHelper.getPlistKey("TwindrURL") //"http://192.168.0.107:9000" 
+let serverURI = "http://localhost:9000" //configHelper.getPlistKey("TwindrURL")
 
 let ACCEPTED = "ACCEPTED"
 let REJECTED = "REJECTED"
 
-func getList<T: JSONDeserializable>(dummy: T, method: Method, uri: String)(token: String) -> [T]? {
-    var res: [T]? = nil
-    
-    request(method, serverURI + uri, parameters: ["X-Auth-Token": token])
-        .responseJSON { (request, response, data, error) in
-            if error == nil && data != nil {
+func getList<T: JSONDeserializable>(dummy: T, method: Method, uri: String)(token: String, callback: ([T]?)->Void) {
+    var req = NSMutableURLRequest(URL: NSURL(string: serverURI + uri)!)
+    req.HTTPMethod = method.rawValue
+    req.setValue(token, forHTTPHeaderField: "X-Auth-Token")
+    request(req)
+        .response { (request, response, data, error) in
+            if error == nil && data != nil && response?.statusCode == 200 {
                 let json = JSON(data!)
                 if let list = json.array {
-                    res = []
+                    var res:[T]? = []
                     
                     for( index: String, subJson: JSON) in json {
                         if let obj = T(json: subJson) {
                             res?.append(obj)
                         }
                     }
+                    
+                    callback(res)
+                } else {
+                    callback(nil)
                 }
+            } else {
+                callback(nil)
             }
         }
-    
-    return res
 }
 
 func respondToMatch(response: String)(token: String, username: String) {
-    var req = NSMutableURLRequest()
+    var req = NSMutableURLRequest(URL: NSURL(string: serverURI + "/m/processMatchResponse")!)
     let resp = PotentialMatchResponse(username: username, status: response)
     req.HTTPMethod = "POST"
     req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -45,18 +50,25 @@ func respondToMatch(response: String)(token: String, username: String) {
     request(req)
 }
 
-func getBusinessObject<T: JSONDeserializable>(dummy: T, method: Method, uri: String)(token: String) -> T? {
-    var res: T? = nil
-    
-    request(method, serverURI + uri, parameters: ["X-Auth-Token": token])
-        .responseJSON { (request, response, data, error) in
-            if error == nil && data != nil {
+func getBusinessObject<T: JSONDeserializable>(dummy: T, method: Method, uri: String)(token: String, callback: (T?)->Void) {
+    var req = NSMutableURLRequest(URL: NSURL(string: serverURI + uri)!)
+    req.HTTPMethod = "GET"
+    req.setValue(token, forHTTPHeaderField: "X-Auth-Token")
+    println(req)
+    request(req)
+        .response{ (request, response, data, error) in
+            if error == nil && data != nil && response?.statusCode == 200 {
                 let json = JSON(data!)
-                res = T(json: json)
+                let res = T(json: json)
+                callback(res)
+            } else {
+                println(error)
+                println(response)
+                println(data?.string)
+                callback(nil)
             }
     }
     
-    return res
 }
 
 func sendBusinessObject<T: JSONSerializable>(dummy: T, uri: String)(obj: T, token: String) {
@@ -78,7 +90,10 @@ func unmatch(token: String, match: String) {
 }
 
 func logout(token: String) {
-    request(.GET, serverURI + "/m/logout", parameters: ["X-Auth-Token": token])
+    var req = NSMutableURLRequest(URL: NSURL(string: serverURI + "/m/logout")!)
+    req.setValue(token, forHTTPHeaderField: "X-Auth-Token")
+    req.HTTPMethod = "GET"
+    request(req)
 }
 
 class Curried {

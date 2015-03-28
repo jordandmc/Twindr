@@ -63,6 +63,6 @@ class Geolocation: NSObject, CLLocationManagerDelegate {
     
     // Delegate function
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        println(error)
+        //println(error)
     }
 }
