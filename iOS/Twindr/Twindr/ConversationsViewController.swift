@@ -14,8 +14,6 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     let textCellIdentifier = "TextCell"
     
-    var converseWith: String = ""
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,9 +40,6 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         converseWith = matchedUsers[indexPath.row]
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        //var messageVC = self.storyboard?.instantiateViewControllerWithIdentifier("MessageViewController") as MessageViewController
-        //messageVC.conversationWith = converseWith
-        //self.showViewController(messageVC, sender: self)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

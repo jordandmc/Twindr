@@ -297,16 +297,17 @@
                     <navigationItem key="navigationItem" title="Matches" id="BGy-7S-3wd"/>
                     <connections>
                         <outlet property="tableView" destination="lHe-X7-Zxh" id="W52-AS-wYX"/>
+                        <segue destination="4fd-EY-VqY" kind="show" identifier="segue" id="LS9-Km-qVF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2VC-tQ-x5l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3564" y="345"/>
         </scene>
-        <!--Message View Controller-->
+        <!--Message Conversation-->
         <scene sceneID="fbz-vn-cGD">
             <objects>
-                <viewController storyboardIdentifier="MessageViewController" id="4fd-EY-VqY" customClass="MessageViewController" customModule="Twindr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MessageViewController" title="Message Conversation" id="4fd-EY-VqY" customClass="MessageViewController" customModule="Twindr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cTI-UM-qJc"/>
                         <viewControllerLayoutGuide type="bottom" id="JLT-na-XlY"/>
