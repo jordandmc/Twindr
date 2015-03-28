@@ -15,6 +15,7 @@ var gender:String!
 var dob:String!
 var interests:String!
 //var matchedUsers:Array<String>!
+var converseWith: String!
 var matchedUsers = ["Jordan", "Tim", "Evan", "Morgan", "Caesar", "Brett", "Jord", "Timothy", "Nave","Morg", "Junhyeok", "Bert", "Nadroj", "Mit", "Vane", "Nagrom", "Raseac", "Tterb", "Cole", "Sand", "Spearman", "Epp", "Kim", "Small", "Braico"]
 
 class ViewController: UIViewController {

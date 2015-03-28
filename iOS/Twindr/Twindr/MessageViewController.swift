@@ -20,8 +20,6 @@ class MessageViewController: JSQMessagesViewController, UIActionSheetDelegate {
     
     var batchMessages = true
     
-    var conversationWith: String = ""
-    
     /*
     *   You can send the message from here.
     */
@@ -34,7 +32,7 @@ class MessageViewController: JSQMessagesViewController, UIActionSheetDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = conversationWith
+        self.title = converseWith
         automaticallyScrollsToMostRecentMessage = true
         inputToolbar.contentView.leftBarButtonItem = nil
         //self.showLoadEarlierMessagesHeader = true
