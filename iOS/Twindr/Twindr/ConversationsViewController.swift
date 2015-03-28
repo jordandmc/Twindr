@@ -41,6 +41,8 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         println(matchedUsers[indexPath.row])
+        //let messageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MessageView") as MessageViewController
+        //self.presentViewController(messageViewController, animated: true, completion: nil)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

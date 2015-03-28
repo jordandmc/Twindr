@@ -278,6 +278,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="4fd-EY-VqY" kind="show" id="p26-pL-C28"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
@@ -299,6 +302,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2VC-tQ-x5l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3564" y="325"/>
+        </scene>
+        <!--Message View Controller-->
+        <scene sceneID="fbz-vn-cGD">
+            <objects>
+                <viewController storyboardIdentifier="MessageView" id="4fd-EY-VqY" customClass="MessageViewController" customModule="Twindr" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cTI-UM-qJc"/>
+                        <viewControllerLayoutGuide type="bottom" id="JLT-na-XlY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JQa-nm-XU7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zqo-Gs-K27" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4307" y="325"/>
         </scene>
         <!--Settings-->
         <scene sceneID="tFk-Be-xYD">
