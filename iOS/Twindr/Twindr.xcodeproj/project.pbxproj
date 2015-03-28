@@ -59,8 +59,8 @@
 		E621AC1A1A8D32AC00C3BAAB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC191A8D32AC00C3BAAB /* HomeViewController.swift */; };
 		E621AC1C1A8D34B000C3BAAB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */; };
 		E621AC1E1A8D34DE00C3BAAB /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC1D1A8D34DE00C3BAAB /* MatchesViewController.swift */; };
-		E67CA31B1AC4EB7100EE1A7B /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E54EA71AC4878E00D8C5DA /* ConversationsViewController.swift */; };
 		E67CA31F1AC4FD5C00EE1A7B /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67CA31E1AC4FD5C00EE1A7B /* MessageViewController.swift */; };
+		E69597541AC635C9009836D2 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69597531AC635C9009836D2 /* ConversationsViewController.swift */; };
 		E6A7DF471AB7E08F00E03D51 /* Geolocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A7DF461AB7E08F00E03D51 /* Geolocation.swift */; };
 		E6A7DF481AB7E08F00E03D51 /* Geolocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A7DF461AB7E08F00E03D51 /* Geolocation.swift */; };
 		E6A7DF4A1AB7E23F00E03D51 /* GeolocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A7DF491AB7E23F00E03D51 /* GeolocationTests.swift */; };
@@ -118,6 +118,7 @@
 		E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E621AC1D1A8D34DE00C3BAAB /* MatchesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesViewController.swift; sourceTree = "<group>"; };
 		E67CA31E1AC4FD5C00EE1A7B /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		E69597531AC635C9009836D2 /* ConversationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
 		E6A7DF461AB7E08F00E03D51 /* Geolocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geolocation.swift; sourceTree = "<group>"; };
 		E6A7DF491AB7E23F00E03D51 /* GeolocationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeolocationTests.swift; sourceTree = "<group>"; };
 		E6CCFA531AB5198A000D1EE9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -242,10 +243,10 @@
 				2040C50A1AB8E6250028A4D1 /* DTO */,
 				175F12091AB792E30070CCE2 /* Helpers */,
 				20B96B9B1A73549500F32F98 /* AppDelegate.swift */,
-				E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */,
 				20B96B9D1A73549500F32F98 /* ViewController.swift */,
 				E621AC191A8D32AC00C3BAAB /* HomeViewController.swift */,
 				E621AC1D1A8D34DE00C3BAAB /* MatchesViewController.swift */,
+				E69597531AC635C9009836D2 /* ConversationsViewController.swift */,
 				E67CA31E1AC4FD5C00EE1A7B /* MessageViewController.swift */,
 				E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */,
 				173A6B8D1AA19D4A003198FF /* LoginViewController.swift */,
@@ -349,6 +350,7 @@
 				TargetAttributes = {
 					20B96B951A73549500F32F98 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 98CS97VCGJ;
 					};
 					20B96BAA1A73549600F32F98 = {
 						CreatedOnToolsVersion = 6.1;
@@ -512,6 +514,7 @@
 				E6A7DF471AB7E08F00E03D51 /* Geolocation.swift in Sources */,
 				2040C51E1AB903CF0028A4D1 /* PreparedPotentialMatch.swift in Sources */,
 				171DAF771AC3EA9000B053A9 /* LoginResponse.swift in Sources */,
+				E69597541AC635C9009836D2 /* ConversationsViewController.swift in Sources */,
 				175F12081AB792CB0070CCE2 /* ConfigHelper.swift in Sources */,
 				2040C5241AB90C7A0028A4D1 /* PotentialMatchResponse.swift in Sources */,
 				2040C5181AB8EC4D0028A4D1 /* ServerRequests.swift in Sources */,
@@ -681,6 +684,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -689,7 +693,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -699,6 +703,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -707,7 +712,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
