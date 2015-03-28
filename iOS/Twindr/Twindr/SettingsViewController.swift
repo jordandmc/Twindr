@@ -40,11 +40,11 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
         toolbar.setItems([spaceButton, doneButton], animated: false)
         
         // Set the inputs for the datePicker
-        self.datePickerView.datePickerMode = UIDatePickerMode.Date
+        datePickerConfig()
+        
+        // Set the inputs for the dob and gender fields
         self.dobField.inputView = self.datePickerView
         self.dobField.inputAccessoryView = toolbar
-        
-        // Set the inputs for the genderPicker
         self.genderField.inputView = self.genderPicker
         self.genderField.inputAccessoryView = toolbar
         
@@ -71,6 +71,20 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
         if let info = res {
             interestsField.text = info.interests
         }
+    }
+    
+    func datePickerConfig() {
+        //Set Maximum Date
+        self.datePickerView.datePickerMode = UIDatePickerMode.Date
+        let dateComponents = NSDateComponents()
+        dateComponents.year = -8
+        let eightYearsAgo = NSCalendar.currentCalendar().dateByAddingComponents(dateComponents, toDate: NSDate(), options: nil)
+        self.datePickerView.maximumDate = eightYearsAgo
+        
+        //Set Minimum Date
+        dateComponents.year = -120
+        let oneTwentyYearsAgo = NSCalendar.currentCalendar().dateByAddingComponents(dateComponents, toDate: NSDate(), options: nil)
+        self.datePickerView.minimumDate = oneTwentyYearsAgo
     }
     
     override func didReceiveMemoryWarning() {
