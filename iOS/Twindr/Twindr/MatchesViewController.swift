@@ -40,58 +40,78 @@ class MatchesViewController: ViewController {
     
     // Decline to be matched with the user via button or swipe
     func dismissMatch() {
-        // send that you rejected them
-        Curried().reject(token: xAuthToken!, username: potentialList[0].username)
+        if potentialList.count > 0 {
+            // send that you rejected them
+            Curried().reject(token: xAuthToken!, username: potentialList[0].username)
         
-        // load next potential match
-        potentialList.removeAtIndex(0)
-        loadPotentialMatch()
+            // load next potential match
+            potentialList.removeAtIndex(0)
+            loadPotentialMatch()
+        }
     }
     
     // Accept the match via button or swipe
     func acceptMatch() {
-        // follow that user
-        // send that you matched with them
-        Curried().accept(token: xAuthToken!, username: potentialList[0].username)
+        if potentialList.count > 0 {
+            // follow that user
+            
+            // send that you matched with them
+            Curried().accept(token: xAuthToken!, username: potentialList[0].username)
         
-        // load next potential match
-        potentialList.removeAtIndex(0)
-        loadPotentialMatch()
+            // load next potential match
+            potentialList.removeAtIndex(0)
+            loadPotentialMatch()
+        }
     }
     
+    // Loads the next potential match in the list or gets more potential matches
     private func loadPotentialMatch() {
         if potentialList.count == 0 {
             if let tkn = xAuthToken {
                 Curried().getPotentialMatches(token: tkn, callback: potentialMatchesLoadedCallback)
             }
         }
+        
+        if potentialList.count > 0 {
+            showNextMatch()
+        } else {
+            showNoMatchesAvailable()
+        }
     }
     
+    // Updates potential match list
     private func potentialMatchesLoadedCallback(res: [PreparedPotentialMatch]?) {
         if let tempList = res {
             potentialList = tempList
             
-            if(potentialList.count > 0) {
-                let potentialMatch = potentialList[0]
-                userLabel.text = potentialMatch.username
-                
-                if potentialMatch.tweets.count >= 1 { tweet1Label.text = potentialMatch.tweets[0] } else { tweet1Label.text = "" }
-                if potentialMatch.tweets.count >= 2 { tweet2Label.text = potentialMatch.tweets[1] } else { tweet2Label.text = "" }
-                if potentialMatch.tweets.count >= 3 { tweet3Label.text = potentialMatch.tweets[2] } else { tweet3Label.text = "" }
-                if potentialMatch.tweets.count >= 4 { tweet4Label.text = potentialMatch.tweets[3] } else { tweet4Label.text = "" }
-                if potentialMatch.tweets.count >= 5 { tweet5Label.text = potentialMatch.tweets[4] } else { tweet5Label.text = "" }
-                
+            if potentialList.count > 0 {
+                showNextMatch()
             } else {
-                userLabel.text   = ""
-                tweet1Label.text = ""
-                tweet2Label.text = "We have no more potential matches at this time."
-                tweet3Label.text = ""
-                tweet4Label.text = ""
-                tweet5Label.text = ""
-                
+                showNoMatchesAvailable()
             }
-
         }
+    }
+    
+    // Render the next potential match on the screen
+    private func showNextMatch() {
+        let potentialMatch = potentialList[0]
+        userLabel.text = potentialMatch.username
+        
+        if potentialMatch.tweets.count >= 1 { tweet1Label.text = potentialMatch.tweets[0] } else { tweet1Label.text = "" }
+        if potentialMatch.tweets.count >= 2 { tweet2Label.text = potentialMatch.tweets[1] } else { tweet2Label.text = "" }
+        if potentialMatch.tweets.count >= 3 { tweet3Label.text = potentialMatch.tweets[2] } else { tweet3Label.text = "" }
+        if potentialMatch.tweets.count >= 4 { tweet4Label.text = potentialMatch.tweets[3] } else { tweet4Label.text = "" }
+        if potentialMatch.tweets.count >= 5 { tweet5Label.text = potentialMatch.tweets[4] } else { tweet5Label.text = "" }
+    }
+    
+    // Render the no matches text on the screen
+    private func showNoMatchesAvailable() {
+        userLabel.text   = ""
+        tweet1Label.text = ""
+        tweet2Label.text = "We have no more potential matches at this time."
+        tweet3Label.text = ""
+        tweet4Label.text = ""
+        tweet5Label.text = ""
     }
     
     @IBAction func noButton(sender: UIBarButtonItem) {

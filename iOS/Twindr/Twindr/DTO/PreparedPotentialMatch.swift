@@ -16,11 +16,11 @@ final class PreparedPotentialMatch: JSONDeserializable {
     let dateOfBirth: String
     
     init?(json: JSON) {
-        switch(json["username"].string, json["tweets"].array, json["sex"].string, json["dateOfBirth"].string) {
-        case let (.Some(username), .Some(tweets), .Some(sex), .Some(dateOfBirth)):
+        switch(json["username"].string, json["tweets"].array, json["sex"].string) {
+        case let (.Some(username), .Some(tweets), .Some(sex)):
             self.username = username
             self.sex = sex
-            self.dateOfBirth = dateOfBirth
+            self.dateOfBirth = json["dateOfBirth"].description
             
             if let tweets = deserializeStringList(json["tweets"]) {
                 self.tweets = tweets

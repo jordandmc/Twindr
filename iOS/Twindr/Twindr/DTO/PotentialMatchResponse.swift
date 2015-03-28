@@ -13,6 +13,11 @@ final class PotentialMatchResponse: JSONSerializable {
     let username: String
     let status: String
     
+    init() {
+        self.username = ""
+        self.status = ""
+    }
+    
     init(username: String, status: String) {
         self.username = username
         self.status = status
@@ -20,6 +25,6 @@ final class PotentialMatchResponse: JSONSerializable {
     
     func toJson() -> String {
         let json: JSON = ["username": username, "status": status]
-        return json.string!
+        return json.description
     }
 }
