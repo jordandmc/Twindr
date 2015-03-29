@@ -15,12 +15,12 @@ final class MatchMessage: JSONSerializable, JSONDeserializable {
     let dateTime: NSDate!
     
     init?(json: JSON) {
-        switch(json["matchID"].string, json["sender"].string, json["message"].string, json["dateTime"].string) {
-        case let (.Some(matchID), .Some(sender), .Some(message), .Some(dateTime)):
+        switch(json["matchID"].string, json["sender"].string, json["message"].string) {
+        case let (.Some(matchID), .Some(sender), .Some(message)):
             self.matchID = matchID
             self.sender = sender
             self.message = message
-            self.dateTime = DateHelper.converToDate(dateTime)
+            self.dateTime = DateHelper.converToDate(json["dateTime"].description)
         default:
             self.matchID = ""
             self.sender = ""
