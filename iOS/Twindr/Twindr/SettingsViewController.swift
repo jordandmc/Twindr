@@ -56,14 +56,20 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
         }
         
         // Retrieve previously entered info
-        if(gender != nil){
+        if(gender != nil) {
             genderField.text = gender
         }
-        if(dob != nil){
+        if(dob != nil) {
             dobField.text = dob
         }
-        if(interests != nil){
+        if(interests != nil) {
             
+        }
+        
+        // If not registration, don't allow editting of certain fields
+        if(!isRegistration) {
+            genderField.enabled = false
+            dobField.enabled = false
         }
     }
     
