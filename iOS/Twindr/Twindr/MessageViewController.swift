@@ -9,6 +9,8 @@ import JSQMessagesViewController
 
 class MessageViewController: JSQMessagesViewController, UIActionSheetDelegate {
     
+    var messageHandler: MessageHandler! //Allows incoming messages
+        
     var messages = [Message]() //You have to append here, all the messages, that you are sending.
     
     /*
@@ -42,6 +44,14 @@ class MessageViewController: JSQMessagesViewController, UIActionSheetDelegate {
         
         senderDisplayName = user
         senderId = senderDisplayName
+        
+        messageHandler = MessageHandler(matchID: converseWith.matchID, receivedMessageCallback)
+        messageHandler.start()
+        
+        // Load previous messages from the server
+        if let tkn = xAuthToken {
+            Curried().getMessages(token: tkn, matchID: converseWith.matchID, callback: loadServerMessagesCallback)
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -153,4 +163,22 @@ class MessageViewController: JSQMessagesViewController, UIActionSheetDelegate {
         return kJSQMessagesCollectionViewCellLabelHeightDefault
     }
     
+    // Received a new message, add it to our list
+    private func receivedMessageCallback(msg: MatchMessage) {
+        let message = Message(sender: msg.sender, text: msg.message)
+        messages.append(message)
+        collectionView.reloadData()
+    }
+    
+    // Load a list of messages from the server
+    private func loadServerMessagesCallback(messageList: [MatchMessage]?) {
+        if let tempMessages = messageList {
+            for msg in tempMessages {
+                let m = Message(sender: msg.sender, text: msg.message)
+                messages.append(m)
+            }
+            
+            collectionView.reloadData()
+        }
+    }
 }

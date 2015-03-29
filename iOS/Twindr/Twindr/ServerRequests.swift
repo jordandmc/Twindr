@@ -74,6 +74,10 @@ private func respondToMatch(response: String)(token: String, username: String) {
     sendBusinessObject(PotentialMatchResponse(), "/m/processMatchResponse")(obj: PotentialMatchResponse(username: username, status: response), token: token)
 }
 
+private func moreMessages()(token: String, matchID: String, callback: ([MatchMessage]?)->Void) {
+    getList(MatchMessage(), Method.GET, "/ajax/getMoreMessages?matchID=" + matchID)(token: token, callback: callback)
+}
+
 private func createURLRequest(uri: String, token: String, httpMethod: Method, contentType: String = "application/json") -> NSMutableURLRequest {
     var req = NSMutableURLRequest(URL: NSURL(string: serverURI + uri)!)
     req.HTTPMethod = httpMethod.rawValue
@@ -91,6 +95,7 @@ class Curried {
     let reject = respondToMatch(REJECTED)
     let accept = respondToMatch(ACCEPTED)
     let sendMessage = sendBusinessObject(MatchMessage(), "/messaging")
+    let getMessages = moreMessages()
 
 }
 

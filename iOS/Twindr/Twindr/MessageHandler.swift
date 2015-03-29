@@ -13,9 +13,9 @@ class MessageHandler {
     let source: EventSource
     let handler: (MatchMessage) -> Void
     
-    init(handler: (MatchMessage) -> Void){
+    init(matchID: String, handler: (MatchMessage) -> Void){
         self.handler = handler
-        let src = EventSource(URL: NSURL(string: serverURI + "/messaging"))
+        let src = EventSource(URL: NSURL(string: serverURI + "/js/receiveMessage/" + matchID))
         self.source = src
     }
     
