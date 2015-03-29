@@ -51,11 +51,13 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
-        if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            // CALL UNMATCHING LOGIC TO SERVER HERE
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            if let tkn = xAuthToken {
+                unmatch(tkn, matchedUsers[indexPath.row])
             
-            matchedUsers.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                matchedUsers.removeAtIndex(indexPath.row)
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            }
         }
     }
 }

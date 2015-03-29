@@ -13,9 +13,9 @@ let serverURI =  ConfigHelper.getPlistKey("TwindrURL") // test on "http://localh
 let ACCEPTED = "ACCEPTED"
 let REJECTED = "REJECTED"
 
-func unmatch(token: String, match: String) {
+func unmatch(token: String, matchTwitterName: String) {
     var req = createURLRequest("/m/unmatch", token, Method.POST, contentType: "text/plain")
-    req.HTTPBody = match.dataUsingEncoding(NSUTF8StringEncoding)
+    req.HTTPBody = matchTwitterName.dataUsingEncoding(NSUTF8StringEncoding)
     request(req)
 }
 
