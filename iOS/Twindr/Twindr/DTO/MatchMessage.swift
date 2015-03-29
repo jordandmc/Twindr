@@ -12,7 +12,7 @@ final class MatchMessage: JSONSerializable, JSONDeserializable {
     let matchID: String
     let sender: String
     let message: String
-    let dateTime: String
+    let dateTime: NSDate!
     
     init?(json: JSON) {
         switch(json["matchID"].string, json["sender"].string, json["message"].string, json["dateTime"].string) {
@@ -20,12 +20,12 @@ final class MatchMessage: JSONSerializable, JSONDeserializable {
             self.matchID = matchID
             self.sender = sender
             self.message = message
-            self.dateTime = dateTime
+            self.dateTime = DateHelper.converToDate(dateTime)
         default:
             self.matchID = ""
             self.sender = ""
             self.message = ""
-            self.dateTime = ""
+            self.dateTime = NSDate()
             return nil
         }
     }
@@ -34,14 +34,14 @@ final class MatchMessage: JSONSerializable, JSONDeserializable {
         self.matchID = ""
         self.sender = ""
         self.message = ""
-        self.dateTime = ""
+        self.dateTime = NSDate()
     }
     
     init(matchID: String, sender: String, message: String, dateTime: String) {
         self.matchID = matchID
         self.sender = sender
         self.message = message
-        self.dateTime = dateTime
+        self.dateTime = DateHelper.converToDate(dateTime)
     }
     
     func toJson() -> String {
