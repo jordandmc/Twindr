@@ -27,6 +27,9 @@ class MessageViewController: JSQMessagesViewController, UIActionSheetDelegate {
         let message = Message(sender: sender, text: text)
         messages.append(message)
         // Send to server
+        if let tkn = xAuthToken {
+            Curried().sendMessage(obj: MatchMessage(matchID: "123456", sender: "someuser", message: "texty test", dateTime: "2015/01/01"), token: tkn)
+        }
         
     }
     
