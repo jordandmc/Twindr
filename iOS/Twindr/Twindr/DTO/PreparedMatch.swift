@@ -21,7 +21,7 @@ final class PreparedMatch: JSONDeserializable {
             self.matchID =  matchID
             self.username = username
             self.sex = sex
-            self.dateOfBirth = DateHelper.converToDate(json["dateOfBirth"].description)
+            self.dateOfBirth = DateHelper.convertToDate(json["dateOfBirth"].description)
         default:
             self.matchID = ""
             self.username = ""
