@@ -61,9 +61,9 @@ function loadMoreMessages(matchID, senderTwitterName, successCallback, errorCall
  * @param messageList The messages to add
  */
 function addMoreMessages(messageList, senderTwitterName) {
-    if(messageList != null && messageList.prevMessages != null) {
-        for (var i = 0; i < messageList.prevMessages.length; i++) {
-            addMessageDiv(messageList.prevMessages[i], senderTwitterName);
+    if(messageList != null && messageList != null) {
+        for (var i = 0; i < messageList.length; i++) {
+            addMessageDiv(messageList[i], senderTwitterName);
         }
 
         var messageDiv = document.getElementById('messageFeed');

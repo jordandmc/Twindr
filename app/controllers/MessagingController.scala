@@ -59,9 +59,7 @@ object MessagingController extends Controller {
    */
   def getMoreMessages(matchID: String) = AuthAction { implicit request =>
     val previousMessages = MatchMessage.retrievePreviousMessage(matchID, new java.util.Date())
-    Ok(Json.obj(
-      "prevMessages" -> previousMessages
-    ))
+    Ok(Json.toJson(previousMessages))
   }
 
   /**
