@@ -16,7 +16,7 @@ final class Registration: JSONSerializable {
     
     init(sex: String, dateOfBirth: String, interests: String) {
         self.sex = sex
-        self.dateOfBirth = DateHelper.converToDate(dateOfBirth)
+        self.dateOfBirth = DateHelper.convertToDate(dateOfBirth)
         self.interests = interests
     }
     

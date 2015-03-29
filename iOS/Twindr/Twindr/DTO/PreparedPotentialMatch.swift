@@ -20,7 +20,7 @@ final class PreparedPotentialMatch: JSONDeserializable {
         case let (.Some(username), .Some(tweets), .Some(sex)):
             self.username = username
             self.sex = sex
-            self.dateOfBirth = DateHelper.converToDate(json["dateOfBirth"].description)
+            self.dateOfBirth = DateHelper.convertToDate(json["dateOfBirth"].description)
             
             if let tweets = deserializeStringList(json["tweets"]) {
                 self.tweets = tweets

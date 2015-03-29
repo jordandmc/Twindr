@@ -20,7 +20,7 @@ final class MatchMessage: JSONSerializable, JSONDeserializable {
             self.matchID = matchID
             self.sender = sender
             self.message = message
-            self.dateTime = DateHelper.converToDate(json["dateTime"].description)
+            self.dateTime = DateHelper.convertToDate(json["dateTime"].description)
         default:
             self.matchID = ""
             self.sender = ""
@@ -41,7 +41,7 @@ final class MatchMessage: JSONSerializable, JSONDeserializable {
         self.matchID = matchID
         self.sender = sender
         self.message = message
-        self.dateTime = DateHelper.converToDate(dateTime)
+        self.dateTime = DateHelper.convertToDate(dateTime)
     }
     
     func toJson() -> String {

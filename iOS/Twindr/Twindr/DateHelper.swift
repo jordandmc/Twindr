@@ -9,7 +9,7 @@
 import Foundation
 
 class DateHelper {
-    class func converToDate(stringDate: String) -> NSDate? {
+    class func convertToDate(stringDate: String) -> NSDate? {
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd"
         return dateFormatter.dateFromString(stringDate)
