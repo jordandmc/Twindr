@@ -127,11 +127,11 @@ describe("loading more messages", function(){
 
 describe("adding a list of messages", function() {
 
-    var messagesList = { prevMessages : [ 
-                            { _id: "", matchID: "123456789", sender: "twitter1", message: "Test message", dateTime: (new Date()).getTime() },
-                            { _id: "", matchID: "123456789", sender: "twitter2", message: "Another message", dateTime: (new Date()).getTime() },
-                            { _id: "", matchID: "123456789", sender: "twitter2", message: "Hey! Listen!", dateTime: (new Date()).getTime() } 
-                        ] };
+    var messagesList = [
+                        { _id: "", matchID: "123456789", sender: "twitter1", message: "Test message", dateTime: (new Date()).getTime() },
+                        { _id: "", matchID: "123456789", sender: "twitter2", message: "Another message", dateTime: (new Date()).getTime() },
+                        { _id: "", matchID: "123456789", sender: "twitter2", message: "Hey! Listen!", dateTime: (new Date()).getTime() }
+                       ];
    
     beforeEach(function() {
         $(document.body).append($("<div id='main'><div id='messageFeed'></div><div id='sendMessage'><textarea id='messageBox' placeholder='Type a message here'></textarea><a id='sendMessageBtn' onclick='sendMessage(abc, 123)' href='#'>Send</a></div></div>"));

@@ -35,7 +35,7 @@ class MessageViewController: JSQMessagesViewController, UIActionSheetDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = converseWith
+        self.title = converseWith.username
         automaticallyScrollsToMostRecentMessage = true
         inputToolbar.contentView.leftBarButtonItem = nil
         //self.showLoadEarlierMessagesHeader = true

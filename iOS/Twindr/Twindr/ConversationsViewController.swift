@@ -43,7 +43,7 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        converseWith = matchedUsers[indexPath.row].username
+        converseWith = matchedUsers[indexPath.row]
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     

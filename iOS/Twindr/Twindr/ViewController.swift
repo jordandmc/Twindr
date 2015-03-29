@@ -14,7 +14,7 @@ var user:String!
 var gender:String!
 var dob:String!
 var interests:String!
-var converseWith: String!
+var converseWith: PreparedMatch!
 
 class ViewController: UIViewController {
     
