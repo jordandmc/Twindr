@@ -26,8 +26,11 @@ class MessageViewController: JSQMessagesViewController, UIActionSheetDelegate {
     func SendMessage(text: String!, sender: String!) {
         let message = Message(sender: sender, text: text)
         messages.append(message)
-        // Send to server
         
+        // Send to server
+        if let tkn = xAuthToken {
+            Curried().sendMessage(obj: MatchMessage(matchID: converseWith.matchID, sender: user, message: text, dateTime: NSDate()), token: tkn)
+        }
     }
     
     override func viewDidLoad() {
