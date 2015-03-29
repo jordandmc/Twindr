@@ -13,14 +13,14 @@ final class PreparedPotentialMatch: JSONDeserializable {
     let username: String
     let tweets: [String]
     let sex: String
-    let dateOfBirth: String
+    let dateOfBirth: NSDate!
     
     init?(json: JSON) {
         switch(json["username"].string, json["tweets"].array, json["sex"].string) {
         case let (.Some(username), .Some(tweets), .Some(sex)):
             self.username = username
             self.sex = sex
-            self.dateOfBirth = json["dateOfBirth"].description
+            self.dateOfBirth = DateHelper.converToDate(json["dateOfBirth"].description)
             
             if let tweets = deserializeStringList(json["tweets"]) {
                 self.tweets = tweets
@@ -31,7 +31,7 @@ final class PreparedPotentialMatch: JSONDeserializable {
         default:
             self.username = ""
             self.sex = ""
-            self.dateOfBirth = ""
+            self.dateOfBirth = NSDate()
             self.tweets = []
             return nil
         }
@@ -40,7 +40,7 @@ final class PreparedPotentialMatch: JSONDeserializable {
     init() {
         self.username = ""
         self.sex = ""
-        self.dateOfBirth = ""
+        self.dateOfBirth = NSDate()
         self.tweets = []
     }
 }
