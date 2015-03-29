@@ -37,15 +37,15 @@ final class MatchMessage: JSONSerializable, JSONDeserializable {
         self.dateTime = NSDate()
     }
     
-    init(matchID: String, sender: String, message: String, dateTime: String) {
+    init(matchID: String, sender: String, message: String, dateTime: NSDate) {
         self.matchID = matchID
         self.sender = sender
         self.message = message
-        self.dateTime = DateHelper.convertToDate(dateTime)
+        self.dateTime = dateTime
     }
     
     func toJson() -> String {
-        let json: JSON = ["matchID": matchID, "sender": sender, "message": message, "dateTime": dateTime]
+        let json: JSON = ["matchID": matchID, "sender": sender, "message": message, "dateTime": dateTime.description]
         return json.description
     }
 }
