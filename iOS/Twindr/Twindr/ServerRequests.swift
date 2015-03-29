@@ -8,7 +8,7 @@
 
 import Foundation
 
-let serverURI =  configHelper.getPlistKey("TwindrURL") // test on "http://localhost:9000"
+let serverURI =  ConfigHelper.getPlistKey("TwindrURL") // test on "http://localhost:9000"
 
 let ACCEPTED = "ACCEPTED"
 let REJECTED = "REJECTED"

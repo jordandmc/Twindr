@@ -7,12 +7,9 @@
 //
 
 import Foundation
-import TwitterKit
-
-let configHelper = ConfigHelper()
 
 class ConfigHelper {
-    func getPlistKey(key: String) -> String {
+    class func getPlistKey(key: String) -> String {
         var dict: NSDictionary?
         if let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist") {
             dict = NSDictionary(contentsOfFile: path)
