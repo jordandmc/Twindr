@@ -99,7 +99,7 @@ object PotentialMatch extends Collected {
  * @param sex the sex of the other user
  * @param dateOfBirth the date of birth of the other user
  */
-case class PreparedPotentialMatch(username: String, tweets: List[String], sex: String, dateOfBirth: Date) {
+case class PreparedPotentialMatch(username: String, tweets: List[String], sex: String, dateOfBirth: Date, inCommon: Int = 0) {
 
 }
 

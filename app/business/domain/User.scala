@@ -4,7 +4,7 @@ import business.logic.GeoJSONFormatter
 import com.mongodb.casbah.query.Imports._
 import com.novus.salat._
 import play.api.libs.oauth.RequestToken
-import java.util.Date
+import java.util.{Calendar, Date}
 
 import scala.util.Random
 
@@ -23,7 +23,7 @@ import scala.util.Random
  */
 case class User(_id: String, oauthToken: RequestToken, twitterName: String,
                 sex: Option[String], dateOfBirth: Option[Date], location: Option[DBObject], interests: List[String],
-                recentTweets: List[String], random: Double) {
+                recentTweets: List[String], random: Double, sexPreference: Option[String] = None) {
 
   private[business] def save(): User = User.withCollection { collection =>
     collection.update(getQuery, grater[User].asDBObject(this), upsert = true)
@@ -43,11 +43,11 @@ object User extends Collected {
   override def collection = "users"
 
   def updateUserTweets(user: User, newTweets: List[String]): User = {
-    user.copy(recentTweets = newTweets).save
+    user.copy(recentTweets = newTweets).save()
   }
 
   def updateUserLocation(user: User, newLocation: Option[DBObject]): User = {
-    user.copy(location = newLocation).save
+    user.copy(location = newLocation).save()
   }
 
   private[business] def getByID(_id: String): Option[User] = User.withCollection { collection =>
@@ -75,14 +75,29 @@ object User extends Collected {
       case _ => (0.0, 0.0)
     }
 
-    val geo = MongoDBObject("$geometry" -> MongoDBObject)
-
-    val criteria = $and(
+    val mainCriteria = $and(
       "location" $nearSphere GeoCoords(longitude, latitude),
-      "random" $gt start
+      "random" $gt start,
+      $or("sexPref" $exists false, "sexPref" $eq user.sex.getOrElse("X"))
     )
 
-    val cursor = collection.find(criteria).sort(MongoDBObject("random" -> 1)).limit(maxUsers)
+    val otherCriteria = List(
+      user.sexPreference.map { sexPref =>
+        "sex" $eq sexPref
+      }
+    )
+
+    val finalCriteria = otherCriteria.foldLeft(mainCriteria) { (acc: DBObject, current: Option[DBObject]) =>
+      current match {
+        case Some(criteria: DBObject) =>
+          $and(acc, criteria)
+        case _ =>
+          acc
+      }
+    }
+
+
+    val cursor = collection.find(finalCriteria).sort(MongoDBObject("random" -> 1)).limit(maxUsers)
 
     cursor.toList.map { x =>
       grater[User].asObject(x)

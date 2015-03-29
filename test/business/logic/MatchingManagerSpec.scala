@@ -11,13 +11,31 @@ import play.api.libs.oauth.RequestToken
 
 trait FirstUser {
   lazy val theUser = User(UUID.randomUUID().toString, RequestToken("123", "456"), "theUser", Option("M"),
-    Option(new java.util.Date()), Option(GeoJSONFormatter.generateFromCoords(0.0, 0.0)), List(), List(),
+    Option(new java.util.Date()), Option(GeoJSONFormatter.generateFromCoords(0.0, 0.0)), List("FPSs", "Platformers", "RPGs"), List(),
     0.0).save()
 }
 
 trait SecondUser {
   lazy val theOtherUser = User(UUID.randomUUID().toString, RequestToken("123", "456"), "theOtherUser", Option("F"),
     Option(new java.util.Date()), Option(GeoJSONFormatter.generateFromCoords(0.0, 0.0)), List(), List(),
+    1.0).save()
+}
+
+trait DesiresFemale {
+  lazy val theHeterosexualUser = User(UUID.randomUUID().toString, RequestToken("123", "456"), "theNextUser", Option("M"),
+    Option(new java.util.Date()), Option(GeoJSONFormatter.generateFromCoords(0.0, 0.0)), List(), List(),
+    0.0, Option("F")).save()
+}
+
+trait FemaleDesiresFemale {
+  lazy val theLesbianUser = User(UUID.randomUUID().toString, RequestToken("123", "456"), "theFinalUser", Option("F"),
+    Option(new java.util.Date()), Option(GeoJSONFormatter.generateFromCoords(0.0, 0.0)), List(), List(),
+    0.0, Option("F")).save()
+}
+
+trait InterestingUser {
+  lazy val theTerroristUser = User(UUID.randomUUID().toString, RequestToken("123", "456"), "theTerroristUser", Option("M"),
+    Option(new java.util.Date()), Option(GeoJSONFormatter.generateFromCoords(0.0, 0.0)), List("C4", "RPGs", "AK47s"), List(),
     1.0).save()
 }
 
@@ -58,6 +76,33 @@ class MatchingManagerSpec extends Specification {
     "Not generate a new PotentialMatch if the users are already matches" in new WithApplicationAndDatabase with FirstUser with SecondUser {
       val theMatch = Match(UUID.randomUUID().toString, theUser._id, theOtherUser._id).save()
       MatchingManager.getPotentialMatches(theUser) must beEmpty
+    }
+
+    "Generate a new Potential match that is the correct sex based on user preference" in new WithApplicationAndDatabase with DesiresFemale with SecondUser {
+      theOtherUser.save()
+      val result = MatchingManager.getPotentialMatches(theHeterosexualUser)
+      result.size must beEqualTo(1)
+      result(0).username must beEqualTo("theOtherUser")
+    }
+
+    "Not generate a new Potential match if the other user's sex filter doesn't allow for it" in new WithApplicationAndDatabase with DesiresFemale with FemaleDesiresFemale {
+      theLesbianUser.save()
+      MatchingManager.getPotentialMatches(theHeterosexualUser) must beEmpty
+    }
+
+    "Not generate a new Potential match if the user's sex filter doesn't allow for it" in new WithApplicationAndDatabase with DesiresFemale with FirstUser {
+      theUser.save()
+      MatchingManager.getPotentialMatches(theHeterosexualUser) must beEmpty
+    }
+
+    "Sort potential matches by number of common interests" in new WithApplicationAndDatabase with FirstUser with SecondUser with InterestingUser {
+      theOtherUser.save()
+      theTerroristUser.save()
+      val result = MatchingManager.getPotentialMatches(theUser)
+
+      result.size must beEqualTo(2)
+      result(0).username must beEqualTo("theTerroristUser")
+      result(1).username must beEqualTo("theOtherUser")
     }
 
   }
