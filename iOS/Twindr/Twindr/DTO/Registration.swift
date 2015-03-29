@@ -15,10 +15,8 @@ final class Registration: JSONSerializable {
     let interests: String
     
     init(sex: String, dateOfBirth: String, interests: String) {
-        var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy/MM/dd"
         self.sex = sex
-        self.dateOfBirth = dateFormatter.dateFromString(dateOfBirth)
+        self.dateOfBirth = DateHelper.converToDate(dateOfBirth)
         self.interests = interests
     }
     
