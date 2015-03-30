@@ -12,9 +12,18 @@
         @if(matches.nonEmpty) {
             <ul id="match-list" class="no-bullets">
             @for(mat <- matches) {
-                <li id="match-user-@mat.username"><p>@mat.username<span class="float-right">
-                    <a class='main-button-small text-like-link' href="@{routes.MessagingController.messages(mat.matchID, mat.username)}">Send message</a>
-                    <a class='main-button-small text-like-link' href='#' onclick="unmatch('@mat.username')">Unmatch</a></span></p></li>
+                <li id="match-user-@mat.username" class=""><p>
+                    @mat.username
+                    <span class="float-right">
+                        <a href="https://twitter.com/@mat.username" class="twitter-follow-button" data-show-count="false">Follow @mat.username</a>
+                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                    </span>
+                    <hr/>
+                    <span class="float-right">
+                        <a class='main-button-small text-like-link' href="@{routes.MessagingController.messages(mat.matchID, mat.username)}">Send message</a>
+                        <a class='main-button-small text-like-link' href='#' onclick="unmatch('@mat.username')">Unmatch</a>
+                    </span>
+                </p></li>
             }
             </ul>
         } else {
