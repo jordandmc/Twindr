@@ -15,12 +15,12 @@ class MessageHandler {
     
     init(matchID: String, handler: (MatchMessage) -> Void){
         self.handler = handler
-        let src = EventSource(URL: NSURL(string: serverURI + "/js/receiveMessage/" + matchID))
+        let src = EventSource(url: serverURI + "/js/receiveMessage/" + matchID, token: xAuthToken!)
         self.source = src
     }
     
     func start() {
-        source.addEventListener("message", handler: responseHandler)
+        source.onMessage(responseHandler)
     }
     
     private func responseHandler(event: Event!) {
