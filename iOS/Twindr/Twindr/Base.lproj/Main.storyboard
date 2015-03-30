@@ -41,7 +41,7 @@
                                     <constraint firstAttribute="height" constant="30" id="sfL-Jm-oU1"/>
                                     <constraint firstAttribute="width" constant="115" id="wmF-DR-jAq"/>
                                 </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedRGB" customColorSpace="calibratedWhite"/>
                                 <state key="normal" title="Settings">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -57,7 +57,7 @@
                                     <constraint firstAttribute="height" constant="30" id="7uW-1w-0BO"/>
                                     <constraint firstAttribute="width" constant="115" id="E2m-Lo-W1q"/>
                                 </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedRGB" customColorSpace="calibratedWhite"/>
                                 <state key="normal" title="Conversations">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

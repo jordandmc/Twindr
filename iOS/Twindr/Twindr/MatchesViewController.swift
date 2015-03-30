@@ -22,12 +22,8 @@ class MatchesViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.navigationController?.setToolbarHidden(false, animated: false)
-        self.navigationController?.toolbar.barTintColor = UIColor(red: CGFloat(39.0/255.0), green: CGFloat(174.0/255.0), blue: CGFloat(96.0/255.0), alpha: CGFloat(1.0))
-        self.navigationController?.toolbar.tintColor = UIColor.whiteColor()
-        
+        setupToolbar()
         setupSwipeGestures()
-        
         loadPotentialMatch()
     }
     
@@ -38,6 +34,13 @@ class MatchesViewController: ViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setupToolbar() {
+        self.navigationController?.setToolbarHidden(false, animated: false)
+        self.navigationController?.toolbar.barTintColor = UIColor(red: CGFloat(39.0/255.0), green: CGFloat(174.0/255.0), blue: CGFloat(96.0/255.0), alpha: CGFloat(1.0))
+        self.navigationController?.toolbar.tintColor = UIColor.whiteColor()
+        self.navigationController?.toolbar.translucent = false
     }
     
     func setupSwipeGestures() {
