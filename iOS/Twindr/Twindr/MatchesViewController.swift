@@ -26,6 +26,8 @@ class MatchesViewController: ViewController {
         self.navigationController?.toolbar.barTintColor = UIColor(red: CGFloat(39.0/255.0), green: CGFloat(174.0/255.0), blue: CGFloat(96.0/255.0), alpha: CGFloat(1.0))
         self.navigationController?.toolbar.tintColor = UIColor.whiteColor()
         
+        setupSwipeGestures()
+        
         loadPotentialMatch()
     }
     
@@ -36,6 +38,21 @@ class MatchesViewController: ViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setupSwipeGestures() {
+        // Right -> Left
+        let yesSwipe = UISwipeGestureRecognizer(target: self,
+            action: "yesSwipe")
+        yesSwipe.direction = .Left
+        self.view.addGestureRecognizer(yesSwipe)
+        
+        // Left -> Right
+        let noSwipe = UISwipeGestureRecognizer(target: self,
+            action: "noSwipe")
+        noSwipe.direction = .Right
+        self.view.addGestureRecognizer(noSwipe)
+        
     }
     
     // Decline to be matched with the user via button or swipe
@@ -122,13 +139,11 @@ class MatchesViewController: ViewController {
         acceptMatch()
     }
     
-    // Swipe to the right (start left, move right)
-    @IBAction func noSwipe(sender: UISwipeGestureRecognizer) {
-        dismissMatch()
+    func yesSwipe() {
+        acceptMatch()
     }
     
-    // Swipe to the left (start right, move left)
-    @IBAction func yesSwipe(sender: UISwipeGestureRecognizer) {
-        acceptMatch()
+    func noSwipe() {
+        dismissMatch()
     }
 }

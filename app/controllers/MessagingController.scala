@@ -33,15 +33,23 @@ object MessagingController extends Controller {
    * Sends the given message from the client to the server and saves the message
    * @return Success
    */
-  def sendMessage = AuthAction(parse.json) { implicit request =>
-    Future {
-      //Make a record of the message in the database
-      val message = request.body.as[MatchMessage]
-      MatchMessage.processNewMessage(message)
+  def sendMessage = AuthAction { implicit request =>
+    request.body.asJson match {
+      case Some(js: JsValue) =>
+        Json.fromJson[MatchMessage](js) match {
+          case response: JsSuccess[MatchMessage] =>
+            Future {
+              //Make a record of the message in the database
+              MatchMessage.processNewMessage(response.get)
+            }
+            msgOutChannel.push(js)
+            Ok
+          case _ =>
+            BadRequest("Invalid JSON")
+        }
+      case _ =>
+        BadRequest("Invalid Response")
     }
-
-    msgOutChannel.push(request.body)
-    Ok
   }
 
   /**
@@ -59,9 +67,7 @@ object MessagingController extends Controller {
    */
   def getMoreMessages(matchID: String) = AuthAction { implicit request =>
     val previousMessages = MatchMessage.retrievePreviousMessage(matchID, new java.util.Date())
-    Ok(Json.obj(
-      "prevMessages" -> previousMessages
-    ))
+    Ok(Json.toJson(previousMessages))
   }
 
   /**

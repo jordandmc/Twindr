@@ -13,20 +13,20 @@ final class PreparedMatch: JSONDeserializable {
     let matchID: String
     let username: String
     let sex: String
-    let dateOfBirth: String
+    let dateOfBirth: NSDate!
     
     init?(json: JSON) {
-        switch(json["matchID"].string, json["username"].string, json["sex"].string, json["dateOfBirth"].string) {
-        case let (.Some(matchID), .Some(username), .Some(sex), .Some(dateOfBirth)):
+        switch(json["matchID"].string, json["username"].string, json["sex"].string) {
+        case let (.Some(matchID), .Some(username), .Some(sex)):
             self.matchID =  matchID
             self.username = username
             self.sex = sex
-            self.dateOfBirth = dateOfBirth
+            self.dateOfBirth = DateHelper.convertToDate(json["dateOfBirth"].description)
         default:
             self.matchID = ""
             self.username = ""
             self.sex = ""
-            self.dateOfBirth = ""
+            self.dateOfBirth = NSDate()
             return nil
         }
     }
@@ -35,7 +35,7 @@ final class PreparedMatch: JSONDeserializable {
         self.matchID = ""
         self.username = ""
         self.sex = ""
-        self.dateOfBirth = ""
+        self.dateOfBirth = NSDate()
     }
 
 }

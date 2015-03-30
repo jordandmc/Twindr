@@ -12,6 +12,7 @@ import UIKit
 class ConversationsViewController: ViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
+    var matchedUsers: [PreparedMatch] = []
     let textCellIdentifier = "TextCell"
     
     override func viewDidLoad() {
@@ -19,6 +20,10 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        if let tkn = xAuthToken {
+            Curried().getMatches(token: tkn, callback: loadedMatchesCallback)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -32,7 +37,7 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as UITableViewCell
-        cell.textLabel?.text = matchedUsers[indexPath.row]
+        cell.textLabel?.text = matchedUsers[indexPath.row].username
         
         return cell
     }
@@ -51,11 +56,20 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
-        if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            // CALL UNMATCHING LOGIC TO SERVER HERE
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            if let tkn = xAuthToken {
+                unmatch(tkn, matchedUsers[indexPath.row].username)
             
-            matchedUsers.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                matchedUsers.removeAtIndex(indexPath.row)
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            }
+        }
+    }
+    
+    private func loadedMatchesCallback(res: [PreparedMatch]?) {
+        if let tempList = res {
+            matchedUsers = tempList
+            tableView.reloadData()
         }
     }
 }
