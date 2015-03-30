@@ -7,13 +7,12 @@
 //
 
 import Foundation
-import EventSource
 
 class MessageHandler {
     let source: EventSource
     let handler: (MatchMessage) -> Void
     
-    init(matchID: String, handler: (MatchMessage) -> Void){
+    init(matchID: String, handler: (MatchMessage) -> Void) {
         self.handler = handler
         let src = EventSource(url: serverURI + "/js/receiveMessage/" + matchID, token: xAuthToken!)
         self.source = src
@@ -24,10 +23,16 @@ class MessageHandler {
     }
     
     private func responseHandler(event: Event!) {
-        let json = JSON(event.data!)
-        let message = MatchMessage(json: json)
-        if let msg = message {
-            handler(msg)
+        var jsonError: NSError?
+        if let eventData = event.data {
+            if let data = (eventData as NSString).dataUsingEncoding(NSUTF8StringEncoding) {
+                let js = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as NSDictionary
+                let json = JSON(js)
+                let message = MatchMessage(json: json)
+                if let msg = message {
+                    handler(msg)
+                }
+            }
         }
     }
 }

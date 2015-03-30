@@ -45,7 +45,7 @@ class MessageViewController: JSQMessagesViewController, UIActionSheetDelegate {
         senderDisplayName = user
         senderId = senderDisplayName
         
-        messageHandler = MessageHandler(matchID: converseWith.matchID, receivedMessageCallback)
+        messageHandler = MessageHandler(matchID: converseWith.matchID, handler: receivedMessageCallback)
         messageHandler.start()
         
         // Load previous messages from the server

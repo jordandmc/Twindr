@@ -6,10 +6,6 @@
 //  Copyright (c) 2015 Haris Amin. All rights reserved.
 //
 
-//
-// Made a few modifications for X-Auth-Token
-//
-
 import Foundation
 
 let ESKeyValueDelimiter = ": "
@@ -53,7 +49,7 @@ enum EventType : Printable {
     }
 }
 
-struct Event{
+class Event: NSObject{
     var eventId:String? = nil
     var event:String? = nil
     var data:String? = nil
@@ -63,6 +59,12 @@ struct Event{
 
 typealias EventSourceHandler = (Event) -> Void
 
+@objc protocol EventSourceDelegate{
+    optional func eventSourceOpenedConnection(event:Event)
+    optional func eventSourceReceivedError(event:Event, error:NSError)
+    optional func eventSourceReceivedMessage(event:Event, message: String)
+}
+
 class EventSource: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelegate {
     private var eventURL:NSURL?
     private var eventSourceConnection:NSURLConnection?
@@ -70,12 +72,10 @@ class EventSource: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelegat
     private var timeoutInterval:NSTimeInterval = 300.0
     private var retryInterval:NSTimeInterval = 1.0
     private var lastEventID:String?
+    private var wasClosed:Bool = true
     private var token: String
     
-    private var wasClosed:Bool = true
-    
-    //    /// Provides details of any errors with the connection to the EventSource
-    //    @property (nonatomic, strong) NSError *error;
+    weak var delegate:EventSourceDelegate?
     
     init(url:String, token: String) {
         self.eventURL = NSURL(string: url)
@@ -131,6 +131,9 @@ class EventSource: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelegat
             // Opened
             var event = Event()
             event.readyState = EventState.OPEN
+            
+            self.delegate?.eventSourceOpenedConnection?(event)
+            
             if let openHandlers:[EventSourceHandler] = self.listeners[EventType.OPEN.description]{
                 for handler in openHandlers{
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -148,6 +151,9 @@ class EventSource: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelegat
         var event = Event()
         event.readyState = EventState.CLOSED
         event.error = error
+        
+        self.delegate?.eventSourceReceivedError?(event, error: error)
+        
         if let errorHandlers:[EventSourceHandler] = self.listeners[EventType.ERROR.description]{
             for handler in errorHandlers{
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -199,9 +205,11 @@ class EventSource: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelegat
                         } else if (key == ESEventDataKey) {
                             event.data = value;
                         } else if (key == ESEventRetryKey) {
-                            //                        self.retryInterval = Double(value);
+                            self.retryInterval = (value as NSString).doubleValue
                         }
                     }
+                    
+                    self.delegate?.eventSourceReceivedMessage?(event, message: eventString!)
                     
                     if let messageHandlers:[EventSourceHandler] = self.listeners[EventType.MESSAGE.description]{
                         for handler in messageHandlers{
@@ -235,6 +243,9 @@ class EventSource: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelegat
         var event = Event()
         event.readyState = EventState.CLOSED
         event.error = NSError(domain: "", code: 2, userInfo: [NSLocalizedDescriptionKey: "Connection with the event source was closed."])
+        
+        self.delegate?.eventSourceReceivedError?(event, error: event.error!)
+        
         if let errorHandlers:[EventSourceHandler] = self.listeners[EventType.ERROR.description]{
             for handler in errorHandlers{
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
