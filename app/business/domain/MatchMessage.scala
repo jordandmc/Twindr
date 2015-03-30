@@ -34,7 +34,7 @@ object MatchMessage extends Collected {
    * @param message A message between matches
    */
   def processNewMessage(message: MatchMessage): Unit = {
-    val msg = message.copy(_id = UUID.randomUUID().toString)
+    val msg = message.copy(_id = UUID.randomUUID().toString, dateTime = new Date())
     msg.save()
   }
 
