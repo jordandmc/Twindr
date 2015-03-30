@@ -61,6 +61,8 @@
 		E621AC1A1A8D32AC00C3BAAB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC191A8D32AC00C3BAAB /* HomeViewController.swift */; };
 		E621AC1C1A8D34B000C3BAAB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */; };
 		E621AC1E1A8D34DE00C3BAAB /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC1D1A8D34DE00C3BAAB /* MatchesViewController.swift */; };
+		E670922F1AC907C8008D039E /* ConfigHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E670922E1AC907C8008D039E /* ConfigHelperTests.swift */; };
+		E67092331AC917D3008D039E /* DateHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67092321AC917D3008D039E /* DateHelperTests.swift */; };
 		E67CA31F1AC4FD5C00EE1A7B /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67CA31E1AC4FD5C00EE1A7B /* MessageViewController.swift */; };
 		E69597541AC635C9009836D2 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69597531AC635C9009836D2 /* ConversationsViewController.swift */; };
 		E69597561AC63EA3009836D2 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69597551AC63EA3009836D2 /* Message.swift */; };
@@ -92,7 +94,6 @@
 		1744CA371AC0DE0100C95E42 /* RequestToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestToken.swift; sourceTree = "<group>"; };
 		175F11B11AB273E20070CCE2 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.txt; path = Twindr/README.txt; sourceTree = "<group>"; };
 		175F12071AB792CB0070CCE2 /* ConfigHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfigHelper.swift; path = Helpers/ConfigHelper.swift; sourceTree = "<group>"; };
-		175F120B1AB797150070CCE2 /* NetworkHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHelperTests.swift; sourceTree = "<group>"; };
 		2040C5081AB8E6250028A4D1 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
 		2040C50F1AB8E6510028A4D1 /* PreparedMatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreparedMatch.swift; sourceTree = "<group>"; };
 		2040C5131AB8EB5E0028A4D1 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -122,6 +123,8 @@
 		E621AC191A8D32AC00C3BAAB /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E621AC1D1A8D34DE00C3BAAB /* MatchesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesViewController.swift; sourceTree = "<group>"; };
+		E670922E1AC907C8008D039E /* ConfigHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigHelperTests.swift; sourceTree = "<group>"; };
+		E67092321AC917D3008D039E /* DateHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelperTests.swift; sourceTree = "<group>"; };
 		E67CA31E1AC4FD5C00EE1A7B /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		E69597531AC635C9009836D2 /* ConversationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
 		E69597551AC63EA3009836D2 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -278,9 +281,10 @@
 		20B96BAE1A73549600F32F98 /* TwindrTests */ = {
 			isa = PBXGroup;
 			children = (
-				175F120B1AB797150070CCE2 /* NetworkHelperTests.swift */,
-				20B96BB11A73549600F32F98 /* TwindrTests.swift */,
+				E670922E1AC907C8008D039E /* ConfigHelperTests.swift */,
+				E67092321AC917D3008D039E /* DateHelperTests.swift */,
 				E6A7DF491AB7E23F00E03D51 /* GeolocationTests.swift */,
+				20B96BB11A73549600F32F98 /* TwindrTests.swift */,
 				20B96BAF1A73549600F32F98 /* Supporting Files */,
 			);
 			path = TwindrTests;
@@ -559,9 +563,11 @@
 				175F12011AB63E2F0070CCE2 /* ViewController.swift in Sources */,
 				2040C5191AB8EC4D0028A4D1 /* ServerRequests.swift in Sources */,
 				171DAF781AC4B41F00B053A9 /* LoginResponse.swift in Sources */,
+				E670922F1AC907C8008D039E /* ConfigHelperTests.swift in Sources */,
 				2040C5151AB8EB5E0028A4D1 /* SwiftyJSON.swift in Sources */,
 				20B96BB21A73549600F32F98 /* TwindrTests.swift in Sources */,
 				170EE9EF1AC7B6DC00FCD798 /* DateHelper.swift in Sources */,
+				E67092331AC917D3008D039E /* DateHelperTests.swift in Sources */,
 				E6A7DF4A1AB7E23F00E03D51 /* GeolocationTests.swift in Sources */,
 				175F12061AB66D940070CCE2 /* LoginViewController.swift in Sources */,
 				20FBF5241AC52B68006DEEA8 /* MatchMessage.swift in Sources */,

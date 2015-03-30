@@ -7,12 +7,9 @@
 //
 
 import Foundation
-
-import UIKit
 import XCTest
 
-class NetworkHelperTests: XCTestCase {
-    let helper:NetworkHelper = NetworkHelper()
+class ConfigHelperTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -24,14 +21,18 @@ class NetworkHelperTests: XCTestCase {
         super.tearDown()
     }
     
-    func CheckReturnedValueInPlist(){
-        var value:String = helper.getPlistKey("TestCaseKey") as String
+    func testReturnedValueInPlist(){
+        var value:String = ConfigHelper.getPlistKey("TestCaseKey") as String
         XCTAssertEqual(value, "TestCaseValue", "Error: Unexpected Result.")
     }
     
-    func CheckForNonExistantKeyValue(){
-        var value:String = helper.getPlistKey("NonExistantKey") as String
-        XCTAssertNil(value, "Error: Unexpected Result.")
+    func testForNonExistantKeyValue(){
+        var value:String = ConfigHelper.getPlistKey("NonExistantKey") as String
+        XCTAssertEqual(value, "", "Error: Unexpected Result.")
     }
-
+    
+    func testEmptyString() {
+        var value:String = ConfigHelper.getPlistKey("NonExistantKey") as String
+        XCTAssertEqual(value, "", "Error: This is supposed to be an empty string")
+    }
 }
