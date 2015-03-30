@@ -165,7 +165,7 @@ class MessageViewController: JSQMessagesViewController, UIActionSheetDelegate {
     
     // Received a new message, add it to our list
     private func receivedMessageCallback(msg: MatchMessage) {
-        if converseWith.username != user {
+        if msg.sender != user {
             let message = Message(sender: msg.sender, text: msg.message)
             messages.append(message)
             collectionView.reloadData()
