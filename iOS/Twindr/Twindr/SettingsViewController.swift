@@ -12,7 +12,10 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
     
     @IBOutlet weak var genderField: UITextField!
     @IBOutlet weak var dobField: UITextField!
-    @IBOutlet weak var interestsField: UITextField!
+    @IBOutlet weak var interestsField: UITextView!
+    @IBOutlet weak var genderLabel: UILabel!
+    @IBOutlet weak var dobLabel: UILabel!
+    
     
     var datePickerView: UIDatePicker = UIDatePicker()
     var genderPicker: UIPickerView = UIPickerView()
@@ -20,6 +23,7 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
     var genderBackend = ["Male":"M", "Female":"F", "Prefer not to say":"X"]
     
     var isRegistration = false
+    var registrationAlert: UIAlertView = UIAlertView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +52,11 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
         self.genderField.inputView = self.genderPicker
         self.genderField.inputAccessoryView = toolbar
         
+        // Make the text View look like a textfield by changing corners/colours
+        self.interestsField.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).CGColor
+        self.interestsField.layer.borderWidth = 1.0;
+        self.interestsField.layer.cornerRadius = 5.0;
+        
         // Should grab info from server and set values
         if let tkn = xAuthToken {
             if !isRegistration {
@@ -63,13 +72,22 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
             dobField.text = dob
         }
         if(interests != nil) {
-            
+            interestsField.text = interests
         }
+        
+        // Handle registration errors
+        registrationAlert.delegate = self
+        registrationAlert.title = "Empty Text Field!"
+        registrationAlert.message = "The Gender and Date of Birth fields cannot be empty!"
+        registrationAlert.cancelButtonIndex = registrationAlert.addButtonWithTitle("ok")
+
         
         // If not registration, don't allow editting of certain fields
         if(!isRegistration) {
-            genderField.enabled = false
-            dobField.enabled = false
+            genderLabel.hidden = true
+            genderField.hidden = true
+            dobLabel.hidden = true
+            dobField.hidden = true
         }
     }
     
@@ -100,22 +118,23 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
     
     @IBAction func saveButton(sender: UIButton) {
         // save the changes
-        if(genderField.text != "" && dobField.text != "") {
-            gender = genderField.text
-            dob = dobField.text
             interests = interestsField.text
             
-            // Send to server
-            if let tkn = xAuthToken {
-                if(isRegistration) {
-                    Curried().register(obj: Registration(sex: genderBackend[gender]!, dateOfBirth: dob, interests: interests), token: tkn)
-                } else {
-                    Curried().updateRegistration(obj: UpdateRegistration(interests: interests), token: tkn)
-                }
-            
-                let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("StartNav") as UINavigationController
-                self.presentViewController(navigationController, animated: true, completion: nil)
+        // Send to server
+        if let tkn = xAuthToken {
+            if(isRegistration && genderField.text != "" && dobField.text != "") {
+                gender = genderField.text
+                dob = dobField.text
+                Curried().register(obj: Registration(sex: genderBackend[gender]!, dateOfBirth: dob, interests: interests), token: tkn)
+            } else if(!isRegistration) {
+                Curried().updateRegistration(obj: UpdateRegistration(interests: interests), token: tkn)
+            } else {
+                registrationAlert.show()
+                return
             }
+            
+            let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("StartNav") as UINavigationController
+            self.presentViewController(navigationController, animated: true, completion: nil)
         }
         
     }
@@ -147,8 +166,7 @@ class SettingsViewController: ViewController, UIPickerViewDelegate, UIPickerView
         dateFormatter.dateFormat = "yyyy/MM/dd"
         dobField.text = dateFormatter.stringFromDate(sender.date)
     }
-    
-    
+
     /*
      * PickerView functions
      */

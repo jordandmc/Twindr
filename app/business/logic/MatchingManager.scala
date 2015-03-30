@@ -63,16 +63,18 @@ object MatchingManager {
     }
   }
 
-  private def preparePotentialMatches(dbObjects: List[PotentialMatch], user: User): List[PreparedPotentialMatch] =
+  private def preparePotentialMatches(dbObjects: List[PotentialMatch], user: User): List[PreparedPotentialMatch] = {
     dbObjects.foldRight(List[PreparedPotentialMatch]()) { (current: PotentialMatch, acc: List[PreparedPotentialMatch]) =>
 
       User.getByID(getOtherUserId(user, current)) match {
         case Some(other: User) =>
           PreparedPotentialMatch(other.twitterName, other.recentTweets, other.sex.getOrElse("X"),
-            other.dateOfBirth.getOrElse(new Date())) :: acc
+            other.dateOfBirth.getOrElse(new Date()), user.interests.intersect(other.interests).size) :: acc
         case _ => acc
       }
-    }
+    }.sortBy(-_.inCommon)
+  }
+
 
   private def prepareMatches(dbObjects: List[Match], user: User): List[PreparedMatch] =
     dbObjects.foldRight(List[PreparedMatch]()) { (current: Match, acc: List[PreparedMatch]) =>
