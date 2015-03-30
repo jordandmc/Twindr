@@ -48,17 +48,22 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .main-button {
-    color: #026802;
-    background: #fffee7;
+    color: #000000;
+    background: #F8F8F8;
     font-size:1.1em;
     padding: 5px 25px;
+    border-width: 1.5px;
+    border-color: darkgray;
+    border-style: solid;
 }
 
 .main-button-small {
-    color: #026802;
-    background: #fffee7;
-    font-size: 1.1em;
+    color: #000000;
+    background: #F8F8F8;
     padding: 2px 10px;
+    border-width: 1.5px;
+    border-color: darkgray;
+    border-style: solid;
 }
 
 .main-button:hover, .main-button:focus{
@@ -78,10 +83,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 .no-bullets {
     list-style-type: none;
-}
-
-.no-bullets li {
-    padding: 10px 0;
+    padding-left: 0px;
 }
 
 .rounded-box {
@@ -90,6 +92,15 @@ h1, h2, h3, h4, h5, h6, p {
     background-color: #27ae60;
     border-radius: 3px;
     padding: 20px;
+}
+
+.rounded-box li {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background-color: RGBA(152,199,172,0.25);
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 10px;
 }
 
 .text-like-link {

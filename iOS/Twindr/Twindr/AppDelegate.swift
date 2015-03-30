@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        NSTimeZone.setDefaultTimeZone(NSTimeZone(name: "UTC")!)
+        
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         Fabric.with([Twitter()])
         return true

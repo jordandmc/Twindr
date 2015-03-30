@@ -9,7 +9,6 @@
 #ifndef Twindr_ObjCBridge_h
 #define Twindr_ObjCBridge_h
 
-#import <EventSource/EventSource.h>
 #import <JSQMessagesViewController/JSQMessages.h>
 
 #endif
