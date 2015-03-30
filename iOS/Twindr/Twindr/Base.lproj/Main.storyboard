@@ -137,6 +137,7 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Third..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzc-uf-O0S">
                                         <rect key="frame" x="52" y="219" width="469" height="67"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="67" id="0JB-p6-3Ah"/>
                                             <constraint firstAttribute="width" constant="469" id="nGT-IF-Gtj"/>
@@ -177,6 +178,7 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.1529411765" green="0.68235294120000001" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="si2-gS-N74" firstAttribute="top" secondItem="vT8-BD-bc4" secondAttribute="top" constant="69" id="3L9-hA-1Po"/>
                                     <constraint firstItem="si2-gS-N74" firstAttribute="leading" secondItem="vT8-BD-bc4" secondAttribute="leading" constant="47" id="5hF-su-8pj"/>
@@ -237,16 +239,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="riR-Pl-Hmh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="4fT-Tn-Mwa" userLabel="YesSwipe">
-                    <connections>
-                        <action selector="yesSwipe:" destination="E99-pK-I6c" id="aIg-Zd-JeR"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="left" id="O4z-u9-ySG" userLabel="NoSwipe">
-                    <connections>
-                        <action selector="noSwipe:" destination="E99-pK-I6c" id="mYf-rD-fI7"/>
-                    </connections>
-                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3564" y="-321"/>
         </scene>
