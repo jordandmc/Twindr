@@ -1,0 +1,25 @@
+Twindr relies or has made use of the following libraries and frameworks:
+
+AlamoFire
+EventSource.swift
+SwiftyJSON
+Fabric
+JSQMessagesViewController
+Play Framework
+Casbah
+Salat
+ScalaTest
+Specs2
+JQuery
+Jasmine
+
+All of this software is licensed either under the Apache 2.0 License, or the MIT license with a few exceptions.
+
+The Apache License can be found here: https://www.apache.org/licenses/LICENSE-2.0.html
+The MIT License can be found here: http://opensource.org/licenses/MIT
+
+The Exceptions are specs2, the license of which can be found here: https://github.com/etorreborre/specs2/blob/master/LICENSE.txt
+
+As well as Twitter's Fabric, the license of which can be found here: https://fabric.io/terms
+
+Code was also sampled from the following repository: https://github.com/matthiasn/sse-chat, which is licensed under Apache 2.0
