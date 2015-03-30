@@ -274,7 +274,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="103" id="zXr-MN-iw3"/>
                                                     </constraints>
-                                                    <state key="normal" title=" Follow" image="twttr-icn-logo-white.png">
+                                                    <state key="normal" title=" Follow" image="Twitter_Logo_White.png">
                                                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
@@ -315,32 +315,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2VC-tQ-x5l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3564" y="344"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="rTo-NL-s5X">
-            <objects>
-                <viewController id="ryi-lQ-A35" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="4dg-rN-zfH"/>
-                        <viewControllerLayoutGuide type="bottom" id="rL8-OX-KsI"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="DJ8-0G-lvG">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Follow view" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6w-rE-m64">
-                                <rect key="frame" x="265" y="228" width="145" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="O10-99-Gax" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4320" y="-361"/>
         </scene>
         <!--Message Conversation-->
         <scene sceneID="fbz-vn-cGD">
@@ -539,6 +513,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="twttr-icn-logo-white.png" width="16" height="13"/>
+        <image name="Twitter_Logo_White.png" width="16" height="13"/>
     </resources>
 </document>
