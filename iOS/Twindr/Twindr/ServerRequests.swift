@@ -70,8 +70,18 @@ private func sendBusinessObject<T: JSONSerializable>(dummy: T, uri: String)(obj:
     request(req)
 }
 
+private func sendBusinessObjectTypeBased<T: JSONSerializable>(type: T.Type, uri: String)(obj: T, token: String) {
+    var req = createURLRequest(uri, token, Method.POST)
+    req.HTTPBody = (obj.toJson()).dataUsingEncoding(NSUTF8StringEncoding)
+    request(req)
+}
+
 private func respondToMatch(response: String)(token: String, username: String) {
     sendBusinessObject(PotentialMatchResponse(), "/m/processMatchResponse")(obj: PotentialMatchResponse(username: username, status: response), token: token)
+}
+
+private func moreMessages()(token: String, matchID: String, callback: ([MatchMessage]?)->Void) {
+    getList(MatchMessage(), Method.GET, "/ajax/getMoreMessages?matchID=" + matchID)(token: token, callback: callback)
 }
 
 private func createURLRequest(uri: String, token: String, httpMethod: Method, contentType: String = "application/json") -> NSMutableURLRequest {
@@ -90,7 +100,8 @@ class Curried {
     let getProfileInformation = getBusinessObject(UpdateRegistration(), Method.GET, "/m/getProfileInformation")
     let reject = respondToMatch(REJECTED)
     let accept = respondToMatch(ACCEPTED)
-    let sendMessage = sendBusinessObject(MatchMessage(), "/messaging")
+    let sendMessage = sendBusinessObjectTypeBased(MatchMessage.self, "/messaging")
+    let getMessages = moreMessages()
 
 }
 
