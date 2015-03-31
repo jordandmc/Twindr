@@ -12,17 +12,59 @@ import TwitterKit
 var xAuthToken: String?
 
 class LoginViewController: ViewController {
+    let twitterTag = 666
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let logInButton = TWTRLogInButton(logInCompletion: loginDelegate)
-        logInButton.center = self.view.center
-        self.view.addSubview(logInButton)
+        let loginButton = TWTRLogInButton(logInCompletion: loginDelegate)
+        loginButton.tag = twitterTag
+        centerButton(loginButton)
+        self.view.addSubview(loginButton)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func centerButton(button: UIButton){
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenWidth: CGFloat = screenSize.width
+        let screenHeight: CGFloat = screenSize.height
+        
+        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+            if self.interfaceOrientation.isPortrait {
+                button.center = self.view.center
+            }
+            else {
+                button.frame.origin = CGPoint(x: screenWidth/2, y: screenHeight/2)
+            }
+        }
+        else {
+            button.center = self.view.center
+        }
+    }
+    
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        var screenSize: CGRect = UIScreen.mainScreen().bounds
+        var screenWidth: CGFloat = screenSize.width
+        var screenHeight: CGFloat = screenSize.height
+        
+        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+            var loginButton = self.view.viewWithTag(twitterTag) as? UIButton
+            if loginButton != nil {
+                if (self.interfaceOrientation == UIInterfaceOrientation.LandscapeRight) {
+                    centerButton(loginButton!)
+                }
+                else if (self.interfaceOrientation == UIInterfaceOrientation.LandscapeLeft) {
+                    centerButton(loginButton!)
+                }
+                else {
+                    loginButton!.center = self.view.center
+                }
+            }
+        }
     }
     
     func loginDelegate(session: TWTRSession!, error: NSError!){
@@ -31,8 +73,6 @@ class LoginViewController: ViewController {
             println("authtoken: \(session.authToken)")
             println("authTokenSecret: \(session.authTokenSecret)")
             sendLogin(session)
-        } else {
-            //println("error: \(error.localizedDescription)")
         }
     }
     
