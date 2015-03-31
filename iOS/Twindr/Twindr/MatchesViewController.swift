@@ -37,7 +37,6 @@ class MatchesViewController: ViewController {
     }
     
     func setupToolbar() {
-        self.navigationController?.setToolbarHidden(false, animated: false)
         self.navigationController?.toolbar.barTintColor = UIColor(red: CGFloat(39.0/255.0), green: CGFloat(174.0/255.0), blue: CGFloat(96.0/255.0), alpha: CGFloat(1.0))
         self.navigationController?.toolbar.tintColor = UIColor.whiteColor()
         self.navigationController?.toolbar.translucent = false
@@ -126,6 +125,8 @@ class MatchesViewController: ViewController {
         if potentialMatch.tweets.count >= 3 { tweet3Label.text = potentialMatch.tweets[2] } else { tweet3Label.text = "" }
         if potentialMatch.tweets.count >= 4 { tweet4Label.text = potentialMatch.tweets[3] } else { tweet4Label.text = "" }
         if potentialMatch.tweets.count >= 5 { tweet5Label.text = potentialMatch.tweets[4] } else { tweet5Label.text = "" }
+        
+        self.navigationController?.setToolbarHidden(false, animated: true)
     }
     
     // Render the no matches text on the screen
@@ -136,6 +137,8 @@ class MatchesViewController: ViewController {
         tweet3Label.text = ""
         tweet4Label.text = ""
         tweet5Label.text = ""
+        
+        self.navigationController?.setToolbarHidden(true, animated: true)
     }
     
     @IBAction func noButton(sender: UIBarButtonItem) {
