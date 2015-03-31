@@ -10,13 +10,36 @@ import Foundation
 import TwitterKit
 
 class TwitterHelper {
+    //class properties not yet supported
+    //class let twitterAPIDomain = "https://api.twitter.com/1.1"
+    
     class func sendFollow(screenName: String) {
-        let followEndpoint = "https://api.twitter.com/1.1/friendships/create.json"
+        let twitterAPIDomain = "https://api.twitter.com/1.1"
+        let followEndpoint = "/friendships/create.json"
         let params = ["screen_name": screenName]
+        
+        sendRequestToTwitter(followEndpoint, htmlMethod: "POST", htmlParams: params)
+    }
+    
+    class func sendUnfollow(screenName: String){
+        let twitterAPIDomain = "https://api.twitter.com/1.1"
+        let unfollowEndpoint = "/friendships/destroy.json"
+        let params = ["screen_name": screenName]
+        
+        sendRequestToTwitter(unfollowEndpoint, htmlMethod: "POST", htmlParams: params)
+    }
+    
+    class func isFollowing(currentUser:String, othearUser: String) -> Bool {
+        
+        return false
+    }
+    
+    class func sendRequestToTwitter(endPoint: String, htmlMethod: String, htmlParams: NSDictionary){
+        let twitterAPIDomain = "https://api.twitter.com/1.1"
         var clientError : NSError?
         
         let request = Twitter.sharedInstance().APIClient.URLRequestWithMethod(
-            "POST", URL: followEndpoint, parameters: params, error: &clientError)
+            htmlMethod, URL: twitterAPIDomain + endPoint, parameters: htmlParams, error: &clientError)
         
         if request != nil {
             Twitter.sharedInstance().APIClient.sendTwitterRequest(request) {
@@ -34,13 +57,5 @@ class TwitterHelper {
         else {
             println("Error: \(clientError)")
         }
-    }
-    
-    class func sendUnfollow(screenName: String){
-        
-    }
-    
-    class func isFollowing(currentUser:String, otherUser: String) -> Bool {
-        return false
     }
 }
