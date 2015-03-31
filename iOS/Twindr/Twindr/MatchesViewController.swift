@@ -61,26 +61,30 @@ class MatchesViewController: ViewController {
     // Decline to be matched with the user via button or swipe
     func dismissMatch() {
         if potentialList.count > 0 {
-            // send that you rejected them
-            Curried().reject(token: xAuthToken!, username: potentialList[0].username)
-        
-            // load next potential match
-            potentialList.removeAtIndex(0)
-            loadPotentialMatch()
+            if let tkn = xAuthToken {
+                // send that you rejected them
+                Curried().reject(token: tkn, username: potentialList[0].username)
+            
+                // load next potential match
+                potentialList.removeAtIndex(0)
+                loadPotentialMatch()
+            }
         }
     }
     
     // Accept the match via button or swipe
     func acceptMatch() {
         if potentialList.count > 0 {
-            // follow that user
+            if let tkn = xAuthToken {
+                // follow that user
+                
+                // send that you matched with them
+                Curried().accept(token: tkn, username: potentialList[0].username)
             
-            // send that you matched with them
-            Curried().accept(token: xAuthToken!, username: potentialList[0].username)
-        
-            // load next potential match
-            potentialList.removeAtIndex(0)
-            loadPotentialMatch()
+                // load next potential match
+                potentialList.removeAtIndex(0)
+                loadPotentialMatch()
+            }
         }
     }
     

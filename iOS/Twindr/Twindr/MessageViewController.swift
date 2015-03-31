@@ -45,11 +45,12 @@ class MessageViewController: JSQMessagesViewController, UIActionSheetDelegate {
         senderDisplayName = user
         senderId = senderDisplayName
         
-        messageHandler = MessageHandler(matchID: converseWith.matchID, handler: receivedMessageCallback)
-        messageHandler.start()
-        
-        // Load previous messages from the server
         if let tkn = xAuthToken {
+            // Start the receive message handler
+            messageHandler = MessageHandler(matchID: converseWith.matchID, token: tkn, handler: receivedMessageCallback)
+            messageHandler.start()
+        
+            // Load previous messages from the server
             Curried().getMessages(token: tkn, matchID: converseWith.matchID, callback: loadServerMessagesCallback)
         }
     }
