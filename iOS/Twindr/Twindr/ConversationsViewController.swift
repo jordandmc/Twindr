@@ -9,11 +9,43 @@
 import Foundation
 import UIKit
 
+class MatchedUserCell: UITableViewCell {
+    
+    @IBOutlet weak var FollowButton: UIButton!
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+    
+}
+
 class ConversationsViewController: ViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     var matchedUsers: [PreparedMatch] = []
     let textCellIdentifier = "TextCell"
+    
+    @IBAction func FollowUser(sender: UIButton) {
+        let selectedIndex: Int = sender.tag
+        
+        println(matchedUsers[selectedIndex].username)
+        TwitterHelper.sendFollow(matchedUsers[selectedIndex].username)
+        sender.backgroundColor = UIColor.redColor()
+        sender.titleLabel?.text = "Unfollow"
+        //sender.imageView?.image = UIImage("")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +68,9 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as MatchedUserCell
         cell.textLabel?.text = matchedUsers[indexPath.row].username
+        cell.FollowButton.tag = indexPath.row
         
         return cell
     }

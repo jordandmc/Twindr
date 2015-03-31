@@ -258,7 +258,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="664"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TextCell" textLabel="Ryh-cr-zem" style="IBUITableViewCellStyleDefault" id="9KD-eN-zNB">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TextCell" textLabel="Ryh-cr-zem" style="IBUITableViewCellStyleDefault" id="9KD-eN-zNB" customClass="MatchedUserCell" customModule="Twindr" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9KD-eN-zNB" id="1XI-0m-tBc">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -283,6 +283,9 @@
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="FollowUser:" destination="7tK-es-CUo" eventType="touchUpInside" id="sz1-2k-1Jt"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -292,6 +295,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="FollowButton" destination="78P-bl-3J0" id="bE2-ab-SE7"/>
                                             <segue destination="4fd-EY-VqY" kind="show" id="hAr-ED-z3J"/>
                                         </connections>
                                     </tableViewCell>

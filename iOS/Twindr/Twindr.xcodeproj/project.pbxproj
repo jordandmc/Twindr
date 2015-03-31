@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		170184001ACA1FED00375622 /* TwitterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170183FF1ACA1FED00375622 /* TwitterHelper.swift */; };
 		170EE9EE1AC7B14900FCD798 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170EE9ED1AC7B14900FCD798 /* DateHelper.swift */; };
 		170EE9EF1AC7B6DC00FCD798 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170EE9ED1AC7B14900FCD798 /* DateHelper.swift */; };
 		171DAF771AC3EA9000B053A9 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171DAF761AC3EA9000B053A9 /* LoginResponse.swift */; };
@@ -84,6 +85,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		170183FF1ACA1FED00375622 /* TwitterHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TwitterHelper.swift; path = Helpers/TwitterHelper.swift; sourceTree = "<group>"; };
 		170EE9ED1AC7B14900FCD798 /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		171DAF761AC3EA9000B053A9 /* LoginResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		173A6B871AA197AD003198FF /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			children = (
 				175F12071AB792CB0070CCE2 /* ConfigHelper.swift */,
 				170EE9ED1AC7B14900FCD798 /* DateHelper.swift */,
+				170183FF1ACA1FED00375622 /* TwitterHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				E621AC1C1A8D34B000C3BAAB /* SettingsViewController.swift in Sources */,
 				2040C51B1AB8FB400028A4D1 /* JSONSerializable.swift in Sources */,
 				E621AC1A1A8D32AC00C3BAAB /* HomeViewController.swift in Sources */,
+				170184001ACA1FED00375622 /* TwitterHelper.swift in Sources */,
 				1744CA381AC0DE0100C95E42 /* RequestToken.swift in Sources */,
 				20FBF5251AC52B68006DEEA8 /* Registration.swift in Sources */,
 				20FBF5271AC52B68006DEEA8 /* UpdateRegistration.swift in Sources */,
