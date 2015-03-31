@@ -27,7 +27,7 @@ class TwitterHelper {
                     //we could extract user information from json
                 }
                 else {
-                println("Error: \(connectionError)")
+                    println("Error: \(connectionError)")
                 }
             }
         }
