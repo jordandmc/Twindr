@@ -38,13 +38,35 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
     let textCellIdentifier = "TextCell"
     
     @IBAction func FollowUser(sender: UIButton) {
-        let selectedIndex: Int = sender.tag
+        sender.titleLabel?.text == " Follow" ? setButtonToUnfollow(sender) : setButtonToFollow(sender)
+    }
+    
+    func setButtonToUnfollow(button: UIButton){
+        let selectedIndex: Int = button.tag
         
-        println(matchedUsers[selectedIndex].username)
+        println("trying to follow " + matchedUsers[selectedIndex].username)
         TwitterHelper.sendFollow(matchedUsers[selectedIndex].username)
-        sender.backgroundColor = UIColor.redColor()
-        sender.titleLabel?.text = "Unfollow"
-        //sender.imageView?.image = UIImage("")
+        button.backgroundColor = UIColor.redColor()
+        button.setTitle(" Unfollow", forState: UIControlState.Normal)
+        button.setImage(nil, forState: UIControlState.Normal)
+    }
+    
+    func setButtonToFollow(button: UIButton){
+        let selectedIndex: Int = button.tag
+        
+        println("trying to unfollow " + matchedUsers[selectedIndex].username)
+        TwitterHelper.sendUnfollow(matchedUsers[selectedIndex].username)
+        button.backgroundColor = UIColor(red: 0.2745, green: 0.6039, blue: 0.9176, alpha: 1.0)
+        button.setTitle(" Follow", forState: UIControlState.Normal)
+        button.setImage(UIImage(named: "Twitter_Logo_White.png"), forState: UIControlState.Normal)
+    }
+    
+    func correctTwitterButtonState(button: UIButton){
+        let selectedIndex: Int = button.tag
+        
+        if TwitterHelper.isFollowing(user, othearUser: matchedUsers[selectedIndex].username) {
+            setButtonToUnfollow(button)
+        }
     }
     
     override func viewDidLoad() {
@@ -69,8 +91,10 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as MatchedUserCell
+        
         cell.textLabel?.text = matchedUsers[indexPath.row].username
         cell.FollowButton.tag = indexPath.row
+        correctTwitterButtonState(cell.FollowButton)
         
         return cell
     }
