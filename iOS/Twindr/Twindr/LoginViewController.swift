@@ -38,7 +38,7 @@ class LoginViewController: ViewController {
                 button.center = self.view.center
             }
             else {
-                button.frame.origin = CGPoint(x: screenWidth/2, y: screenHeight/2)
+                button.frame.origin = CGPoint(x: (screenHeight/2)-(button.frame.width/2), y: screenWidth/2)
             }
         }
         else {
@@ -47,23 +47,9 @@ class LoginViewController: ViewController {
     }
     
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-        var screenSize: CGRect = UIScreen.mainScreen().bounds
-        var screenWidth: CGFloat = screenSize.width
-        var screenHeight: CGFloat = screenSize.height
-        
-        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-            var loginButton = self.view.viewWithTag(twitterTag) as? UIButton
-            if loginButton != nil {
-                if (self.interfaceOrientation == UIInterfaceOrientation.LandscapeRight) {
-                    centerButton(loginButton!)
-                }
-                else if (self.interfaceOrientation == UIInterfaceOrientation.LandscapeLeft) {
-                    centerButton(loginButton!)
-                }
-                else {
-                    loginButton!.center = self.view.center
-                }
-            }
+        var loginButton = self.view.viewWithTag(twitterTag) as? UIButton
+        if loginButton != nil {
+            centerButton(loginButton!)
         }
     }
     
