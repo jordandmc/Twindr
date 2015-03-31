@@ -17,12 +17,12 @@ object DateHelper {
           <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
             <script type="text/javascript">
               $(function() {
-                $("#datepicker" ).datepicker({
+                $("#datepicker").datepicker({
                   dateFormat: "yy-mm-dd",
                   changeMonth: true,
                   changeYear: true,
                   yearRange: "-120:+0",
-                  maxDate: "0"
+                  maxDate: "-8y"
                 });
               });
             </script>

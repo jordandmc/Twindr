@@ -63,6 +63,6 @@ object MatchingController extends Controller {
   }
 
   def matchedUserFeed = AuthAction { implicit request =>
-    Ok(views.html.matchedUserFeed(MatchingManager.getMatches(request.user)))
+    Ok(views.html.matchedUserFeed(MatchingManager.getMatches(request.user))(request, request.user.twitterName))
   }
 }

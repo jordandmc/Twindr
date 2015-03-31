@@ -1,4 +1,4 @@
-@(registrationForm: Form[business.domain.Registration])(implicit request: play.api.mvc.RequestHeader)
+@(registrationForm: Form[business.domain.Registration])(implicit request: play.api.mvc.RequestHeader, userTwitterName: String)
 
 @import helper._
 @import views.utility.DateHelper

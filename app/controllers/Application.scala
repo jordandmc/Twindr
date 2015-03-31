@@ -11,20 +11,20 @@ object Application extends Controller {
     if(AuthAction.isAuthenticated(request)) {
       val user = AuthAction.getUserFromRequest(request)
       user match {
-        case None => Ok(views.html.index(request))
+        case None => Ok(views.html.index(request, ""))
         case Some(u: User) if RegistrationManager.hasRegistered(u) => Redirect(routes.Application.matchesFeed())
         case _ => Redirect(routes.Login.register())
       }
     }
     else {
-      Ok(views.html.index(request))
+      Ok(views.html.index(request, ""))
     }
   }
 
   def matchesFeed = AuthAction { implicit request =>
     //Update the user's tweets when they refresh the matches page
     User.updateUserTweets(request.user, TwitterProvider.timeline(request))
-    Ok(views.html.matchesFeed())
+    Ok(views.html.matchesFeed()(request, request.user.twitterName))
   }
 
   def javascriptRoutes = Action { implicit request =>

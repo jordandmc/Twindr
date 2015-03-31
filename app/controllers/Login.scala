@@ -33,7 +33,7 @@ object Login extends Controller {
 
   def register = AuthAction { implicit request =>
     if(!RegistrationManager.hasRegistered(request.user)) {
-      Ok(views.html.register(registrationForm))
+      Ok(views.html.register(registrationForm)(request, request.user.twitterName))
     }
     else {
       Redirect(routes.Application.matchesFeed())
@@ -43,7 +43,7 @@ object Login extends Controller {
   def checkRegistration = AuthAction { implicit request =>
     registrationForm.bindFromRequest(request.request.body.asFormUrlEncoded.getOrElse(Map())).fold(
       formWithErrors => {
-        BadRequest(views.html.register(formWithErrors))
+        BadRequest(views.html.register(formWithErrors)(request, request.user.twitterName))
       },
       registration => {
         RegistrationManager.register(request.user, registration)
