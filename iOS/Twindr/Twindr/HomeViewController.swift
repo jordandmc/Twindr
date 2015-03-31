@@ -9,12 +9,6 @@
 import UIKit
 import TwitterKit
 
-extension UINavigationController {
-    public override func supportedInterfaceOrientations() -> Int {
-        return visibleViewController.supportedInterfaceOrientations()
-    }
-}
-
 class HomeViewController: ViewController {
     
     var geolocation = Geolocation()
@@ -31,6 +25,12 @@ class HomeViewController: ViewController {
         
         // Gets the coordinates of the user
         geolocation.getLocation()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        let value = UIInterfaceOrientation.Portrait.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
     }
     
     override func didReceiveMemoryWarning() {

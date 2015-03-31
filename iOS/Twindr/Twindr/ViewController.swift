@@ -9,12 +9,25 @@
 import UIKit
 import CoreLocation
 
-// globally defined variables
+// globally defined variables - Only reason we're using these
+// is because xcode was not liking us passing variables between
+// segues that aren't "presentations" (ie. "Show")
 var user:String!
 var gender:String!
 var dob:String!
 var interests:String!
 var converseWith: PreparedMatch!
+
+extension UINavigationController {
+    public override func supportedInterfaceOrientations() -> Int {
+        return visibleViewController.supportedInterfaceOrientations()
+    }
+    
+    public override func shouldAutorotate() -> Bool {
+        return visibleViewController.shouldAutorotate()
+    }
+    
+}
 
 class ViewController: UIViewController {
     
