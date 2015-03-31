@@ -22,7 +22,7 @@
                                 <rect key="frame" x="45" y="100" width="679" height="164"/>
                                 <color key="backgroundColor" red="0.1529411765" green="0.68235294120000001" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="164" id="Gez-o1-Kk4"/>
+                                    <constraint firstAttribute="height" constant="164" id="cxo-od-9bm"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -38,7 +38,7 @@
                                 <rect key="frame" x="45" y="325" width="679" height="164"/>
                                 <color key="backgroundColor" red="0.1529411765" green="0.68235294120000001" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="164" id="Pf8-mg-c74"/>
+                                    <constraint firstAttribute="height" constant="164" id="kLJ-Eg-1T6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -65,7 +65,7 @@
                                 <rect key="frame" x="45" y="550" width="679" height="164"/>
                                 <color key="backgroundColor" red="0.15294117647058825" green="0.68235294117647061" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="164" id="Fsd-DJ-f6Z"/>
+                                    <constraint firstAttribute="height" constant="164" id="YWX-zx-h5K"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -81,19 +81,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ObU-D9-QkW" secondAttribute="bottom" constant="84" id="2eZ-8j-6GR"/>
-                            <constraint firstItem="w6b-6w-u8W" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="25" id="2pF-pX-nbd"/>
-                            <constraint firstItem="TLM-bN-E4S" firstAttribute="leading" secondItem="N88-rd-gGT" secondAttribute="leading" id="CPE-If-ZPy"/>
-                            <constraint firstItem="TLM-bN-E4S" firstAttribute="top" secondItem="N88-rd-gGT" secondAttribute="bottom" constant="61" id="HC2-Nf-ddM"/>
-                            <constraint firstItem="N88-rd-gGT" firstAttribute="top" secondItem="w6b-6w-u8W" secondAttribute="bottom" constant="61" id="LR2-zm-nsj"/>
-                            <constraint firstItem="ObU-D9-QkW" firstAttribute="top" secondItem="TLM-bN-E4S" secondAttribute="bottom" constant="61" id="PKK-Nx-5fM"/>
-                            <constraint firstItem="ObU-D9-QkW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="S48-Rc-M1N"/>
-                            <constraint firstItem="N88-rd-gGT" firstAttribute="trailing" secondItem="w6b-6w-u8W" secondAttribute="trailing" id="g6R-a4-al2"/>
-                            <constraint firstItem="TLM-bN-E4S" firstAttribute="trailing" secondItem="N88-rd-gGT" secondAttribute="trailing" id="gtT-2M-blK"/>
-                            <constraint firstItem="w6b-6w-u8W" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="36" id="j2l-Rr-iWI"/>
-                            <constraint firstItem="TLM-bN-E4S" firstAttribute="leading" secondItem="ObU-D9-QkW" secondAttribute="leading" id="mIj-uX-692"/>
-                            <constraint firstItem="ObU-D9-QkW" firstAttribute="trailing" secondItem="TLM-bN-E4S" secondAttribute="trailing" id="mqV-Q2-4lb"/>
-                            <constraint firstItem="w6b-6w-u8W" firstAttribute="leading" secondItem="N88-rd-gGT" secondAttribute="leading" id="nfW-Qa-Riv"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ObU-D9-QkW" secondAttribute="bottom" constant="84" id="5JZ-h7-Yr1"/>
+                            <constraint firstItem="ObU-D9-QkW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="E59-rf-GU4"/>
+                            <constraint firstItem="ObU-D9-QkW" firstAttribute="leading" secondItem="TLM-bN-E4S" secondAttribute="leading" id="EBy-Zz-yda"/>
+                            <constraint firstItem="N88-rd-gGT" firstAttribute="leading" secondItem="TLM-bN-E4S" secondAttribute="leading" id="Hux-zr-STw"/>
+                            <constraint firstItem="N88-rd-gGT" firstAttribute="trailing" secondItem="TLM-bN-E4S" secondAttribute="trailing" id="Iqm-li-ubX"/>
+                            <constraint firstItem="TLM-bN-E4S" firstAttribute="trailing" secondItem="ObU-D9-QkW" secondAttribute="trailing" id="Lie-SE-VbZ"/>
+                            <constraint firstItem="w6b-6w-u8W" firstAttribute="leading" secondItem="N88-rd-gGT" secondAttribute="leading" id="Mee-x3-FkS"/>
+                            <constraint firstItem="w6b-6w-u8W" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="36" id="OF4-hz-5Q8"/>
+                            <constraint firstItem="N88-rd-gGT" firstAttribute="top" secondItem="w6b-6w-u8W" secondAttribute="bottom" constant="61" id="bzS-Dg-IE1"/>
+                            <constraint firstItem="ObU-D9-QkW" firstAttribute="top" secondItem="TLM-bN-E4S" secondAttribute="bottom" constant="61" id="ez1-tu-xaR"/>
+                            <constraint firstItem="w6b-6w-u8W" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="25" id="hPQ-uO-jbU"/>
+                            <constraint firstItem="TLM-bN-E4S" firstAttribute="top" secondItem="N88-rd-gGT" secondAttribute="bottom" constant="61" id="lUL-wR-gJf"/>
+                            <constraint firstItem="w6b-6w-u8W" firstAttribute="trailing" secondItem="N88-rd-gGT" secondAttribute="trailing" id="yy3-Ba-MIw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="FMv-r7-qWM"/>
