@@ -1,4 +1,4 @@
-@(implicit request: play.api.mvc.RequestHeader)
+@(implicit request: play.api.mvc.RequestHeader, userTwitterName: String)
 
 <header id="header">
   <div class="container">
@@ -24,7 +24,7 @@
             } else {
                 <li class="profile-nav-nonlink">Settings</li>
             }
-          <li><a href="@routes.Login.logout()">Logout</a></li>
+          <li><a href="@routes.Login.logout()">Logout @userTwitterName</a></li>
         }
       </ul>
     </nav>

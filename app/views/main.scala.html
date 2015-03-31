@@ -1,4 +1,4 @@
-@(title: String, moreScripts: Html = Html(""))(content: Html)(implicit request: play.api.mvc.RequestHeader)
+@(title: String, moreScripts: Html = Html(""))(content: Html)(implicit request: play.api.mvc.RequestHeader, userTwitterName: String)
 
 <!DOCTYPE html>
 
@@ -13,7 +13,7 @@
         @moreScripts
     </head>
     <body>
-        @header(request)
+        @header(request, userTwitterName)
         <div id="main-wrapper" class="container">
             @content
         </div>

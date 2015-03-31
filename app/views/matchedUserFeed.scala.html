@@ -1,4 +1,4 @@
-@(matches: List[business.domain.PreparedMatch])(implicit request: play.api.mvc.RequestHeader)
+@(matches: List[business.domain.PreparedMatch])(implicit request: play.api.mvc.RequestHeader, userTwitterName: String)
 
 @main("Twindr - Matchmaking") {
 
