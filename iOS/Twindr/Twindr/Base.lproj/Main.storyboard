@@ -361,7 +361,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rFj-H5-FO8">
                                 <rect key="frame" x="30" y="85" width="707" height="129"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Here you can update your profile.                                Please put one interest per line." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HY1-Dh-uyE">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Here you can update your profile.                                Please ensure only one interest per line." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HY1-Dh-uyE">
                                         <rect key="frame" x="48" y="25" width="624" height="68"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="68" id="Bkp-cz-i2M"/>
