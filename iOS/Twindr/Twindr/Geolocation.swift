@@ -30,11 +30,11 @@ class Geolocation: NSObject, CLLocationManagerDelegate {
             location = setLocation(90.0, longitude: 0.0)
             println("latitude: \(location.coordinate.latitude)")
             println("longitude: \(location.coordinate.longitude)")
-        }
-        
-        // Send to server
-        if let tkn = xAuthToken {
-            sendLocation(tkn, location)
+            
+            // Send to server
+            if let tkn = xAuthToken {
+                sendLocation(tkn, location)
+            }
         }
     }
     
@@ -60,6 +60,12 @@ class Geolocation: NSObject, CLLocationManagerDelegate {
             location = (locations.last as CLLocation)
             println("latitude: \(location.coordinate.latitude)")
             println("longitude: \(location.coordinate.longitude)")
+            
+            // Send to server
+            if let tkn = xAuthToken {
+                sendLocation(tkn, location)
+            }
+            
             locationManager.stopUpdatingLocation()
         }
     }
