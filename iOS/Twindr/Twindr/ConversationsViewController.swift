@@ -9,11 +9,37 @@
 import Foundation
 import UIKit
 
+class MatchedUserCell: UITableViewCell {
+    
+    @IBOutlet weak var FollowButton: UIButton!
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+    
+}
+
 class ConversationsViewController: ViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     var matchedUsers: [PreparedMatch] = []
     let textCellIdentifier = "TextCell"
+    
+    @IBAction func FollowUser(sender: UIButton) {
+        sender.titleLabel?.text == " Follow" ? setButtonToUnfollow(sender) : setButtonToFollow(sender)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +62,10 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as MatchedUserCell
+        
         cell.textLabel?.text = matchedUsers[indexPath.row].username
+        cell.FollowButton.tag = indexPath.row
         
         return cell
     }
@@ -59,7 +87,6 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
         if editingStyle == UITableViewCellEditingStyle.Delete {
             if let tkn = xAuthToken {
                 unmatch(tkn, matchedUsers[indexPath.row].username)
-            
                 matchedUsers.removeAtIndex(indexPath.row)
                 tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             }
@@ -70,6 +97,47 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
         if let tempList = res {
             matchedUsers = tempList
             tableView.reloadData()
+            loadFollowButtons()
         }
+    }
+    
+    private func loadFollowButtons(){
+        if navigatedThroughButton {
+            let usernamesArray = matchedUsers.map { (matchedUser) -> String in String(matchedUser.username) }
+            TwitterHelper.getUsersFollowed(usernamesArray, initalizeFollowButtons)
+            navigatedThroughButton = false
+        }
+    }
+    
+    private func initalizeFollowButtons(updatedFollowInfo: [Bool]){
+        for i in 0...updatedFollowInfo.count-1 {
+            if updatedFollowInfo[i] {
+                if let followButton = self.view.viewWithTag(i) as? UIButton {
+                    setButtonToUnfollow(followButton, sendRequest: false)
+                }
+            }
+        }
+    }
+    
+    private func setButtonToUnfollow(button: UIButton, sendRequest: Bool = true){
+        let selectedIndex: Int = button.tag
+        
+        if sendRequest {
+            TwitterHelper.sendFollow(matchedUsers[selectedIndex].username)
+        }
+        button.backgroundColor = UIColor.redColor()
+        button.setTitle(" Unfollow", forState: UIControlState.Normal)
+        button.setImage(nil, forState: UIControlState.Normal)
+    }
+    
+    private func setButtonToFollow(button: UIButton, sendRequest: Bool = true){
+        let selectedIndex: Int = button.tag
+        
+        if sendRequest {
+            TwitterHelper.sendUnfollow(matchedUsers[selectedIndex].username)
+        }
+        button.backgroundColor = UIColor(red: 0.2745, green: 0.6039, blue: 0.9176, alpha: 1.0)
+        button.setTitle(" Follow", forState: UIControlState.Normal)
+        button.setImage(UIImage(named: "Twitter_Logo_White.png"), forState: UIControlState.Normal)
     }
 }
