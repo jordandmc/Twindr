@@ -38,6 +38,7 @@ function addMessageDiv(message, senderTwitterName) {
         }
 
         document.getElementById("messageFeed").appendChild(newMessage);
+        scrollToBottomOfMessageFeed();
     }
 }
 
@@ -66,8 +67,7 @@ function addMoreMessages(messageList, senderTwitterName) {
             addMessageDiv(messageList[i], senderTwitterName);
         }
 
-        var messageDiv = document.getElementById('messageFeed');
-        messageDiv.scrollTop = messageDiv.scrollHeight;
+        scrollToBottomOfMessageFeed();
     }
 }
 
@@ -88,4 +88,11 @@ function doResize() {
         height = $(window).height() * 0.2;
 
     $('#messageFeed').height(height);
+}
+
+/**
+ * Scrolls to the bottom of the message feed
+ */
+function scrollToBottomOfMessageFeed() {
+    $("#messageFeed").scrollTop($("#messageFeed")[0].scrollHeight);
 }

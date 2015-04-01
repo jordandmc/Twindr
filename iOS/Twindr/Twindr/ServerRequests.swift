@@ -24,7 +24,7 @@ func logout(token: String) {
     request(req)
 }
 
-private func getList<T: JSONDeserializable>(dummy: T, method: Method, uri: String)(token: String, callback: ([T]?)->Void) {
+private func getList<T: JSONDeserializable>(dummy: T.Type, method: Method, uri: String)(token: String, callback: ([T]?)->Void) {
     var req = createURLRequest(uri, token, method)
     request(req)
         .responseJSON { (request, response, data, error) in
@@ -49,7 +49,7 @@ private func getList<T: JSONDeserializable>(dummy: T, method: Method, uri: Strin
         }
 }
 
-private func getBusinessObject<T: JSONDeserializable>(dummy: T, method: Method, uri: String)(token: String, callback: (T?)->Void) {
+private func getBusinessObject<T: JSONDeserializable>(dummy: T.Type, method: Method, uri: String)(token: String, callback: (T?)->Void) {
     var req = createURLRequest(uri, token, Method.GET)
     request(req)
         .responseJSON{ (request, response, data, error) in
@@ -64,24 +64,18 @@ private func getBusinessObject<T: JSONDeserializable>(dummy: T, method: Method, 
     }
 }
 
-private func sendBusinessObject<T: JSONSerializable>(dummy: T, uri: String)(obj: T, token: String) {
-    var req = createURLRequest(uri, token, Method.POST)
-    req.HTTPBody = (obj.toJson()).dataUsingEncoding(NSUTF8StringEncoding)
-    request(req)
-}
-
-private func sendBusinessObjectTypeBased<T: JSONSerializable>(type: T.Type, uri: String)(obj: T, token: String) {
+private func sendBusinessObject<T: JSONSerializable>(dummy: T.Type, uri: String)(obj: T, token: String) {
     var req = createURLRequest(uri, token, Method.POST)
     req.HTTPBody = (obj.toJson()).dataUsingEncoding(NSUTF8StringEncoding)
     request(req)
 }
 
 private func respondToMatch(response: String)(token: String, username: String) {
-    sendBusinessObject(PotentialMatchResponse(), "/m/processMatchResponse")(obj: PotentialMatchResponse(username: username, status: response), token: token)
+    sendBusinessObject(PotentialMatchResponse.self, "/m/processMatchResponse")(obj: PotentialMatchResponse(username: username, status: response), token: token)
 }
 
 private func moreMessages()(token: String, matchID: String, callback: ([MatchMessage]?)->Void) {
-    getList(MatchMessage(), Method.GET, "/ajax/getMoreMessages?matchID=" + matchID)(token: token, callback: callback)
+    getList(MatchMessage.self, Method.GET, "/ajax/getMoreMessages?matchID=" + matchID)(token: token, callback: callback)
 }
 
 private func createURLRequest(uri: String, token: String, httpMethod: Method, contentType: String = "application/json") -> NSMutableURLRequest {
@@ -93,14 +87,14 @@ private func createURLRequest(uri: String, token: String, httpMethod: Method, co
 }
 
 class Curried {
-    let register = sendBusinessObject(Registration(), "/m/registerUser")
-    let updateRegistration = sendBusinessObject(UpdateRegistration(), "/m/registerUser")
-    let getMatches = getList(PreparedMatch(), Method.GET, "/m/matches")
-    let getPotentialMatches = getList(PreparedPotentialMatch(), Method.GET, "/m/potentialMatches")
-    let getProfileInformation = getBusinessObject(UpdateRegistration(), Method.GET, "/m/getProfileInformation")
+    let register = sendBusinessObject(Registration.self, "/m/registerUser")
+    let updateRegistration = sendBusinessObject(UpdateRegistration.self, "/m/registerUser")
+    let getMatches = getList(PreparedMatch.self, Method.GET, "/m/matches")
+    let getPotentialMatches = getList(PreparedPotentialMatch.self, Method.GET, "/m/potentialMatches")
+    let getProfileInformation = getBusinessObject(UpdateRegistration.self, Method.GET, "/m/getProfileInformation")
     let reject = respondToMatch(REJECTED)
     let accept = respondToMatch(ACCEPTED)
-    let sendMessage = sendBusinessObjectTypeBased(MatchMessage.self, "/messaging")
+    let sendMessage = sendBusinessObject(MatchMessage.self, "/messaging")
     let getMessages = moreMessages()
 
 }

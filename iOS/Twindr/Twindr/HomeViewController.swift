@@ -20,10 +20,17 @@ class HomeViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
         self.title = user
         
         // Gets the coordinates of the user
         geolocation.getLocation()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        let value = UIInterfaceOrientation.Portrait.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
     }
     
     override func didReceiveMemoryWarning() {
@@ -37,5 +44,9 @@ class HomeViewController: ViewController {
         }
         user = ""
         Twitter.sharedInstance().logOut()
+    }
+    
+    override func supportedInterfaceOrientations() -> Int {
+        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
     }
 }

@@ -19,13 +19,13 @@ object Profile extends Controller {
 
   def settings = AuthAction { implicit request =>
     val userData = UpdateRegistration(request.user.interests.mkString("\n"))
-    Ok(views.html.settings(registrationForm.fill(userData))(request))
+    Ok(views.html.settings(registrationForm.fill(userData))(request, request.user.twitterName))
   }
 
   def updateSettings = AuthAction { implicit request =>
     registrationForm.bindFromRequest(request.request.body.asFormUrlEncoded.getOrElse(Map())).fold(
       formWithErrors => {
-        BadRequest(views.html.settings(formWithErrors))
+        BadRequest(views.html.settings(formWithErrors)(request, request.user.twitterName))
       },
       registration => {
         RegistrationManager.register(request.user, Registration(request.user.sex.get, request.user.dateOfBirth.get, registration.interests))

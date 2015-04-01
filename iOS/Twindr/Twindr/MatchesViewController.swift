@@ -22,12 +22,8 @@ class MatchesViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.navigationController?.setToolbarHidden(false, animated: false)
-        self.navigationController?.toolbar.barTintColor = UIColor(red: CGFloat(39.0/255.0), green: CGFloat(174.0/255.0), blue: CGFloat(96.0/255.0), alpha: CGFloat(1.0))
-        self.navigationController?.toolbar.tintColor = UIColor.whiteColor()
-        
+        setupToolbar()
         setupSwipeGestures()
-        
         loadPotentialMatch()
     }
     
@@ -38,6 +34,12 @@ class MatchesViewController: ViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setupToolbar() {
+        self.navigationController?.toolbar.barTintColor = UIColor(red: CGFloat(39.0/255.0), green: CGFloat(174.0/255.0), blue: CGFloat(96.0/255.0), alpha: CGFloat(1.0))
+        self.navigationController?.toolbar.tintColor = UIColor.whiteColor()
+        self.navigationController?.toolbar.translucent = false
     }
     
     func setupSwipeGestures() {
@@ -58,26 +60,30 @@ class MatchesViewController: ViewController {
     // Decline to be matched with the user via button or swipe
     func dismissMatch() {
         if potentialList.count > 0 {
-            // send that you rejected them
-            Curried().reject(token: xAuthToken!, username: potentialList[0].username)
-        
-            // load next potential match
-            potentialList.removeAtIndex(0)
-            loadPotentialMatch()
+            if let tkn = xAuthToken {
+                // send that you rejected them
+                Curried().reject(token: tkn, username: potentialList[0].username)
+            
+                // load next potential match
+                potentialList.removeAtIndex(0)
+                loadPotentialMatch()
+            }
         }
     }
     
     // Accept the match via button or swipe
     func acceptMatch() {
         if potentialList.count > 0 {
-            // follow that user
+            if let tkn = xAuthToken {
+                // follow that user
+                
+                // send that you matched with them
+                Curried().accept(token: tkn, username: potentialList[0].username)
             
-            // send that you matched with them
-            Curried().accept(token: xAuthToken!, username: potentialList[0].username)
-        
-            // load next potential match
-            potentialList.removeAtIndex(0)
-            loadPotentialMatch()
+                // load next potential match
+                potentialList.removeAtIndex(0)
+                loadPotentialMatch()
+            }
         }
     }
     
@@ -119,6 +125,8 @@ class MatchesViewController: ViewController {
         if potentialMatch.tweets.count >= 3 { tweet3Label.text = potentialMatch.tweets[2] } else { tweet3Label.text = "" }
         if potentialMatch.tweets.count >= 4 { tweet4Label.text = potentialMatch.tweets[3] } else { tweet4Label.text = "" }
         if potentialMatch.tweets.count >= 5 { tweet5Label.text = potentialMatch.tweets[4] } else { tweet5Label.text = "" }
+        
+        self.navigationController?.setToolbarHidden(false, animated: true)
     }
     
     // Render the no matches text on the screen
@@ -129,6 +137,8 @@ class MatchesViewController: ViewController {
         tweet3Label.text = ""
         tweet4Label.text = ""
         tweet5Label.text = ""
+        
+        self.navigationController?.setToolbarHidden(true, animated: true)
     }
     
     @IBAction func noButton(sender: UIBarButtonItem) {

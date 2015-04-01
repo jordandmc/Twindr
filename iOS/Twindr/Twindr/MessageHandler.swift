@@ -12,9 +12,9 @@ class MessageHandler {
     let source: EventSource
     let handler: (MatchMessage) -> Void
     
-    init(matchID: String, handler: (MatchMessage) -> Void) {
+    init(matchID: String, token: String, handler: (MatchMessage) -> Void) {
         self.handler = handler
-        let src = EventSource(url: serverURI + "/js/receiveMessage/" + matchID, token: xAuthToken!)
+        let src = EventSource(url: serverURI + "/js/receiveMessage/" + matchID, token: token)
         self.source = src
     }
     

@@ -15,27 +15,25 @@ final class PreparedMatch: JSONDeserializable {
     let sex: String
     let dateOfBirth: NSDate!
     
-    init?(json: JSON) {
+    convenience init?(json: JSON) {
         switch(json["matchID"].string, json["username"].string, json["sex"].string) {
         case let (.Some(matchID), .Some(username), .Some(sex)):
-            self.matchID =  matchID
-            self.username = username
-            self.sex = sex
-            self.dateOfBirth = DateHelper.convertToDate(json["dateOfBirth"].description)
+            self.init(matchID: matchID, username: username, sex: sex, dateOfBirth: DateHelper.convertToDate(json["dateOfBirth"].description) ?? NSDate())
         default:
-            self.matchID = ""
-            self.username = ""
-            self.sex = ""
-            self.dateOfBirth = NSDate()
+            self.init(matchID: "", username: "", sex: "", dateOfBirth: NSDate())
             return nil
         }
     }
     
-    init() {
-        self.matchID = ""
-        self.username = ""
-        self.sex = ""
-        self.dateOfBirth = NSDate()
+    convenience init() {
+        self.init(matchID: "", username: "", sex: "", dateOfBirth: NSDate())
+    }
+    
+    private init(matchID: String, username: String, sex: String, dateOfBirth: NSDate) {
+        self.matchID =  matchID
+        self.username = username
+        self.sex = sex
+        self.dateOfBirth = dateOfBirth
     }
 
 }

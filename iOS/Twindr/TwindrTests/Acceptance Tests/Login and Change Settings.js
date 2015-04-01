@@ -1,5 +1,5 @@
 var target = UIATarget.localTarget();
-
+UIATarget.localTarget().delay(10);
 target.frontMostApp().mainWindow().buttons()["Log in with Twitter"].tap();
 
 // Check if it's the twitter login screen (first-time user)
