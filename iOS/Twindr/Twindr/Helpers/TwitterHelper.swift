@@ -10,11 +10,8 @@ import Foundation
 import TwitterKit
 
 class TwitterHelper {
-    //class properties not yet supported
-    //class let twitterAPIDomain = "https://api.twitter.com/1.1"
     
     class func sendFollow(screenName: String) {
-        let twitterAPIDomain = "https://api.twitter.com/1.1"
         let followEndpoint = "/friendships/create.json"
         let params = ["screen_name": screenName]
         
@@ -22,16 +19,22 @@ class TwitterHelper {
     }
     
     class func sendUnfollow(screenName: String){
-        let twitterAPIDomain = "https://api.twitter.com/1.1"
         let unfollowEndpoint = "/friendships/destroy.json"
         let params = ["screen_name": screenName]
         
         sendRequestToTwitter(unfollowEndpoint, htmlMethod: "POST", htmlParams: params)
     }
     
-    class func isFollowing(currentUser:String, othearUser: String) -> Bool {
+    //
+    class func getUsersFollowed(users: [String]) -> [Bool] {
+        let checkFollowingEndpoint = "/friendships/lookup.json"
+        let params = ["screen_name": ",".join(users)]
+        var result = [false]
         
-        return false
+        //sendRequestToTwitter(checkFollowingEndpoint, htmlMethod: "GET", htmlParams: params)
+        println(params)
+        
+        return result
     }
     
     class func sendRequestToTwitter(endPoint: String, htmlMethod: String, htmlParams: NSDictionary){

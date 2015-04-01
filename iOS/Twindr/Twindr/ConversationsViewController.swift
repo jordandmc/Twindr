@@ -61,14 +61,6 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
         button.setImage(UIImage(named: "Twitter_Logo_White.png"), forState: UIControlState.Normal)
     }
     
-    func correctTwitterButtonState(button: UIButton){
-        let selectedIndex: Int = button.tag
-        
-        if TwitterHelper.isFollowing(user, othearUser: matchedUsers[selectedIndex].username) {
-            setButtonToUnfollow(button)
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -78,6 +70,9 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
         if let tkn = xAuthToken {
             Curried().getMatches(token: tkn, callback: loadedMatchesCallback)
         }
+        
+        navigatedThroughButton ? println("button nav") : (navigatedThroughButton = false)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -94,7 +89,7 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
         
         cell.textLabel?.text = matchedUsers[indexPath.row].username
         cell.FollowButton.tag = indexPath.row
-        correctTwitterButtonState(cell.FollowButton)
+        //correctTwitterButtonState(cell.FollowButton)
         
         return cell
     }

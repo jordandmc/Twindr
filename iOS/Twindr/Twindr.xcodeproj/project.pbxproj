@@ -29,6 +29,7 @@
 		175F12081AB792CB0070CCE2 /* ConfigHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175F12071AB792CB0070CCE2 /* ConfigHelper.swift */; };
 		175F120A1AB795560070CCE2 /* ConfigHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175F12071AB792CB0070CCE2 /* ConfigHelper.swift */; };
 		17B5050C1AC902E100D8E5A5 /* Twitter_Logo_White.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B5050B1AC902E100D8E5A5 /* Twitter_Logo_White.png */; };
+		17EFAE121ACB74700017903E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20B96B9F1A73549500F32F98 /* Main.storyboard */; };
 		2011396E1AC5497100ED8A00 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621AC1B1A8D34B000C3BAAB /* SettingsViewController.swift */; };
 		2040C50B1AB8E6250028A4D1 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2040C5081AB8E6250028A4D1 /* Alamofire.swift */; };
 		2040C50C1AB8E6250028A4D1 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2040C5081AB8E6250028A4D1 /* Alamofire.swift */; };
@@ -410,6 +411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				175F12051AB63F780070CCE2 /* TwitterKitResources.bundle in Resources */,
+				17EFAE121ACB74700017903E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,12 +9,18 @@
 import UIKit
 import TwitterKit
 
+var navigatedThroughButton: Bool = false
+
 class HomeViewController: ViewController {
     
     var geolocation = Geolocation()
     
     @IBAction func Logout(sender: UIButton) {
         Logout(xAuthToken)
+    }
+    
+    @IBAction func ConversationButtonClicked() {
+        navigatedThroughButton = true
     }
     
     override func viewDidLoad() {
