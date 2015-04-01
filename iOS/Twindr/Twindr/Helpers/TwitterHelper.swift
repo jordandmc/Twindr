@@ -15,38 +15,39 @@ class TwitterHelper {
         let followEndpoint = "/friendships/create.json"
         let params = ["screen_name": screenName]
         
-        sendRequestToTwitter(followEndpoint, htmlMethod: "POST", htmlParams: params)
+        sendRequestToTwitter(followEndpoint, htmlMethod: "POST", htmlParams: params, onCompletion: nil)
     }
     
     class func sendUnfollow(screenName: String){
         let unfollowEndpoint = "/friendships/destroy.json"
         let params = ["screen_name": screenName]
         
-        sendRequestToTwitter(unfollowEndpoint, htmlMethod: "POST", htmlParams: params)
+        sendRequestToTwitter(unfollowEndpoint, htmlMethod: "POST", htmlParams: params, onCompletion: nil)
     }
     
-    class func getUsersFollowed(users: [String]) -> [Bool] {
+    class func getUsersFollowed(users: [String], onCompletion: ([Bool]) -> Void) {
         let checkFollowingEndpoint = "/friendships/lookup.json"
         let params = ["screen_name": ",".join(users)]
-        var result = [false]
+        var result:[Bool] = []
         var index = 0
         
-        if let jsonArray:[JSON]? = sendRequestToTwitter(checkFollowingEndpoint, htmlMethod: "GET", htmlParams: params)?.array {
-            for user:JSON in jsonArray! {
-                if let followArray = user["connections"].array {
-                    result.append(contains(followArray, "following"))
+        sendRequestToTwitter(checkFollowingEndpoint, htmlMethod: "GET", htmlParams: params){
+            (json) in
+            if let jsonArray:[JSON]? = json.array {
+                for user:JSON in jsonArray! {
+                    if let followArray = user["connections"].array {
+                        result.append(contains(followArray, "following"))
+                    }
+                    index++
                 }
-                index++
+                onCompletion(result)
             }
         }
-        
-        return result
     }
     
-    class func sendRequestToTwitter(endPoint: String, htmlMethod: String, htmlParams: NSDictionary) -> JSON? {
+    private class func sendRequestToTwitter(endPoint: String, htmlMethod: String, htmlParams: NSDictionary, onCompletion: ((JSON) -> Void)?) {
         let twitterAPIDomain = "https://api.twitter.com/1.1"
         var clientError : NSError?
-        var json:JSON? = nil
         
         let request = Twitter.sharedInstance().APIClient.URLRequestWithMethod(
             htmlMethod, URL: twitterAPIDomain + endPoint, parameters: htmlParams, error: &clientError)
@@ -56,9 +57,11 @@ class TwitterHelper {
                 (response, data, connectionError) -> Void in
                 if (connectionError == nil) {
                     var jsonError : NSError?
+                    let json = JSON(data: data, options: nil, error: &jsonError)
                     
-                    json = JSON(data: data, options: nil, error: &jsonError)
-                    println(json)
+                    if let hasClosure = onCompletion {
+                        onCompletion!(json)
+                    }
                 }
                 else {
                     println("Error: \(connectionError)")
@@ -68,7 +71,5 @@ class TwitterHelper {
         else {
             println("Error: \(clientError)")
         }
-        
-        return json
     }
 }

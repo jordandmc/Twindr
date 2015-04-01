@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-var usersBeingFollowed: [Bool] = [false]
-
 class MatchedUserCell: UITableViewCell {
     
     @IBOutlet weak var FollowButton: UIButton!
@@ -59,38 +57,6 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
         // Dispose of any resources that can be recreated.
     }
     
-    func setButtonToUnfollow(button: UIButton, sendRequest: Bool = true){
-        let selectedIndex: Int = button.tag
-        
-        println("trying to follow " + matchedUsers[selectedIndex].username)
-        if sendRequest {
-            TwitterHelper.sendFollow(matchedUsers[selectedIndex].username)
-        }
-        button.backgroundColor = UIColor.redColor()
-        button.setTitle(" Unfollow", forState: UIControlState.Normal)
-        button.setImage(nil, forState: UIControlState.Normal)
-    }
-    
-    func setButtonToFollow(button: UIButton, sendRequest: Bool = true){
-        let selectedIndex: Int = button.tag
-        
-        println("trying to unfollow " + matchedUsers[selectedIndex].username)
-        if sendRequest {
-            TwitterHelper.sendUnfollow(matchedUsers[selectedIndex].username)
-        }
-        button.backgroundColor = UIColor(red: 0.2745, green: 0.6039, blue: 0.9176, alpha: 1.0)
-        button.setTitle(" Follow", forState: UIControlState.Normal)
-        button.setImage(UIImage(named: "Twitter_Logo_White.png"), forState: UIControlState.Normal)
-    }
-    
-    func initalizeTwitterFollowButton(button: UIButton){
-        let selectedIndex: Int = button.tag
-        
-        if usersBeingFollowed.count > selectedIndex && usersBeingFollowed[selectedIndex] {
-            setButtonToUnfollow(button, sendRequest: false)
-        }
-    }
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return matchedUsers.count;
     }
@@ -100,7 +66,6 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
         
         cell.textLabel?.text = matchedUsers[indexPath.row].username
         cell.FollowButton.tag = indexPath.row
-        initalizeTwitterFollowButton(cell.FollowButton)
         
         return cell
     }
@@ -122,7 +87,6 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
         if editingStyle == UITableViewCellEditingStyle.Delete {
             if let tkn = xAuthToken {
                 unmatch(tkn, matchedUsers[indexPath.row].username)
-            
                 matchedUsers.removeAtIndex(indexPath.row)
                 tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             }
@@ -139,12 +103,41 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
     
     private func loadFollowButtons(){
         if navigatedThroughButton {
-            println("button nav")
             let usernamesArray = matchedUsers.map { (matchedUser) -> String in String(matchedUser.username) }
-            usersBeingFollowed = TwitterHelper.getUsersFollowed(usernamesArray)
-        }
-        else {
+            TwitterHelper.getUsersFollowed(usernamesArray, initalizeFollowButtons)
             navigatedThroughButton = false
         }
+    }
+    
+    private func initalizeFollowButtons(updatedFollowInfo: [Bool]){
+        for i in 0...updatedFollowInfo.count-1 {
+            if updatedFollowInfo[i] {
+                if let followButton = self.view.viewWithTag(i) as? UIButton {
+                    setButtonToUnfollow(followButton, sendRequest: false)
+                }
+            }
+        }
+    }
+    
+    private func setButtonToUnfollow(button: UIButton, sendRequest: Bool = true){
+        let selectedIndex: Int = button.tag
+        
+        if sendRequest {
+            TwitterHelper.sendFollow(matchedUsers[selectedIndex].username)
+        }
+        button.backgroundColor = UIColor.redColor()
+        button.setTitle(" Unfollow", forState: UIControlState.Normal)
+        button.setImage(nil, forState: UIControlState.Normal)
+    }
+    
+    private func setButtonToFollow(button: UIButton, sendRequest: Bool = true){
+        let selectedIndex: Int = button.tag
+        
+        if sendRequest {
+            TwitterHelper.sendUnfollow(matchedUsers[selectedIndex].username)
+        }
+        button.backgroundColor = UIColor(red: 0.2745, green: 0.6039, blue: 0.9176, alpha: 1.0)
+        button.setTitle(" Follow", forState: UIControlState.Normal)
+        button.setImage(UIImage(named: "Twitter_Logo_White.png"), forState: UIControlState.Normal)
     }
 }
