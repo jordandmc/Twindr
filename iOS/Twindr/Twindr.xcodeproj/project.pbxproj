@@ -99,7 +99,6 @@
 		1744CA371AC0DE0100C95E42 /* RequestToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestToken.swift; sourceTree = "<group>"; };
 		175F11B11AB273E20070CCE2 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.txt; path = Twindr/README.txt; sourceTree = "<group>"; };
 		175F12071AB792CB0070CCE2 /* ConfigHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfigHelper.swift; path = Helpers/ConfigHelper.swift; sourceTree = "<group>"; };
-		175F120B1AB797150070CCE2 /* NetworkHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHelperTests.swift; sourceTree = "<group>"; };
 		17B5050B1AC902E100D8E5A5 /* Twitter_Logo_White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Twitter_Logo_White.png; sourceTree = "<group>"; };
 		2040C5081AB8E6250028A4D1 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
 		2040C50F1AB8E6510028A4D1 /* PreparedMatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreparedMatch.swift; sourceTree = "<group>"; };
