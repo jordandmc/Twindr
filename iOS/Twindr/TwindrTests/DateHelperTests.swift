@@ -38,12 +38,12 @@ class DateHelperTests: XCTestCase {
     
     func testFutureDate() {
         let date = DateHelper.convertToDate("9999/12/1")
-        XCTAssert(date?.description == "9999-12-01 06:00:00 +0000", "These should be equal")
+        XCTAssert(date?.description == "9999-12-01 00:00:00 +0000", "These should be equal")
     }
     
     func testPastDate() {
         let date = DateHelper.convertToDate("1234/12/1")
-        XCTAssert(date?.description == "1234-12-01 06:28:36 +0000", "These should be equal")
+        XCTAssert(date?.description == "1234-12-01 00:00:00 +0000", "These should be equal")
     }
     
     func testInvalidMonth() {
