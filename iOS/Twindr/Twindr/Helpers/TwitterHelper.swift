@@ -25,32 +25,40 @@ class TwitterHelper {
         sendRequestToTwitter(unfollowEndpoint, htmlMethod: "POST", htmlParams: params)
     }
     
-    //
     class func getUsersFollowed(users: [String]) -> [Bool] {
         let checkFollowingEndpoint = "/friendships/lookup.json"
         let params = ["screen_name": ",".join(users)]
         var result = [false]
+        var index = 0
         
-        //sendRequestToTwitter(checkFollowingEndpoint, htmlMethod: "GET", htmlParams: params)
-        println(params)
+        if let jsonArray:[JSON]? = sendRequestToTwitter(checkFollowingEndpoint, htmlMethod: "GET", htmlParams: params)?.array {
+            for user:JSON in jsonArray! {
+                if let followArray = user["connections"].array {
+                    result.append(contains(followArray, "following"))
+                }
+                index++
+            }
+        }
         
         return result
     }
     
-    class func sendRequestToTwitter(endPoint: String, htmlMethod: String, htmlParams: NSDictionary){
+    class func sendRequestToTwitter(endPoint: String, htmlMethod: String, htmlParams: NSDictionary) -> JSON? {
         let twitterAPIDomain = "https://api.twitter.com/1.1"
         var clientError : NSError?
+        var json:JSON? = nil
         
         let request = Twitter.sharedInstance().APIClient.URLRequestWithMethod(
             htmlMethod, URL: twitterAPIDomain + endPoint, parameters: htmlParams, error: &clientError)
-        
+
         if request != nil {
             Twitter.sharedInstance().APIClient.sendTwitterRequest(request) {
                 (response, data, connectionError) -> Void in
                 if (connectionError == nil) {
                     var jsonError : NSError?
-                    let json : AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError)
-                    //we could extract user information from json
+                    
+                    json = JSON(data: data, options: nil, error: &jsonError)
+                    println(json)
                 }
                 else {
                     println("Error: \(connectionError)")
@@ -60,5 +68,7 @@ class TwitterHelper {
         else {
             println("Error: \(clientError)")
         }
+        
+        return json
     }
 }
