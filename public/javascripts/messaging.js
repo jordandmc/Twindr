@@ -94,7 +94,5 @@ function doResize() {
  * Scrolls to the bottom of the message feed
  */
 function scrollToBottomOfMessageFeed() {
-    //var messageDiv = document.getElementById('messageFeed');
-    //messageDiv.scrollTop = messageDiv.scrollHeight;
     $("#messageFeed").scrollTop($("#messageFeed")[0].scrollHeight);
 }
