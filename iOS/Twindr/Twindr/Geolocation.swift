@@ -32,7 +32,10 @@ class Geolocation: NSObject, CLLocationManagerDelegate {
             println("longitude: \(location.coordinate.longitude)")
         }
         
-        // Send location to server
+        // Send to server
+        if let tkn = xAuthToken {
+            sendLocation(tkn, location)
+        }
     }
     
     // Set and return the location

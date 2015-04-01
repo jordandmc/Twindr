@@ -19,6 +19,11 @@ func unmatch(token: String, matchTwitterName: String) {
     request(req)
 }
 
+func sendLocation(token: String, location: CLLocation) {
+    var req = createURLRequest("/ajax/updateGeolocation?latitude=" + location.coordinate.latitude.description + "&longitude=" + location.coordinate.longitude.description, token, Method.POST, contentType: "text/plain")
+    request(req)
+}
+
 func logout(token: String) {
     var req = createURLRequest("/m/logout", token, Method.GET)
     request(req)

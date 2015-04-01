@@ -95,9 +95,6 @@ class LoginViewController: ViewController {
                 }
             }
         } else {
-            if error != nil {
-                //println("Error: \(error!.localizedDescription)")
-            }
             displayLoginFailure()
         }
     }
