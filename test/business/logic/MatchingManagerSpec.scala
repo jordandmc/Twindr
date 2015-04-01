@@ -2,7 +2,7 @@ package business.logic
 
 import java.util.UUID
 
-import business.domain.{Match, PotentialMatch, User}
+import business.domain.{PotentialMatchResponse, Match, PotentialMatch, User}
 import business.scaffolding.WithApplicationAndDatabase
 import org.junit.runner.RunWith
 import org.specs2.runner.JUnitRunner
@@ -106,4 +106,79 @@ class MatchingManagerSpec extends Specification {
     }
 
   }
+
+  "processMatchResponse" should {
+    "Do nothing if one user accepts and the other rejects"  in new WithApplicationAndDatabase with FirstUser with SecondUser {
+      val thePotentialMatch = PotentialMatch(UUID.randomUUID().toString, theUser._id, theOtherUser._id, PotentialMatch.ACCEPTED).save()
+      MatchingManager.processMatchResponse(theOtherUser, PotentialMatchResponse(theUser.twitterName, PotentialMatch.REJECTED))
+      MatchingManager.getMatches(theUser) must beEmpty
+      MatchingManager.getMatches(theOtherUser) must beEmpty
+    }
+
+    "Do nothing if one user rejects and the other accepts"  in new WithApplicationAndDatabase with FirstUser with SecondUser {
+      val thePotentialMatch = PotentialMatch(UUID.randomUUID().toString, theUser._id, theOtherUser._id, PotentialMatch.REJECTED).save()
+      MatchingManager.processMatchResponse(theOtherUser, PotentialMatchResponse(theUser.twitterName, PotentialMatch.ACCEPTED))
+      MatchingManager.getMatches(theUser) must beEmpty
+      MatchingManager.getMatches(theOtherUser) must beEmpty
+    }
+
+    "Do nothing if both users reject" in new WithApplicationAndDatabase with FirstUser with SecondUser {
+      val thePotentialMatch = PotentialMatch(UUID.randomUUID().toString, theUser._id, theOtherUser._id, PotentialMatch.REJECTED).save()
+      MatchingManager.processMatchResponse(theOtherUser, PotentialMatchResponse(theUser.twitterName, PotentialMatch.REJECTED))
+      MatchingManager.getMatches(theUser) must beEmpty
+      MatchingManager.getMatches(theOtherUser) must beEmpty
+    }
+
+    "Create a match if both users accept" in new WithApplicationAndDatabase with FirstUser with SecondUser {
+      val thePotentialMatch = PotentialMatch(UUID.randomUUID().toString, theUser._id, theOtherUser._id, PotentialMatch.ACCEPTED).save()
+      MatchingManager.processMatchResponse(theOtherUser, PotentialMatchResponse(theUser.twitterName, PotentialMatch.ACCEPTED))
+
+      val result = MatchingManager.getMatches(theUser)
+      result.size must equalTo(1)
+      result(0).username must equalTo(theOtherUser.twitterName)
+
+      val result2 = MatchingManager.getMatches(theOtherUser)
+      result2.size must equalTo(1)
+      result2(0).username must equalTo(theUser.twitterName)
+    }
+  }
+
+  "getMatches" should {
+    "Return any empty list if the user has no matches" in new WithApplicationAndDatabase with FirstUser with SecondUser {
+      MatchingManager.getMatches(theUser).size must equalTo(0)
+      MatchingManager.getMatches(theOtherUser).size must equalTo(0)
+    }
+
+    "Return any matches the users have" in new WithApplicationAndDatabase with FirstUser with SecondUser {
+      val theMatch = Match(UUID.randomUUID().toString, theUser._id, theOtherUser._id).save()
+
+      val result = MatchingManager.getMatches(theUser)
+      result.size must equalTo(1)
+      result(0).username must equalTo(theOtherUser.twitterName)
+
+      val result2 = MatchingManager.getMatches(theOtherUser)
+      result2.size must equalTo(1)
+      result2(0).username must equalTo(theUser.twitterName)
+    }
+
+    "Not return matches that have been unmatched" in new WithApplicationAndDatabase with FirstUser with SecondUser {
+      val theMatch = Match(UUID.randomUUID().toString, theUser._id, theOtherUser._id, unmatched = true).save()
+
+      MatchingManager.getMatches(theUser).size must equalTo(0)
+      MatchingManager.getMatches(theOtherUser).size must equalTo(0)
+    }
+  }
+
+  "unmatch" should {
+    "Mark matches as being unmatched" in new WithApplicationAndDatabase with FirstUser with SecondUser {
+      val theMatch = Match(UUID.randomUUID().toString, theUser._id, theOtherUser._id).save()
+
+      MatchingManager.unmatch(theUser, theOtherUser.twitterName)
+
+      MatchingManager.getMatches(theUser).size must equalTo(0)
+      MatchingManager.getMatches(theOtherUser).size must equalTo(0)
+    }
+  }
+
+
 }
