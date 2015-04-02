@@ -66,6 +66,7 @@ class ConversationsViewController: ViewController, UITableViewDelegate, UITableV
         
         cell.textLabel?.text = matchedUsers[indexPath.row].username
         cell.FollowButton.tag = indexPath.row
+        cell.contentView.superview?.backgroundColor = UIColor(red: CGFloat(84.0/255.0), green: CGFloat(80.0/255.0), blue: CGFloat(77.0/255.0), alpha: CGFloat(1.0))
         
         return cell
     }

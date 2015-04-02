@@ -126,7 +126,7 @@ class MatchesViewController: ViewController {
         if potentialMatch.tweets.count >= 4 { tweet4Label.text = potentialMatch.tweets[3] } else { tweet4Label.text = "" }
         if potentialMatch.tweets.count >= 5 { tweet5Label.text = potentialMatch.tweets[4] } else { tweet5Label.text = "" }
         
-        self.navigationController?.setToolbarHidden(false, animated: true)
+        self.navigationController?.setToolbarHidden(false, animated: false)
     }
     
     // Render the no matches text on the screen
@@ -138,7 +138,7 @@ class MatchesViewController: ViewController {
         tweet4Label.text = ""
         tweet5Label.text = ""
         
-        self.navigationController?.setToolbarHidden(true, animated: true)
+        self.navigationController?.setToolbarHidden(true, animated: false)
     }
     
     @IBAction func noButton(sender: UIBarButtonItem) {
